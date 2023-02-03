@@ -160,41 +160,77 @@ arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVari
 arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 22).toUpperCase(), (result[arrayindex++]).toUpperCase(),
 	false, FailureHandling.OPTIONAL))
 
-'verify phn 1 ext'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 23).toUpperCase(), (result[arrayindex++]).toUpperCase(),
-	false, FailureHandling.OPTIONAL))
+if(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 23).length() > 0){
+	'verify phn 1 ext'
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 23).toUpperCase(), (result[arrayindex++]).toUpperCase(),
+			false, FailureHandling.OPTIONAL))
+}else{
+	arrayindex++
+}
 
-'verify phn 2 Area'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 24).toUpperCase(), (result[arrayindex++]).toUpperCase(),
-	false, FailureHandling.OPTIONAL))
+if(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 24).length() > 0){
+	'verify phn 2 Area'
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 24).toUpperCase(), (result[arrayindex++]).toUpperCase(),
+			false, FailureHandling.OPTIONAL))
+}else{
+	arrayindex++
+}
 
-'verify phn 2'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 25).toUpperCase(), (result[arrayindex++]).toUpperCase(),
-	false, FailureHandling.OPTIONAL))
+if(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 25).length() > 0){
+	'verify phn 2'
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 25).toUpperCase(), (result[arrayindex++]).toUpperCase(),
+			false, FailureHandling.OPTIONAL))
+}else{
+	arrayindex++
+}
 
-'verify phn 2 ext'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 26).toUpperCase(), (result[arrayindex++]).toUpperCase(),
-	false, FailureHandling.OPTIONAL))
+if(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 26).length() > 0){
+	'verify phn 2 ext'
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 26).toUpperCase(), (result[arrayindex++]).toUpperCase(),
+			false, FailureHandling.OPTIONAL))
+}else{
+	arrayindex++
+}
 
-'verify phn 3 area'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 27).toUpperCase(), (result[arrayindex++]).toUpperCase(),
-	false, FailureHandling.OPTIONAL))
+if(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 27).length() > 0){
+	'verify phn 3 area'
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 27).toUpperCase(), (result[arrayindex++]).toUpperCase(),
+			false, FailureHandling.OPTIONAL))
+}else{
+	arrayindex++
+}
 
-'verify phn 3'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 28).toUpperCase(), (result[arrayindex++]).toUpperCase(),
-	false, FailureHandling.OPTIONAL))
+if(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 28).length() > 0){
+	'verify phn 3'
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 28).toUpperCase(), (result[arrayindex++]).toUpperCase(),
+			false, FailureHandling.OPTIONAL))
+}else{
+	arrayindex++
+}
 
-'verify phn 3 ext'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 29).toUpperCase(), (result[arrayindex++]).toUpperCase(),
-	false, FailureHandling.OPTIONAL))
+if(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 29).length() > 0){
+	'verify phn 3 ext'
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 29).toUpperCase(), (result[arrayindex++]).toUpperCase(),
+			false, FailureHandling.OPTIONAL))
+}else{
+	arrayindex++
+}
 
-'verify Fax area'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 30).toUpperCase(), (result[arrayindex++]).toUpperCase(),
-	false, FailureHandling.OPTIONAL))
+if(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 30).length() > 0){
+	'verify Fax area'
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 30).toUpperCase(), (result[arrayindex++]).toUpperCase(),
+			false, FailureHandling.OPTIONAL))
+}else{
+	arrayindex++
+}
 
-'verify Fax'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 31).toUpperCase(), (result[arrayindex++]).toUpperCase(),
-	false, FailureHandling.OPTIONAL))
+if(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 31).length() > 0){
+	'verify Fax'
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 31).toUpperCase(), (result[arrayindex++]).toUpperCase(),
+			false, FailureHandling.OPTIONAL))
+}else{
+	arrayindex++
+}
 
 'verify ownership'
 arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 32).toUpperCase(), (result[arrayindex++]).toUpperCase(),

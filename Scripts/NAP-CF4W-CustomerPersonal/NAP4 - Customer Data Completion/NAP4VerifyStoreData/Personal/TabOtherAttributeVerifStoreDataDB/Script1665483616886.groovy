@@ -51,21 +51,34 @@ arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVari
 arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 19).toUpperCase(), (resultotherattrinfo[
     arrayindexinfo++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-'verify is split treasure'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 21).toUpperCase(), (resultotherattrlist[
-    arrayindexlist++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+if(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 21).length() > 0){
+	'verify is split treasure'
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 21).toUpperCase(), (resultotherattrlist[
+	                                                                                                                                              arrayindexlist++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+}else{
+	arrayindexlist++
+}
+
 
 'verify is debtor group slik'
 arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 22).toUpperCase(), (resultotherattrlist[
     arrayindexlist++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-'verify is violate BMPK'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 24).toUpperCase(), (resultotherattrlist[
-    arrayindexlist++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+if(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 24).length() > 0){
+	'verify is violate BMPK'
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 24).toUpperCase(), (resultotherattrlist[
+	                                                                                                                                              arrayindexlist++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+}else{
+	arrayindexlist++
+}
 
-'verify is exceed BMPK'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 25).toUpperCase(), (resultotherattrlist[
-    arrayindexlist++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+if(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 25).length() > 0){
+	'verify is exceed BMPK'
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 25).toUpperCase(), (resultotherattrlist[
+	                                                                                                                                              arrayindexlist++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+}else{
+	arrayindexlist++
+}
 
 'verify AFF with MF slik'
 arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 26).toUpperCase(), (resultotherattrlist[
