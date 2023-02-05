@@ -594,4 +594,9 @@
       <initValue>[]</initValue>
       <name>StandardFee</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'\\Simulasi\\Simulasi Tax Calculation.xlsx'</initValue>
+      <name>PathSimulasiPajak</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>

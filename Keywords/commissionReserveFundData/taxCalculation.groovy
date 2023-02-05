@@ -38,12 +38,43 @@ public class taxCalculation {
 	@Keyword
 	public checkTaxpayerInfo(Sql instance, String name){
 		ArrayList<String> taxpayerInfo = new ArrayList<String>()
-		instance.eachRow(("select mr_tax_kind_code, tax_id_no_exists, is_vat from taxpayer where name = '"+name+"' and is_active = 1"), { def row ->
+		instance.eachRow(("select mr_tax_kind_code, CAST(tax_id_no_exists AS INT), CAST(is_vat AS INT) from taxpayer where name = '"+name+"' and is_active = 1"), { def row ->
 			taxpayerInfo.add(row[0])
 			taxpayerInfo.add(row[1])
 			taxpayerInfo.add(row[2])
 		})
+		//		if(taxpayerInfo[0]==null){
+		//			taxpayerInfo.add("P")
+		//			taxpayerInfo.add("0")
+		//			taxpayerInfo.add("0")
+		//		}
+
 		return taxpayerInfo
+	}
+
+	@Keyword
+	public checkSupplierEmployeeTax(Sql instance, String name){
+		ArrayList<String> code = new ArrayList<String>()
+
+		instance.eachRow(("SELECT CAST(is_npwp_exist AS INT) FROM VENDOR_EMP WHERE VENDOR_EMP_NAME = '"+name+"'"), { def row ->
+			code.add("P")
+			code.add(row[0])
+			code.add("0")
+		})
+
+		return code
+	}
+
+	@Keyword
+	public checkSupplierTax(Sql instance, String name){
+		ArrayList<String> code = new ArrayList<String>()
+		instance.eachRow(("SELECT MR_VENDOR_TYPE_CODE, CAST(IS_NPWP_EXIST AS INT), CAST(IS_VAT AS INT) FROM VENDOR WHERE VENDOR_NAME = '"+name+"' AND MR_VENDOR_CATEGORY_CODE = 'SUPPLIER' AND IS_ACTIVE = 1"), { def row ->
+			code.add(row[0])
+			code.add(row[1])
+			code.add(row[2])
+		})
+
+		return code
 	}
 
 	//keyword calculate nett tax company

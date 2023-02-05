@@ -51,7 +51,7 @@ public class checkCommissionCode {
 			referantorCode = (row[0])
 		})
 		if(referantorCode==null){
-			instance.eachRow(("select EMP_NO from REF_EMP WITH(NOLOCK) where emp_name ='"+referantorName+"'"), { def row ->
+			instance.eachRow(("select TOP(1) EMP_NO from REF_EMP WITH(NOLOCK) where emp_name ='"+referantorName+"'"), { def row ->
 				referantorCode = (row[0])
 			})
 		}
