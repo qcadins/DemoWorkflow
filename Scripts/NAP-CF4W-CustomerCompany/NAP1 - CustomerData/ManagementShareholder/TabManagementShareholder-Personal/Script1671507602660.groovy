@@ -883,7 +883,7 @@ def checkVerifyEqualOrMatch(Boolean isMatch) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
 
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('2.TabManagementShareholderData', GlobalVariable.NumofMS, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('2.TabManagementShareholderData', GlobalVariable.NumofMS, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder').getValue(GlobalVariable.NumofMS, 2) + ';' + GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
         GlobalVariable.FlagFailed = 1
     }
@@ -909,7 +909,7 @@ def checkDDL(){
 						IDType) == false) {
 					
 					'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-					CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'ID Type')
+					CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder').getValue(GlobalVariable.NumofMS, 2) + ';' + findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder').getValue(GlobalVariable.NumofMS, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'ID Type')
 					
 					(GlobalVariable.FlagFailed)++
 				}
@@ -928,7 +928,7 @@ def checkDDL(){
 						MaritalStatus) == false) {
 					
 					'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-					CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'MaritalStatus')
+					CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder').getValue(GlobalVariable.NumofMS, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'MaritalStatus')
 					
 					(GlobalVariable.FlagFailed)++
 				}
@@ -947,7 +947,7 @@ def checkDDL(){
 						CustModel) == false) {
 					
 					'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-					CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'CustModel')
+					CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder').getValue(GlobalVariable.NumofMS, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'CustModel')
 					
 					(GlobalVariable.FlagFailed)++
 				}
@@ -966,7 +966,7 @@ def checkDDL(){
 						Gender) == false) {
 					
 					'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-					CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'Gender')
+					CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder').getValue(GlobalVariable.NumofMS, 2) + ';' + GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'Gender')
 					
 					(GlobalVariable.FlagFailed)++
 				}

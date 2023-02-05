@@ -6,6 +6,8 @@ import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
 
+import java.sql.ResultSetMetaData
+
 import com.kms.katalon.core.annotation.Keyword
 import com.kms.katalon.core.checkpoint.Checkpoint
 import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as CucumberKW
@@ -22,6 +24,9 @@ import groovy.sql.Sql
 import internal.GlobalVariable
 
 public class checkNAP4 {
+
+	int colmcount
+	int i
 
 	//keyword check legal document DDL
 	@Keyword
@@ -212,7 +217,7 @@ public class checkNAP4 {
 		})
 		return countData
 	}
-	
+
 	//keyword check cust asset DDL
 	@Keyword
 	public checkcustAsset(Sql instance){
@@ -222,7 +227,7 @@ public class checkNAP4 {
 		})
 		return value
 	}
-	
+
 	//keyword check job position DDL
 	@Keyword
 	public checkjobPosition(Sql instance){
@@ -232,7 +237,7 @@ public class checkNAP4 {
 		})
 		return value
 	}
-	
+
 	//keyword check job status DDL
 	@Keyword
 	public checkjobStatus(Sql instance){
@@ -242,7 +247,7 @@ public class checkNAP4 {
 		})
 		return value
 	}
-	
+
 	//keyword check company Scale status DDL
 	@Keyword
 	public checkcompanyScale(Sql instance){
@@ -252,7 +257,7 @@ public class checkNAP4 {
 		})
 		return value
 	}
-	
+
 	//keyword check company relationship status DDL
 	@Keyword
 	public checkcompanyrelationship(Sql instance){
@@ -261,5 +266,42 @@ public class checkNAP4 {
 			value.add(row[0].toUpperCase())
 		})
 		return value
+	}
+	
+	@Keyword
+	public getFamilyData(Sql instance, String appno){
+		ArrayList<String> arrayFamilyData = new ArrayList<String>()
+		String familydata
+		instance.eachRow(("SELECT CUST_NAME, [RELATIONSHIP], [BIRTH_PLACE], [BIRTH_DT] FROM( SELECT CUST_NAME, [BIRTH_PLACE], [BIRTH_DT], mastername.Code, DESCR, app_cust_id FROM ( select cust_name, [BIRTH_PLACE], [BIRTH_DT], [Code], value, app_cust_id FROM ( select cust_name, ( CASE WHEN MR_CUST_RELATIONSHIP_CODE = '' THEN 'SELF' ELSE MR_CUST_RELATIONSHIP_CODE END) as [RELATIONSHIP], BIRTH_PLACE as [BIRTH_PLACE], FORMAT(BIRTH_DT, 'dd-MMM-yyyy') as [BIRTH_DT], ac.app_cust_id from app_cust ac with(nolock) join app a with(nolock) on ac.app_id = a.app_id JOIN APP_CUST_PERSONAL acp WITH(NOLOCK) ON acp.APP_CUST_ID = ac.APP_CUST_ID WHERE app_no = '"+ appno +"' and ( is_customer = 1 or is_family = 1 ) ) as Orig unpivot ( value for [Code] in ([RELATIONSHIP]) ) as unpiv ) as mastername JOIN FOUNDATION.dbo.REF_MASTER rf WITH(NOLOCK) ON rf.MASTER_CODE = mastername.value WHERE rf.IS_ACTIVE = '1' and rf.REF_MASTER_TYPE_CODE IN( 'CUST_PERSONAL_RELATIONSHIP', 'CUST_TYPE', 'CUST_MODEL' ) ) AS ref PIVOT ( MAX(ref.DESCR) for [Code] in ([RELATIONSHIP]) ) as piv order by [RELATIONSHIP], app_cust_id "), {  row ->
+			ResultSetMetaData rsmd = row.getMetaData()
+			colmcount = rsmd.getColumnCount()
+
+
+			for(i = 0 ; i < colmcount ; i++){
+				familydata = (row[i])
+				arrayFamilyData.add(familydata.toUpperCase())
+			}
+		})
+
+
+		return arrayFamilyData
+	}
+	
+	@Keyword
+	public getMSData(Sql instance, String appno){
+		String customerdata
+		ArrayList<String> listcustdata = new ArrayList<>()
+		instance.eachRow(("SELECT CUST_NAME , MR_CUST_TYPE_CODE , SHARE_PRCNT , CASE WHEN CAST(IS_ACTIVE as varchar(25)) = 1 THEN 'YES' ELSE 'NO' END, CASE WHEN CAST(IS_OWNER as varchar(25)) = 1 THEN 'YES' ELSE 'NO' END , CASE WHEN CAST(IS_SIGNER as varchar(25)) = 1 THEN 'YES' ELSE 'NO' END, accms.APP_CUST_COMPANY_MGMNT_SHRHOLDER_ID FROM APP_CUST ac WITH(NOLOCK) JOIN APP a WITH(NOLOCK) ON ac.APP_ID = a.APP_ID JOIN APP_CUST_COMPANY_MGMNT_SHRHOLDER accms WITH(NOLOCK) ON accms.APP_CUST_ID = ac.APP_CUST_ID WHERE APP_NO = '"+ appno +"' AND IS_SHAREHOLDER = '1' union SELECT PUBLIC_NAME , MR_SHRHOLDER_TYPE_CODE , SHARE_PRCNT , CASE WHEN CAST(IS_ACTIVE as varchar(25)) = 1 THEN 'YES' ELSE 'NO' END, CASE WHEN CAST(IS_OWNER as varchar(25)) = 1 THEN 'YES' ELSE 'NO' END , CASE WHEN CAST(IS_SIGNER as varchar(25)) = 1 THEN 'YES' ELSE 'NO' END, accms.APP_CUST_COMPANY_MGMNT_SHRHOLDER_ID FROM APP_CUST ac WITH(NOLOCK) JOIN APP a WITH(NOLOCK) ON ac.APP_ID = a.APP_ID JOIN APP_CUST_COMPANY acc WITH(NOLOCK) ON acc.APP_CUST_ID = ac.APP_CUST_ID JOIN APP_CUST_COMPANY_MGMNT_SHRHOLDER accms WITH(NOLOCK) ON accms.APP_CUST_COMPANY_ID = acc.APP_CUST_COMPANY_ID WHERE APP_NO = '"+ appno +"' AND MR_PUBLIC_TYPE_CODE is not null order by accms.APP_CUST_COMPANY_MGMNT_SHRHOLDER_ID"), {  row ->
+
+			ResultSetMetaData rsmd = row.getMetaData()
+			colmcount = rsmd.getColumnCount()
+
+
+			for(i = 0 ; i < colmcount ; i++){
+				customerdata = (row[i])
+				listcustdata.add(customerdata)
+			}
+		})
+		return listcustdata
 	}
 }

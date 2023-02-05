@@ -92,47 +92,68 @@ if (WebUI.getText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPerson
 'EMPLOYEE') {
 	'verify proffession code'
 	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 14).toUpperCase(), (result[
-		arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
-
+	                                                                                                                                 arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
 	'verify job position'
 	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 16).toUpperCase(), (result[
-		arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
-
+	                                                                                                                                 arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
 	'verify job status'
 	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 17).toUpperCase(), (result[
-		arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
-
-	'verify is internal employee'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 18).toUpperCase(), (result[
-		arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
-
-	'verify is well known company'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 19).toUpperCase(), (result[
-		arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
-
+	                                                                                                                                 arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+	if(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 18).length() > 0){
+		'verify is internal employee'
+		arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 18).toUpperCase(), (result[
+		                                                                                                                                 arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	}else{
+		arrayindex++
+	}
+	
+	if(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 19).length() > 0){
+		'verify is well known company'
+		arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 19).toUpperCase(), (result[
+		                                                                                                                                 arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	}else{
+		arrayindex++
+	}
+	
 	'verify company name'
 	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 20).toUpperCase(), (result[
-		arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
-
+	                                                                                                                                 arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
 	'verify industry type'
 	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 21).toUpperCase(), (result[
-		arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
-
-	'verify company scale'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 23).toUpperCase(), (result[
-		arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
-
+	                                                                                                                                 arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+	if(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 23).length() > 0){
+		'verify company scale'
+		arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 23).toUpperCase(), (result[
+		                                                                                                                                 arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	}else{
+		arrayindex++
+	}
+	
 	'verify start working'
 	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 24).toUpperCase(), (result[
-		arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
-
-	'verify job title'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 25).toUpperCase(), (result[
-		arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
-
-	'verify Num of Employee'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 26).toUpperCase(), (result[
-		arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	                                                                                                                                 arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	
+	if(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 25).length() > 0){
+		'verify job title'
+		arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 25).toUpperCase(), (result[
+		                                                                                                                                 arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	}else{
+		arrayindex++
+	}
+	
+	if(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 26).length() > 0){
+		'verify Num of Employee'
+		arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 26).toUpperCase(), (result[
+		                                                                                                                                 arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+	}else{
+		arrayindex++
+	}
+	
 } else if (WebUI.getText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/CustomerModelCode')) ==
 'PROFESSIONAL') {
 

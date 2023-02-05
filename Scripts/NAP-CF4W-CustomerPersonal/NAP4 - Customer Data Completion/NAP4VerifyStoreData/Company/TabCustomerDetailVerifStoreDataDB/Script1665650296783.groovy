@@ -44,13 +44,21 @@ arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVari
 //arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 17).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
 //    false, FailureHandling.OPTIONAL))
 
-'verify is VIP'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 18).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
-    false, FailureHandling.OPTIONAL))
+if(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 18).length() > 0){
+	'verify is VIP'
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 18).toUpperCase(), (result[arrayindex++]).toUpperCase(),
+			false, FailureHandling.OPTIONAL))
+}else{
+	arrayindex++
+}
 
-'verify is AFF with MF'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 19).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
-    false, FailureHandling.OPTIONAL))
+if(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 19).length() > 0){
+	'verify is AFF with MF'
+	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 19).toUpperCase(), (result[arrayindex++]).toUpperCase(),
+			false, FailureHandling.OPTIONAL))
+}else{
+	arrayindex++
+}
 
 'verify industry type code'
 arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 20).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
