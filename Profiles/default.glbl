@@ -21,6 +21,11 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
+      <initValue>''</initValue>
+      <name>APPSTEP</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
       <initValue>0.00</initValue>
       <name>AssetPrice</name>
    </GlobalVariableEntity>
@@ -266,6 +271,11 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
+      <initValue>0</initValue>
+      <name>IsDataCancel</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
       <initValue>'\\Rule\\MainCovRule.xlsx'</initValue>
       <name>MainCovRulePath</name>
    </GlobalVariableEntity>
@@ -278,11 +288,6 @@
       <description></description>
       <initValue>'\\Rule\\MaxRefundRule.xlsx'</initValue>
       <name>MaxRefundRulePath</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>''</initValue>
-      <name>APPSTEP</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
@@ -366,6 +371,21 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
+      <initValue>'\\Simulasi\\Simulasi Perhitungan Gross Yield &amp; Angsuran Regular Fixed CF.xlsx'</initValue>
+      <name>PathSimulasiFinancial</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'\\Simulasi\\Simulasi Tax Calculation.xlsx'</initValue>
+      <name>PathSimulasiPajak</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'Dupcheck gagal'</initValue>
+      <name>ReasonFailedDupcheck</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
       <initValue>'Failed Data Lookup Tidak Sesuai DB'</initValue>
       <name>ReasonFailedDataLookup</name>
    </GlobalVariableEntity>
@@ -421,6 +441,11 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
+      <initValue>[]</initValue>
+      <name>ReferantorVAT</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
       <initValue>0</initValue>
       <name>RemainingAllocatedAmt</name>
    </GlobalVariableEntity>
@@ -438,6 +463,11 @@
       <description></description>
       <initValue>'\\Rule\\ReservedFundRule.xlsx'</initValue>
       <name>RSVRulePath</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>[]</initValue>
+      <name>StandardFee</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
@@ -511,6 +541,11 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
+      <initValue>0</initValue>
+      <name>SubsidyDP</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
       <initValue>'0'</initValue>
       <name>SubsidyDPValue</name>
    </GlobalVariableEntity>
@@ -568,35 +603,5 @@
       <description></description>
       <initValue>0.00</initValue>
       <name>TotalVat</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>'\\Simulasi\\Simulasi Perhitungan Gross Yield &amp; Angsuran Regular Fixed CF.xlsx'</initValue>
-      <name>PathSimulasiFinancial</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>0</initValue>
-      <name>SubsidyDP</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>'Dupcheck gagal'</initValue>
-      <name>ReasonFailedDupcheck</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>[]</initValue>
-      <name>ReferantorVAT</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>[]</initValue>
-      <name>StandardFee</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>'\\Simulasi\\Simulasi Tax Calculation.xlsx'</initValue>
-      <name>PathSimulasiPajak</name>
    </GlobalVariableEntity>
 </GlobalVariableEntities>

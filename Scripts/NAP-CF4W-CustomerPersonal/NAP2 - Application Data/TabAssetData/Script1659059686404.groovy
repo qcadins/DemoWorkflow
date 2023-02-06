@@ -115,7 +115,7 @@ WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/Tab
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/button_Search Supplier'))
 
 'verify input error'
-CustomKeywords.'customizeKeyword.function.verifyInputLookup'(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/button_Cancel'), 
+CustomKeywords.'customizeKeyword.function.verifyInputLookup'(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData'), 
     '7.TabAssetData', GlobalVariable.NumofColm)
 
 if (GlobalVariable.Role == 'Testing') {
@@ -198,7 +198,7 @@ WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/Tab
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/button_Search Asset'))
 
 'verify input error'
-CustomKeywords.'customizeKeyword.function.verifyInputLookup'(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/button_Cancel'), 
+CustomKeywords.'customizeKeyword.function.verifyInputLookup'(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData'), 
     '7.TabAssetData', GlobalVariable.NumofColm)
 
 'select asset condition'
@@ -871,7 +871,7 @@ if (CustomKeywords.'assetData.checkAssetData.checkSelfOwnerPersonal'() == true) 
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/button_Search Supplier'))
 
         'verify input error'
-        CustomKeywords.'customizeKeyword.function.verifyInputLookup'(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/button_Cancel'), 
+        CustomKeywords.'customizeKeyword.function.verifyInputLookup'(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData'), 
             '7.TabAssetData', GlobalVariable.NumofColm)
 
         'function untuk input address asset location'
@@ -1009,7 +1009,7 @@ def assetLocInput() {
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/button_Search Supplier'))
 
     'verify input error'
-    CustomKeywords.'customizeKeyword.function.verifyInputLookup'(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/button_Cancel'), 
+    CustomKeywords.'customizeKeyword.function.verifyInputLookup'(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData'), 
         '7.TabAssetData', GlobalVariable.NumofColm)
 }
 

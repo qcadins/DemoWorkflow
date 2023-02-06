@@ -177,9 +177,6 @@ for (GlobalVariable.NumofGuarantorPersonal = GlobalVariable.StartIndex; GlobalVa
                             'click X'
                             WebUI.click(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/Button_X'))
 
-                            'click button cancel'
-                            WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/button_Cancel'))
-
 							'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusReasonLookup'
 							CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3a.TabGuarantorDataPersonal', GlobalVariable.NumofGuarantorPersonal, GlobalVariable.StatusFailed, GlobalVariable.StatusReasonLookup)
 
@@ -254,9 +251,6 @@ for (GlobalVariable.NumofGuarantorPersonal = GlobalVariable.StartIndex; GlobalVa
                                 'click X'
                                 WebUI.click(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/Button_X'))
 
-                                'click button cancel'
-                                WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/button_Cancel'))
-
 								'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusReasonLookup'
 								CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3a.TabGuarantorDataPersonal', GlobalVariable.NumofGuarantorPersonal, GlobalVariable.StatusFailed, GlobalVariable.StatusReasonLookup)
 
@@ -299,9 +293,6 @@ for (GlobalVariable.NumofGuarantorPersonal = GlobalVariable.StartIndex; GlobalVa
                             } else {
                                 'click X'
                                 WebUI.click(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/Button_X'))
-
-                                'click button cancel'
-                                WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/button_Cancel'))
 
 								'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusReasonLookup'
 								CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3a.TabGuarantorDataPersonal', GlobalVariable.NumofGuarantorPersonal, GlobalVariable.StatusFailed, GlobalVariable.StatusReasonLookup)
@@ -353,9 +344,6 @@ for (GlobalVariable.NumofGuarantorPersonal = GlobalVariable.StartIndex; GlobalVa
                                 } else {
                                     'click X'
                                     WebUI.click(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/Button_X'))
-
-                                    'click button cancel'
-                                    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/button_Cancel'))
 
 									'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusReasonLookup'
 									CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3a.TabGuarantorDataPersonal', GlobalVariable.NumofGuarantorPersonal, GlobalVariable.StatusFailed, GlobalVariable.StatusReasonLookup)
@@ -435,6 +423,8 @@ for (GlobalVariable.NumofGuarantorPersonal = GlobalVariable.StartIndex; GlobalVa
                         'click button cancel'
                         WebUI.click(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/button_Cancel'))
 
+						GlobalVariable.IsDataCancel = 1
+						
                         'customer added -1'
                         (GlobalVariable.CountNumofCustomer)--
                     } else {
@@ -442,24 +432,26 @@ for (GlobalVariable.NumofGuarantorPersonal = GlobalVariable.StartIndex; GlobalVa
                             CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3a.TabGuarantorDataPersonal', 
                                 0, GlobalVariable.NumofGuarantorPersonal - 1, GlobalVariable.StatusWarning)
                         }
+						
+                        'check if input data / lookup'
+						
+						if (datafileGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 13) == 'Input Data') {
+							if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany == 'Yes')) {
+								'call test case Guarantor personal data verif'
+								WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/Guarantor/TabGuarantorDataPersonalStoreDBVerif'),
+									[:], FailureHandling.CONTINUE_ON_FAILURE)
+							}
+						} else if (datafileGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 13) == 'LookUp') {
+							if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany == 'Yes')) {
+								'call test case Guarantor personal data verif'
+								WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/Guarantor/TabGuarantorDataPersonalStoreDBVerif-LookUp'),
+									[:], FailureHandling.CONTINUE_ON_FAILURE)
+							}
+						}
+						
                     }
                     
-                    'check if input data / lookup'
-					if(findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorPersonal').getValue(GlobalVariable.NumofGuarantorPersonal, 1) == 'SUCCESS'){
-                    if (datafileGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 13) == 'Input Data') {
-                        if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany == 'Yes')) {
-                            'call test case Guarantor personal data verif'
-                            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/Guarantor/TabGuarantorDataPersonalStoreDBVerif'), 
-                                [:], FailureHandling.CONTINUE_ON_FAILURE)
-                        }
-                    } else if (datafileGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 13) == 'LookUp') {
-                        if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany == 'Yes')) {
-                            'call test case Guarantor personal data verif'
-                            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/Guarantor/TabGuarantorDataPersonalStoreDBVerif-LookUp'), 
-                                [:], FailureHandling.CONTINUE_ON_FAILURE)
-                        }
-                    }
-					}
+					
                     break
                 }
             }

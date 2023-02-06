@@ -189,7 +189,7 @@ if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 14) == 'Input Da
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabCustomerData/button_Search'))
 
     'verify input error'
-    CustomKeywords.'customizeKeyword.function.verifyInputLookup'(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/button_Back'), 
+    CustomKeywords.'customizeKeyword.function.verifyInputLookup'(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData'), 
         '1.TabCustomerMainData', GlobalVariable.NumofColm)
 
     'jika authority aml tidak kosong'
@@ -252,7 +252,7 @@ if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 14) == 'Input Da
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabCustomerData/button_SearchZipcode'))
 
     'verify input error'
-    CustomKeywords.'customizeKeyword.function.verifyInputLookup'(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/button_Back'), 
+    CustomKeywords.'customizeKeyword.function.verifyInputLookup'(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData'), 
         '1.TabCustomerMainData', GlobalVariable.NumofColm)
 
     'select ownership'
@@ -281,7 +281,7 @@ if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 14) == 'Input Da
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabCustomerData/button_Search (1)'))
 
     'verify input error'
-    CustomKeywords.'customizeKeyword.function.verifyInputLookup'(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/button_Back'), 
+    CustomKeywords.'customizeKeyword.function.verifyInputLookup'(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData'), 
         '1.TabCustomerMainData', GlobalVariable.NumofColm)
 
     if (GlobalVariable.Role == 'Testing') {
@@ -312,7 +312,7 @@ if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 14) == 'Input Da
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabCustomerData/button_Search'))
 
         'verify input error'
-        CustomKeywords.'customizeKeyword.function.verifyInputLookup'(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/button_Back'), 
+        CustomKeywords.'customizeKeyword.function.verifyInputLookup'(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData'), 
             '1.TabCustomerMainData', GlobalVariable.NumofColm)
     }
     

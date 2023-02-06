@@ -699,7 +699,7 @@ if (datafileTabApplication.getValue(
 	WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/button_Search'))
 
 	'verify input error'
-    CustomKeywords.'customizeKeyword.function.verifyInputLookup'(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Cancel'), '6.TabApplicationData', GlobalVariable.NumofColm)
+    CustomKeywords.'customizeKeyword.function.verifyInputLookup'(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData'), '6.TabApplicationData', GlobalVariable.NumofColm)
 }
 
 'Input Phone 1 Area'
@@ -791,7 +791,7 @@ WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabA
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/button_Search'))
 
 'verify input error'
-CustomKeywords.'customizeKeyword.function.verifyInputLookup'(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Cancel'), '6.TabApplicationData', GlobalVariable.NumofColm)
+CustomKeywords.'customizeKeyword.function.verifyInputLookup'(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData'), '6.TabApplicationData', GlobalVariable.NumofColm)
 
 'Select option dropdownlist Blacklist APPI'
 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/select_BlackListAppi'),
@@ -820,7 +820,7 @@ WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabA
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/button_Search'))
 
 'verify input error'
-CustomKeywords.'customizeKeyword.function.verifyInputLookup'(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Cancel'), '6.TabApplicationData', GlobalVariable.NumofColm)
+CustomKeywords.'customizeKeyword.function.verifyInputLookup'(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData'), '6.TabApplicationData', GlobalVariable.NumofColm)
 
 'Input Jumlah Asset'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/input_JUMLAH ASSET'),
@@ -860,12 +860,14 @@ if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP
 	'APPLICATION DATA', false, FailureHandling.OPTIONAL)) {
 	'click cancel'
 	WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/button_Cancel'))
-}
-
-if(GlobalVariable.RoleCompany == 'Testing' && GlobalVariable.CheckVerifStoreDBCompany=="Yes"){
-		'call test case store db application data'
-		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabApplicationDataStoreDBVerif'),
-				[:], FailureHandling.CONTINUE_ON_FAILURE)
+	
+	GlobalVariable.IsDataCancel = 1
+}else{
+	if(GlobalVariable.RoleCompany == 'Testing' && GlobalVariable.CheckVerifStoreDBCompany=="Yes"){
+			'call test case store db application data'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabApplicationDataStoreDBVerif'),
+					[:], FailureHandling.CONTINUE_ON_FAILURE)
+	}
 }
 
 public checkVerifyEqualOrMatch(Boolean isMatch){

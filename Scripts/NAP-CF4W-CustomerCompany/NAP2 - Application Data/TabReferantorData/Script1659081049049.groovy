@@ -914,13 +914,15 @@ if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP
     'REFERANTOR', false, FailureHandling.OPTIONAL)) {
     'click button cancel'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/button_Cancel'))
-}
-
-'check if role = testing & check store db = yes & status = success'
-if (((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany == 'Yes'))) {
-    'call test case store db referantor data'
-    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabReferantorDataStoreDBVerif'), [:], 
-        FailureHandling.CONTINUE_ON_FAILURE)
+	
+	GlobalVariable.IsDataCancel = 1
+}else{
+	'check if role = testing & check store db = yes & status = success'
+	if (((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany == 'Yes'))) {
+	    'call test case store db referantor data'
+	    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabReferantorDataStoreDBVerif'), [:], 
+	        FailureHandling.CONTINUE_ON_FAILURE)
+	}
 }
 
 def adddatatoarraylist(ArrayList<WebElement> referantorDetail) {

@@ -42,7 +42,7 @@ WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP1-Cus
 if (GlobalVariable.RoleCompany == 'Testing') {
     'verify application step'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/applicationcurrentstep')), 
-            'CUSTOMER', false, FailureHandling.OPTIONAL))
+            'CUSTOMEREWEW', false))
 }
 
 if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 14) == 'Input Data') {
@@ -106,7 +106,7 @@ if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 14) == 'Input Dat
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/button_Search'))
 
     'verify input error'
-    CustomKeywords.'customizeKeyword.function.verifyInputLookup'(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/button_Back'), 
+    CustomKeywords.'customizeKeyword.function.verifyInputLookup'(findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData'), 
         '1.TabCustomerMainData', GlobalVariable.NumofColm)
 
     'select ownership'
@@ -142,12 +142,12 @@ if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 14) == 'Input Dat
         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/button_Search'))
 
         'verify input error'
-        CustomKeywords.'customizeKeyword.function.verifyInputLookup'(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/button_Back'), 
+        CustomKeywords.'customizeKeyword.function.verifyInputLookup'(findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData'), 
             '1.TabCustomerMainData', GlobalVariable.NumofColm)
     }
     
     'check if role testing untuk get data customer digunakan untuk data verif'
-    if (GlobalVariable.RoleCompany == 'Testing') {
+    if (GlobalVariable.RoleCompany == 'Testing' && GlobalVariable.FlagFailed == 0) {
         'call function get data cust'
         getDataCust()
 
@@ -176,7 +176,7 @@ if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 14) == 'Input Dat
 }
 
 'check if role testing dan diinput dengan lookup untuk get data customer digunakan untuk Store DB Verif'
-if ((GlobalVariable.RoleCompany == 'Testing') && (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 14) == 'LookUp')) {
+if ((GlobalVariable.RoleCompany == 'Testing') && (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 14) == 'LookUp') && GlobalVariable.FlagFailed == 0) {
     'call function get data cust'
     getDataCust()
 
@@ -272,26 +272,33 @@ if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP
         'Klik new consumer finance'
         WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'))
     }
+	
+	GlobalVariable.IsDataCancel = 1
+	
 } else {
     if (GlobalVariable.FlagWarning > 0) {
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
             0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusWarning)
     }
+	
+	if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 14) == 'Input Data') {
+		if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany == 'Yes')) {
+			'call test case verif customer store data'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/Customer/TabCustomerDataStoreDBVerif'),
+				[:], FailureHandling.CONTINUE_ON_FAILURE)
+		}
+	} else if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 14) == 'LookUp') {
+		if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany == 'Yes')) {
+			'call test case verif customer store data'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/Customer/TabCustomerDataStoreDBVerif-LookUp'),
+				[:], FailureHandling.CONTINUE_ON_FAILURE)
+		}
+	}
 }
 
-if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 14) == 'Input Data') {
-    if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany == 'Yes')) {
-        'call test case verif customer store data'
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/Customer/TabCustomerDataStoreDBVerif'), 
-            [:], FailureHandling.CONTINUE_ON_FAILURE)
-    }
-} else if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 14) == 'LookUp') {
-    if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany == 'Yes')) {
-        'call test case verif customer store data'
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/Customer/TabCustomerDataStoreDBVerif-LookUp'), 
-            [:], FailureHandling.CONTINUE_ON_FAILURE)
-    }
-}
+
+
+
 
 def getDataCust() {
     def confinsdata = []
@@ -339,7 +346,7 @@ def checkVerifyEqualOrMatch(Boolean isMatch) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
         'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, 
-            GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+            GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
         GlobalVariable.FlagFailed = 1
     }

@@ -21,22 +21,8 @@ import internal.GlobalVariable as GlobalVariable
 
 GlobalVariable.FlagFailed = 0
 
-if(GlobalVariable.APPSTEP == 'SHAREHOLDER PERSONAL'){
-'get data file path'
-GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileManagementShareholderPersonal)
-
-datafilecustdetail = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/CustomerDetail')
-
-'declare data file Global variable'
-GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementshareholderPersonal/AddressInformation')
-}else if(GlobalVariable.APPSTEP == 'GUARANTOR PERSONAL'){
-'get data file path'
-GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorPersonalCompany)
-
-datafilecustdetail = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/CustomerDetail')
-
-GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/AddressInformation')
-}
+'call function get data file'
+getDataFile()
 
 'declare GlobalVariable.StartIndex'
 GlobalVariable.StartIndex = 0
@@ -366,8 +352,11 @@ def verifyDDLAddress(int Address){
 		'verify total ddl confins = total ddl db'
 		if(WebUI.verifyEqual(totalddladdresstype - 1, AddressType.size())==false){
 			
+			'call function get data file'
+			getDataFile()
+			
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('2.AddressInformation', Address, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL)
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('2.AddressInformation', Address, GlobalVariable.StatusFailed, GlobalVariable.FindDataFile.getValue(Address, 2) + ';' + GlobalVariable.ReasonFailedDDL)
 			
 			GlobalVariable.FlagFailed=1
 		}
@@ -376,8 +365,11 @@ def verifyDDLAddress(int Address){
 		if(WebUI.verifyOptionsPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/select_addressType'),
 			AddressType)==false){
 			
+			'call function get data file'
+			getDataFile()
+		
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('2.AddressInformation', Address, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL)
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('2.AddressInformation', Address, GlobalVariable.StatusFailed, GlobalVariable.FindDataFile.getValue(Address, 2) + ';' + GlobalVariable.ReasonFailedDDL)
 			
 			GlobalVariable.FlagFailed=1
 		}
@@ -391,8 +383,11 @@ def verifyDDLAddress(int Address){
 		'verify total ddl confins = total ddl db'
 		if(WebUI.verifyEqual(totalownership - 1, Ownership.size())==false){
 						
+			'call function get data file'
+			getDataFile()
+			
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('2.AddressInformation', Address, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL)
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('2.AddressInformation', Address, GlobalVariable.StatusFailed, GlobalVariable.FindDataFile.getValue(Address, 2) + ';' + GlobalVariable.ReasonFailedDDL)
 			
 			GlobalVariable.FlagFailed=1
 		}
@@ -401,8 +396,11 @@ def verifyDDLAddress(int Address){
 		if(WebUI.verifyOptionsPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/select_Select One Dinas  Family  KPR  Rented  Self - Owned'),
 			Ownership)==false){
 			
+			'call function get data file'
+			getDataFile()
+		
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('2.AddressInformation', Address, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL)
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('2.AddressInformation', Address, GlobalVariable.StatusFailed, GlobalVariable.FindDataFile.getValue(Address, 2) + ';' + GlobalVariable.ReasonFailedDDL)
 			
 			GlobalVariable.FlagFailed=1
 		}
@@ -487,4 +485,23 @@ def getAddress(){
 	
 	GlobalVariable.Confinsdata = confinsdata
 
+}
+
+def getDataFile(){
+	if(GlobalVariable.APPSTEP == 'SHAREHOLDER PERSONAL'){
+		'get data file path'
+		GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileManagementShareholderPersonal)
+		
+		datafilecustdetail = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/CustomerDetail')
+		
+		'declare data file Global variable'
+		GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementshareholderPersonal/AddressInformation')
+	}else if(GlobalVariable.APPSTEP == 'GUARANTOR PERSONAL'){
+		'get data file path'
+		GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorPersonalCompany)
+		
+		datafilecustdetail = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/CustomerDetail')
+		
+		GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/AddressInformation')
+	}
 }

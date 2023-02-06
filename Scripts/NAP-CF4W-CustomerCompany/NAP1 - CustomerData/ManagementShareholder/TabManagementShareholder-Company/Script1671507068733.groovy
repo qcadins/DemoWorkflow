@@ -120,9 +120,6 @@ for (GlobalVariable.NumofMS = GlobalVariable.StartIndex; GlobalVariable.NumofMS 
                             'click X'
                             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/button_X'))
 
-							'click button cancel'
-							WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/button_Cancel'))
-							
                             (GlobalVariable.FlagWarning)++
 
                             continue
@@ -218,9 +215,6 @@ for (GlobalVariable.NumofMS = GlobalVariable.StartIndex; GlobalVariable.NumofMS 
                                 'click X'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/button_X'))
 
-								'click button cancel'
-								WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/button_Cancel'))
-								
                                 (GlobalVariable.FlagWarning)++
 
                                 continue
@@ -264,9 +258,6 @@ for (GlobalVariable.NumofMS = GlobalVariable.StartIndex; GlobalVariable.NumofMS 
                         } else {
                             'click X'
                             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/Button_X'))
-
-                            'click button cancel'
-                            WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/button_Cancel'))
 
 							'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusReasonLookup'
 							CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('2.TabManagementShareholderData', GlobalVariable.NumofMS, GlobalVariable.StatusFailed, GlobalVariable.StatusReasonLookup)
@@ -316,9 +307,6 @@ for (GlobalVariable.NumofMS = GlobalVariable.StartIndex; GlobalVariable.NumofMS 
                             'click X'
                             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/button_X'))
 
-							'click button cancel'
-							WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/button_Cancel'))
-							
                             (GlobalVariable.FlagWarning)++
 
                             continue
@@ -388,6 +376,8 @@ for (GlobalVariable.NumofMS = GlobalVariable.StartIndex; GlobalVariable.NumofMS 
                 	'click button cancel'
                 	WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_Cancel'))
                 	
+					GlobalVariable.IsDataCancel = 1
+					
                 	'customer added -1'
                 	(GlobalVariable.CountNumofCustomer)--
                 } else {
@@ -413,25 +403,6 @@ for (GlobalVariable.NumofMS = GlobalVariable.StartIndex; GlobalVariable.NumofMS 
                         CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/errorvalidasi'), 
                             GlobalVariable.NumofMS, '2.TabManagementShareholderData')
                     }
-                    
-					if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder').getValue(GlobalVariable.NumofMS, 1) == 'SUCCESS') {
-                    if (datafileMS.getValue(GlobalVariable.NumofMS, 13) == 'Input Data') {
-                        if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany == 'Yes')) {
-                          
-                                'call test case MS Company data store verif'
-                                WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/ManagementShareholder/TabMSCompanyDataStoreDBVerif'), 
-                                    [:], FailureHandling.CONTINUE_ON_FAILURE)
-                            
-                        }
-                    } else {
-                        if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany == 'Yes')) {
-                       
-                                'call test case MS Company  data store verif'
-                                WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/ManagementShareholder/TabMSCompanyDataStoreDBVerif-LookUp'), 
-                                    [:], FailureHandling.CONTINUE_ON_FAILURE)
-                        }
-                    }
-					}
                 }
                 
          
@@ -440,6 +411,8 @@ for (GlobalVariable.NumofMS = GlobalVariable.StartIndex; GlobalVariable.NumofMS 
                 	'click button cancel'
                 	WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_Cancel'))
                 	
+					GlobalVariable.IsDataCancel = 1
+					
                 	'customer added -1'
                 	(GlobalVariable.CountNumofCustomer)--
                 } else {
@@ -447,6 +420,24 @@ for (GlobalVariable.NumofMS = GlobalVariable.StartIndex; GlobalVariable.NumofMS 
                 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData', 
                 				0, GlobalVariable.NumofMS - 1, GlobalVariable.StatusWarning)
                 	}
+					
+						if (datafileMS.getValue(GlobalVariable.NumofMS, 13) == 'Input Data') {
+							if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany == 'Yes')) {
+							  
+									'call test case MS Company data store verif'
+									WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/ManagementShareholder/TabMSCompanyDataStoreDBVerif'),
+										[:], FailureHandling.CONTINUE_ON_FAILURE)
+								
+							}
+						} else {
+							if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany == 'Yes')) {
+						   
+									'call test case MS Company  data store verif'
+									WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/ManagementShareholder/TabMSCompanyDataStoreDBVerif-LookUp'),
+										[:], FailureHandling.CONTINUE_ON_FAILURE)
+							}
+						
+						}
                 }
 					break			
             }

@@ -21,7 +21,7 @@ import internal.GlobalVariable
 public class function {
 	//keyword verify input error lookup
 	@Keyword
-	public verifyInputLookup(Object button, String sheet, int colm){
+	public verifyInputLookup(TestData testdata, String sheet, int colm){
 		'verify input error'
 		if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabCustomerData/a_Select'),
 		10, FailureHandling.OPTIONAL)) {
@@ -31,16 +31,13 @@ public class function {
 			'click X'
 			WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabCustomerData/button_X'))
 
-			'Click Button Cancel/Back'
-			WebUI.click(button)
-
 			'Write To Excel GlobalVariable.StatusFailed'
 			(new customizeKeyword.writeExcel()).writeToExcel(GlobalVariable.DataFilePath, sheet,
 					0, colm - 1, GlobalVariable.StatusFailed)
 
 			'Write To Excel GlobalVariable.StatusReasonLookup'
 			(new customizeKeyword.writeExcel()).writeToExcel(GlobalVariable.DataFilePath, sheet,
-					1, colm - 1, GlobalVariable.StatusReasonLookup)
+					1, colm - 1, testdata.getValue(colm, 2) + ';' + GlobalVariable.StatusReasonLookup)
 
 			'GlobalVariable.FlagFailed =1 karena lookup gagal'
 			GlobalVariable.FlagFailed = 1

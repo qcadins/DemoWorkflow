@@ -719,7 +719,7 @@ if (datafileTabApplication.getValue(
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/button_Search'))
 
 	'verify input error'
-	CustomKeywords.'customizeKeyword.function.verifyInputLookup'(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/button_Cancel'), '6.TabApplicationData', GlobalVariable.NumofColm)
+	CustomKeywords.'customizeKeyword.function.verifyInputLookup'(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData'), '6.TabApplicationData', GlobalVariable.NumofColm)
 }
 
 'Input Phone 1 Area'
@@ -813,7 +813,7 @@ WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/Tab
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/button_Search'))
 
 'verify input error'
-		CustomKeywords.'customizeKeyword.function.verifyInputLookup'(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/button_Cancel'), '6.TabApplicationData', GlobalVariable.NumofColm)
+		CustomKeywords.'customizeKeyword.function.verifyInputLookup'(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData'), '6.TabApplicationData', GlobalVariable.NumofColm)
 
 'Select option dropdownlist Blacklist APPI'
 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/select_BlackListAppi'), 
@@ -842,7 +842,7 @@ WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/Tab
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/button_Search'))
 
 'verify input error'
-		CustomKeywords.'customizeKeyword.function.verifyInputLookup'(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/button_Cancel'), '6.TabApplicationData', GlobalVariable.NumofColm)
+		CustomKeywords.'customizeKeyword.function.verifyInputLookup'(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData'), '6.TabApplicationData', GlobalVariable.NumofColm)
 
 'Input Jumlah Asset'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/input_JUMLAH ASSET'), 

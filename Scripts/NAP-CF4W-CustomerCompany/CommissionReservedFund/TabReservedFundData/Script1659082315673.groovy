@@ -121,7 +121,7 @@ for(int i = 0;i<allocFrom.size();i++){
 		if(WebUI.verifyMatch(textAllocFromSection, ".*"+allocFrom[i].replace("_"," ")+".*",true)==false){
 						
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyRule'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('13.TabReservedFundData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedVerifyRule)
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('13.TabReservedFundData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedVerifyRule)
 			
 			GlobalVariable.FlagFailed=1
 		}
@@ -156,7 +156,7 @@ for(int i = 0;i<allocFrom.size();i++){
 			if(WebUI.verifyMatch(inputAllocAmt.replace(",",""),defAllocAmt[i],false)==false){
 								
 				'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyRule'
-				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('13.TabReservedFundData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedVerifyRule)
+				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('13.TabReservedFundData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedVerifyRule)
 				
 				GlobalVariable.FlagFailed=1
 			}
@@ -169,7 +169,7 @@ for(int i = 0;i<allocFrom.size();i++){
 				if(WebUI.verifyElementNotHasAttribute(inputAlloc,'readonly', GlobalVariable.TimeOut)==false){
 					
 					'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyRule'
-					CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('13.TabReservedFundData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedVerifyRule)
+					CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('13.TabReservedFundData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedVerifyRule)
 					
 					GlobalVariable.FlagFailed=1
 				}
@@ -186,7 +186,7 @@ for(int i = 0;i<allocFrom.size();i++){
 				if(WebUI.verifyElementHasAttribute(inputAlloc,'readonly', GlobalVariable.TimeOut)==false){
 					
 					'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyRule'
-					CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('13.TabReservedFundData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedVerifyRule)
+					CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('13.TabReservedFundData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedVerifyRule)
 					
 					GlobalVariable.FlagFailed=1
 				}
@@ -233,6 +233,8 @@ if(alert.toLowerCase().contains("Must Be Less Than".toLowerCase())||WebUI.verify
 
 	'Klik cancel'
 	WebUI.click(findTestObject('NAP/CommissionReservedFund/TabReservedFundData/button_Cancel'))
+	
+	GlobalVariable.IsDataCancel = 1
 	
 	GlobalVariable.FlagFailed = 1
 }
@@ -331,6 +333,8 @@ if (WebUI.verifyElementPresent(findTestObject('NAP/CommissionReservedFund/TabRes
 	'Klik cancel'
 	WebUI.click(findTestObject('NAP/CommissionReservedFund/TabReservedFundData/button_Cancel'))
 
+	GlobalVariable.IsDataCancel = 1
+	
 	'Pengecekan jika new consumer finance belum diexpand'
 	if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
 		'Klik new consumer finance'
@@ -342,7 +346,7 @@ public checkVerifyEqualOrMatch(Boolean isMatch, String sheetname, int numofcolm)
 	if(isMatch==false && GlobalVariable.FlagFailed==0){
 	
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'(sheetname, numofcolm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'(sheetname, numofcolm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 	
 		GlobalVariable.FlagFailed=1
 	}

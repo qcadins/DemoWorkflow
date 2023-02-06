@@ -26,34 +26,8 @@ GlobalVariable.StartIndex = 0
 
 def datafilecustdetail
 
-if (GlobalVariable.APPSTEP == 'CUSTOMER') {
-    'get data file path'
-    GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileCustomerCompany)
-
-    'get data file customer'
-    datafilecustdetail = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail')
-
-    'declare data file Global variable'
-    GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData')
-} else if (GlobalVariable.APPSTEP == 'SHAREHOLDER COMPANY') {
-    'get data file path'
-    GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileManagementShareholderCompany)
-
-    'get data file customer'
-    datafilecustdetail = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/CustomerDetail')
-
-    'declare data file Global variable'
-    GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementshareholderCompany/FinancialData')
-} else if (GlobalVariable.APPSTEP == 'GUARANTOR COMPANY') {
-    'get data file path'
-    GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorCompanyCompany)
-
-    'get data file customer'
-    datafilecustdetail = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/CustomerDetail')
-
-    'declare data file Global variable'
-    GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/FinancialData')
-}
+'call function get data file'
+getDataFile()
 
 'get count colm'
 countcolm = GlobalVariable.FindDataFile.getColumnNumbers()
@@ -168,9 +142,13 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 	}
 	
 	if (financialDateDelete.size() > 0) {
+
+		'call function get data file'
+		getDataFile()
+		
 		'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedDelete'
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('4.FinancialData', GlobalVariable.StartIndex,
-			GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedDelete + financialDateDelete)
+			GlobalVariable.StatusWarning, GlobalVariable.FindDataFile.getValue(GlobalVariable.StartIndex, 2) + ';' + GlobalVariable.ReasonFailedDelete + financialDateDelete)
 
 		(GlobalVariable.FlagWarning)++
 	}
@@ -359,9 +337,12 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 	}
 	
 	if (bankAccDelete.size() > 0) {
+		'call function get data file'
+		getDataFile()
+		
 		'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedDelete'
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('4.FinancialData', GlobalVariable.StartIndex,
-			GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedDelete + bankAccDelete)
+			GlobalVariable.StatusWarning, GlobalVariable.FindDataFile.getValue(GlobalVariable.StartIndex, 2) + ';' + GlobalVariable.ReasonFailedDelete + bankAccDelete)
 
 		(GlobalVariable.FlagWarning)++
 	}
@@ -985,4 +966,35 @@ def inputBankStatementFromEmpty() {
             inputBankStatement(BSindex)
         }
     }
+}
+
+def getDataFile(){
+	if (GlobalVariable.APPSTEP == 'CUSTOMER') {
+		'get data file path'
+		GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileCustomerCompany)
+	
+		'get data file customer'
+		datafilecustdetail = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail')
+	
+		'declare data file Global variable'
+		GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData')
+	} else if (GlobalVariable.APPSTEP == 'SHAREHOLDER COMPANY') {
+		'get data file path'
+		GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileManagementShareholderCompany)
+	
+		'get data file customer'
+		datafilecustdetail = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/CustomerDetail')
+	
+		'declare data file Global variable'
+		GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementshareholderCompany/FinancialData')
+	} else if (GlobalVariable.APPSTEP == 'GUARANTOR COMPANY') {
+		'get data file path'
+		GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorCompanyCompany)
+	
+		'get data file customer'
+		datafilecustdetail = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/CustomerDetail')
+	
+		'declare data file Global variable'
+		GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/FinancialData')
+	}
 }

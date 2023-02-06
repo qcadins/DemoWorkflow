@@ -581,10 +581,7 @@ def mscopyapp(){
 						} else {
 							'click X'
 							WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/Button_X'))
-
-							'click button cancel'
-							WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/button_Cancel'))
-
+\
 							'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusReasonLookup'
 							CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('2.TabManagementShareholderData',
 								GlobalVariable.NumofMS, GlobalVariable.StatusFailed, GlobalVariable.StatusReasonLookup)
@@ -765,6 +762,8 @@ def mscopyapp(){
 						'click button cancel'
 						WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_Cancel'))
 
+						GlobalVariable.IsDataCancel = 1
+						
 						'customer added -1'
 						(GlobalVariable.CountNumofCustomer)--
 					} else {
@@ -789,8 +788,24 @@ def mscopyapp(){
 							CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/errorvalidasi'),
 								GlobalVariable.NumofMS, '2.TabManagementShareholderData')
 						}
+					}
+					
+					if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_Cancel'),
+						GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
+						'click button cancel'
+						WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_Cancel'))
+
+						GlobalVariable.IsDataCancel = 1
 						
-						if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder').getValue(GlobalVariable.NumofMS, 1) == 'SUCCESS') {
+						'customer added -1'
+						(GlobalVariable.CountNumofCustomer)--
+					} else {
+						if (GlobalVariable.FlagWarning > 0) {
+							CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData',
+								0, GlobalVariable.NumofMS - 1, GlobalVariable.StatusWarning)
+						}
+						
+						
 						if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany ==
 								'Yes')) {
 							if (datafileMS.getValue(GlobalVariable.NumofMS, 13) == 'Input Data') {
@@ -803,21 +818,7 @@ def mscopyapp(){
 									[:], FailureHandling.CONTINUE_ON_FAILURE)
 							}
 						}
-						}
-					}
-					
-					if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_Cancel'),
-						GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
-						'click button cancel'
-						WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_Cancel'))
-
-						'customer added -1'
-						(GlobalVariable.CountNumofCustomer)--
-					} else {
-						if (GlobalVariable.FlagWarning > 0) {
-							CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData',
-								0, GlobalVariable.NumofMS - 1, GlobalVariable.StatusWarning)
-						}
+						
 					}
 					
 					break

@@ -27,6 +27,7 @@ GlobalVariable.FlagFailed = 0
 
 GlobalVariable.FlagWarning = 0
 
+'call function get Data File'
 getDataFile()
 
 ArrayList<String> legaltypefaileddelete = new ArrayList<>()
@@ -194,8 +195,11 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 	
 	if (legaltypefaileddelete.size() > 0) {
 
+		'call function get Data File'
+		getDataFile()
+		
 		'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedDelete'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.LegalDocument', GlobalVariable.ColmNAP4, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedDelete + legaltypefaileddelete)
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.LegalDocument', GlobalVariable.ColmNAP4, GlobalVariable.StatusWarning, GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 2) + ';' + GlobalVariable.ReasonFailedDelete + legaltypefaileddelete)
 		
 		(GlobalVariable.FlagWarning)++
 	}
@@ -291,8 +295,11 @@ if (GlobalVariable.FlagFailed == 0) {
 }
 
 if (GlobalVariable.FlagWarning > 0) {
+	'call function get Data File'
+	getDataFile()
+	
 	'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedDelete'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.LegalDocument', GlobalVariable.ColmNAP4, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedInputData + faileddata)
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.LegalDocument', GlobalVariable.ColmNAP4, GlobalVariable.StatusWarning, GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 2) + ';' + GlobalVariable.ReasonFailedInputData + faileddata)
 }
 
 if (WebUI.verifyElementPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/LegalDocument/th_Expired Date'),
@@ -328,8 +335,11 @@ def verifLegalDocType(int legal){
 		if (WebUI.verifyOptionsPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/LegalDocument/select_NIP  SIUP  TDP'),
 			LegalDocType) == false) {
 			
+			'call function get Data File'
+			getDataFile()
+			
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.LegalDocument', legal, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL)
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.LegalDocument', legal, GlobalVariable.StatusFailed, GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 2) + ';' + GlobalVariable.ReasonFailedDDL)
 
 			(GlobalVariable.FlagFailed)++
 		}
@@ -340,8 +350,11 @@ def verifLegalDocType(int legal){
 		'verify total ddl confins = total ddl db'
 		if (WebUI.verifyEqual(totalLegaldoctypeddl, LegalDocType.size()) == false){
 		
+		'call function get Data File'
+		getDataFile()
+			
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.LegalDocument', legal, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL)
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.LegalDocument', legal, GlobalVariable.StatusFailed, GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 2) + ';' + GlobalVariable.ReasonFailedDDL)
 		
 		(GlobalVariable.FlagFailed)++
 		}
