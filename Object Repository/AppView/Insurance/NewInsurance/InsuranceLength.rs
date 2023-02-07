@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>totaladditionalpremitocustomer</name>
+   <name>InsuranceLength</name>
    <tag></tag>
-   <elementGuidId>69b9de2b-734c-40fa-9040-d8775aebaa6c</elementGuidId>
+   <elementGuidId>06cef469-abb5-41cb-8dd2-c8f8b53e6666</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>//*[@id=&quot;SummaryCompanySection&quot;]/div[2]/div[1]/label[2]</value>
+         <value>//*[@id=&quot;InsuranceObjectSection&quot;]/div/table/tbody/tr/td[7]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -17,6 +17,6 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//*[@id=&quot;SummaryCompanySection&quot;]/div[2]/div[1]/label[2]</value>
+      <value>//*[@id=&quot;InsuranceObjectSection&quot;]/div/table/tbody/tr/td[7]</value>
    </webElementProperties>
 </WebElementEntity>

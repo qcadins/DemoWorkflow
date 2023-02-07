@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>totaladditionalpremitocustomer</name>
+   <name>InscoStampduty</name>
    <tag></tag>
-   <elementGuidId>69b9de2b-734c-40fa-9040-d8775aebaa6c</elementGuidId>
+   <elementGuidId>d4a4bb4b-4793-4428-b884-5e71981e20d1</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>//*[@id=&quot;SummaryCompanySection&quot;]/div[2]/div[1]/label[2]</value>
+         <value>/html/body/ngb-modal-window/div/div/app-app-insurance-detail/div[2]/div/div[5]/div[2]/label[2]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -17,6 +17,6 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//*[@id=&quot;SummaryCompanySection&quot;]/div[2]/div[1]/label[2]</value>
+      <value>/html/body/ngb-modal-window/div/div/app-app-insurance-detail/div[2]/div/div[5]/div[2]/label[2]</value>
    </webElementProperties>
 </WebElementEntity>

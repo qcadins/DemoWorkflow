@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>totaladditionalpremitocustomer</name>
+   <name>EndDate</name>
    <tag></tag>
-   <elementGuidId>69b9de2b-734c-40fa-9040-d8775aebaa6c</elementGuidId>
+   <elementGuidId>9cac7e44-567f-425f-9c22-e253e8caa4cb</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>//*[@id=&quot;SummaryCompanySection&quot;]/div[2]/div[1]/label[2]</value>
+         <value>//*[@id=&quot;CUCO_Customer&quot;]/div[4]/div[2]/label[2]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -17,6 +17,6 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//*[@id=&quot;SummaryCompanySection&quot;]/div[2]/div[1]/label[2]</value>
+      <value>//*[@id=&quot;CUCO_Customer&quot;]/div[4]/div[2]/label[2]</value>
    </webElementProperties>
 </WebElementEntity>

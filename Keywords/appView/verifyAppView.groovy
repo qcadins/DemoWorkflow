@@ -674,7 +674,7 @@ public class verifyAppView {
 	public checkAppInfoAndRestructuringData(Sql instance, String appno){
 		String appdata
 		ArrayList <String> listappdata = new ArrayList<String>()
-		instance.eachRow(("SELECT [APPSRCNAME] , [FIRST_INST_TYPE] , [PAYMENTFREQ] , [TENOR] ,[NUM_OF_INST], [INTRSTTYPE] , CASE WHEN [FLOATINGPERIOD] ='' THEN '-' ELSE [FLOATINGPERIOD] END , [INST_SCHM] , [WOP] , [CUST_NOTIF_OPT] , [CHARACTERISTIC_OF_CREDIT] , ISNULL([PREVAGGRMT],'-') AS [PREV_AGRMNT_NO], ISNULL([WAY_OF_RESTRUCTURE],'-') AS [WAY_OF_RESTRUCTURE], [SLIKECO], ISNULL([MOU_NO],'-') AS [MOU_NO] FROM (SELECT [APPSRCNAME], [PAYMENTFREQ], [TENOR],[NUM_OF_INST],[FLOATINGPERIOD], [PREVAGGRMT], [MOU_NO], mastername.Code, DESCR FROM ( select [APPSRCNAME], [PAYMENTFREQ], [TENOR],[NUM_OF_INST], [FLOATINGPERIOD], [PREVAGGRMT], [MOU_NO], [Code], value FROM ( SELECT ras.APP_SRC_NAME AS [APPSRCNAME], MR_FIRST_INST_TYPE_CODE AS 'FIRST_INST_TYPE', PAY_FREQ_CODE AS [PAYMENTFREQ], TENOR AS [TENOR],NUM_OF_INST AS [NUM_OF_INST], CAST(acpfd.INTEREST_TYPE as nvarchar(50)) AS 'INTRSTTYPE', FLOATING_PERIOD_CODE AS [FLOATINGPERIOD], MR_INST_SCHEME_CODE AS 'INST_SCHM', MR_WOP_CODE AS 'WOP', MR_CUST_NOTIFY_OPT_CODE AS 'CUST_NOTIF_OPT', MR_CHARACTERISTIC_OF_CREDIT_CODE AS 'CHARACTERISTIC_OF_CREDIT', agr.PREV_AGRMNT_NO AS [PREVAGGRMT], MR_WAY_OF_RESTRUCTURE_CODE AS 'WAY_OF_RESTRUCTURE', agr.MR_SLIK_SEC_ECO_CODE AS [SLIKECO], mou_cust_no as [MOU_NO] FROM APP a WITH(NOLOCK) JOIN APP_CUST ac WITH(NOLOCK) ON a.APP_ID = ac.APP_ID JOIN APP_GOVERMENT_REGULATION agr WITH(NOLOCK) ON agr.APP_ID = a.APP_ID JOIN APP_FIN_DATA acpfd WITH(NOLOCK) ON acpfd.APP_ID = ac.APP_ID JOIN REF_APP_SRC ras WITH(NOLOCK) ON ras.APP_SRC_CODE = a.MR_APP_SOURCE_CODE left JOIN MOU_CUST mc with(nolock) on mc.mou_cust_id = a.mou_cust_id WHERE APP_NO = '"+appno+"') as Orig unpivot (value for [Code] in ([FIRST_INST_TYPE],[WOP],[INTRSTTYPE],[INST_SCHM],[CUST_NOTIF_OPT],[CHARACTERISTIC_OF_CREDIT],[WAY_OF_RESTRUCTURE],[SLIKECO]) )as unpiv) as mastername JOIN FOUNDATION.dbo.REF_MASTER rf WITH(NOLOCK) ON rf.MASTER_CODE = mastername.value WHERE rf.IS_ACTIVE = '1' AND rf.REF_MASTER_TYPE_CODE IN ('FIRST_INST_TYPE','WOP','INTRSTTYPE','INST_SCHM','CUST_NOTIF_OPT','CHARACTERISTIC_OF_CREDIT','WAY_OF_RESTRUCTURE','SLIK_SEC_ECO')) AS ref PIVOT(MAX(ref.DESCR) for [Code] in ([FIRST_INST_TYPE],[WOP],[INTRSTTYPE],[INST_SCHM],[CUST_NOTIF_OPT],[CHARACTERISTIC_OF_CREDIT],[WAY_OF_RESTRUCTURE],[SLIKECO])) as piv"), {  row ->
+		instance.eachRow(("SELECT [APPSRCNAME] , [FIRST_INST_TYPE] , [PAYMENTFREQ] , [TENOR] ,[NUM_OF_INST], [INTRSTTYPE] , CASE WHEN [FLOATINGPERIOD] ='' THEN '-' ELSE [FLOATINGPERIOD] END , [INST_SCHM] , [WOP] , [CUST_NOTIF_OPT] , [CHARACTERISTIC_OF_CREDIT] , ISNULL([PREVAGGRMT],'-') AS [PREV_AGRMNT_NO], ISNULL([WAY_OF_RESTRUCTURE],'-') AS [WAY_OF_RESTRUCTURE], [SLIKECO], ISNULL([MOU_NO],'-') AS [MOU_NO] FROM (SELECT [APPSRCNAME], [PAYMENTFREQ], [TENOR],[NUM_OF_INST],[FLOATINGPERIOD], [PREVAGGRMT], [MOU_NO], mastername.Code, DESCR FROM ( select [APPSRCNAME], [PAYMENTFREQ], [TENOR],[NUM_OF_INST], [FLOATINGPERIOD], [PREVAGGRMT], [MOU_NO], [Code], value FROM ( SELECT ras.APP_SRC_NAME AS [APPSRCNAME], MR_FIRST_INST_TYPE_CODE AS 'FIRST_INST_TYPE', rpf.DESCR AS [PAYMENTFREQ], TENOR AS [TENOR],NUM_OF_INST AS [NUM_OF_INST], CAST(acpfd.INTEREST_TYPE as nvarchar(50)) AS 'INTRSTTYPE', FLOATING_PERIOD_CODE AS [FLOATINGPERIOD], MR_INST_SCHEME_CODE AS 'INST_SCHM', MR_WOP_CODE AS 'WOP', MR_CUST_NOTIFY_OPT_CODE AS 'CUST_NOTIF_OPT', MR_CHARACTERISTIC_OF_CREDIT_CODE AS 'CHARACTERISTIC_OF_CREDIT', agr.PREV_AGRMNT_NO AS [PREVAGGRMT], MR_WAY_OF_RESTRUCTURE_CODE AS 'WAY_OF_RESTRUCTURE', agr.MR_SLIK_SEC_ECO_CODE AS [SLIKECO], mou_cust_no as [MOU_NO] FROM APP a WITH(NOLOCK) JOIN APP_CUST ac WITH(NOLOCK) ON a.APP_ID = ac.APP_ID JOIN APP_GOVERMENT_REGULATION agr WITH(NOLOCK) ON agr.APP_ID = a.APP_ID JOIN APP_FIN_DATA acpfd WITH(NOLOCK) ON acpfd.APP_ID = ac.APP_ID JOIN REF_APP_SRC ras WITH(NOLOCK) ON ras.APP_SRC_CODE = a.MR_APP_SOURCE_CODE left JOIN MOU_CUST mc with(nolock) on mc.mou_cust_id = a.mou_cust_id JOIN FOUNDATION.dbo.REF_PAY_FREQ rpf with(nolock) on rpf.PAY_FREQ_CODE = a.PAY_FREQ_CODE WHERE APP_NO = '"+appno+"') as Orig unpivot (value for [Code] in ([FIRST_INST_TYPE],[WOP],[INTRSTTYPE],[INST_SCHM],[CUST_NOTIF_OPT],[CHARACTERISTIC_OF_CREDIT],[WAY_OF_RESTRUCTURE],[SLIKECO]) )as unpiv) as mastername JOIN FOUNDATION.dbo.REF_MASTER rf WITH(NOLOCK) ON rf.MASTER_CODE = mastername.value WHERE rf.IS_ACTIVE = '1' AND rf.REF_MASTER_TYPE_CODE IN ('FIRST_INST_TYPE','WOP','INTRSTTYPE','INST_SCHM','CUST_NOTIF_OPT','CHARACTERISTIC_OF_CREDIT','WAY_OF_RESTRUCTURE','SLIK_SEC_ECO')) AS ref PIVOT(MAX(ref.DESCR) for [Code] in ([FIRST_INST_TYPE],[WOP],[INTRSTTYPE],[INST_SCHM],[CUST_NOTIF_OPT],[CHARACTERISTIC_OF_CREDIT],[WAY_OF_RESTRUCTURE],[SLIKECO])) as piv"), {  row ->
 
 			ResultSetMetaData rsmd = row.getMetaData()
 			colmcount = rsmd.getColumnCount()
@@ -762,7 +762,7 @@ public class verifyAppView {
 	public checkInsuranceCustomer(Sql instance, String appno){
 		String insurancedata
 		ArrayList <String> listinsurance = new ArrayList<String>()
-		instance.eachRow(("SELECT rml.DESCR as 'INSURED_BY', INS_POLICY_NO, CUST_INSCO_BRANCH_NAME, INS_POLICY_NAME, CUST_CVG_AMT, FORMAT(CUST_COVER_START_DT, 'dd-MMM-yyyy'), CUST_NOTES, FORMAT(END_DT, 'dd-MMM-yyyy') FROM APP_INS ai WITH(NOLOCK) JOIN APP a WITH(NOLOCK) ON ai.APP_ID = a.APP_ID JOIN APP_INS_OBJ aio WITH(NOLOCK) ON a.APP_ID = aio.APP_ID JOIN FOUNDATION.dbo.REF_MASTER rml WITH(NOLOCK) ON rml.MASTER_CODE = INS_ASSET_COVERED_BY WHERE a.APP_NO = '"+ appno +"' AND rml.REF_MASTER_TYPE_CODE = 'INSURED_BY'"), {  row ->
+		instance.eachRow(("SELECT rml.DESCR as 'INSURED_BY', INS_POLICY_NO, CUST_INSCO_BRANCH_NAME, INS_POLICY_NAME, CUST_CVG_AMT, CONVERT(varchar(50),CUST_COVER_START_DT, 127), CUST_NOTES, CONVERT(varchar(50),END_DT, 127) FROM APP_INS ai WITH(NOLOCK) JOIN APP a WITH(NOLOCK) ON ai.APP_ID = a.APP_ID JOIN APP_INS_OBJ aio WITH(NOLOCK) ON a.APP_ID = aio.APP_ID JOIN FOUNDATION.dbo.REF_MASTER rml WITH(NOLOCK) ON rml.MASTER_CODE = INS_ASSET_COVERED_BY WHERE a.APP_NO = '"+ appno +"' AND rml.REF_MASTER_TYPE_CODE = 'INSURED_BY'"), {  row ->
 
 			ResultSetMetaData rsmd = row.getMetaData()
 			colmcount = rsmd.getColumnCount()
@@ -781,7 +781,7 @@ public class verifyAppView {
 	public checkInsuranceMultifinance(Sql instance, String appno){
 		String insurancedata
 		ArrayList <String> listinsurance = new ArrayList<String>()
-		instance.eachRow(("SELECT [INSURED_BY], [INS_PAID_BY], [INSCOBRANCHNAME], [PAY_PERIOD_TO_INSCO], [INS_COVER_PERIOD], [cvgAMT], [INSLENGTH], [CUSTADMINFEE], [NOTES], [ASSETREGION] FROM (SELECT [INSCOBRANCHNAME], [cvgAMT], [INSLENGTH], [CUSTADMINFEE], [NOTES], [ASSETREGION], mastername.Code, DESCR FROM (select [INSCOBRANCHNAME], [cvgAMT], [INSLENGTH], [CUSTADMINFEE], [NOTES], [ASSETREGION], [Code], value FROM (SELECT INS_ASSET_COVERED_BY as 'INSURED_BY', INS_ASSET_PAID_BY as 'INS_PAID_BY', aio.INSCO_BRANCH_NAME as [INSCOBRANCHNAME], INS_ASSET_COVER_PERIOD as 'INS_COVER_PERIOD', aio.PAY_PERIOD_TO_INSCO as 'PAY_PERIOD_TO_INSCO', aio.CVG_AMT as [cvgAMT], INS_LENGTH as [INSLENGTH], CUST_ADMIN_FEE_AMT  as [CUSTADMINFEE], aio.NOTES as [NOTES], aio.INS_ASSET_REGION as [ASSETREGION] FROM APP_INS ai WITH(NOLOCK) JOIN APP a WITH(NOLOCK) ON ai.APP_ID = a.APP_ID JOIN APP_INS_OBJ aio WITH(NOLOCK) ON a.APP_ID = aio.APP_ID WHERE a.APP_NO = '"+ appno +"') as orig unpivot (value for [Code] in ([INSURED_BY],[INS_PAID_BY],[INS_COVER_PERIOD],[PAY_PERIOD_TO_INSCO]) )as unpiv) as mastername JOIN FOUNDATION.dbo.REF_MASTER rf on rf.MASTER_CODE = mastername.value WHERE rf.IS_ACTIVE = '1') AS ref PIVOT (MAX(ref.DESCR) for [Code] in ([INSURED_BY],[INS_PAID_BY],[INS_COVER_PERIOD],[PAY_PERIOD_TO_INSCO])) as piv"), {  row ->
+		instance.eachRow((" SELECT [INSURED_BY], [INS_PAID_BY], [ASSETREGION], [INSCOBRANCHNAME], [PAY_PERIOD_TO_INSCO], [INS_COVER_PERIOD], [cvgAMT], [INSLENGTH], [INSCOADMINFEE],[INSCOSTAMPDUTYFEE], [NOTES] FROM (SELECT [INSCOBRANCHNAME], [cvgAMT], [INSLENGTH], [INSCOADMINFEE],[INSCOSTAMPDUTYFEE], [NOTES], [ASSETREGION], mastername.Code, DESCR FROM (select [INSCOBRANCHNAME], [cvgAMT], [INSLENGTH], [INSCOADMINFEE], [INSCOSTAMPDUTYFEE], [NOTES], [ASSETREGION], [Code], value FROM (SELECT INS_ASSET_COVERED_BY as 'INSURED_BY', INS_ASSET_PAID_BY as 'INS_PAID_BY', aio.INSCO_BRANCH_NAME as [INSCOBRANCHNAME], INS_ASSET_COVER_PERIOD as 'INS_COVER_PERIOD', aio.PAY_PERIOD_TO_INSCO as 'PAY_PERIOD_TO_INSCO', aio.CVG_AMT as [cvgAMT], INS_LENGTH as [INSLENGTH], INSCO_ADMIN_FEE_AMT  as [INSCOADMINFEE], INSCO_STAMP_DUTY_FEE AS [INSCOSTAMPDUTYFEE], aio.NOTES as [NOTES], aio.INS_ASSET_REGION as [ASSETREGION] FROM APP_INS ai WITH(NOLOCK) JOIN APP a WITH(NOLOCK) ON ai.APP_ID = a.APP_ID JOIN APP_INS_OBJ aio WITH(NOLOCK) ON a.APP_ID = aio.APP_ID WHERE a.APP_NO = '"+appno+"') as orig unpivot (value for [Code] in ([INSURED_BY],[INS_PAID_BY],[INS_COVER_PERIOD],[PAY_PERIOD_TO_INSCO]) )as unpiv) as mastername JOIN FOUNDATION.dbo.REF_MASTER rf on rf.MASTER_CODE = mastername.value WHERE rf.IS_ACTIVE = '1') AS ref PIVOT (MAX(ref.DESCR) for [Code] in ([INSURED_BY],[INS_PAID_BY],[INS_COVER_PERIOD],[PAY_PERIOD_TO_INSCO])) as piv"), {  row ->
 
 			ResultSetMetaData rsmd = row.getMetaData()
 			colmcount = rsmd.getColumnCount()
@@ -800,7 +800,7 @@ public class verifyAppView {
 	public checkInsuranceCustMf(Sql instance, String appno){
 		String insurancedata
 		ArrayList <String> listinsurance = new ArrayList<String>()
-		instance.eachRow(("SELECT [POLICYNO], [BRANCHNAME], [POLICYNAME], [CUSTCVGAMT], [STARTDATE], [NOTE], [ENDDATE], [INS_PAID_BY], [INSCOBRANCHNAME], [INS_COVER_PERIOD], [cvgAMT], [INSLENGTH], [CUSTADMINFEE], [NOTES], [ASSETREGION] FROM (SELECT [INSCOBRANCHNAME], [POLICYNO], [BRANCHNAME], [POLICYNAME], [CUSTCVGAMT], [STARTDATE], [NOTE], [ENDDATE], [cvgAMT], [INSLENGTH], [CUSTADMINFEE], [NOTES], [ASSETREGION], mastername.Code, DESCR FROM (select [INSCOBRANCHNAME], [POLICYNO], [BRANCHNAME], [POLICYNAME], [CUSTCVGAMT], [STARTDATE], [NOTE], [ENDDATE], [cvgAMT], [INSLENGTH], [CUSTADMINFEE], [NOTES], [ASSETREGION], [Code], value FROM (SELECT INS_ASSET_COVERED_BY as 'INSURED_BY', INS_ASSET_PAID_BY as 'INS_PAID_BY', aio.INSCO_BRANCH_NAME as [INSCOBRANCHNAME], INS_ASSET_COVER_PERIOD as 'INS_COVER_PERIOD', aio.PAY_PERIOD_TO_INSCO as 'PAY_PERIOD_TO_INSCO', aio.CVG_AMT as [cvgAMT], INS_LENGTH as [INSLENGTH], CUST_ADMIN_FEE_AMT as [CUSTADMINFEE], aio.NOTES as [NOTES], aio.INS_ASSET_REGION as [ASSETREGION], INS_POLICY_NO as [POLICYNO], CUST_INSCO_BRANCH_NAME as [BRANCHNAME], INS_POLICY_NAME as [POLICYNAME], CUST_CVG_AMT as [CUSTCVGAMT], FORMAT(CUST_COVER_START_DT, 'dd-MMM-yyyy') as [STARTDATE], CUST_NOTES as [NOTE], FORMAT(START_DT, 'dd-MMM-yyyy') as [ENDDATE] FROM APP_INS ai WITH(NOLOCK) JOIN APP a WITH(NOLOCK) ON ai.APP_ID = a.APP_ID JOIN APP_INS_OBJ aio WITH(NOLOCK) ON a.APP_ID = aio.APP_ID WHERE a.APP_NO = '"+ appno +"') as orig unpivot (value for [Code] in ([INSURED_BY],[INS_PAID_BY],[INS_COVER_PERIOD],[PAY_PERIOD_TO_INSCO]) )as unpiv) as mastername JOIN FOUNDATION.dbo.REF_MASTER rf on rf.MASTER_CODE = mastername.value WHERE rf.IS_ACTIVE = '1') AS ref PIVOT (MAX(ref.DESCR) for [Code] in ([INSURED_BY],[INS_PAID_BY],[INS_COVER_PERIOD],[PAY_PERIOD_TO_INSCO])) as piv"), {  row ->
+		instance.eachRow(("SELECT [INSURED_BY], [POLICYNO], [BRANCHNAME], [POLICYNAME], [CUSTCVGAMT], [STARTDATE], [NOTE], [ENDDATE], [INS_PAID_BY], [ASSETREGION], [INSCOBRANCHNAME], [INS_COVER_PERIOD], [cvgAMT], [INSLENGTH], [INSCOADMINFEE],[INSCOSTAMPDUTYFEE], [NOTES] FROM (SELECT [INSCOBRANCHNAME], [POLICYNO], [BRANCHNAME], [POLICYNAME], [CUSTCVGAMT], [STARTDATE], [NOTE], [ENDDATE], [cvgAMT], [INSLENGTH], [NOTES], [ASSETREGION],[INSCOADMINFEE],[INSCOSTAMPDUTYFEE], mastername.Code, DESCR FROM (select [INSCOBRANCHNAME], [POLICYNO], [BRANCHNAME], [POLICYNAME], [CUSTCVGAMT], [STARTDATE], [NOTE], [ENDDATE], [cvgAMT], [INSLENGTH], [NOTES], [ASSETREGION],[INSCOADMINFEE],[INSCOSTAMPDUTYFEE], [Code], value FROM (SELECT INS_ASSET_COVERED_BY as 'INSURED_BY', INS_ASSET_PAID_BY as 'INS_PAID_BY', aio.INSCO_BRANCH_NAME as [INSCOBRANCHNAME], INS_ASSET_COVER_PERIOD as 'INS_COVER_PERIOD', aio.PAY_PERIOD_TO_INSCO as 'PAY_PERIOD_TO_INSCO', aio.CVG_AMT as [cvgAMT], INS_LENGTH as [INSLENGTH], INSCO_ADMIN_FEE_AMT as [INSCOADMINFEE], INSCO_STAMP_DUTY_FEE AS [INSCOSTAMPDUTYFEE], aio.NOTES as [NOTES], aio.INS_ASSET_REGION as [ASSETREGION], INS_POLICY_NO as [POLICYNO], CUST_INSCO_BRANCH_NAME as [BRANCHNAME], INS_POLICY_NAME as [POLICYNAME], CUST_CVG_AMT as [CUSTCVGAMT], CONVERT(varchar(50), START_DT, 127) as [STARTDATE], CUST_NOTES as [NOTE], CONVERT(varchar(50), END_DT, 127) as [ENDDATE] FROM APP_INS ai WITH(NOLOCK) JOIN APP a WITH(NOLOCK) ON ai.APP_ID = a.APP_ID JOIN APP_INS_OBJ aio WITH(NOLOCK) ON a.APP_ID = aio.APP_ID WHERE a.APP_NO = '"+appno+"') as orig unpivot (value for [Code] in ([INSURED_BY],[INS_PAID_BY],[INS_COVER_PERIOD],[PAY_PERIOD_TO_INSCO]) )as unpiv) as mastername JOIN FOUNDATION.dbo.REF_MASTER rf on rf.MASTER_CODE = mastername.value WHERE rf.IS_ACTIVE = '1') AS ref PIVOT (MAX(ref.DESCR) for [Code] in ([INSURED_BY],[INS_PAID_BY],[INS_COVER_PERIOD],[PAY_PERIOD_TO_INSCO])) as piv"), {  row ->
 
 			ResultSetMetaData rsmd = row.getMetaData()
 			colmcount = rsmd.getColumnCount()
@@ -819,7 +819,24 @@ public class verifyAppView {
 	public checkInsuranceMainCoverage(Sql instance, String appno){
 		String insurancedata
 		ArrayList <String> listinsurance = new ArrayList<String>()
-		instance.eachRow(("SELECT rml.DESCR, TOTAL_CUST_MAIN_PREMI_AMT, aio.TOTAL_CUST_ADD_PREMI_AMT, TOTAL_INSCO_MAIN_PREMI_AMT, aio.TOTAL_INSCO_ADD_PREMI_AMT, SUBQ.DESCR, CASE WHEN CAST(IS_CAPITALIZED as varchar(25)) = '0' THEN 'NO' WHEN CAST(IS_CAPITALIZED as varchar(25)) = '1' THEN 'YES' ELSE CAST(IS_CAPITALIZED as varchar(25)) END FROM APP_INS_MAIN_CVG aimc JOIN APP_INS_OBJ aio WITH(NOLOCK) ON aio.APP_INS_OBJ_ID = aimc.APP_INS_OBJ_ID JOIN APP a WITH(NOLOCK) ON a.APP_ID = aio.APP_ID JOIN FOUNDATION.dbo.REF_MASTER rml WITH(NOLOCK) ON rml.MASTER_CODE = aimc.MR_MAIN_CVG_TYPE_CODE, (SELECT rml.DESCR, a.APP_NO FROM APP_INS_OBJ aio WITH(NOLOCK) JOIN APP a WITH(NOLOCK) ON a.APP_ID = aio.APP_ID JOIN FOUNDATION.dbo.REF_MASTER rml WITH(NOLOCK) ON rml.MASTER_CODE = aio.INS_ASSET_PAID_BY WHERE rml.REF_MASTER_TYPE_CODE = 'INS_PAID_BY') as SUBQ WHERE a.APP_NO = '"+ appno +"' AND SUBQ.APP_NO = a.APP_NO"), {  row ->
+		instance.eachRow(("SELECT mr_main_cvg_type_code, CUST_MAIN_PREMI_AMT, aimc.TOTAL_CUST_ADD_PREMI_AMT, INSCO_MAIN_PREMI_AMT, aimc.TOTAL_INSCO_ADD_PREMI_AMT, SUBQ.DESCR, CASE WHEN CAST(IS_CAPITALIZED as varchar(25)) = '0' THEN 'NO' WHEN CAST(IS_CAPITALIZED as varchar(25)) = '1' THEN 'YES' ELSE CAST(IS_CAPITALIZED as varchar(25)) END FROM APP_INS_MAIN_CVG aimc JOIN APP_INS_OBJ aio WITH(NOLOCK) ON aio.APP_INS_OBJ_ID = aimc.APP_INS_OBJ_ID JOIN APP a WITH(NOLOCK) ON a.APP_ID = aio.APP_ID JOIN FOUNDATION.dbo.REF_MASTER rml WITH(NOLOCK) ON rml.MASTER_CODE = aimc.MR_MAIN_CVG_TYPE_CODE, (SELECT rml.DESCR, a.APP_NO FROM APP_INS_OBJ aio WITH(NOLOCK) JOIN APP a WITH(NOLOCK) ON a.APP_ID = aio.APP_ID JOIN FOUNDATION.dbo.REF_MASTER rml WITH(NOLOCK) ON rml.MASTER_CODE = aio.INS_ASSET_PAID_BY WHERE rml.REF_MASTER_TYPE_CODE = 'INS_PAID_BY') as SUBQ WHERE a.APP_NO = '"+ appno +"' AND SUBQ.APP_NO = a.APP_NO"), {  row ->
+
+			ResultSetMetaData rsmd = row.getMetaData()
+			colmcount = rsmd.getColumnCount()
+
+
+			for(i = 0 ; i < colmcount ; i++){
+				insurancedata = (row[i])
+				listinsurance.add(insurancedata)
+			}
+		})
+		return listinsurance
+	}
+
+	public checkInsuranceMainCoverageMultifinance(Sql instance, String appno){
+		String insurancedata
+		ArrayList <String> listinsurance = new ArrayList<String>()
+		instance.eachRow(("SELECT mr_main_cvg_type_code, aimc.CUST_MAIN_PREMI_AMT, FORMAT(ROUND(cust_main_premi_rate,3),'N3') , aimc.TOTAL_CUST_ADD_PREMI_AMT, aimc.INSCO_MAIN_PREMI_AMT, FORMAT(ROUND(insco_main_premi_rate,3),'N3'), aimc.TOTAL_INSCO_ADD_PREMI_AMT, SUBQ.DESCR, CASE WHEN CAST(IS_CAPITALIZED as varchar(25)) = '0' THEN 'NO' WHEN CAST(IS_CAPITALIZED as varchar(25)) = '1' THEN 'YES' ELSE CAST(IS_CAPITALIZED as varchar(25)) END FROM APP_INS_MAIN_CVG aimc JOIN APP_INS_OBJ aio WITH(NOLOCK) ON aio.APP_INS_OBJ_ID = aimc.APP_INS_OBJ_ID JOIN APP a WITH(NOLOCK) ON a.APP_ID = aio.APP_ID JOIN FOUNDATION.dbo.REF_MASTER rml WITH(NOLOCK) ON rml.MASTER_CODE = aimc.MR_MAIN_CVG_TYPE_CODE, (SELECT rml.DESCR, a.APP_NO FROM APP_INS_OBJ aio WITH(NOLOCK) JOIN APP a WITH(NOLOCK) ON a.APP_ID = aio.APP_ID JOIN FOUNDATION.dbo.REF_MASTER rml WITH(NOLOCK) ON rml.MASTER_CODE = aio.INS_ASSET_PAID_BY WHERE rml.REF_MASTER_TYPE_CODE = 'INS_PAID_BY') as SUBQ WHERE a.APP_NO = '"+appno+"' AND SUBQ.APP_NO = a.APP_NO"), {  row ->
 
 			ResultSetMetaData rsmd = row.getMetaData()
 			colmcount = rsmd.getColumnCount()
@@ -838,7 +855,7 @@ public class verifyAppView {
 	public checkAdditionalCoverage(Sql instance, String appno, int yearno){
 		String insurancedata
 		ArrayList <String> listinsurance = new ArrayList<String>()
-		instance.eachRow(("SELECT UPPER(rml.DESCR) FROM APP_INS_MAIN_CVG aimc JOIN APP_INS_OBJ aio WITH(NOLOCK) ON aio.APP_INS_OBJ_ID = aimc.APP_INS_OBJ_ID JOIN APP a WITH(NOLOCK) ON a.APP_ID = aio.APP_ID JOIN APP_INS_ADD_CVG aiac WITH(NOLOCK) ON aiac.APP_INS_MAIN_CVG_ID = aimc.APP_INS_MAIN_CVG_ID JOIN FOUNDATION.dbo.REF_MASTER rml WITH(NOLOCK) ON rml.MASTER_CODE = aiac.MR_ADD_CVG_TYPE_CODE WHERE APP_NO = '"+ appno +"' AND YEAR_NO = "+ yearno +""), {  row ->
+		instance.eachRow(("SELECT STRING_AGG(mr_add_cvg_type_code, ', '), STRING_AGG(FORMAT(ROUND(cust_add_premi_rate,3),'N3'), ', '), STRING_AGG(FORMAT(ROUND(INSCO_add_premi_rate,3),'N3'), ', ') FROM APP_INS_MAIN_CVG aimc JOIN APP_INS_OBJ aio WITH(NOLOCK) ON aio.APP_INS_OBJ_ID = aimc.APP_INS_OBJ_ID JOIN APP a WITH(NOLOCK) ON a.APP_ID = aio.APP_ID JOIN APP_INS_ADD_CVG aiac WITH(NOLOCK) ON aiac.APP_INS_MAIN_CVG_ID = aimc.APP_INS_MAIN_CVG_ID WHERE APP_NO = '"+appno+"' AND YEAR_NO = '"+yearno+"'"), {  row ->
 
 			ResultSetMetaData rsmd = row.getMetaData()
 			colmcount = rsmd.getColumnCount()
@@ -857,7 +874,43 @@ public class verifyAppView {
 	public checkInsuranceSummary(Sql instance, String appno){
 		String insurancedata
 		ArrayList <String> listinsurance = new ArrayList<String>()
-		instance.eachRow(("SELECT TOTAL_CUST_MAIN_PREMI_AMT, aio.TOTAL_CUST_ADD_PREMI_AMT, CUST_ADMIN_FEE_AMT + CUST_STAMP_DUTY_FEE, aio.[TOTAL_INS_CUST_AMT ], aio.TOTAL_CUST_DISC_AMT, aio.[TOTAL_INS_CUST_AMT ]-aio.TOTAL_CUST_DISC_AMT, INS_CPLTZ_AMT, TOTAL_INSCO_MAIN_PREMI_AMT, aio.TOTAL_INSCO_ADD_PREMI_AMT, INSCO_ADMIN_FEE_AMT+INSCO_STAMP_DUTY_FEE, TOTAL_INS_INSCO_AMT FROM APP_INS_MAIN_CVG aimc JOIN APP_INS_OBJ aio WITH(NOLOCK) ON aio.APP_INS_OBJ_ID = aimc.APP_INS_OBJ_ID JOIN APP a WITH(NOLOCK) ON a.APP_ID = aio.APP_ID JOIN FOUNDATION.dbo.REF_MASTER rml WITH(NOLOCK) ON rml.MASTER_CODE = aimc.MR_MAIN_CVG_TYPE_CODE WHERE APP_NO = '"+ appno +"'"), {  row ->
+		instance.eachRow(("select total_cust_main_premi_amt, total_insco_main_premi_amt, total_cust_add_premi_amt, total_insco_add_premi_amt, total_cust_fee_amt, total_insco_fee_amt, total_cust_premi_amt, total_insco_premi_amt, total_cust_disc_amt, total_cust_premi_amt-total_cust_disc_amt as [total_premi_to_cust_aft_disc], total_ins_cptlz_amt from app_ins ai join app a on a.app_id = ai.app_id where app_no = '"+appno+"'"), {  row ->
+
+			ResultSetMetaData rsmd = row.getMetaData()
+			colmcount = rsmd.getColumnCount()
+
+
+			for(i = 0 ; i < colmcount ; i++){
+				insurancedata = (row[i])
+				listinsurance.add(insurancedata)
+			}
+		})
+		return listinsurance
+	}
+
+	@Keyword
+	public checkNewInsuranceSummary(Sql instance, String appno){
+		String insurancedata
+		ArrayList <String> listinsurance = new ArrayList<String>()
+		instance.eachRow(("select total_cust_premi_amt, total_premi_paid_by_cust_amt, total_ins_cptlz_amt from app_ins ai join app a on ai.app_id = a.app_id where app_no = '"+appno+"'"), {  row ->
+
+			ResultSetMetaData rsmd = row.getMetaData()
+			colmcount = rsmd.getColumnCount()
+
+
+			for(i = 0 ; i < colmcount ; i++){
+				insurancedata = (row[i])
+				listinsurance.add(insurancedata)
+			}
+		})
+		return listinsurance
+	}
+
+	@Keyword
+	public checkNewInsurance(Sql instance, String appno){
+		String insurancedata
+		ArrayList <String> listinsurance = new ArrayList<String>()
+		instance.eachRow(("SELECT [FULL_ASSET_NAME], [INSURED_BY], [INS_PAID_BY], [INSCOBRANCHNAME], ISNULL([PAY_PERIOD_TO_INSCO],''), ISNULL([INS_COVER_PERIOD],''), [INSLENGTH], total_cust_main_premi_amt, total_cust_add_premi_amt, TOTAL_CUST_FEE_AMT FROM (SELECT [FULL_ASSET_NAME], [INSCOBRANCHNAME], [INSLENGTH], mastername.Code, DESCR, total_cust_main_premi_amt, total_cust_add_premi_amt, TOTAL_CUST_FEE_AMT FROM (select [FULL_ASSET_NAME], [INSCOBRANCHNAME], [INSLENGTH], [Code], value ,total_cust_main_premi_amt, total_cust_add_premi_amt, TOTAL_CUST_FEE_AMT FROM (SELECT [FULL_ASSET_NAME], INS_ASSET_COVERED_BY as 'INSURED_BY', INS_ASSET_PAID_BY as 'INS_PAID_BY', aio.INSCO_BRANCH_NAME as [INSCOBRANCHNAME], INS_ASSET_COVER_PERIOD as 'INS_COVER_PERIOD', aio.PAY_PERIOD_TO_INSCO as 'PAY_PERIOD_TO_INSCO', INS_LENGTH as [INSLENGTH], aio.total_cust_main_premi_amt, aio.total_cust_add_premi_amt, TOTAL_CUST_FEE_AMT FROM APP_INS ai WITH(NOLOCK) JOIN APP a WITH(NOLOCK) ON ai.APP_ID = a.APP_ID JOIN APP_INS_OBJ aio WITH(NOLOCK) ON a.APP_ID = aio.APP_ID join app_asset aa on aio.app_asset_id = aa.app_asset_id WHERE a.APP_NO = '"+appno+"') as orig unpivot (value for [Code] in ([INSURED_BY],[INS_PAID_BY],[INS_COVER_PERIOD],[PAY_PERIOD_TO_INSCO]))as unpiv) as mastername JOIN FOUNDATION.dbo.REF_MASTER rf on rf.MASTER_CODE = mastername.value WHERE rf.IS_ACTIVE = '1') AS ref PIVOT (MAX(ref.DESCR) for [Code] in ([INSURED_BY],[INS_PAID_BY],[INS_COVER_PERIOD],[PAY_PERIOD_TO_INSCO])) as piv"), {  row ->
 
 			ResultSetMetaData rsmd = row.getMetaData()
 			colmcount = rsmd.getColumnCount()
