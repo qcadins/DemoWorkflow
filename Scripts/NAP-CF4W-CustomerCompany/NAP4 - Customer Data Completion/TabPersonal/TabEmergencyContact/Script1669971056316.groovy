@@ -22,18 +22,8 @@ import internal.GlobalVariable as GlobalVariable
 
 GlobalVariable.FlagFailed = 0
 
-if (GlobalVariable.APPSTEP == 'SHAREHOLDER PERSONAL') {
-    'get data file path'
-    GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileManagementShareholderPersonal)
-
-    'declare data file Global variable'
-    GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/EmergencyContact')
-} else if (GlobalVariable.APPSTEP == 'GUARANTOR PERSONAL') {
-    'get data file path'
-    GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorPersonalCompany)
-
-    GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/EmergencyContact')
-}
+'call function get data file'
+getDataFile()
 
 'call function check ddl'
 checkDDL()
@@ -418,9 +408,12 @@ def checkDDL(){
 		'verify isi ddl IDType confins = db'
 		if (WebUI.verifyOptionsPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/select_ID Type'),
 			IDType) == false) {
+			'call function get data file'
+			getDataFile()
+			
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
 			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('4.EmergencyContact', GlobalVariable.NumofColm,
-				GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'ID Type')
+				GlobalVariable.StatusFailed, GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'ID Type')
 	
 			(GlobalVariable.FlagFailed)++
 		}
@@ -437,11 +430,30 @@ def checkDDL(){
 			'verify isi ddl Gender confins = db'
 			if (WebUI.verifyOptionsPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/EmergencyContact/select_Gender'),
 				Gender) == false) {
+			
+				'call function get data file'
+				getDataFile()
+				
 				'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
 				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('4.EmergencyContact', GlobalVariable.NumofColm,
-					GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'Gender')
+					GlobalVariable.StatusFailed, GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'Gender')
 		
 				(GlobalVariable.FlagFailed)++
 			}
+	}
+}
+
+def getDataFile(){
+	if (GlobalVariable.APPSTEP == 'SHAREHOLDER PERSONAL') {
+		'get data file path'
+		GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileManagementShareholderPersonal)
+	
+		'declare data file Global variable'
+		GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/EmergencyContact')
+	} else if (GlobalVariable.APPSTEP == 'GUARANTOR PERSONAL') {
+		'get data file path'
+		GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorPersonalCompany)
+	
+		GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/EmergencyContact')
 	}
 }

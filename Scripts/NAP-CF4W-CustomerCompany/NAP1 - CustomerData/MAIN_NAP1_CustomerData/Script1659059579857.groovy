@@ -10,6 +10,7 @@ import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.testcase.TestCase as TestCase
 import com.kms.katalon.core.testdata.TestData as TestData
 import com.kms.katalon.core.testobject.TestObject as TestObject
+import com.kms.katalon.core.util.KeywordUtil
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
@@ -86,7 +87,7 @@ if ((datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 10).equalsIgnore
                 GlobalVariable.NumofColm, 9))
 
         'verify input error'
-        CustomKeywords.'customizeKeyword.function.verifyInputLookup'(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabCustomerData/button_Cancel'), 
+        CustomKeywords.'customizeKeyword.function.verifyInputLookup'(findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData'), 
             '1.TabCustomerMainData', GlobalVariable.NumofColm)
 
         if ((POStat == 'DEACT') || (POStat == 'EXP')) {
@@ -132,7 +133,7 @@ if ((datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 10).equalsIgnore
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabCustomerData/button_Search'))
 
         'verify input error'
-        CustomKeywords.'customizeKeyword.function.verifyInputLookup'(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabCustomerData/button_Cancel'), 
+        CustomKeywords.'customizeKeyword.function.verifyInputLookup'(findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData'), 
             '1.TabCustomerMainData', GlobalVariable.NumofColm)
     }
     
@@ -154,7 +155,7 @@ if ((datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 10).equalsIgnore
             GlobalVariable.NumofColm, 9))
 
     'verify input error'
-    CustomKeywords.'customizeKeyword.function.verifyInputLookup'(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabCustomerData/button_Cancel'), 
+    CustomKeywords.'customizeKeyword.function.verifyInputLookup'(findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData'), 
         '1.TabCustomerMainData', GlobalVariable.NumofColm)
 
     if ((POStat == 'DEACT') || (POStat == 'EXP')) {
@@ -345,6 +346,11 @@ if (GlobalVariable.Role == 'Data Entry') {
     'call test case verify applicant'
     WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/VerifyApplicant'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 } else {
+
+	if(GlobalVariable.IsDataCancel == 1){
+		KeywordUtil.markFailedAndStop('Failed NAP1')
+	}
+	
     'check if copy app yes / no / edit'
     if ((datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || datafileCustomerCompany.getValue(
         GlobalVariable.NumofColm, 10).equalsIgnoreCase('Edit')) || (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 
@@ -383,6 +389,10 @@ if (GlobalVariable.Role == 'Data Entry') {
         }
     }
     
+	if(GlobalVariable.IsDataCancel == 1){
+		KeywordUtil.markFailedAndStop('Failed NAP1')
+	}
+	
     'untuk mendapatkan posisi copy app dari excel'
     for (GlobalVariable.NumofMS = 2; GlobalVariable.NumofMS <= (datafileMS.getColumnNumbers() - 1); (GlobalVariable.NumofMS)++) {
         if (datafileMS.getValue(GlobalVariable.NumofMS, 12) == datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 
@@ -398,12 +408,12 @@ if (GlobalVariable.Role == 'Data Entry') {
         8).length() < 1)) {
         'call test case management shareholder'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/ManagementShareholder/MAINManagementShareholder'), 
-            [:], FailureHandling.STOP_ON_FAILURE)
+            [:], FailureHandling.CONTINUE_ON_FAILURE)
     } else if (datafileMS.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('Edit') || (datafileCustomerCompany.getValue(
         GlobalVariable.NumofColm, 8).length() > 1)) {
         'call test case if edit'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/ManagementShareholder/MAINMSCopyApp'), 
-            [:], FailureHandling.STOP_ON_FAILURE)
+            [:], FailureHandling.CONTINUE_ON_FAILURE)
     } else if (datafileMS.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('Yes')) {
         'click button save'
         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_Save'))
@@ -429,6 +439,10 @@ if (GlobalVariable.Role == 'Data Entry') {
         }
     }
     
+	if(GlobalVariable.IsDataCancel == 1){
+		KeywordUtil.markFailedAndStop('Failed NAP1')
+	}
+	
     'untuk mendapatkan posisi copy app dari excel'
     for (GlobalVariable.NumofGuarantorPersonal = 2; GlobalVariable.NumofGuarantorPersonal <= (datafileGuarantorPersonal.getColumnNumbers() - 
     1); (GlobalVariable.NumofGuarantorPersonal)++) {
@@ -444,12 +458,12 @@ if (GlobalVariable.Role == 'Data Entry') {
     if (datafileGuarantorPersonal.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('No') && (datafileCustomerCompany.getValue(
         GlobalVariable.NumofColm, 8).length() < 1)) {
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/Guarantor/TabGuarantorPersonal'), 
-            [:], FailureHandling.STOP_ON_FAILURE)
+            [:], FailureHandling.CONTINUE_ON_FAILURE)
     } else if (datafileGuarantorPersonal.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('Edit') || (datafileCustomerCompany.getValue(
         GlobalVariable.NumofColm, 8).length() > 1)) {
         'call test case guarantor copy app'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/Guarantor/TabGuarantorPersonalCopyApp'), 
-            [:], FailureHandling.STOP_ON_FAILURE)
+            [:], FailureHandling.CONTINUE_ON_FAILURE)
     } else if (datafileGuarantorPersonal.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('Yes')) {
         'click button save and continue'
         WebUI.click(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_Save and continue'))
@@ -486,6 +500,10 @@ if (GlobalVariable.Role == 'Data Entry') {
         }
     }
     
+	if(GlobalVariable.IsDataCancel == 1){
+		KeywordUtil.markFailedAndStop('Failed NAP1')
+	}
+	
     'untuk mendapatkan posisi copy app dari excel'
     for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorCompany <= (datafileGuarantorCompany.getColumnNumbers() - 
     1); (GlobalVariable.NumofGuarantorCompany)++) {
@@ -502,16 +520,16 @@ if (GlobalVariable.Role == 'Data Entry') {
         GlobalVariable.NumofColm, 8).length() < 1)) {
         'call test case guarantor tanpa copy app'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/Guarantor/TabGuarantorCompany'), [:], 
-            FailureHandling.STOP_ON_FAILURE)
+            FailureHandling.CONTINUE_ON_FAILURE)
     } else if (datafileGuarantorCompany.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('Edit') || (datafileCustomerCompany.getValue(
         GlobalVariable.NumofColm, 8).length() > 1)) {
         'call test case guarantor copy app'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/Guarantor/TabGuarantorCompanyCopyApp'), 
-            [:], FailureHandling.STOP_ON_FAILURE)
+            [:], FailureHandling.CONTINUE_ON_FAILURE)
     }
     
     'call test case verify applicant'
-    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/VerifyApplicant'), [:], FailureHandling.STOP_ON_FAILURE)
+    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/VerifyApplicant'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 }
 
 def pagingTesting() {

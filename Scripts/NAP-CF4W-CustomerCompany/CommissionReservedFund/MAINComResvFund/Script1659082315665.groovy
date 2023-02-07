@@ -10,6 +10,7 @@ import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.testcase.TestCase as TestCase
 import com.kms.katalon.core.testdata.TestData as TestData
 import com.kms.katalon.core.testobject.TestObject as TestObject
+import com.kms.katalon.core.util.KeywordUtil
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
@@ -78,6 +79,10 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
     }
 } else {
 
+	if(GlobalVariable.IsDataCancel == 1){
+		KeywordUtil.markFailedAndStop('Failed NAP1')
+	}
+	
 	'Mengambil nilai row keberapa dimulai data return pada excel'
 	def returnRow = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '12.TabCommissionData', 'Return Commission & Reserved Fund') +
 	1
@@ -111,17 +116,21 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
 		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/ReturnHandling/ReturnHandlingVerifStoreDBBefore'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 			
 		'call test case main return handling'
-		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/ReturnHandling/MAINReturnHandling'), [:], FailureHandling.STOP_ON_FAILURE)
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/ReturnHandling/MAINReturnHandling'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 	}
 	else if(datafileCommission.getValue(GlobalVariable.NumofColm, returnRow+1).equalsIgnoreCase("No")||datafileCommission.getValue(GlobalVariable.NumofColm, returnRow+1).equalsIgnoreCase("Done")||datafileCommission.getValue(GlobalVariable.NumofColm, returnRow+1).length()==0){
 	    'dijalankan tanpa copy app / dengan edit hasil copy app'
 	    if (datafileCommission.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || datafileCommission.getValue(
 	        GlobalVariable.NumofColm, 10).equalsIgnoreCase('Edit')) {
 	        'call test case tab commission'
-	        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData'), [:], FailureHandling.STOP_ON_FAILURE)
+	        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 	    } else if (datafileCommission.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('Yes')) {
 			copyAppYesCommission()
 	    }
+	}
+	
+	if(GlobalVariable.IsDataCancel == 1){
+		KeywordUtil.markFailedAndStop('Failed NAP1')
 	}
 	
 	returnRowCom = returnRow
@@ -159,7 +168,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
 		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/ReturnHandling/ReturnHandlingVerifStoreDBBefore'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 			
 		'call test case main return handling'
-		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/ReturnHandling/MAINReturnHandling'), [:], FailureHandling.STOP_ON_FAILURE)
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/ReturnHandling/MAINReturnHandling'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 		
 		
 	}
@@ -168,7 +177,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
 	    if (datafileReservedFund.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || datafileReservedFund.getValue(
 	        GlobalVariable.NumofColm, 10).equalsIgnoreCase('Edit')) {
 	        'call test case tab reserved fund data'
-	        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData'), [:], FailureHandling.STOP_ON_FAILURE)
+	        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 	    } else if (datafileReservedFund.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('Yes')) {
 			copyAppYesReservedFund()
 	    }

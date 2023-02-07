@@ -138,10 +138,7 @@ for (int i = 1; i <= variableData.size(); i++) {
                                 } else {
                                     'click X'
                                     WebUI.click(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/Button_X'))
-
-                                    'click button cancel'
-                                    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/button_Cancel'))
-									
+	
 									'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusReasonLookup'
 									CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3b.TabGuarantorDataCompany', GlobalVariable.NumofGuarantorCompany, GlobalVariable.StatusFailed, GlobalVariable.StatusReasonLookup)
 
@@ -186,9 +183,6 @@ for (int i = 1; i <= variableData.size(); i++) {
                                 } else {
                                     'click X'
                                     WebUI.click(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/Button_X'))
-
-                                    'click button cancel'
-                                    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabGuarantorData/button_Cancel'))
 
 									'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusReasonLookup'
 									CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3b.TabGuarantorDataCompany', GlobalVariable.NumofGuarantorCompany, GlobalVariable.StatusFailed, GlobalVariable.StatusReasonLookup)
@@ -269,6 +263,8 @@ for (int i = 1; i <= variableData.size(); i++) {
                             'click button cancel'
                             WebUI.click(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/button_Cancel'))
 
+							GlobalVariable.IsDataCancel = 1
+							
                             'customer added -1'
                             (GlobalVariable.CountNumofCustomer)--
                         } else {
@@ -276,26 +272,25 @@ for (int i = 1; i <= variableData.size(); i++) {
                                 CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '3b.TabGuarantorDataCompany', 
                                     0, GlobalVariable.NumofGuarantorCompany - 1, GlobalVariable.StatusWarning)
                             }
+							
+							
+							if (datafileGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 13) == 'Input Data') {
+								if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany ==
+								'Yes')) {
+									'call test case guarantor data company store verif'
+									WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/Guarantor/TabGuarantorDataCompanyStoreDBVerif'),
+										[:], FailureHandling.CONTINUE_ON_FAILURE)
+								}
+							} else if (datafileGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 13) == 'LookUp') {
+								if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany ==
+								'Yes')) {
+									'call test case guarantor data company store verif'
+									WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/Guarantor/TabGuarantorDataCompanyStoreDBVerif-LookUp'),
+										[:], FailureHandling.CONTINUE_ON_FAILURE)
+								}
+							}
                         }
-                        
-                        'check if input data / lookup'
-						if (findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(GlobalVariable.NumofGuarantorCompany, 1) == 'SUCCESS') {
-                        if (datafileGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 13) == 'Input Data') {
-                            if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany == 
-                            'Yes')) {
-                                'call test case guarantor data company store verif'
-                                WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/Guarantor/TabGuarantorDataCompanyStoreDBVerif'), 
-                                    [:], FailureHandling.CONTINUE_ON_FAILURE)
-                            }
-                        } else if (datafileGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 13) == 'LookUp') {
-                            if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany == 
-                            'Yes')) {
-                                'call test case guarantor data company store verif'
-                                WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/Guarantor/TabGuarantorDataCompanyStoreDBVerif-LookUp'), 
-                                    [:], FailureHandling.CONTINUE_ON_FAILURE)
-                            }
-                        }
-						}
+						
                         break
                     } else {
                         'check if next colm != current appno'

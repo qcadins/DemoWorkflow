@@ -108,7 +108,7 @@ if ((datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 10).equalsIgnor
                 GlobalVariable.NumofColm, 9))
 
         'verify input error'
-        CustomKeywords.'customizeKeyword.function.verifyInputLookup'(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabCustomerData/button_Cancel'), '1.TabCustomerMainData', GlobalVariable.NumofColm)
+        CustomKeywords.'customizeKeyword.function.verifyInputLookup'(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData'), '1.TabCustomerMainData', GlobalVariable.NumofColm)
 
         'Jika postat bernilai deact atau exp'
         if ((POStat == 'DEACT') || (POStat == 'EXP')) {
@@ -154,7 +154,7 @@ if ((datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 10).equalsIgnor
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabCustomerData/button_Search'))
 
         'verify input error'
-        CustomKeywords.'customizeKeyword.function.verifyInputLookup'(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabCustomerData/button_Cancel'), '1.TabCustomerMainData', GlobalVariable.NumofColm)
+        CustomKeywords.'customizeKeyword.function.verifyInputLookup'(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData'), '1.TabCustomerMainData', GlobalVariable.NumofColm)
     }
     
     'click button next'
@@ -177,7 +177,7 @@ if ((datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 10).equalsIgnor
             GlobalVariable.NumofColm, 9))
 
     'verify input error'
-	CustomKeywords.'customizeKeyword.function.verifyInputLookup'(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabCustomerData/button_Cancel'), '1.TabCustomerMainData', GlobalVariable.NumofColm)
+	CustomKeywords.'customizeKeyword.function.verifyInputLookup'(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData'), '1.TabCustomerMainData', GlobalVariable.NumofColm)
 
     'jika postat bernilai deact atau exp'
     if ((POStat == 'DEACT') || (POStat == 'EXP')) {

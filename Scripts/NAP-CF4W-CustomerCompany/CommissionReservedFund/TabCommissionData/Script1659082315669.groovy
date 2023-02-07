@@ -143,7 +143,7 @@ if(GlobalVariable.RoleCompany == "Testing"){
 				if(WebUI.verifyEqual(Math.round(Double.parseDouble(textIncomeInfoAmt.replace(",",""))),Math.round(getAmountFromAppDB*Double.parseDouble(refundAmt[i])))==false){
 					
 					'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyRule'
-					CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('12.TabCommissionData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedVerifyRule)
+					CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('12.TabCommissionData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedVerifyRule)
 					
 					GlobalVariable.FlagFailed=1
 				}
@@ -873,7 +873,7 @@ if (variableRef.size() > 0) {
 if(commissiondelete.size() > 0){
 	
 	'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedStoredDB'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('12.TabCommissionData', GlobalVariable.NumofColm, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedDelete + commissiondelete)
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('12.TabCommissionData', GlobalVariable.NumofColm, GlobalVariable.StatusWarning, findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDelete + commissiondelete)
 	
 	GlobalVariable.FlagWarning++
 }
@@ -899,6 +899,8 @@ if(WebUI.verifyElementPresent(alertCalculate, GlobalVariable.TimeOut, FailureHan
 	
 	'Klik cancel'
 	WebUI.click(findTestObject('NAP/CommissionReservedFund/TabCommissionData/button_Cancel'))
+	
+	GlobalVariable.IsDataCancel = 1
 	
 	GlobalVariable.FlagFailed = 1
 }
@@ -949,6 +951,8 @@ if (WebUI.verifyElementPresent(findTestObject('NAP/CommissionReservedFund/TabCom
 	'Klik cancel'
 	WebUI.click(findTestObject('NAP/CommissionReservedFund/TabCommissionData/button_Cancel'))
 
+	GlobalVariable.IsDataCancel = 1
+	
 	'Pengecekan jika new consumer finance belum diexpand'
 	if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
 		'Klik new consumer finance'
@@ -960,7 +964,7 @@ public checkVerifyEqualOrMatch(Boolean isMatch, String sheetname, int numofcolm)
 		if(isMatch==false && GlobalVariable.FlagFailed==0){
 
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'(sheetname, numofcolm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'(sheetname, numofcolm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
 			GlobalVariable.FlagFailed=1
 	}

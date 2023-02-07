@@ -25,6 +25,7 @@ GlobalVariable.FlagWarning = 0
 
 GlobalVariable.FlagFailed = 0
 
+'call function get data file'
 getDataFile()
 
 ArrayList<String> assettypefaileddelete = new ArrayList<>()
@@ -153,8 +154,11 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 	
 	if (assettypefaileddelete.size() > 0) {
 		
+		'call function get data file'
+		getDataFile()
+		
 		'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedDelete'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('5.CustomerAsset', GlobalVariable.ColmNAP4, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedDelete + assettypefaileddelete)
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('5.CustomerAsset', GlobalVariable.ColmNAP4, GlobalVariable.StatusWarning, GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 2) + ';' + GlobalVariable.ReasonFailedDelete + assettypefaileddelete)
 
 		(GlobalVariable.FlagWarning)++
 	}
@@ -251,8 +255,11 @@ if (GlobalVariable.FlagFailed == 0) {
 'check if flagwarning > 0'
 if (GlobalVariable.FlagWarning > 0) {
 
+	'call function get data file'
+	getDataFile()
+	
 	'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedInputData'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('5.CustomerAsset', GlobalVariable.ColmNAP4, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedInputData + faileddata)
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('5.CustomerAsset', GlobalVariable.ColmNAP4, GlobalVariable.StatusWarning, GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 2) + ';' + GlobalVariable.ReasonFailedInputData + faileddata)
 }
 
 'check if th customer asset is present'
@@ -384,9 +391,13 @@ def checkDDL(){
 		'verify isi ddl assettype confins = db'
 		if (WebUI.verifyOptionsPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/CustomerAsset/select_MobilMotorRumah'),
 			assettype) == false) {
+		
+			'call function get data file'
+			getDataFile()
+			
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.CustomerAsset', GlobalVariable.NumofColm,
-				GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'assettype')
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.CustomerAsset', GlobalVariable.ColmNAP4,
+				GlobalVariable.StatusFailed, GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'assettype')
 	
 			(GlobalVariable.FlagFailed)++
 		}
