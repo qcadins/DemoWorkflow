@@ -24,7 +24,9 @@ import internal.GlobalVariable as GlobalVariable
 'declare copyappcolm = 0'
 GlobalVariable.StartIndex = 0
 
-def datafilecustdetail
+GlobalVariable.APPSTEP = 'CUSTOMER'
+
+GlobalVariable.ColmNAP4 = 2
 
 'call function get data file'
 getDataFile()
@@ -40,6 +42,7 @@ ArrayList<String> bankAccDelete = new ArrayList<String>()
 
 'untuk mendapatkan posisi copy app dari excel'
 for (index = 2; index <= (countcolm + 1); index++) {
+	
     if (GlobalVariable.FindDataFile.getValue(index, 9).equalsIgnoreCase(datafilecustdetail.getValue(GlobalVariable.ColmNAP4, 
             12)) && GlobalVariable.FindDataFile.getValue(index, 10).equalsIgnoreCase(datafilecustdetail.getValue(GlobalVariable.ColmNAP4, 
             13))) {
@@ -997,4 +1000,6 @@ def getDataFile(){
 		'declare data file Global variable'
 		GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/FinancialData')
 	}
+	
+	return datafilecustdetail
 }
