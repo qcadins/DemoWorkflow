@@ -261,6 +261,11 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
+      <initValue>'\\Rule\\InsAddCvgRule.xlsx'</initValue>
+      <name>insAddCvgRulePath</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
       <initValue>'0'</initValue>
       <name>InsuranceCapitalizeAmount</name>
    </GlobalVariableEntity>

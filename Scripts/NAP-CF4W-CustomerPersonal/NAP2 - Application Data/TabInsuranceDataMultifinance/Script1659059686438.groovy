@@ -39,6 +39,9 @@ WebDriver driver = DriverFactory.getWebDriver()
 'Ambil appNo dari confins'
 String appNo = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/span_AppNo'))
 
+'declare addtcvgtype, addtpremirate, suminsuredamt, addtcvg'
+ArrayList<String> addtCvgType, addtPremiRate, sumInsuredAmt, addtCvg, addtpremitype
+
 inputInsInfo(sqlConnectionLOS, sqlConnectionFOU,appNo )
 
 checkDDL(sqlConnectionFOU)
@@ -181,7 +184,7 @@ if(GlobalVariable.Role == 'Testing'){
 			int totalddlmaincvg = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/select_MainCoverage'))
 			
 			'verify total ddl maincvg confins = total ddl db'
-			WebUI.verifyEqual(totalddlmaincvg - 1, maincvg.size())
+			WebUI.verifyEqual(totalddlmaincvg, maincvg.size())
 			
 			'verify isi ddl maincvg confins = db'
 			if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/select_MainCoverage'),
@@ -530,9 +533,6 @@ if(capinssetting=="YEARLY"){
 		'declare countaddcov'
 		countAddCov = variableAddCov.size()
 		
-		'declare addtcvgtype, addtpremirate, suminsuredamt, addtcvg'
-		ArrayList<String> addtCvgType, addtPremiRate, sumInsuredAmt, addtCvg
-		
 		if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckRulePersonal=="Yes" && GlobalVariable.FirstTimeEntry == "Yes"){
 			'Hashmap untuk ambil nilai additional premi rate, sum insured amount, dan main coverage typenya dari rule excel berdasarkan condition'
 			result = CustomKeywords.'insuranceData.verifyAddtCvg.verifyAddtPremiRate'(sqlConnectionLOS, sqlConnectionFOU,appNo,selectedInscoBranch,selectedRegion,cvgAmt.toString(),WebUI.getAttribute(mainCoverageObject,'value'),WebUI.getText(yearNumObject))
@@ -541,6 +541,7 @@ if(capinssetting=="YEARLY"){
 			addtPremiRate = result.get("AddtRate")
 			sumInsuredAmt = result.get("SumInsuredAmt")
 			addtCvg = result.get("AddCvgList")
+			addtpremitype = result.get("PremiType")
 			
 			'looping additional coverage'
 			for(int addCovIndex = 1 ; addCovIndex <= countAddCov ; addCovIndex++){
@@ -779,15 +780,17 @@ if(capinssetting=="YEARLY"){
 			'ambil nilai additional coverage'
 			modifyAddtRateObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/input_AddtRate'),'xpath','equals',"//div[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr["+(j+2)+"]/td[8]/div/span/div/input",true)
 			
+			if(!addtCvgType.contains(CustomKeywords.'insuranceData.verifyAddtCvg.checkAddtCvgCode'(sqlConnectionLOS, labelAddCov))){
+				continue
+			}
+			
 			'Pengecekan jika checkbox additional cvg tercentang dan jenisnya merupakan tpl, kdup, tjhtp atau bukan'
-			if(WebUI.verifyElementChecked(addCovYearCheckbox, GlobalVariable.TimeOut,FailureHandling.OPTIONAL)&&!labelAddCov.equalsIgnoreCase("TPL")&&!labelAddCov.equalsIgnoreCase("TANGGUNG JAWAB HUKUM TERHADAP PENUMPANG")
-				&&!labelAddCov.equalsIgnoreCase("KECELAKAAN DIRI UNTUK PENUMPANG")){
+			if(WebUI.verifyElementChecked(addCovYearCheckbox, GlobalVariable.TimeOut,FailureHandling.OPTIONAL) && addtpremitype.get(j-1).equalsIgnoreCase('PRCNT')){
 				
 				'Simpan nilai rate additional cvg'
 				AddtRate.add(Double.parseDouble(WebUI.getAttribute(modifyAddtRateObject,'value').replace(" %","").replace(",","")))
 			}
-			else if(WebUI.verifyElementChecked(addCovYearCheckbox, GlobalVariable.TimeOut,FailureHandling.OPTIONAL)&&(labelAddCov.equalsIgnoreCase("TPL")||labelAddCov.equalsIgnoreCase("TANGGUNG JAWAB HUKUM TERHADAP PENUMPANG")
-				||labelAddCov.equalsIgnoreCase("KECELAKAAN DIRI UNTUK PENUMPANG"))){
+			else if(WebUI.verifyElementChecked(addCovYearCheckbox, GlobalVariable.TimeOut,FailureHandling.OPTIONAL) && addtpremitype.get(j-1).equalsIgnoreCase('AMT')){
 				
 				'Simpan nilai rate additional cvg'
 				AddtRate.add(Math.round(Double.parseDouble(WebUI.getAttribute(modifyAddtRateObject,'value').replace(" %","").replace(",",""))*(numofmonth/12)))

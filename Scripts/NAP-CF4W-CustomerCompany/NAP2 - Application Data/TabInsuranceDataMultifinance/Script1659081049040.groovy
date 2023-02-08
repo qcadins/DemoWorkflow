@@ -10,6 +10,7 @@ import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.testcase.TestCase as TestCase
 import com.kms.katalon.core.testdata.TestData as TestData
 import com.kms.katalon.core.testobject.TestObject as TestObject
+import com.kms.katalon.core.util.KeywordUtil
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
@@ -34,6 +35,8 @@ WebDriver driver = DriverFactory.getWebDriver()
 
 'Ambil appNo dari confins'
 String appNo = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/span_AppNo'))
+
+ArrayList<String> addtCvgType, addtPremiRate, sumInsuredAmt, addtCvg, addtpremitype
 
 if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckRuleCompany=="Yes" && GlobalVariable.FirstTimeEntry == "Yes"){
 	'Ambil nilai asset region dari rule excel berdasarkan condition-condition'
@@ -76,78 +79,7 @@ WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-Applicat
 	datafileTabInsurance.getValue(
 		GlobalVariable.NumofColm, 25), false)
 
-if(GlobalVariable.RoleCompany=="Testing"){
-	ArrayList<WebElement> inscoBranchName = new ArrayList<WebElement>()
-	
-	'Ambil text original office dari confins'
-	String officeName = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/label_OriginalOffice'))
-	
-	'Ambil array string (text) insco branch name dari db'
-	inscoBranchName = CustomKeywords.'insuranceData.checkInscoBranch.checkDDLInscoBranch'(sqlConnectionFOU, officeName)
-	
-	'Ambil nilai count insco branch name dari db'
-	Integer countInscoBranch = CustomKeywords.'insuranceData.checkInscoBranch.countDDLInscoBranch'(sqlConnectionFOU, officeName)
-	
-	'Verif dropdownlist insco branch name yang muncul pada confins sesuai dengan array string insco branch name dari db'
-	if(WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/select_InscoBranchNameMF'),
-		inscoBranchName)==false){
-		
-		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('8.TabInsuranceData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'insco branch name MF')
-		
-		GlobalVariable.FlagFailed=1
-	}
-	
-	'Ambil nilai jumlah option/pilihan insco branch name dari confins'
-	Integer totalInscoBranch = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/select_InscoBranchNameMF'))
-	
-	'Verif jumlah insco branch name yang muncul pada confins sesuai dengan jumlah insco branch name pada db'
-	if(WebUI.verifyEqual(totalInscoBranch - 1, countInscoBranch)==false){
-		
-		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('8.TabInsuranceData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'Jumlah insco branch name')
-		
-		GlobalVariable.FlagFailed=1
-	}
-	
-	'get coverperiod ddl value from db'
-	ArrayList<String> coverperiod = CustomKeywords.'insuranceData.checkInsRateBase.checkCoverPeriodDDL'(sqlConnectionFOU)
-	
-	'get total label from ddl insuredby'
-	int totalddlcoverperiod = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/select_CoverPeriodMF'))
-
-	'verify total ddl coverperiod confins = total ddl db'
-	WebUI.verifyEqual(totalddlcoverperiod - 1, coverperiod.size())
-	
-	'verify isi ddl coverperiod confins = db'
-	if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/select_CoverPeriodMF'),
-		coverperiod) == false) {
-
-		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('8.TabInsuranceData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'cover period')
-
-		(GlobalVariable.FlagFailed)++
-	}
-		
-	'get paymenttype ddl value from db'
-	ArrayList<String> paymenttype = CustomKeywords.'insuranceData.checkInsRateBase.checkPaymentTypeDDL'(sqlConnectionFOU)
-			
-	'get total label from ddl paymenttype'
-	int totalddlpaymenttype = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/select_Payment Type MF'))
-	
-	'verify total ddl paymenttype confins = total ddl db'
-	WebUI.verifyEqual(totalddlpaymenttype - 1, paymenttype.size())
-			
-	'verify isi ddl paymenttype confins = db'
-	if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/select_Payment Type MF'),
-			paymenttype) == false) {
-				
-	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('8.TabInsuranceData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'payment type')
-				
-		(GlobalVariable.FlagFailed)++
-	}
-}
+checkDDL(sqlConnectionFOU)
 
 'Select option insco branch name'
 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/select_InscoBranchNameMF'),
@@ -603,8 +535,6 @@ if(capinssetting=="YEARLY"){
 		
 		countAddCov = variableAddCov.size()
 		
-		ArrayList<String> addtCvgType, addtPremiRate, sumInsuredAmt, addtCvg
-		
 		if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckRuleCompany=="Yes" && GlobalVariable.FirstTimeEntry == "Yes"){
 			'Hashmap untuk ambil nilai additional premi rate, sum insured amount, dan main coverage typenya dari rule excel berdasarkan condition'
 			result = CustomKeywords.'insuranceData.verifyAddtCvg.verifyAddtPremiRate'(sqlConnectionLOS, sqlConnectionFOU,appNo,selectedInscoBranch,selectedRegion,cvgAmt.toString(),WebUI.getAttribute(mainCoverageObject,'value'),WebUI.getText(yearNumObject))
@@ -613,6 +543,7 @@ if(capinssetting=="YEARLY"){
 			addtPremiRate = result.get("AddtRate")
 			sumInsuredAmt = result.get("SumInsuredAmt")
 			addtCvg = result.get("AddCvgList")
+			addtpremitype = result.get("PremiType")
 			
 			for(int addCovIndex = 1 ; addCovIndex <= countAddCov ; addCovIndex++){
 				labelAddCovPerYear = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/label_AddCovPerYear'),
@@ -827,15 +758,17 @@ if(capinssetting=="YEARLY"){
 			'ambil nilai additional coverage'
 			modifyAddtRateObject = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/input_AddtRate'),'xpath','equals',"//div[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr["+(j+2)+"]/td[8]/div/span/div/input",true)
 			
+			if(!addtCvgType.contains(CustomKeywords.'insuranceData.verifyAddtCvg.checkAddtCvgCode'(sqlConnectionLOS, labelAddCov))){
+				continue
+			}
+			
 			'Pengecekan jika checkbox additional cvg tercentang dan jenisnya merupakan tpl, kdup, tjhtp atau bukan'
-			if(WebUI.verifyElementChecked(addCovYearCheckbox, GlobalVariable.TimeOut,FailureHandling.OPTIONAL)&&!labelAddCov.equalsIgnoreCase("TPL")&&!labelAddCov.equalsIgnoreCase("TANGGUNG JAWAB HUKUM TERHADAP PENUMPANG")
-				&&!labelAddCov.equalsIgnoreCase("KECELAKAAN DIRI UNTUK PENUMPANG")){
+			if(WebUI.verifyElementChecked(addCovYearCheckbox, GlobalVariable.TimeOut,FailureHandling.OPTIONAL) && addtpremitype.get(j-1).equalsIgnoreCase('PRCNT')){
 				
 				'Simpan nilai rate additional cvg'
 				AddtRate.add(Double.parseDouble(WebUI.getAttribute(modifyAddtRateObject,'value').replace(" %","").replace(",","")))
 			}
-			else if(WebUI.verifyElementChecked(addCovYearCheckbox, GlobalVariable.TimeOut,FailureHandling.OPTIONAL)&&(labelAddCov.equalsIgnoreCase("TPL")||labelAddCov.equalsIgnoreCase("TANGGUNG JAWAB HUKUM TERHADAP PENUMPANG")
-				||labelAddCov.equalsIgnoreCase("KECELAKAAN DIRI UNTUK PENUMPANG"))){
+			else if(WebUI.verifyElementChecked(addCovYearCheckbox, GlobalVariable.TimeOut,FailureHandling.OPTIONAL)&& addtpremitype.get(j-1).equalsIgnoreCase('AMT')){
 				
 				'Simpan nilai rate additional cvg'
 				AddtRate.add(Math.round(Double.parseDouble(WebUI.getAttribute(modifyAddtRateObject,'value').replace(" %","").replace(",",""))*(numofmonth/12)))
@@ -877,8 +810,10 @@ if(capinssetting=="YEARLY"){
 		String textTotalPremitoCust = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/label_TotalPremiumtoCustomer')).replace(
 			',', '')
 		
+		int rowfee = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Calculate Fee Result')
+		
 		'get perhitungan total fee dari excel'
-		totalFeeResult = datafileTabInsurance.getValue(GlobalVariable.NumofColm, 87).replace(',', '')
+		totalFeeResult = datafileTabInsurance.getValue(GlobalVariable.NumofColm, rowfee+2).replace(',', '')
 		
 		'Perhitungan total premi to customer'
 		totalPremitoCustResult = (((totalResult[0]) + (totalResult[1])) + Long.parseLong(totalFeeResult.replace(',','')))
@@ -1001,5 +936,80 @@ public checkVerifyEqualOrMatch(Boolean isMatch){
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('8.TabInsuranceData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
 		GlobalVariable.FlagFailed=1
+	}
+}
+
+def checkDDL(Sql sqlConnectionFOU){
+	if(GlobalVariable.RoleCompany=="Testing"){
+		ArrayList<WebElement> inscoBranchName = new ArrayList<WebElement>()
+		
+		'Ambil text original office dari confins'
+		String officeName = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/label_OriginalOffice'))
+		
+		'Ambil array string (text) insco branch name dari db'
+		inscoBranchName = CustomKeywords.'insuranceData.checkInscoBranch.checkDDLInscoBranch'(sqlConnectionFOU, officeName)
+		
+		'Ambil nilai count insco branch name dari db'
+		Integer countInscoBranch = CustomKeywords.'insuranceData.checkInscoBranch.countDDLInscoBranch'(sqlConnectionFOU, officeName)
+		
+		'Verif dropdownlist insco branch name yang muncul pada confins sesuai dengan array string insco branch name dari db'
+		if(WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/select_InscoBranchNameMF'),
+			inscoBranchName)==false){
+			
+			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('8.TabInsuranceData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'insco branch name MF')
+			
+			GlobalVariable.FlagFailed=1
+		}
+		
+		'Ambil nilai jumlah option/pilihan insco branch name dari confins'
+		Integer totalInscoBranch = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/select_InscoBranchNameMF'))
+		
+		'Verif jumlah insco branch name yang muncul pada confins sesuai dengan jumlah insco branch name pada db'
+		if(WebUI.verifyEqual(totalInscoBranch - 1, countInscoBranch)==false){
+			
+			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('8.TabInsuranceData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'Jumlah insco branch name')
+			
+			GlobalVariable.FlagFailed=1
+		}
+		
+		'get coverperiod ddl value from db'
+		ArrayList<String> coverperiod = CustomKeywords.'insuranceData.checkInsRateBase.checkCoverPeriodDDL'(sqlConnectionFOU)
+		
+		'get total label from ddl insuredby'
+		int totalddlcoverperiod = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/select_CoverPeriodMF'))
+	
+		'verify total ddl coverperiod confins = total ddl db'
+		WebUI.verifyEqual(totalddlcoverperiod - 1, coverperiod.size())
+		
+		'verify isi ddl coverperiod confins = db'
+		if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/select_CoverPeriodMF'),
+			coverperiod) == false) {
+	
+			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('8.TabInsuranceData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'cover period')
+	
+			(GlobalVariable.FlagFailed)++
+		}
+			
+		'get paymenttype ddl value from db'
+		ArrayList<String> paymenttype = CustomKeywords.'insuranceData.checkInsRateBase.checkPaymentTypeDDL'(sqlConnectionFOU)
+				
+		'get total label from ddl paymenttype'
+		int totalddlpaymenttype = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/select_Payment Type MF'))
+		
+		'verify total ddl paymenttype confins = total ddl db'
+		WebUI.verifyEqual(totalddlpaymenttype - 1, paymenttype.size())
+				
+		'verify isi ddl paymenttype confins = db'
+		if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/select_Payment Type MF'),
+				paymenttype) == false) {
+					
+		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('8.TabInsuranceData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'payment type')
+					
+			(GlobalVariable.FlagFailed)++
+		}
 	}
 }

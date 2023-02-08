@@ -267,7 +267,7 @@ public class checkNAP4 {
 		})
 		return value
 	}
-	
+
 	@Keyword
 	public getFamilyData(Sql instance, String appno){
 		ArrayList<String> arrayFamilyData = new ArrayList<String>()
@@ -286,7 +286,7 @@ public class checkNAP4 {
 
 		return arrayFamilyData
 	}
-	
+
 	@Keyword
 	public getMSData(Sql instance, String appno){
 		String customerdata
@@ -303,5 +303,22 @@ public class checkNAP4 {
 			}
 		})
 		return listcustdata
+	}
+	
+	@Keyword
+	public GenSetCDC(Sql instance){
+		String genset
+		ArrayList<String> listcdc = new ArrayList<>()
+		instance.eachRow(("SELECT TRIM(value) FROM GENERAL_SETTING CROSS APPLY STRING_SPLIT(GS_DESCR, ',') WHERE GS_CODE = 'CUST_COMPLETION_BY_PASS'"), {  row ->
+
+			ResultSetMetaData rsmd = row.getMetaData()
+			colmcount = rsmd.getColumnCount()
+
+			for(i = 0 ; i < colmcount ; i++){
+				genset = (row[i])
+				listcdc.add(genset)
+			}
+		})
+		return listcdc
 	}
 }

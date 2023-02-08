@@ -35,6 +35,8 @@ public class verifyAddtCvg {
 
 		ArrayList<String> addtCvg = new ArrayList<>()
 
+		ArrayList<String> addtPremiType = new ArrayList<>()
+
 		String userDir = System.getProperty('user.dir')
 
 		String filePathAssetCat = userDir+GlobalVariable.MainCovRulePath
@@ -153,6 +155,7 @@ public class verifyAddtCvg {
 
 						if(ruleAddtCvg.getValue(8,i)!=tempAddtCvg){
 							addtCvg.add(ruleAddtCvg.getValue(8,i))
+							addtPremiType.add(ruleAddtCvg.getValue(11,i))
 
 							tempAddtCvg = ruleAddtCvg.getValue(8,i)
 						}
@@ -161,6 +164,11 @@ public class verifyAddtCvg {
 						&& Integer.parseInt(ruleAddtCvg.getValue(10,i))>=assetAge)||ruleAddtCvg.getValue(10,i)=="0"){
 
 							if(ruleAddtCvg.getValue(11,i)=="PRCNT"){
+
+								//								if(!ruleAddtCvg.getValue(8,i).equalsIgnoreCase(ruleAddtCvg.getValue(8,i-1))){
+								//									addtPremiType.add(ruleAddtCvg.getValue(11,i))
+								//								}
+
 								addtCvgType.add(ruleAddtCvg.getValue(8,i))
 
 								addtPremiRate.add(ruleAddtCvg.getValue(13,i))
@@ -169,6 +177,11 @@ public class verifyAddtCvg {
 
 							}
 							else if(ruleAddtCvg.getValue(11,i)=="AMT"){
+
+								//								if(!ruleAddtCvg.getValue(8,i).equalsIgnoreCase(ruleAddtCvg.getValue(8,i-1))){
+								//									addtPremiType.add(ruleAddtCvg.getValue(11,i))
+								//								}
+
 								addtCvgType.add(ruleAddtCvg.getValue(8,i))
 
 								addtPremiRate.add(ruleAddtCvg.getValue(16,i))
@@ -193,6 +206,8 @@ public class verifyAddtCvg {
 		result.put("SumInsuredAmt",sumInsuredAmt)
 
 		result.put("AddCvgList",addtCvg)
+
+		result.put("PremiType", addtPremiType)
 
 		return result
 	}

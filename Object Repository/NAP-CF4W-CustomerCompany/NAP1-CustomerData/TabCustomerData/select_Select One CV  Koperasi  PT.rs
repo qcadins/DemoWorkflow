@@ -7,10 +7,14 @@
    <selectorCollection>
       <entry>
          <key>XPATH</key>
-         <value>//div[@id='CustMainData']/div/div[2]/div/div/lib-ucdropdownlist/div/select</value>
+         <value>//*[@id=&quot;CustMainData&quot;]/div[1]/div[2]/div/div/lib-ucdropdownlist/div/select</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;CustMainData&quot;]/div[1]/div[2]/div/div/lib-ucdropdownlist/div/select</value>
       </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -27,18 +31,18 @@
       <value>form-control ng-untouched ng-pristine ng-invalid ng-star-inserted</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>text</name>
       <type>Main</type>
       <value>Select One CV  Koperasi  PT </value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>false</isSelected>
+      <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>id(&quot;CustMainData&quot;)/div[@class=&quot;row&quot;]/div[@class=&quot;col-md-6 ng-star-inserted&quot;]/div[@class=&quot;form-group row&quot;]/div[@class=&quot;col-md-8&quot;]/lib-ucdropdownlist[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;ng-star-inserted&quot;]/select[@class=&quot;form-control ng-untouched ng-pristine ng-invalid ng-star-inserted&quot;]</value>
+      <value>//*[@id=&quot;CustMainData&quot;]/div[1]/div[2]/div/div/lib-ucdropdownlist/div/select</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
