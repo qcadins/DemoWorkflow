@@ -88,7 +88,7 @@ GlobalVariable.StartIndex); (GlobalVariable.NumofReferantor)++) {
                 continue
             }
         } else {
-		if (datafileReferantor.getValue(excelindex+1, 12) != datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 13)) {
+		if (datafileReferantor.getValue(excelindex+1, 12) != datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 13)) {
 			arrayindex = 0
             break
 		}
@@ -100,6 +100,6 @@ GlobalVariable.StartIndex); (GlobalVariable.NumofReferantor)++) {
 if (arrayMatch.contains(false)) {
 		
 	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedStoredDB'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('5.TabReferantorData', GlobalVariable.StartIndex, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedStoredDB)
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('5.TabReferantorData', GlobalVariable.StartIndex, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(GlobalVariable.NumofReferantor, 2) + ';'+GlobalVariable.ReasonFailedStoredDB)
 
 }

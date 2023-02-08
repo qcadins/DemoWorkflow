@@ -97,7 +97,7 @@ if (GlobalVariable.Role == 'Testing') {
     if (WebUI.verifyEqual(totalDataSupplier, countSupplierData) == false) {
         'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDataLookup'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, 
-            GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDataLookup)
+            GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedDataLookup)
 
         GlobalVariable.FlagFailed = 1
     }
@@ -135,7 +135,7 @@ if (GlobalVariable.Role == 'Testing') {
         salesPerson) == false) {
         'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, 
-            GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL)
+            GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedDDL)
 
         GlobalVariable.FlagFailed = 1
     }
@@ -145,7 +145,7 @@ if (GlobalVariable.Role == 'Testing') {
         adminHead) == false) {
         'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, 
-            GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL)
+            GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedDDL)
 
         GlobalVariable.FlagFailed = 1
     }
@@ -184,7 +184,7 @@ if (GlobalVariable.Role == 'Testing') {
     if (WebUI.verifyEqual(totalDataAsset, countAssetData) == false) {
         'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDataLookup'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, 
-            GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDataLookup)
+            GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedDataLookup)
 
         GlobalVariable.FlagFailed = 1
     }
@@ -226,7 +226,7 @@ if (GlobalVariable.Role == 'Testing') {
 	if (WebUI.verifyEqual(totalAssetUsage - 1, assetUsage.size()) == false) {
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm,
-			GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL)
+			GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedDDL)
 
 		GlobalVariable.FlagFailed = 1
 	}
@@ -235,7 +235,7 @@ if (GlobalVariable.Role == 'Testing') {
 	if (WebUI.verifyEqual(totalAssetCondition, assetCondition.size()) == false) {
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm,
-			GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL)
+			GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedDDL)
 
 		GlobalVariable.FlagFailed = 1
 	}
@@ -245,7 +245,7 @@ if (GlobalVariable.Role == 'Testing') {
 		assetUsage) == false) {
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm,
-			GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL)
+			GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedDDL)
 
 		GlobalVariable.FlagFailed = 1
 	}
@@ -255,7 +255,7 @@ if (GlobalVariable.Role == 'Testing') {
 			assetCondition) == false) {
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm,
-				GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL)
+				GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedDDL)
 		
 		GlobalVariable.FlagFailed = 1
 	}
@@ -579,7 +579,7 @@ if (CustomKeywords.'assetData.checkAssetData.checkSelfUsagePersonal'() == true) 
             userRelation) == false) {
             'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, 
-                GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL)
+                GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedDDL)
 
             GlobalVariable.FlagFailed = 1
         }
@@ -591,7 +591,7 @@ if (CustomKeywords.'assetData.checkAssetData.checkSelfUsagePersonal'() == true) 
         if (WebUI.verifyEqual(totalUserRelation - 1, countUserRelation) == false) {
             'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, 
-                GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL)
+                GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedDDL)
 
             GlobalVariable.FlagFailed = 1
         }
@@ -643,7 +643,7 @@ if (CustomKeywords.'assetData.checkAssetData.checkSelfOwnerPersonal'() == true) 
                 ownerPersonalRelation) == false) {
                 'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
                 CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, 
-                    GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL)
+                    GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedDDL)
 
                 GlobalVariable.FlagFailed = 1
             }
@@ -655,7 +655,7 @@ if (CustomKeywords.'assetData.checkAssetData.checkSelfOwnerPersonal'() == true) 
             if (WebUI.verifyEqual(totalOwnerPersonalRelation - 1, countOwnerPersonalRelation) == false) {
                 'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
                 CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, 
-                    GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL)
+                    GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedDDL)
 
                 GlobalVariable.FlagFailed = 1
             }
@@ -679,7 +679,7 @@ if (CustomKeywords.'assetData.checkAssetData.checkSelfOwnerPersonal'() == true) 
                 ownerCompanyRelation) == false) {
                 'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
                 CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, 
-                    GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL)
+                    GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedDDL)
 
                 GlobalVariable.FlagFailed = 1
             }
@@ -691,7 +691,7 @@ if (CustomKeywords.'assetData.checkAssetData.checkSelfOwnerPersonal'() == true) 
             if (WebUI.verifyEqual(totalOwnerCompanyRelation - 1, countOwnerCompanyRelation) == false) {
                 'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
                 CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, 
-                    GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL)
+                    GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedDDL)
 
                 GlobalVariable.FlagFailed = 1
             }
@@ -710,7 +710,7 @@ if (CustomKeywords.'assetData.checkAssetData.checkSelfOwnerPersonal'() == true) 
 				ownerprofession) == false) {
 		
 				'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'ownerprofession')
+				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedDDL + 'ownerprofession')
 		
 				(GlobalVariable.FlagFailed)++
 			}
@@ -769,7 +769,7 @@ if (CustomKeywords.'assetData.checkAssetData.checkSelfOwnerPersonal'() == true) 
 			IDType) == false) {
 	
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'IDType')
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedDDL + 'IDType')
 	
 			(GlobalVariable.FlagFailed)++
 		}
@@ -794,7 +794,7 @@ if (CustomKeywords.'assetData.checkAssetData.checkSelfOwnerPersonal'() == true) 
 				copyaddr) == false) {
 				
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'copyaddr asset owner')
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedDDL + 'copyaddr asset owner')
 					
 			(GlobalVariable.FlagFailed)++
 		}
@@ -804,7 +804,7 @@ if (CustomKeywords.'assetData.checkAssetData.checkSelfOwnerPersonal'() == true) 
 				copyaddr) == false) {
 						
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'copyaddr asset location')
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedDDL + 'copyaddr asset location')
 					
 			(GlobalVariable.FlagFailed)++
 		}
@@ -967,7 +967,7 @@ def checkVerifyEqualOrMatch(Boolean isMatch) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
         'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, 
-            GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+            GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
         GlobalVariable.FlagFailed = 1
     }

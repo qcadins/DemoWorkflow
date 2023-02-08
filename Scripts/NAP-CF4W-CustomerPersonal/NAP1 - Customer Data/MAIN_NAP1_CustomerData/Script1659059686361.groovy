@@ -140,7 +140,7 @@ if ((datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 10).equalsIgnor
             if (WebUI.verifyEqual(totalDataPO, countPO) == false) {
             
 				'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDataLookup'
-				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDataLookup)
+				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(GlobalVariable.NumofColm, 2) + ';' +GlobalVariable.ReasonFailedDataLookup)
 				
                 GlobalVariable.FlagFailed = 1
             }
@@ -221,7 +221,7 @@ if (GlobalVariable.Role == 'Data Entry') {
             'CUSTOMER', false, FailureHandling.OPTIONAL)) {
           			
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusFailedCopyApp'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.StatusFailedCopyApp)
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(GlobalVariable.NumofColm, 2) + ';' +GlobalVariable.StatusFailedCopyApp)
 			
             'customer added -1'
             (GlobalVariable.CountNumofCustomer)--
@@ -270,7 +270,7 @@ if (GlobalVariable.Role == 'Data Entry') {
             'FAMILY', false, FailureHandling.OPTIONAL)) {
 
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusFailedCopyApp'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('2.TabFamilyData', GlobalVariable.StartIndex, GlobalVariable.StatusFailed, GlobalVariable.StatusFailedCopyApp)
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('2.TabFamilyData', GlobalVariable.StartIndex, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(GlobalVariable.StartIndex, 2) + ';' +GlobalVariable.StatusFailedCopyApp)
 			
             'customer added -1'
             (GlobalVariable.CountNumofCustomer)--
@@ -324,10 +324,10 @@ if (GlobalVariable.Role == 'Data Entry') {
             GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusFailedCopyApp'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3a.TabGuarantorDataPersonal', GlobalVariable.StartIndex, GlobalVariable.StatusFailed, GlobalVariable.StatusFailedCopyApp)
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3a.TabGuarantorDataPersonal', GlobalVariable.StartIndex, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal').getValue(GlobalVariable.StartIndex, 2) + ';' +GlobalVariable.StatusFailedCopyApp)
 		
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusFailedCopyApp'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3b.TabGuarantorDataCompany', GlobalVariable.StartIndex, GlobalVariable.StatusFailed, GlobalVariable.StatusFailedCopyApp)
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3b.TabGuarantorDataCompany', GlobalVariable.StartIndex, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataCompany').getValue(GlobalVariable.StartIndex, 2) + ';' +GlobalVariable.StatusFailedCopyApp)
 		
             'customer added -1'
             (GlobalVariable.CountNumofCustomer)--
@@ -398,7 +398,7 @@ if (GlobalVariable.Role == 'Data Entry') {
             'CUSTOMER', false, FailureHandling.OPTIONAL)) {
             
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusFailedCopyApp'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, GlobalVariable.StatusFailedCopyApp)
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(GlobalVariable.NumofColm, 2) + ';' +GlobalVariable.StatusFailedCopyApp)
 
             'customer added -1'
             (GlobalVariable.CountNumofCustomer)--
@@ -446,7 +446,7 @@ if (GlobalVariable.Role == 'Data Entry') {
             'FAMILY', false, FailureHandling.OPTIONAL)) {
             
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusFailedCopyApp'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('2.TabFamilyData', GlobalVariable.StartIndex, GlobalVariable.StatusFailed, GlobalVariable.StatusFailedCopyApp)
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('2.TabFamilyData', GlobalVariable.StartIndex, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(GlobalVariable.StartIndex, 2) + ';' +GlobalVariable.StatusFailedCopyApp)
 
             'customer added -1'
             (GlobalVariable.CountNumofCustomer)--
@@ -499,10 +499,10 @@ if (GlobalVariable.Role == 'Data Entry') {
             GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusFailedCopyApp'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3a.TabGuarantorDataPersonal', GlobalVariable.StartIndex, GlobalVariable.StatusFailed, GlobalVariable.StatusFailedCopyApp)
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3a.TabGuarantorDataPersonal', GlobalVariable.StartIndex, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal').getValue(GlobalVariable.StartIndex, 2) + ';' +GlobalVariable.StatusFailedCopyApp)
 			
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusFailedCopyApp'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3b.TabGuarantorDataCompany', GlobalVariable.StartIndex, GlobalVariable.StatusFailed, GlobalVariable.StatusFailedCopyApp)
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3b.TabGuarantorDataCompany', GlobalVariable.StartIndex, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataCompany').getValue(GlobalVariable.StartIndex, 2) + ';' +GlobalVariable.StatusFailedCopyApp)
 
 			'customer added -1'
 			(GlobalVariable.CountNumofCustomer)--
@@ -766,8 +766,8 @@ def pagingTesting() {
             1))) {
            
 			'Write To Excel GlobalVariable.StatusWarning and reason'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusWarning, datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 2).replace('-',
-					'') + ((GlobalVariable.ReasonFailedReset + 'NAP1') + ';\n'))
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusWarning, datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 2).replace('-',
+					'') + findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(GlobalVariable.NumofColm, 2) + ';' + ((GlobalVariable.ReasonFailedReset + 'NAP1') + ';\n'))
 
             GlobalVariable.FlagWarning = 1
         }
@@ -777,8 +777,8 @@ def pagingTesting() {
             1))) {
             
 			'Write To Excel GlobalVariable.StatusWarning and reason'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusWarning, datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 2).replace('-',
-					'') + ((GlobalVariable.ReasonFailedSort + 'NAP1') + ';\n'))
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusWarning, datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 2).replace('-',
+					'') + findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(GlobalVariable.NumofColm, 2) + ';' + ((GlobalVariable.ReasonFailedSort + 'NAP1') + ';\n'))
 
             GlobalVariable.FlagWarning = 1
         }
@@ -788,8 +788,8 @@ def pagingTesting() {
             1))) {
             
 			'Write To Excel GlobalVariable.StatusWarning and reason'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusWarning, datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 2).replace('-',
-					'') + ((GlobalVariable.ReasonFailedFooter + 'NAP1') + ';\n'))
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusWarning, datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 2).replace('-',
+					'') + findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(GlobalVariable.NumofColm, 2) + ';' + ((GlobalVariable.ReasonFailedFooter + 'NAP1') + ';\n'))
 		
             GlobalVariable.FlagWarning = 1
         }

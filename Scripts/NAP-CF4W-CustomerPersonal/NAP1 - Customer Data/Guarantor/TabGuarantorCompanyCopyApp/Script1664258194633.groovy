@@ -154,7 +154,7 @@ for (int i = 1; i <= variableData.size(); i++) {
 
                                     'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusReasonLookup'
                                     CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3b.TabGuarantorDataCompany', 
-                                        GlobalVariable.NumofGuarantorCompany, GlobalVariable.StatusFailed, GlobalVariable.StatusReasonLookup)
+                                        GlobalVariable.NumofGuarantorCompany, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataCompany').getValue(GlobalVariable.NumofGuarantorCompany, 2) + ';' +GlobalVariable.StatusReasonLookup)
 
                                     GlobalVariable.FlagFailed = 1
 
@@ -199,7 +199,7 @@ for (int i = 1; i <= variableData.size(); i++) {
 
                                     'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusReasonLookup'
                                     CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3b.TabGuarantorDataCompany', 
-                                        GlobalVariable.NumofGuarantorCompany, GlobalVariable.StatusFailed, GlobalVariable.StatusReasonLookup)
+                                        GlobalVariable.NumofGuarantorCompany, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataCompany').getValue(GlobalVariable.NumofGuarantorCompany, 2) + ';' +GlobalVariable.StatusReasonLookup)
 
                                     GlobalVariable.FlagFailed = 1
 

@@ -55,8 +55,7 @@ if (GlobalVariable.Role == 'Testing') {
     if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabCustomerData/select_CustomerModel'), 
         custmodel) == false) {
         'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, 
-            GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'Customer Model')
+        CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'Customer Model')
 
         (GlobalVariable.FlagFailed)++
     }
@@ -75,7 +74,7 @@ if (GlobalVariable.Role == 'Testing') {
         IDType) == false) {
         'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, 
-            GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'ID Type')
+            GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'ID Type')
 
         (GlobalVariable.FlagFailed)++
     }
@@ -94,7 +93,7 @@ if (GlobalVariable.Role == 'Testing') {
         MaritalStatus) == false) {
         'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, 
-            GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'MaritalStatus')
+            GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(GlobalVariable.NumofColm, 2) + ';' +GlobalVariable.ReasonFailedDDL + 'MaritalStatus')
 
         (GlobalVariable.FlagFailed)++
     }
@@ -113,7 +112,7 @@ if (GlobalVariable.Role == 'Testing') {
         Gender) == false) {
         'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, 
-            GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'Gender')
+            GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(GlobalVariable.NumofColm, 2) + ';' +GlobalVariable.ReasonFailedDDL + 'Gender')
 
         (GlobalVariable.FlagFailed)++
     }
@@ -405,7 +404,7 @@ if (GlobalVariable.FlagFailed == 0) {
             'CUSTOMER', false, FailureHandling.OPTIONAL)) {
             'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusFailedCopyApp'
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, 
-                GlobalVariable.StatusFailed, GlobalVariable.StatusFailedCopyApp)
+                GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(GlobalVariable.NumofColm, 2) + ';' +GlobalVariable.StatusFailedCopyApp)
         }
     }
 }
@@ -578,7 +577,7 @@ def checkVerifyEqualOrMatch(Boolean isMatch) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
         'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, 
-            GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+            GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(GlobalVariable.NumofColm, 2) + ';' +GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
         GlobalVariable.FlagFailed = 1
     }
