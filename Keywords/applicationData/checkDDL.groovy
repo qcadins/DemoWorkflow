@@ -55,7 +55,7 @@ public class checkDDL {
 		})
 		return listValue
 	}
-	
+
 	@Keyword
 	public checkDDLInstallmentType(Sql instance){
 		String value
@@ -66,7 +66,7 @@ public class checkDDL {
 		})
 		return listValue
 	}
-	
+
 	@Keyword
 	public checkDDLCOC(Sql instance){
 		String value
@@ -77,7 +77,7 @@ public class checkDDL {
 		})
 		return listValue
 	}
-	
+
 	@Keyword
 	public checkDDLPayFreq(Sql instance){
 		String value
@@ -88,7 +88,7 @@ public class checkDDL {
 		})
 		return listValue
 	}
-	
+
 	@Keyword
 	public checkDDLPaymentType(Sql instance){
 		String value
@@ -99,7 +99,7 @@ public class checkDDL {
 		})
 		return listValue
 	}
-	
+
 	@Keyword
 	public checkDDLCustNotif(Sql instance){
 		String value

@@ -59,8 +59,7 @@ def jsCode = 'return document.querySelector("input.mat-checkbox-input.cdk-visual
 CustomKeywords.'JsExecutor.jsExecutionFunction'(jsCode)
 
 'Cek IsCoverLifeInsurance Tercentang atau tidak pada Excel'
-if (datafileTabLifeInsurance.getValue(
-    GlobalVariable.NumofColm, 12) == 'YES') {
+if (datafileTabLifeInsurance.getValue(GlobalVariable.NumofColm, 12) == 'YES') {
     'Memastikan Kondisi Awal Checkbox tidak tercentang'
     if (WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabLifeInsuranceData/checkbox_coverlifeinsurance'), 
         GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
@@ -303,7 +302,7 @@ if(GlobalVariable.FlagFailed==0){
 	}
 }
 
-if(GlobalVariable.Role == 'Testing' && GlobalVariable.CheckVerifStoreDBPersonal=="Yes"){
+if(GlobalVariable.Role == 'Testing' && GlobalVariable.CheckVerifStoreDBPersonal=="Yes" && datafileTabLifeInsurance.getValue(GlobalVariable.NumofColm, 12) == 'YES'){
 	'call test case store db life insurance data'
 	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabLifeInsuranceDataStoreDBVerif'),
 			[:], FailureHandling.CONTINUE_ON_FAILURE)

@@ -119,7 +119,7 @@ if ((datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 10).equalsIgnore
             if (WebUI.verifyEqual(totalDataPO, countPO) == false) {
                 'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDataLookup'
                 CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, 
-                    GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDataLookup)
+                    GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDataLookup)
 
                 GlobalVariable.FlagFailed = 1
             }
@@ -195,7 +195,7 @@ if (GlobalVariable.Role == 'Data Entry') {
             'CUSTOMER', false, FailureHandling.OPTIONAL)) {
             'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusFailedCopyApp'
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, 
-                GlobalVariable.StatusFailed, GlobalVariable.StatusFailedCopyApp)
+                GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.StatusFailedCopyApp)
 
             'customer -1'
             (GlobalVariable.CountNumofCustomer)--
@@ -245,7 +245,7 @@ if (GlobalVariable.Role == 'Data Entry') {
             'MANAGEMENT SHAREHOLDER', false, FailureHandling.OPTIONAL)) {
             'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusFailedCopyApp'
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('2.TabManagementShareholderData', GlobalVariable.StartIndex, 
-                GlobalVariable.StatusFailed, GlobalVariable.StatusFailedCopyApp)
+                GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder').getValue(GlobalVariable.StartIndex, 2) + ';' + GlobalVariable.StatusFailedCopyApp)
 
             'customer added -1'
             (GlobalVariable.CountNumofCustomer)--
@@ -299,11 +299,11 @@ if (GlobalVariable.Role == 'Data Entry') {
             GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
             'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusFailedCopyApp'
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3a.TabGuarantorDataPersonal', GlobalVariable.StartIndex, 
-                GlobalVariable.StatusFailed, GlobalVariable.StatusFailedCopyApp)
+                GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorPersonal').getValue(GlobalVariable.StartIndex, 2) + ';' + GlobalVariable.StatusFailedCopyApp)
 
             'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusFailedCopyApp'
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3b.TabGuarantorDataCompany', GlobalVariable.StartIndex, 
-                GlobalVariable.StatusFailed, GlobalVariable.StatusFailedCopyApp)
+                GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(GlobalVariable.StartIndex, 2) + ';' + GlobalVariable.StatusFailedCopyApp)
 
             'customer added -1'
             (GlobalVariable.CountNumofCustomer)--
@@ -373,7 +373,7 @@ if (GlobalVariable.Role == 'Data Entry') {
             'CUSTOMER', false, FailureHandling.OPTIONAL)) {
             'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusFailedCopyApp'
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, 
-                GlobalVariable.StatusFailed, GlobalVariable.StatusFailedCopyApp)
+                GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.StatusFailedCopyApp)
 
             'customer added -1'
             (GlobalVariable.CountNumofCustomer)--
@@ -423,7 +423,7 @@ if (GlobalVariable.Role == 'Data Entry') {
             'MANAGEMENT SHAREHOLDER', false, FailureHandling.OPTIONAL)) {
             'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusFailedCopyApp'
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('2.TabManagementShareholderData', GlobalVariable.StartIndex, 
-                GlobalVariable.StatusFailed, GlobalVariable.StatusFailedCopyApp)
+                GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder').getValue(GlobalVariable.StartIndex, 2) + ';' + GlobalVariable.StatusFailedCopyApp)
 
             'customer added -1'
             (GlobalVariable.CountNumofCustomer)--
@@ -480,11 +480,11 @@ if (GlobalVariable.Role == 'Data Entry') {
             GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
             'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusFailedCopyApp'
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3a.TabGuarantorDataPersonal', GlobalVariable.StartIndex, 
-                GlobalVariable.StatusFailed, GlobalVariable.StatusFailedCopyApp)
+                GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorPersonal').getValue(GlobalVariable.StartIndex, 2) + ';' + GlobalVariable.StatusFailedCopyApp)
 
             'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusFailedCopyApp'
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3b.TabGuarantorDataCompany', GlobalVariable.StartIndex, 
-                GlobalVariable.StatusFailed, GlobalVariable.StatusFailedCopyApp)
+                GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(GlobalVariable.StartIndex, 2) + ';' + GlobalVariable.StatusFailedCopyApp)
 
             'customer added -1'
             (GlobalVariable.CountNumofCustomer)--
