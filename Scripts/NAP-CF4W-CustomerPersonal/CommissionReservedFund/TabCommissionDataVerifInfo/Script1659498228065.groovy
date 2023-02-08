@@ -56,7 +56,10 @@ def datafilepathSimTax = CustomKeywords.'dbConnection.connectDB.getExcelPath'(Gl
 Double vatAmount, whtAmount, disburseAmount, expenseAmount
 Integer sizeSupp = variableSupp.size()
 
-checkSupplier(sqlConnectionFOU, sizeSupp, vatAmount, whtAmount, disburseAmount, expenseAmount)
+'Ambil text original office dari confins'
+String office = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/label_OriginalOffice'))
+
+checkSupplier(sqlConnectionTAX, sqlConnectionFOU, sizeSupp, vatAmount, whtAmount, disburseAmount, expenseAmount)
 
 'Looping data supplier employee'
 for (int j = 1; j <= variableSuppEmp.size(); j++) {
@@ -166,6 +169,7 @@ for (int j = 1; j <= variableSuppEmp.size(); j++) {
 		else if((taxpayerInfo[0]) == 'P'){
 			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathSimTax,'SIMULASI TAX PERSONAL NEW',1,2, commAmt)
 			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(datafilepathSimTax,'SIMULASI TAX PERSONAL NEW',2,2, taxpayerInfo[1])
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(datafilepathSimTax,'SIMULASI TAX PERSONAL NEW',3,2,0)
 			println(taxpayerInfo[1])
 			vatAmount = Double.parseDouble(findTestData('Simulasi/Simulasi Pajak Personal').getValue(3, 12))
 			whtAmount = Double.parseDouble(findTestData('Simulasi/Simulasi Pajak Personal').getValue(3, 8))
@@ -199,7 +203,7 @@ for (int j = 1; j <= variableSuppEmp.size(); j++) {
 		
 			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathSimTax,'SIMULASI TAX PERSONAL NEW',1,2, commAmt)
 			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(datafilepathSimTax,'SIMULASI TAX PERSONAL NEW',2,2, taxpayerInfo[1])
-			
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(datafilepathSimTax,'SIMULASI TAX PERSONAL NEW',3,2,0)
 			vatAmount = Double.parseDouble(findTestData('Simulasi/Simulasi Pajak Personal').getValue(5, 12))
 			whtAmount = Double.parseDouble(findTestData('Simulasi/Simulasi Pajak Personal').getValue(5, 8))
 			disburseAmount = Double.parseDouble(findTestData('Simulasi/Simulasi Pajak Personal').getValue(5, 13))
@@ -207,15 +211,27 @@ for (int j = 1; j <= variableSuppEmp.size(); j++) {
 
 		}
     }
-    
-	'Verify wht pada confins sesuai dengan penghitungan dengan batas toleransi +-5'
-	WebUI.verifyLessThanOrEqual(Math.abs(whTax - whtAmount), 10)
+	Double whtThisYear = CustomKeywords.'commissionReserveFundData.taxCalculation.checkWHTthisYear'(sqlConnectionTAX,sqlConnectionFOU,"SupplierEmployee",office, supplierEmployeeName)
+	
+	if(whtThisYear>=whTax){
+		WebUI.verifyEqual(whTax, 0)
+	}
+	else if(whtThisYear==null || whtThisYear<whTax){
+		'Verify wht pada confins sesuai dengan penghitungan dengan batas toleransi +-5'
+		WebUI.verifyLessThanOrEqual(Math.abs(whTax - whtAmount), 10)
+	}
 	
 	'Verify vat pada confins sesuai dengan penghitungan dengan batas toleransi +-5'
 	WebUI.verifyLessThanOrEqual(Math.abs(vaTax - vatAmount), 10)
 	
-	'Verify expense pada confins sesuai dengan penghitungan dengan batas toleransi +-5'
-	WebUI.verifyLessThanOrEqual(Math.abs(expenseAmt - expenseAmount), 10)
+	if(whtThisYear>=whTax){
+		'Verify expense pada confins sesuai dengan penghitungan dengan batas toleransi +-5'
+		WebUI.verifyLessThanOrEqual(Math.abs(expenseAmt - (expenseAmount-whtAmount)), 10)
+	}
+	else{
+		'Verify expense pada confins sesuai dengan penghitungan dengan batas toleransi +-5'
+		WebUI.verifyLessThanOrEqual(Math.abs(expenseAmt - expenseAmount), 10)
+	}
 	
 	'Verify disburse pada confins sesuai dengan penghitungan dengan batas toleransi +-5'
 	WebUI.verifyLessThanOrEqual(Math.abs(disburseAmt - disburseAmount), 10)
@@ -339,7 +355,13 @@ for (int k = 1; k <= variableRef.size(); k++) {
 		else if((taxpayerInfo[0]) == 'P'){
 			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathSimTax,'SIMULASI TAX PERSONAL NEW',1,2, commAmt)
 			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(datafilepathSimTax,'SIMULASI TAX PERSONAL NEW',2,2, taxpayerInfo[1])
-			
+			if(CustomKeywords.'commissionReserveFundData.checkCommissionCode.checkAgencyPersonalData'(sqlConnectionFOU,refName)!=null
+				&& CustomKeywords.'commissionReserveFundData.taxCalculation.checkVATForPersonal'(sqlConnectionFOU)=="1"){
+				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(datafilepathSimTax,'SIMULASI TAX PERSONAL NEW',3,2, taxpayerInfo[2])
+			}
+			else{
+				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(datafilepathSimTax,'SIMULASI TAX PERSONAL NEW',3,2,0)
+			}
 			vatAmount = Double.parseDouble(findTestData('Simulasi/Simulasi Pajak Personal').getValue(3, 12))
 			whtAmount = Double.parseDouble(findTestData('Simulasi/Simulasi Pajak Personal').getValue(3, 8))
 			disburseAmount = Double.parseDouble(findTestData('Simulasi/Simulasi Pajak Personal').getValue(3, 13))
@@ -371,7 +393,13 @@ for (int k = 1; k <= variableRef.size(); k++) {
 		else if((taxpayerInfo[0]) == 'P'){
 			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathSimTax,'SIMULASI TAX PERSONAL NEW',1,2, commAmt)
 			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(datafilepathSimTax,'SIMULASI TAX PERSONAL NEW',2,2, taxpayerInfo[1])
-			
+			if(CustomKeywords.'commissionReserveFundData.checkCommissionCode.checkAgencyPersonalData'(sqlConnectionFOU,refName)!=null
+				&& CustomKeywords.'commissionReserveFundData.taxCalculation.checkVATForPersonal'(sqlConnectionFOU)=="1"){
+				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(datafilepathSimTax,'SIMULASI TAX PERSONAL NEW',3,2, taxpayerInfo[2])
+			}
+			else{
+				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(datafilepathSimTax,'SIMULASI TAX PERSONAL NEW',3,2,0)
+			}
 			vatAmount = Double.parseDouble(findTestData('Simulasi/Simulasi Pajak Personal').getValue(5, 12))
 			whtAmount = Double.parseDouble(findTestData('Simulasi/Simulasi Pajak Personal').getValue(5, 8))
 			disburseAmount = Double.parseDouble(findTestData('Simulasi/Simulasi Pajak Personal').getValue(5, 13))
@@ -380,14 +408,27 @@ for (int k = 1; k <= variableRef.size(); k++) {
 		}
     }
     
-	'Verify wht pada confins sesuai dengan penghitungan dengan batas toleransi +-5'
-	WebUI.verifyLessThanOrEqual(Math.abs(whTax - whtAmount), 10)
+	Double whtThisYear = CustomKeywords.'commissionReserveFundData.taxCalculation.checkWHTthisYear'(sqlConnectionTAX,sqlConnectionFOU,"Referantor",office, refName)
+	
+	if(whtThisYear>=whTax){
+		WebUI.verifyEqual(whTax, 0)
+	}
+	else if(whtThisYear==null || whtThisYear<whTax){
+		'Verify wht pada confins sesuai dengan penghitungan dengan batas toleransi +-5'
+		WebUI.verifyLessThanOrEqual(Math.abs(whTax - whtAmount), 10)
+	}
 	
 	'Verify vat pada confins sesuai dengan penghitungan dengan batas toleransi +-5'
 	WebUI.verifyLessThanOrEqual(Math.abs(vaTax - vatAmount), 10)
 	
-	'Verify expense pada confins sesuai dengan penghitungan dengan batas toleransi +-5'
-	WebUI.verifyLessThanOrEqual(Math.abs(expenseAmt - expenseAmount), 10)
+	if(whtThisYear>=whTax){
+		'Verify expense pada confins sesuai dengan penghitungan dengan batas toleransi +-5'
+		WebUI.verifyLessThanOrEqual(Math.abs(expenseAmt - (expenseAmount-whtAmount)), 10)
+	}
+	else{
+		'Verify expense pada confins sesuai dengan penghitungan dengan batas toleransi +-5'
+		WebUI.verifyLessThanOrEqual(Math.abs(expenseAmt - expenseAmount), 10)
+	}
 	
 	'Verify disburse pada confins sesuai dengan penghitungan dengan batas toleransi +-5'
 	WebUI.verifyLessThanOrEqual(Math.abs(disburseAmt - disburseAmount), 10)
@@ -548,7 +589,7 @@ public checkVerifyEqualOrMatch(Boolean isMatch, String sheetname, int numofcolm)
 	}
 }
 
-public checkSupplier(Sql sqlConnectionFOU, Integer sizeSupp, Double vatAmount, Double whtAmount, Double disburseAmount, Double expenseAmount){
+public checkSupplier(Sql sqlConnectionTAX, Sql sqlConnectionFOU, Integer sizeSupp, Double vatAmount, Double whtAmount, Double disburseAmount, Double expenseAmount){
 	def datafilepathSimTax = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathSimulasiPajak)
 	
 	'Looping data Supplier'
@@ -658,7 +699,7 @@ public checkSupplier(Sql sqlConnectionFOU, Integer sizeSupp, Double vatAmount, D
 			else if((taxpayerInfo[0]) == 'P'){
 				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathSimTax,'SIMULASI TAX PERSONAL NEW',1,2, commAmt)
 				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(datafilepathSimTax,'SIMULASI TAX PERSONAL NEW',2,2, taxpayerInfo[1])
-				
+				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(datafilepathSimTax,'SIMULASI TAX PERSONAL NEW',3,2, 0)
 				vatAmount = Double.parseDouble(findTestData('Simulasi/Simulasi Pajak Personal').getValue(3, 12))
 				whtAmount = Double.parseDouble(findTestData('Simulasi/Simulasi Pajak Personal').getValue(3, 8))
 				disburseAmount = Double.parseDouble(findTestData('Simulasi/Simulasi Pajak Personal').getValue(3, 13))
@@ -699,15 +740,28 @@ public checkSupplier(Sql sqlConnectionFOU, Integer sizeSupp, Double vatAmount, D
 	
 			}
 		}
-		
-		'Verify wht pada confins sesuai dengan penghitungan dengan batas toleransi +-5'
-		WebUI.verifyLessThanOrEqual(Math.abs(whTax - whtAmount), 10)
+		String officeName = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/label_OriginalOffice'))
+		Double whtThisYear = CustomKeywords.'commissionReserveFundData.taxCalculation.checkWHTthisYear'(sqlConnectionTAX,sqlConnectionFOU,"Supplier",officeName, supplierName)
+	
+		if(whtThisYear>=whTax){
+			WebUI.verifyEqual(whTax, 0)
+		}
+		else if(whtThisYear==null || whtThisYear<whTax){
+			'Verify wht pada confins sesuai dengan penghitungan dengan batas toleransi +-5'
+			WebUI.verifyLessThanOrEqual(Math.abs(whTax - whtAmount), 10)
+		}
 		
 		'Verify vat pada confins sesuai dengan penghitungan dengan batas toleransi +-5'
 		WebUI.verifyLessThanOrEqual(Math.abs(vaTax - vatAmount), 10)
 		
-		'Verify expense pada confins sesuai dengan penghitungan dengan batas toleransi +-5'
-		WebUI.verifyLessThanOrEqual(Math.abs(expenseAmt - expenseAmount), 10)
+		if(whtThisYear>=whTax){
+			'Verify expense pada confins sesuai dengan penghitungan dengan batas toleransi +-5'
+			WebUI.verifyLessThanOrEqual(Math.abs(expenseAmt - (expenseAmount-whtAmount)), 10)
+		}
+		else{
+			'Verify expense pada confins sesuai dengan penghitungan dengan batas toleransi +-5'
+			WebUI.verifyLessThanOrEqual(Math.abs(expenseAmt - expenseAmount), 10)
+		}
 		
 		'Verify disburse pada confins sesuai dengan penghitungan dengan batas toleransi +-5'
 		WebUI.verifyLessThanOrEqual(Math.abs(disburseAmt - disburseAmount), 10)

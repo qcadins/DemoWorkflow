@@ -82,4 +82,13 @@ public class checkCommissionCode {
 		}
 		return referantorName
 	}
+	
+	@Keyword
+	public checkAgencyPersonalData(Sql instance, String refName){
+		String referantorCode
+		instance.eachRow(("select VENDOR_CODE from vendor where mr_vendor_category_code = 'AGENCY_PERSONAL' AND VENDOR_NAME = '"+refName+"' and is_active = 1"), { def row ->
+			referantorCode = (row[0])
+		})
+		return referantorCode
+	}
 }

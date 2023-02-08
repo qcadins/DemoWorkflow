@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>endDate</name>
+   <tag></tag>
+   <elementGuidId>aafbb447-4be0-4e85-9d49-aabb45e577d8</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>/html/body/ngb-modal-window/div/div/app-app-insurance-detail/div[2]/div/div[4]/div[2]/label[2]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>/html/body/ngb-modal-window/div/div/app-app-insurance-detail/div[2]/div/div[4]/div[2]/label[2]</value>
+   </webElementProperties>
+</WebElementEntity>

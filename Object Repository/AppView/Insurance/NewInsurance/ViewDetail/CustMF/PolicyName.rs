@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>PolicyName</name>
+   <tag></tag>
+   <elementGuidId>46b489e2-7fce-42b8-a7b1-71c3bf6cb732</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;CUCO_Customer&quot;]/div[2]/div[2]/label[2]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;CUCO_Customer&quot;]/div[2]/div[2]/label[2]</value>
+   </webElementProperties>
+</WebElementEntity>

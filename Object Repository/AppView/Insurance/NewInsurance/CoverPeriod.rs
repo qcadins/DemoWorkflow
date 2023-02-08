@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>CoverPeriod</name>
+   <tag></tag>
+   <elementGuidId>f92f3c63-4d13-4dea-974f-a98a2730f375</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;InsuranceObjectSection&quot;]/div/table/tbody/tr/td[6]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;InsuranceObjectSection&quot;]/div/table/tbody/tr/td[6]</value>
+   </webElementProperties>
+</WebElementEntity>

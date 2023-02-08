@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>InsLength</name>
+   <tag></tag>
+   <elementGuidId>7531063a-1fcb-49e0-8a27-8fbb8822b1e1</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>/html/body/ngb-modal-window/div/div/app-app-insurance-detail/div[2]/div/div[4]/div[2]/label[2]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>/html/body/ngb-modal-window/div/div/app-app-insurance-detail/div[2]/div/div[4]/div[2]/label[2]</value>
+   </webElementProperties>
+</WebElementEntity>

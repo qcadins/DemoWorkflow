@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>InsCo</name>
+   <tag></tag>
+   <elementGuidId>31710312-fd8d-497f-811c-d8327c68d5f2</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;InsuranceObjectSection&quot;]/div/table/tbody/tr/td[4]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;InsuranceObjectSection&quot;]/div/table/tbody/tr/td[4]</value>
+   </webElementProperties>
+</WebElementEntity>

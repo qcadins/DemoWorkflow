@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>AssetName</name>
+   <tag></tag>
+   <elementGuidId>a7c78dcc-e9d6-490a-8d6a-f7fdf7323654</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;InsuranceObjectSection&quot;]/div/table/tbody/tr/td[1]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;InsuranceObjectSection&quot;]/div/table/tbody/tr/td[1]</value>
+   </webElementProperties>
+</WebElementEntity>

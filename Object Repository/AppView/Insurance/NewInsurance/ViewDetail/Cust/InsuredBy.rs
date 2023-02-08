@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>InsuredBy</name>
+   <tag></tag>
+   <elementGuidId>2939cbf6-1fec-434b-86ef-1e1b58a94d97</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>/html/body/ngb-modal-window/div/div/app-app-insurance-detail/div[2]/div/div[1]/div[1]/label[2]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>/html/body/ngb-modal-window/div/div/app-app-insurance-detail/div[2]/div/div[1]/div[1]/label[2]</value>
+   </webElementProperties>
+</WebElementEntity>

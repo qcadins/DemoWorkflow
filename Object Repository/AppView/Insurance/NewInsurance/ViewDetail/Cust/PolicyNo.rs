@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>PolicyNo</name>
+   <tag></tag>
+   <elementGuidId>fe2f79d8-da48-4b59-8b95-c6737ac0e472</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>/html/body/ngb-modal-window/div/div/app-app-insurance-detail/div[2]/div/div[1]/div[2]/label[2]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>/html/body/ngb-modal-window/div/div/app-app-insurance-detail/div[2]/div/div[1]/div[2]/label[2]</value>
+   </webElementProperties>
+</WebElementEntity>

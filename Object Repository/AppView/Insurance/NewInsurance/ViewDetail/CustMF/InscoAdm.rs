@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>InscoAdm</name>
+   <tag></tag>
+   <elementGuidId>225c384d-e541-4101-99fe-5d33764fc5f8</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;CUCO_Company&quot;]/div[5]/div[1]/label[2]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;CUCO_Company&quot;]/div[5]/div[1]/label[2]</value>
+   </webElementProperties>
+</WebElementEntity>

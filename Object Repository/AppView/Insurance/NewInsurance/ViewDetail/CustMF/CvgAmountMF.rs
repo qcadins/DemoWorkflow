@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>CvgAmountMF</name>
+   <tag></tag>
+   <elementGuidId>152334fd-4ad6-49e0-8209-ff1b7e1d9544</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;CUCO_Company&quot;]/div[4]/div[1]/label[2]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;CUCO_Company&quot;]/div[4]/div[1]/label[2]</value>
+   </webElementProperties>
+</WebElementEntity>

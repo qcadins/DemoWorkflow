@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>CustomerAdminFee</name>
+   <tag></tag>
+   <elementGuidId>ee320d14-ce9b-4db6-ab2e-3271fb69ffb8</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;InsuranceObjectSection&quot;]/div/table/tbody/tr/td[10]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;InsuranceObjectSection&quot;]/div/table/tbody/tr/td[10]</value>
+   </webElementProperties>
+</WebElementEntity>

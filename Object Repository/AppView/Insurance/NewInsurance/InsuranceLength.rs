@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>InsuranceLength</name>
+   <tag></tag>
+   <elementGuidId>06cef469-abb5-41cb-8dd2-c8f8b53e6666</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;InsuranceObjectSection&quot;]/div/table/tbody/tr/td[7]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;InsuranceObjectSection&quot;]/div/table/tbody/tr/td[7]</value>
+   </webElementProperties>
+</WebElementEntity>

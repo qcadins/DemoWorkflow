@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>InsNotesMF</name>
+   <tag></tag>
+   <elementGuidId>73c26579-3723-40b5-8d28-b59af1ddb4be</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;CUCO_Company&quot;]/div[6]/div/label[2]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;CUCO_Company&quot;]/div[6]/div/label[2]</value>
+   </webElementProperties>
+</WebElementEntity>
