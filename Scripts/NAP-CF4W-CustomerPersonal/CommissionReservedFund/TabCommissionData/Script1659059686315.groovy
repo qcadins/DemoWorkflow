@@ -159,7 +159,7 @@ if(!appLastStep.equalsIgnoreCase("UPL_DOC") && GlobalVariable.FirstTimeEntry=="Y
 					if(WebUI.verifyEqual(Math.round(Double.parseDouble(textIncomeInfoAmt.replace(",",""))),Math.round(getAmountFromAppDB*Double.parseDouble(refundAmt[i])))==false){
 						
 						'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyRule'
-						CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('13.TabCommissionData', GlobalVariable.NumofColm, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedVerifyRule)
+						CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('13.TabCommissionData', GlobalVariable.NumofColm, GlobalVariable.StatusWarning, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedVerifyRule)
 						
 						GlobalVariable.FlagFailed=1
 					}
@@ -933,7 +933,7 @@ if(!appLastStep.equalsIgnoreCase("UPL_DOC") && GlobalVariable.FirstTimeEntry=="Y
 	if(commissiondelete.size() > 0){
 		
 		'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedDelete'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('13.TabCommissionData', GlobalVariable.NumofColm, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedDelete + commissiondelete)
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('13.TabCommissionData', GlobalVariable.NumofColm, GlobalVariable.StatusWarning, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedDelete + commissiondelete)
 		
 		GlobalVariable.FlagWarning++
 	}
@@ -947,18 +947,20 @@ if(!appLastStep.equalsIgnoreCase("UPL_DOC") && GlobalVariable.FirstTimeEntry=="Y
 	if(WebUI.verifyElementPresent(alertCalculate, GlobalVariable.TimeOut,FailureHandling.OPTIONAL)){
 		
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusReasonCalculateGagal'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('13.TabCommissionData', GlobalVariable.NumofColm, GlobalVariable.StatusWarning, GlobalVariable.StatusReasonCalculateGagal)
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('13.TabCommissionData', GlobalVariable.NumofColm, GlobalVariable.StatusWarning, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.StatusReasonCalculateGagal)
 		
 		'Pengecekan error alert amount/percentage melebihi limit'
 		if(WebUI.getText(alertCalculate).toLowerCase().contains("Cannot be more than".toLowerCase())){
 			
 			'Write To Excel GlobalVariable.StatusReasonAmountOverLimit'
 			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '13.TabCommissionData',
-				1, GlobalVariable.NumofColm - 1, GlobalVariable.StatusReasonAmountOverLimit)
+				1, GlobalVariable.NumofColm - 1, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.StatusReasonAmountOverLimit)
 		}
 		
 		'Klik cancel'
 		WebUI.click(findTestObject('NAP/CommissionReservedFund/TabCommissionData/button_Cancel'))
+		
+		GlobalVariable.IsDataCancel = 1
 		
 		GlobalVariable.FlagFailed = 1
 	}
@@ -1010,6 +1012,8 @@ if(!appLastStep.equalsIgnoreCase("UPL_DOC") && GlobalVariable.FirstTimeEntry=="Y
 		'Klik cancel'
 		WebUI.click(findTestObject('NAP/CommissionReservedFund/TabCommissionData/button_Cancel'))
 	
+		GlobalVariable.IsDataCancel = 1
+		
 		'Pengecekan jika new consumer finance belum diexpand'
 		if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
 			'Klik new consumer finance'
@@ -1026,7 +1030,7 @@ public checkVerifyEqualOrMatch(Boolean isMatch, String sheetname, int numofcolm)
 
 			'write to excel reason failed verify equal or match'
 			CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, sheetname,
-					1, numofcolm-1, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+					1, numofcolm-1, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
 			GlobalVariable.FlagFailed=1
 	}
