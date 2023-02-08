@@ -13,16 +13,28 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
+
+import groovy.sql.Sql
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.WebDriver as WebDriver
 import org.openqa.selenium.By as By
 import org.openqa.selenium.WebElement as WebElement
 import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 
-WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompletion/a_New Consumer Finance'))
+'Pengecekan jika new consumer finance belum diexpand'
+if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
+    'Klik new consumer finance'
+    WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'))
+}
 
 'get data file path'
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
+
+//'connect DB FOU'
+//Sql sqlConnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
+//
+//'get gen set cdc'
+//ArrayLis<String> Excluded = CustomKeywords.'nap4Data.checkNAP4.GenSetCDC'(sqlConnectionFOU)
 
 'declare datafileCustomerCompany'
 datafileCustomerCompany = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData')
@@ -48,7 +60,7 @@ WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompleti
 
 WebDriver driver = DriverFactory.getWebDriver()
 
-ArrayList<WebElement> variable = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-cust-completion-detail > div > div > div > div.px-3 > lib-ucgridview > div > table > tbody tr'))
+ArrayList<String> variable = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-cust-completion-detail > div > div > div > div.px-3 > lib-ucgridview > div > table > tbody tr'))
 
 int count = variable.size()
 
@@ -61,6 +73,7 @@ GlobalVariable.FlagFailed = 0
 //	checkVerifyEqualOrMatch(WebUI.verifyEqual(GlobalVariable.CountNumofCustomer, count, FailureHandling.OPTIONAL))
 //
 //}
+
 for (int i = 1; i <= count; i++) {
     'modify object customername'
     modifynewCustomerName = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerName'), 'xpath', 
@@ -100,41 +113,26 @@ for (int i = 1; i <= count; i++) {
     if (CustomerArray.size() > 0) {
         'looping customer array'
         for (c = 1; c <= CustomerArray.size(); c++) {
-            'verify if iscomplete == no'
-            if (isComplete == 'NO') {
+            'verify action == Yes'
+            if ((GlobalVariable.RoleCompany == 'Testing' && datafileCDC.getValue(GlobalVariable.NumofColm, 14) == 'YES') || 
+				(GlobalVariable.RoleCompany == 'Data Entry' && isComplete.equalsIgnoreCase('NO'))) {
                 'verify if customerarray == customer name'
                 if (CustomerName.equalsIgnoreCase(CustomerArray[(c - 1)])) {
                     'click button action'
                     WebUI.click(modifynewButtonAction)
 
-                    if (GlobalVariable.RoleCompany == 'Data Entry') {
-                        'call test case customer Company'
-                        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerCompany/MAINCustomerCompanyTC'), 
-                            [:], FailureHandling.CONTINUE_ON_FAILURE)
-                    } else if (GlobalVariable.RoleCompany == 'Testing') {
-                        'call test case customer Company'
-                        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerCompany/MAINCustomerCompanyTC'), 
-                            [:], FailureHandling.STOP_ON_FAILURE)
-                    }
-                }
-            } else if (isComplete == 'YES') {
-                if (datafileCDC.getValue(GlobalVariable.NumofColm, 14) == 'YES') {
-                    'verify if customerarray == customer name'
-                    if (CustomerName.equalsIgnoreCase(CustomerArray[(c - 1)])) {
-                        'click button action'
-                        WebUI.click(modifynewButtonAction)
+                    'call test case customer Company'
+                    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerCompany/MAINCustomerCompanyTC'), 
+                    		[:], FailureHandling.CONTINUE_ON_FAILURE)
 
-                        if (GlobalVariable.RoleCompany == 'Data Entry') {
-                            'call test case customer Company'
-                            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerCompany/MAINCustomerCompanyTC'), 
-                                [:], FailureHandling.CONTINUE_ON_FAILURE)
-                        } else if (GlobalVariable.RoleCompany == 'Testing') {
-                            'call test case customer Company'
-                            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerCompany/MAINCustomerCompanyTC'), 
-                                [:], FailureHandling.STOP_ON_FAILURE)
-                        }
-                    }
+					
+					isComplete = WebUI.getText(modifynewisComplete)
+					
+					'Verify iscomplete == yes'
+					checkVerifyEqualOrMatch(WebUI.verifyMatch(isComplete, 'YES', false, FailureHandling.OPTIONAL))
                 }
+            } else {
+                continue
             }
         }
     }
@@ -143,77 +141,37 @@ for (int i = 1; i <= count; i++) {
     if (ManagementShareholderArray.size() > 0) {
         'looping managementshareholder array'
         for (f = 1; f <= ManagementShareholderArray.size(); f++) {
-            'verify iscomplete == NO'
-            if (isComplete == 'NO') {
+            'verify action == Yes'
+            if (datafileCDC.getValue(GlobalVariable.NumofColm, 16) == 'YES') {
                 'verify customername == managementshareholder array'
                 if (CustomerName.equalsIgnoreCase(ManagementShareholderArray[(f - 1)]) && (CustomerType == 'PERSONAL')) {
                     'click button action'
                     WebUI.click(modifynewButtonAction)
 
-                    if (GlobalVariable.RoleCompany == 'Data Entry') {
-                        'call test case customer personal (ManagementShareholder)'
-                        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/ManagementShareholderPersonal/MAINManagementShareholderPersonalTC'), 
-                            [:], FailureHandling.CONTINUE_ON_FAILURE)
-                    } else if (GlobalVariable.RoleCompany == 'Testing') {
-                        'call test case customer personal (ManagementShareholder)'
-                        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/ManagementShareholderPersonal/MAINManagementShareholderPersonalTC'), 
-                            [:], FailureHandling.STOP_ON_FAILURE)
-                    }
-                    
-                    isComplete = WebUI.getText(modifynewisComplete)
+                    'call test case customer personal (ManagementShareholder)'
+                    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/ManagementShareholderPersonal/MAINManagementShareholderPersonalTC'), 
+                    		[:], FailureHandling.CONTINUE_ON_FAILURE)
 
-                    'Verify iscomplete == yes'
-                    checkVerifyEqualOrMatch(WebUI.verifyMatch(isComplete, 'YES', false, FailureHandling.OPTIONAL))
+					
+					isComplete = WebUI.getText(modifynewisComplete)
+					
+					'Verify iscomplete == yes'
+					checkVerifyEqualOrMatch(WebUI.verifyMatch(isComplete, 'YES', false, FailureHandling.OPTIONAL))
                 } else if (CustomerName.equalsIgnoreCase(ManagementShareholderArray[(f - 1)]) && (CustomerType == 'COMPANY')) {
                     'click button action'
                     WebUI.click(modifynewButtonAction)
 
-                    if (GlobalVariable.RoleCompany == 'Data Entry') {
-                        'call test case customer company (ManagementShareholder)'
-                        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/ManagementShareholderCompany/MAINManagementShareholderCompanyTC'), 
-                            [:], FailureHandling.CONTINUE_ON_FAILURE)
-                    } else if (GlobalVariable.RoleCompany == 'Testing') {
-                        'call test case customer company (ManagementShareholder)'
-                        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/ManagementShareholderCompany/MAINManagementShareholderCompanyTC'), 
-                            [:], FailureHandling.STOP_ON_FAILURE)
-                    }
-                    
-                    isComplete = WebUI.getText(modifynewisComplete)
-
-                    'Verify iscomplete == yes'
-                    checkVerifyEqualOrMatch(WebUI.verifyMatch(isComplete, 'YES', false, FailureHandling.OPTIONAL))
-                }
-            } else if (isComplete == 'YES') {
-                if (datafileCDC.getValue(GlobalVariable.NumofColm, 16) == 'YES') {
-                    'verify customername == managementshareholder array'
-                    if (CustomerName.equalsIgnoreCase(ManagementShareholderArray[(f - 1)]) && (CustomerType == 'PERSONAL')) {
-                        'click button action'
-                        WebUI.click(modifynewButtonAction)
-
-                        if (GlobalVariable.RoleCompany == 'Data Entry') {
-                            'call test case customer personal (ManagementShareholder)'
-                            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/ManagementShareholderPersonal/MAINManagementShareholderPersonalTC'), 
-                                [:], FailureHandling.CONTINUE_ON_FAILURE)
-                        } else if (GlobalVariable.RoleCompany == 'Testing') {
-                            'call test case customer personal (ManagementShareholder)'
-                            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/ManagementShareholderPersonal/MAINManagementShareholderPersonalTC'), 
-                                [:], FailureHandling.STOP_ON_FAILURE)
-                        }
-                    } else if (CustomerName.equalsIgnoreCase(ManagementShareholderArray[(f - 1)]) && (CustomerType == 'COMPANY')) {
-                        'click button action'
-                        WebUI.click(modifynewButtonAction)
-
-                        if (GlobalVariable.RoleCompany == 'Data Entry') {
-                            'call test case customer company (ManagementShareholder)'
-                            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/ManagementShareholderCompany/MAINManagementShareholderCompanyTC'), 
-                                [:], FailureHandling.CONTINUE_ON_FAILURE)
-                        } else if (GlobalVariable.RoleCompany == 'Testing') {
-                            'call test case customer personal (ManagementShareholder)'
-                            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/ManagementShareholderCompany/MAINManagementShareholderCompanyTC'), 
-                                [:], FailureHandling.STOP_ON_FAILURE)
-                        }
-                    }
-                }
+                    'call test case customer personal (ManagementShareholder)'
+                    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/ManagementShareholderCompany/MAINManagementShareholderCompanyTC'), 
+                    		[:], FailureHandling.CONTINUE_ON_FAILURE)
+					
+					isComplete = WebUI.getText(modifynewisComplete)
+					
+					'Verify iscomplete == yes'
+					checkVerifyEqualOrMatch(WebUI.verifyMatch(isComplete, 'YES', false, FailureHandling.OPTIONAL))
+                }				
+            } else {
+                continue
             }
         }
     }
@@ -222,80 +180,37 @@ for (int i = 1; i <= count; i++) {
     if (GuarantorArray.size() > 0) {
         'looping guarantor array'
         for (g = 1; g <= GuarantorArray.size(); g++) {
-            'verify iscomplete == NO'
-            if (isComplete == 'NO') {
+            'verify action == YES'
+            if (datafileCDC.getValue(GlobalVariable.NumofColm, 18) == 'YES') {
                 'verify customername == guarantorarray'
                 if (CustomerName.equalsIgnoreCase(GuarantorArray[(g - 1)]) && (CustomerType == 'PERSONAL')) {
-                    'click button action'
                     WebUI.click(modifynewButtonAction)
 
-                    if (GlobalVariable.RoleCompany == 'Data Entry') {
-                        'call test case guarantor personal'
-                        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/GuarantorPersonal/MAINGuarantorPersonalTC'), 
-                            [:], FailureHandling.CONTINUE_ON_FAILURE)
-                    } else if (GlobalVariable.RoleCompany == 'Testing') {
-                        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/GuarantorPersonal/MAINGuarantorPersonalTC'), 
-                            [:], FailureHandling.STOP_ON_FAILURE)
-                    }
-                    
-                    isComplete = WebUI.getText(modifynewisComplete)
-
-                    'Verify iscomplete == yes'
-                    checkVerifyEqualOrMatch(WebUI.verifyMatch(isComplete, 'YES', false, FailureHandling.OPTIONAL))
+                    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/GuarantorPersonal/MAINGuarantorPersonalTC'), 
+                    		[:], FailureHandling.CONTINUE_ON_FAILURE)
+					
+					isComplete = WebUI.getText(modifynewisComplete)
+					
+					'Verify iscomplete == yes'
+					checkVerifyEqualOrMatch(WebUI.verifyMatch(isComplete, 'YES', false, FailureHandling.OPTIONAL))
+					
                 } else if (CustomerName.equalsIgnoreCase(GuarantorArray[(g - 1)]) && (CustomerType == 'COMPANY')) {
                     'click button action'
                     WebUI.click(modifynewButtonAction)
 
-                    if (GlobalVariable.RoleCompany == 'Data Entry') {
-                        'call test case guarantor company'
-                        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/GuarantorCompany/MAINGuarantorCompanyTC'), 
-                            [:], FailureHandling.CONTINUE_ON_FAILURE)
-                    } else if (GlobalVariable.RoleCompany == 'Testing') {
-                        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/GuarantorCompany/MAINGuarantorCompanyTC'), 
-                            [:], FailureHandling.STOP_ON_FAILURE)
-                    }
+                    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/GuarantorCompany/MAINGuarantorCompanyTC'), 
+                    		[:], FailureHandling.CONTINUE_ON_FAILURE)
+					
+					isComplete = WebUI.getText(modifynewisComplete)
+					
+					'Verify iscomplete == yes'
+					checkVerifyEqualOrMatch(WebUI.verifyMatch(isComplete, 'YES', false, FailureHandling.OPTIONAL))
                 }
-            } else if (isComplete == 'YES') {
-                if (datafileCDC.getValue(GlobalVariable.NumofColm, 18) == 'YES') {
-                    'verify customername == guarantorarray'
-                    if (CustomerName.equalsIgnoreCase(GuarantorArray[(g - 1)]) && (CustomerType == 'PERSONAL')) {
-                        WebUI.click(modifynewButtonAction)
-
-                        if (GlobalVariable.RoleCompany == 'Data Entry') {
-                            'call test case guarantor personal'
-                            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/GuarantorPersonal/MAINGuarantorPersonalTC'), 
-                                [:], FailureHandling.CONTINUE_ON_FAILURE)
-                        } else if (GlobalVariable.RoleCompany == 'Testing') {
-                            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/GuarantorPersonal/MAINGuarantorPersonalTC'), 
-                                [:], FailureHandling.STOP_ON_FAILURE)
-                        }
-                        
-                        isComplete = WebUI.getText(modifynewisComplete)
-
-                        'Verify iscomplete == yes'
-                        checkVerifyEqualOrMatch(WebUI.verifyMatch(isComplete, 'YES', false, FailureHandling.OPTIONAL))
-                    } else if (CustomerName.equalsIgnoreCase(GuarantorArray[(g - 1)]) && (CustomerType == 'COMPANY')) {
-                        'click button action'
-                        WebUI.click(modifynewButtonAction)
-
-                        if (GlobalVariable.RoleCompany == 'Data Entry') {
-                            'call test case guarantor company'
-                            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/GuarantorCompany/MAINGuarantorCompanyTC'), 
-                                [:], FailureHandling.CONTINUE_ON_FAILURE)
-                        } else if (GlobalVariable.RoleCompany == 'Testing') {
-                            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/GuarantorCompany/MAINGuarantorCompanyTC'), 
-                                [:], FailureHandling.STOP_ON_FAILURE)
-                        }
-                    }
-                }
+            } else {
+                continue
             }
         }
     }
-    
-    isComplete = WebUI.getText(modifynewisComplete)
-
-    'Verify iscomplete == yes'
-    checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifynewisComplete), 'YES', false, FailureHandling.OPTIONAL))
 }
 
 'click button submit'
@@ -326,7 +241,8 @@ if (WebUI.verifyElementPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/C
     'write to excel if failed'
     CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '14.CustomerDataCompletion', 
         0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusFailed //Verify sort & paging
-        ) //	verif reset nap4
+        //	verif reset nap4
+        )
 } else {
     'write to excel if success'
     CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '14.CustomerDataCompletion', 
@@ -337,7 +253,8 @@ def checkVerifyEqualOrMatch(Boolean isMatch) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
         'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('14.CustomerDataCompletion', GlobalVariable.NumofColm, 
-            GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+            GlobalVariable.StatusWarning, (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion').getValue(
+                GlobalVariable.NumofColm, 2) + ';') + GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
         GlobalVariable.FlagFailed = 1
     }
@@ -345,15 +262,15 @@ def checkVerifyEqualOrMatch(Boolean isMatch) {
 
 def pagingTesting() {
     if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckPagingCompany == 'Yes')) {
-        ArrayList<WebElement> resultReset = new ArrayList<WebElement>()
+        ArrayList<String> resultReset = new ArrayList<String>()
 
-        ArrayList<WebElement> checkVerifySort = new ArrayList<WebElement>()
+        ArrayList<String> checkVerifySort = new ArrayList<String>()
 
-        ArrayList<WebElement> checkVerifyFooter = new ArrayList<WebElement>()
+        ArrayList<String> checkVerifyFooter = new ArrayList<String>()
 
         resultReset = CustomKeywords.'paging.verifyPaging.resetPagingCustDataCompletion'()
 
-        ArrayList<WebElement> listString = new ArrayList<WebElement>()
+        ArrayList<String> listString = new ArrayList<String>()
 
         'click search'
         WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Search'))
@@ -362,7 +279,7 @@ def pagingTesting() {
         WebDriver driver = DriverFactory.getWebDriver()
 
         'Inisialisasi variabel'
-        ArrayList<WebElement> rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-cust-completion-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
+        ArrayList<String> rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-cust-completion-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
 
         'Klik header office'
         WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/span_Office'))
@@ -389,7 +306,7 @@ def pagingTesting() {
 
         checkVerifySort.add(WebUI.verifyEqual(isSorted, true))
 
-        listApp = new ArrayList<WebElement>()
+        listApp = new ArrayList<String>()
 
         'Klik header appno'
         WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/span_appNo'))
@@ -415,7 +332,7 @@ def pagingTesting() {
         'Verify alert tidak muncul'
         checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), GlobalVariable.TimeOut))
 
-        listString = new ArrayList<WebElement>()
+        listString = new ArrayList<String>()
 
         for (int i = 1; i <= rowData.size(); i++) {
             appNoObject = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/custNo'), 'xpath', 
@@ -436,7 +353,7 @@ def pagingTesting() {
         'Verify alert tidak muncul'
         checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), GlobalVariable.TimeOut))
 
-        listString = new ArrayList<WebElement>()
+        listString = new ArrayList<String>()
 
         for (int i = 1; i <= rowData.size(); i++) {
             appNoObject = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/custName'), 'xpath', 
@@ -454,7 +371,7 @@ def pagingTesting() {
         'Klik header custname'
         WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/span_custName'))
 
-        listString = new ArrayList<WebElement>()
+        listString = new ArrayList<String>()
 
         for (int i = 1; i <= rowData.size(); i++) {
             appNoObject = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/custName'), 'xpath', 
@@ -475,7 +392,7 @@ def pagingTesting() {
         'Verify alert tidak muncul'
         checkVerifySort.add(WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/div_erroralert'), GlobalVariable.TimeOut))
 
-        listString = new ArrayList<WebElement>()
+        listString = new ArrayList<String>()
 
         for (int i = 1; i <= rowData.size(); i++) {
             appNoObject = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/POName'), 'xpath', 
@@ -493,7 +410,7 @@ def pagingTesting() {
         'Klik header poname'
         WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/span_POName'))
 
-        listString = new ArrayList<WebElement>()
+        listString = new ArrayList<String>()
 
         for (int i = 1; i <= rowData.size(); i++) {
             appNoObject = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/POName'), 'xpath', 
@@ -530,7 +447,7 @@ def pagingTesting() {
 
             rowData = driver.findElements(By.cssSelector('body > app-root > app-full-layout > div > div.main-panel > div > div > div > div > app-cust-completion-paging > lib-ucpaging > lib-ucgridview > div > table > tbody > tr'))
 
-            listString = new ArrayList<WebElement>()
+            listString = new ArrayList<String>()
 
             for (int i = 1; i <= rowData.size(); i++) {
                 appNoObject = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/appNo'), 'xpath', 
@@ -554,7 +471,7 @@ def pagingTesting() {
 
             listApp = listString
 
-            listString = new ArrayList<WebElement>()
+            listString = new ArrayList<String>()
 
             listString = CustomKeywords.'paging.verifyPaging.addAppNoForPagingNAP4'(listString)
 
@@ -572,7 +489,7 @@ def pagingTesting() {
 
             listApp = listString
 
-            listString = new ArrayList<WebElement>()
+            listString = new ArrayList<String>()
 
             listString = CustomKeywords.'paging.verifyPaging.addAppNoForPagingNAP4'(listString)
 

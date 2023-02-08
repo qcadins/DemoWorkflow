@@ -118,41 +118,23 @@ for (int i = 1; i <= count; i++) {
     if (CustomerArray.size() > 0) {
         'looping customer array'
         for (c = 1; c <= CustomerArray.size(); c++) {
-            'verify if iscomplete == no'
-            if (isComplete == 'NO') {
-                'verify if customerarray == customer name'
-                if (CustomerName.equalsIgnoreCase(CustomerArray[(c - 1)])) {
-                    'click button action'
-                    WebUI.click(modifynewButtonAction)
-
-                    if (GlobalVariable.Role == 'Data Entry') {
-                        'call test case customer personal'
-                        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/CustomerPersonal/MAINCustomerPersonalTC'), 
-                            [:], FailureHandling.CONTINUE_ON_FAILURE)
-                    } else {
-                        'call test case customer personal'
-                        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/CustomerPersonal/MAINCustomerPersonalTC'), 
-                            [:], FailureHandling.STOP_ON_FAILURE)
-                    }
-                }
-            } else if (isComplete == 'YES') {
-                if (datafileCDC.getValue(GlobalVariable.NumofColm, 14) == 'YES') {
+            	'verify if action == YES'            
+                if ((GlobalVariable.Role == 'Testing' && datafileCDC.getValue(GlobalVariable.NumofColm, 14) == 'YES') || 
+				(GlobalVariable.Role == 'Data Entry' && isComplete.equalsIgnoreCase('NO'))) {
                     'verify if customerarray == customer name'
                     if (CustomerName.equalsIgnoreCase(CustomerArray[(c - 1)])) {
                         'click button action'
                         WebUI.click(modifynewButtonAction)
 
-                        if (GlobalVariable.Role == 'Data Entry') {
-                            'call test case customer personal'
-                            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/CustomerPersonal/MAINCustomerPersonalTC'), 
-                                [:], FailureHandling.CONTINUE_ON_FAILURE)
-                        } else {
-                            'call test case customer personal'
-                            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/CustomerPersonal/MAINCustomerPersonalTC'), 
-                                [:], FailureHandling.STOP_ON_FAILURE)
-                        }
+                        'call test case customer personal'
+                        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/CustomerPersonal/MAINCustomerPersonalTC'), 
+                        		[:], FailureHandling.CONTINUE_ON_FAILURE)                        
+						
+						isComplete = WebUI.getText(modifynewisComplete)
+						
+						'Verify iscomplete == yes'
+						checkVerifyEqualOrMatch(WebUI.verifyMatch(isComplete, 'YES', false, FailureHandling.OPTIONAL))
                     }
-                }
             }
         }
     }
@@ -161,41 +143,22 @@ for (int i = 1; i <= count; i++) {
     if (FamilyArray.size() > 0) {
         'looping family array'
         for (f = 1; f <= FamilyArray.size(); f++) {
-            'verify iscomplete == NO'
-            if (isComplete == 'NO') {
-                'verify customername == family array'
-                if (CustomerName.equalsIgnoreCase(FamilyArray[(f - 1)])) {
-                    'click button action'
-                    WebUI.click(modifynewButtonAction)
-
-                    if (GlobalVariable.Role == 'Data Entry') {
-                        'call test case customer personal (Family)'
-                        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/FamilyPersonal/MAINFamilyPersonalTC'), 
-                            [:], FailureHandling.CONTINUE_ON_FAILURE)
-                    } else {
-                        'call test case customer personal (Family)'
-                        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/FamilyPersonal/MAINFamilyPersonalTC'), 
-                            [:], FailureHandling.STOP_ON_FAILURE)
-                    }
-                }
-            } else if (isComplete == 'YES') {
+            	'verify action == YES'
                 if (datafileCDC.getValue(GlobalVariable.NumofColm, 16) == 'YES') {
                     'verify customername == family array'
                     if (CustomerName.equalsIgnoreCase(FamilyArray[(f - 1)])) {
                         'click button action'
                         WebUI.click(modifynewButtonAction)
 
-                        if (GlobalVariable.Role == 'Data Entry') {
-                            'call test case customer personal (Family)'
-                            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/FamilyPersonal/MAINFamilyPersonalTC'), 
-                                [:], FailureHandling.CONTINUE_ON_FAILURE)
-                        } else {
-                            'call test case customer personal (Family)'
-                            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/FamilyPersonal/MAINFamilyPersonalTC'), 
-                                [:], FailureHandling.STOP_ON_FAILURE)
-                        }
+                        'call test case customer personal (Family)'
+                        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/FamilyPersonal/MAINFamilyPersonalTC'), 
+                        		[:], FailureHandling.CONTINUE_ON_FAILURE)
+						
+						isComplete = WebUI.getText(modifynewisComplete)
+						
+						'Verify iscomplete == yes'
+						checkVerifyEqualOrMatch(WebUI.verifyMatch(isComplete, 'YES', false, FailureHandling.OPTIONAL))
                     }
-                }
             }
         }
     }
@@ -204,73 +167,38 @@ for (int i = 1; i <= count; i++) {
     if (GuarantorArray.size() > 0) {
         'looping guarantor array'
         for (g = 1; g <= GuarantorArray.size(); g++) {
-            'verify iscomplete == NO'
-            if (isComplete == 'NO') {
-                'verify customername == guarantorarray'
-                if (CustomerName.equalsIgnoreCase(GuarantorArray[(g - 1)]) && (CustomerType == 'PERSONAL')) {
-                    'click button action'
-                    WebUI.click(modifynewButtonAction)
-
-                    if (GlobalVariable.Role == 'Data Entry') {
-                        'call test case guarantor personal'
-                        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/GuarantorPersonal/MAINGuarantorPersonalTC'), 
-                            [:], FailureHandling.CONTINUE_ON_FAILURE)
-                    } else {
-						'call test case guarantor personal'
-                        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/GuarantorPersonal/MAINGuarantorPersonalTC'), 
-                            [:], FailureHandling.STOP_ON_FAILURE)
-                    }
-                } else if (CustomerName.equalsIgnoreCase(GuarantorArray[(g - 1)]) && (CustomerType == 'COMPANY')) {
-                    'click button action'
-                    WebUI.click(modifynewButtonAction)
-
-                    if (GlobalVariable.Role == 'Data Entry') {
-                        'call test case guarantor company'
-                        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/GuarantorCompany/MAINGuarantorCompanyTC'), 
-                            [:], FailureHandling.CONTINUE_ON_FAILURE)
-                    } else {
-						'call test case guarantor company'
-                        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/GuarantorCompany/MAINGuarantorCompanyTC'), 
-                            [:], FailureHandling.STOP_ON_FAILURE)
-                    }
-                }
-            } else if (isComplete == 'YES') {
+            	'verify action == YES'
                 if (datafileCDC.getValue(GlobalVariable.NumofColm, 18) == 'YES') {
                     'verify customername == guarantorarray'
                     if (CustomerName.equalsIgnoreCase(GuarantorArray[(g - 1)]) && (CustomerType == 'PERSONAL')) {
 						'klik button action'
                         WebUI.click(modifynewButtonAction)
 
-                        if (GlobalVariable.Role == 'Data Entry') {
-                            'call test case guarantor personal'
-                            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/GuarantorPersonal/MAINGuarantorPersonalTC'), 
-                                [:], FailureHandling.CONTINUE_ON_FAILURE)
-                        } else {
-							'call test case guarantor personal'
-                            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/GuarantorPersonal/MAINGuarantorPersonalTC'), 
-                                [:], FailureHandling.STOP_ON_FAILURE)
-                        }
+                        'call test case guarantor personal'
+                        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/GuarantorPersonal/MAINGuarantorPersonalTC'), 
+                        		[:], FailureHandling.CONTINUE_ON_FAILURE)
+						
+						isComplete = WebUI.getText(modifynewisComplete)
+						
+						'Verify iscomplete == yes'
+						checkVerifyEqualOrMatch(WebUI.verifyMatch(isComplete, 'YES', false, FailureHandling.OPTIONAL))
+						
                     } else if (CustomerName.equalsIgnoreCase(GuarantorArray[(g - 1)]) && (CustomerType == 'COMPANY')) {
                         'click button action'
                         WebUI.click(modifynewButtonAction)
 
-                        if (GlobalVariable.Role == 'Data Entry') {
-                            'call test case guarantor company'
-                            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/GuarantorCompany/MAINGuarantorCompanyTC'), 
-                                [:], FailureHandling.CONTINUE_ON_FAILURE)
-                        } else {
-							'call test case guarantor company'
-                            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/GuarantorCompany/MAINGuarantorCompanyTC'), 
-                                [:], FailureHandling.STOP_ON_FAILURE)
-                        }
+                        'call test case guarantor company'
+                        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/GuarantorCompany/MAINGuarantorCompanyTC'), 
+                        		[:], FailureHandling.CONTINUE_ON_FAILURE)
+						
+						isComplete = WebUI.getText(modifynewisComplete)
+						
+						'Verify iscomplete == yes'
+						checkVerifyEqualOrMatch(WebUI.verifyMatch(isComplete, 'YES', false, FailureHandling.OPTIONAL))
                     }
-                }
             }
         }
     }
-    
-    'Verify iscomplete == yes'
-    checkVerifyEqualOrMatch(WebUI.verifyMatch(isComplete, 'YES', false, FailureHandling.OPTIONAL))
 }
 
 'click button submit'

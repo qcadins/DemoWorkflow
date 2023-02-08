@@ -42,7 +42,7 @@ WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP1-Cus
 if (GlobalVariable.RoleCompany == 'Testing') {
     'verify application step'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/applicationcurrentstep')), 
-            'CUSTOMEREWEW', false))
+            'CUSTOMER', false))
 }
 
 if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 14) == 'Input Data') {
