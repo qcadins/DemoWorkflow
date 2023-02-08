@@ -197,8 +197,7 @@ for (GlobalVariable.NumofFamily = GlobalVariable.StartIndex; GlobalVariable.Numo
                                 'click X'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabNewApplication/Button_X'))
 
-                                'click button cancel'
-                                WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabFamilyData/button_Cancel'))
+                               
 
 								'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusReasonLookup'
 								CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('2.TabFamilyData', GlobalVariable.NumofFamily, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(GlobalVariable.NumofFamily, 2) + ';' +GlobalVariable.StatusReasonLookup)
@@ -257,9 +256,7 @@ for (GlobalVariable.NumofFamily = GlobalVariable.StartIndex; GlobalVariable.Numo
                                 'click X'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabNewApplication/Button_X'))
 
-                                'click button cancel'
-                                WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabFamilyData/button_Cancel'))
-
+                               
 								'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusReasonLookup'
 								CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('2.TabFamilyData', GlobalVariable.NumofFamily, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(GlobalVariable.NumofFamily, 2) + ';' +GlobalVariable.StatusReasonLookup)
 
@@ -347,9 +344,7 @@ for (GlobalVariable.NumofFamily = GlobalVariable.StartIndex; GlobalVariable.Numo
                                 'click X'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabNewApplication/Button_X'))
 
-                                'click button cancel'
-                                WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabFamilyData/button_Cancel'))
-
+                                
 								'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusReasonLookup'
 								CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('2.TabFamilyData', GlobalVariable.NumofFamily, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(GlobalVariable.NumofFamily, 2) + ';' +GlobalVariable.StatusReasonLookup)
 
@@ -405,8 +400,7 @@ for (GlobalVariable.NumofFamily = GlobalVariable.StartIndex; GlobalVariable.Numo
                             'click X'
                             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabNewApplication/Button_X'))
 
-                            'click button cancel'
-                            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabFamilyData/button_Cancel'))
+                           
 
 							'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusReasonLookup'
 							CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('2.TabFamilyData', GlobalVariable.NumofFamily, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(GlobalVariable.NumofFamily, 2) + ';' +GlobalVariable.StatusReasonLookup)
@@ -485,8 +479,7 @@ for (GlobalVariable.NumofFamily = GlobalVariable.StartIndex; GlobalVariable.Numo
                                 'click X'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabNewApplication/Button_X'))
 
-                                'click button cancel'
-                                WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabFamilyData/button_Cancel'))
+                               
 
 								'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusReasonLookup'
 								CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('2.TabFamilyData', GlobalVariable.NumofFamily, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(GlobalVariable.NumofFamily, 2) + ';' +GlobalVariable.StatusReasonLookup)
@@ -545,8 +538,7 @@ for (GlobalVariable.NumofFamily = GlobalVariable.StartIndex; GlobalVariable.Numo
                                 'click X'
                                 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabNewApplication/Button_X'))
 
-                                'click button cancel'
-                                WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabFamilyData/button_Cancel'))
+                                
 
 								'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusReasonLookup'
 								CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('2.TabFamilyData', GlobalVariable.NumofFamily, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(GlobalVariable.NumofFamily, 2) + ';' +GlobalVariable.StatusReasonLookup)
@@ -650,6 +642,8 @@ for (GlobalVariable.NumofFamily = GlobalVariable.StartIndex; GlobalVariable.Numo
                     GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                     'click button cancel'
                     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabFamilyData/button_Cancel'))
+					
+					GlobalVariable.IsDataCancel = 1
                 } else {
                     if ((flagWarning > 0) || (GlobalVariable.FlagWarning > 0)) {
                         'Write to Excel WARNING'
@@ -659,23 +653,23 @@ for (GlobalVariable.NumofFamily = GlobalVariable.StartIndex; GlobalVariable.Numo
                     
                     'customer added +1'
                     (GlobalVariable.CountNumofCustomer)++
+					if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 13) == 'Input Data') {
+						if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckVerifStoreDBPersonal == 'Yes')) {
+							'call test case Family data store verif'
+							WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/Family/TabFamilyDataStoreDBVerif'),
+								[:], FailureHandling.CONTINUE_ON_FAILURE)
+						}
+					} else if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 13) == 'LookUp') {
+						if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckVerifStoreDBPersonal == 'Yes')) {
+							'call test case Family data store verif lookup'
+							WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/Family/TabFamilyDataStoreDBVerif-LookUp'),
+								[:], FailureHandling.CONTINUE_ON_FAILURE)
+						}
+					}
                 }
                 
-				if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(GlobalVariable.NumofFamily, 1) == 'SUCCESS'){					
-                if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 13) == 'Input Data') {
-                    if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckVerifStoreDBPersonal == 'Yes')) {
-                        'call test case Family data store verif'
-                        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/Family/TabFamilyDataStoreDBVerif'), 
-                            [:], FailureHandling.CONTINUE_ON_FAILURE)
-                    }
-                } else if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 13) == 'LookUp') {
-                    if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckVerifStoreDBPersonal == 'Yes')) {
-                        'call test case Family data store verif lookup'
-                        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/Family/TabFamilyDataStoreDBVerif-LookUp'), 
-                            [:], FailureHandling.CONTINUE_ON_FAILURE)
-                    }
-                }
-				}
+                
+				
             }
         }
     }

@@ -17,7 +17,7 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 
 'call tc login'
-WebUI.callTestCase(findTestCase('Login/LoginR3BranchManagerSuperuser - NEW'), [:], FailureHandling.STOP_ON_FAILURE)
+WebUI.callTestCase(findTestCase('Login/LoginR3BranchManagerSuperuser - NEW'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 
 'get data file path'
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathPersonal)
@@ -71,17 +71,19 @@ if (GlobalVariable.Role == 'Data Entry') {
     } //                'Jika flag checkappviewpersonal bernilai yes'
     //                if (GlobalVariable.CheckAppViewPersonal == 'Yes') {
     //                    'call test case verify app view'
-    //                    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/AppView/ApplicationInquiry'), [:], FailureHandling.STOP_ON_FAILURE)
+    //                    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/AppView/ApplicationInquiry'), [:], FailureHandling.CONTINUE_ON_FAILURE)
     //                }
 } else {
     'looping countnumofcust'
     for (GlobalVariable.NumofColm; GlobalVariable.NumofColm <= (countCustomerPersonal - 1); (GlobalVariable.NumofColm)++) {
+		GlobalVariable.IsDataCancel = 0
+		
         if (CustomKeywords.'customizeKeyword.function.checkNAPExist'(datafileCustomerPersonal) == true) {
             break
         }
         
         'Jika status pada excel bukan unexecuted'
-        if ((datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 1) != 'Unexecuted') || (datafileCustomerPersonal.getValue(
+        if ((datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 1).equalsIgnoreCase('Success')) || (datafileCustomerPersonal.getValue(
             GlobalVariable.NumofColm, 12).length() == 0)) {
             'skip ke appno selanjutnya'
             continue
@@ -89,39 +91,50 @@ if (GlobalVariable.Role == 'Data Entry') {
         
         'Jika edit appno pada excel tidak kosong'
         if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 8) != '') {
-			try{
+			
 				'call tc edit nap'
-				WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/EditNAP'), [:], FailureHandling.STOP_ON_FAILURE)
-			}
-			catch (Exception e) {
-				KeywordUtil.markFailed(e.printStackTrace())
-
-				continue
-			}
+				WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/EditNAP'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+			
+			
         } else {
-            try {
+				if (GlobalVariable.IsDataCancel == 1) {
+					continue
+				}
+            
                 'call tc main nap1'
                 WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/MAIN_NAP1_CustomerData'), 
-                    [:], FailureHandling.STOP_ON_FAILURE)
+                    [:], FailureHandling.CONTINUE_ON_FAILURE)
+				
+				if (GlobalVariable.IsDataCancel == 1) {
+					continue
+				}
 
                 'call tc custdupcheckverif'
                 WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/DuplicateChecking/CustomerDuplicateCheckingVerif'), 
-                    [:], FailureHandling.STOP_ON_FAILURE)
+                    [:], FailureHandling.CONTINUE_ON_FAILURE)
 
                 'jika dupcheckverif bernilai yes'
                 if (GlobalVariable.DupcheckVerif == 'Yes') {
                     'call tc custdupcheck'
                     WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/DuplicateChecking/CustomerDuplicateChecking'), 
-                        [:], FailureHandling.STOP_ON_FAILURE)
+                        [:], FailureHandling.CONTINUE_ON_FAILURE)
                 }
+				
+				if (GlobalVariable.IsDataCancel == 1) {
+					continue
+				}
                 
                 'call tc main nap2'
                 WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/MAIN_NAP2_ApplicationData'), 
-                    [:], FailureHandling.STOP_ON_FAILURE)
+                    [:], FailureHandling.CONTINUE_ON_FAILURE)
+				
+				if (GlobalVariable.IsDataCancel == 1) {
+					continue
+				}
 
                 'call tc main comresfund'
                 WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/CommissionReservedFund/MAINComResvFund'), [:], 
-                    FailureHandling.STOP_ON_FAILURE)
+                    FailureHandling.CONTINUE_ON_FAILURE)
 
                 'declare datafileCommission'
                 datafileCommission = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData')
@@ -154,21 +167,30 @@ if (GlobalVariable.Role == 'Data Entry') {
                         
                         'call tc main comresfund'
                         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/CommissionReservedFund/MAINComResvFund'), 
-                            [:], FailureHandling.STOP_ON_FAILURE)
+                            [:], FailureHandling.CONTINUE_ON_FAILURE)
                     } else {
                         break
                     }
                 }
                 
+				if (GlobalVariable.IsDataCancel == 1) {
+					continue
+				}
+				
                 'call tc nap4 cdc'
                 WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
-                    [:], FailureHandling.STOP_ON_FAILURE)
-            }
-            catch (Exception e) {
-                KeywordUtil.markFailed(e.printStackTrace())
-
-                continue
-            } 
+                    [:], FailureHandling.CONTINUE_ON_FAILURE)
+				
+				if (GlobalVariable.IsDataCancel == 1) {
+					continue
+				}
+				'check if verif Appview = yes'
+				if (GlobalVariable.CheckAppViewPersonal == 'Yes') {
+					'call test case verify app view'
+					WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/AppView/ApplicationInquiry'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+				}
+            
+            
         }
     }
 }

@@ -534,6 +534,8 @@ for (int i = 1; i <= variableData.size(); i++) {
                             'click button cancel'
                             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabFamilyData/button_Cancel'))
 
+							GlobalVariable.IsDataCancel = 1
+							
                             'customer added -1'
                             (GlobalVariable.CountNumofCustomer)--
                         } else {
@@ -542,21 +544,21 @@ for (int i = 1; i <= variableData.size(); i++) {
                                 CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabFamilyData', 
                                     0, GlobalVariable.NumofFamily - 1, GlobalVariable.StatusWarning)
                             }
+							if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckVerifStoreDBPersonal == 'Yes')) {
+								if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 13) == 'Input Data') {
+										'call test case Family data store verif'
+										WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/Family/TabFamilyDataStoreDBVerif'),
+											[:], FailureHandling.CONTINUE_ON_FAILURE)
+								} else if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 13) == 'LookUp') {
+										'call test case family lookup store data verif'
+										WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/Family/TabFamilyDataStoreDBVerif-LookUp'),
+											[:], FailureHandling.CONTINUE_ON_FAILURE)
+								}
+								
+							}
                         }
                         
-						if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(GlobalVariable.NumofFamily, 1) == 'SUCCESS'){
-						if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckVerifStoreDBPersonal == 'Yes')) {
-                        if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 13) == 'Input Data') {
-                                'call test case Family data store verif'
-                                WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/Family/TabFamilyDataStoreDBVerif'), 
-                                    [:], FailureHandling.CONTINUE_ON_FAILURE)                           
-                        } else if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 13) == 'LookUp') {
-                                'call test case family lookup store data verif'
-                                WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/Family/TabFamilyDataStoreDBVerif-LookUp'), 
-                                    [:], FailureHandling.CONTINUE_ON_FAILURE)
-                        }
-						}
-						}
+						
                         break
                     }
                 } else {
@@ -813,8 +815,7 @@ def closeLookup(){
 	'click X'
 	WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabNewApplication/Button_X'))
 
-	'click button cancel'
-	WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabFamilyData/button_Cancel'))
+	
 
 	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusReasonLookup'
 	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('2.TabFamilyData', GlobalVariable.NumofFamily, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(GlobalVariable.NumofFamily, 2) + ';' +GlobalVariable.StatusReasonLookup)

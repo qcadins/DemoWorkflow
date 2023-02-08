@@ -695,6 +695,8 @@ if (WebUI.verifyElementNotPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP2
     'click button cancel'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/button_Cancel'))
 	
+	GlobalVariable.IsDataCancel = 1
+	
 	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusReasonCalculateGagal'
 	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('10.TabFinancialData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.StatusReasonCalculateGagal)
 
@@ -743,21 +745,25 @@ if (GlobalVariable.FlagFailed == 0) {
     }
 }
 
-'check if role = testing & check store db = yes & status = success'
-if (GlobalVariable.Role == 'Testing' && GlobalVariable.CheckVerifStoreDBPersonal=="Yes" && findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData').getValue(GlobalVariable.NumofColm, 1) == 'SUCCESS') {
-	'call test case subsidy store db verif'
-	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabSubsidyStoreDBVerif'),
-			[:], FailureHandling.CONTINUE_ON_FAILURE)
 
-	'call test case financial datastore db verif'
-	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabFinancialDataStoreDBVerif'),
-			[:], FailureHandling.CONTINUE_ON_FAILURE)
-
-}
 if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/ApplicationCurrentStep')), 
     'FINANCIAL DATA', false, FailureHandling.OPTIONAL)) {
     'click button cancel'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/button_Cancel'))
+	GlobalVariable.IsDataCancel = 1
+	
+}else{
+	'check if role = testing & check store db = yes & status = success'
+	if (GlobalVariable.Role == 'Testing' && GlobalVariable.CheckVerifStoreDBPersonal=="Yes" && findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData').getValue(GlobalVariable.NumofColm, 1) == 'SUCCESS') {
+		'call test case subsidy store db verif'
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabSubsidyStoreDBVerif'),
+				[:], FailureHandling.CONTINUE_ON_FAILURE)
+	
+		'call test case financial datastore db verif'
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabFinancialDataStoreDBVerif'),
+				[:], FailureHandling.CONTINUE_ON_FAILURE)
+	
+	}
 }
 
 def writeReasonFailedVerifRule() {

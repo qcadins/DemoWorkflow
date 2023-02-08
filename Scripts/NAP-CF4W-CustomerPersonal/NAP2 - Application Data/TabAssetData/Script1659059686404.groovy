@@ -941,25 +941,26 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-Ap
     GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
     'click button cancel'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/button_Cancel'))
+	GlobalVariable.IsDataCancel = 1
 } else {
     if (flagWarning > 0) {
         'write to excel status warning'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '7.TabAssetData', 0, GlobalVariable.NumofColm - 
             1, GlobalVariable.StatusWarning)
     }
-}
-
-if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckVerifStoreDBPersonal == 'Yes')) {
-	if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 1) == 'SUCCESS'){		
-    'call test case store db accessories data'
-    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabAccessoriesDataStoreDBVerif'), 
-        [:], FailureHandling.CONTINUE_ON_FAILURE)
+	if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckVerifStoreDBPersonal == 'Yes')) {
+		if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 1) == 'SUCCESS'){
+		'call test case store db accessories data'
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabAccessoriesDataStoreDBVerif'),
+			[:], FailureHandling.CONTINUE_ON_FAILURE)
+		}
+	
+		'call test case store db asset data'
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabAssetDataStoreDBVerif'), [:],
+			FailureHandling.CONTINUE_ON_FAILURE)
 	}
-
-    'call test case store db asset data'
-    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabAssetDataStoreDBVerif'), [:], 
-        FailureHandling.CONTINUE_ON_FAILURE)
 }
+
 
 WebUI.delay(10)
 

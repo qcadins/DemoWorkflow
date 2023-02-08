@@ -979,15 +979,16 @@ if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NA
     'REFERANTOR', false, FailureHandling.OPTIONAL)) {
     'click button cancel'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabReferantorData/button_Cancel'))
+	GlobalVariable.IsDataCancel = 1
 }
-
-'check if role = testing & check store db = yes & status = success'
-if (((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckVerifStoreDBPersonal == 'Yes'))) {
-    'call test case store db referantor data'
-    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabReferantorDataStoreDBVerif'), 
-        [:], FailureHandling.CONTINUE_ON_FAILURE)
+else{
+	'check if role = testing & check store db = yes & status = success'
+	if (((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckVerifStoreDBPersonal == 'Yes'))) {
+	    'call test case store db referantor data'
+	    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabReferantorDataStoreDBVerif'), 
+	        [:], FailureHandling.CONTINUE_ON_FAILURE)
+	}
 }
-
 def adddatatoarraylist(ArrayList<String> referantorDetail) {
     'Ambil dan simpan npwp no dari confins'
     String textNPWPNo = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabReferantorData/label_NPWPNo'))

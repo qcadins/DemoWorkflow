@@ -302,20 +302,21 @@ if(GlobalVariable.FlagFailed==0){
 	}
 }
 
-if(GlobalVariable.Role == 'Testing' && GlobalVariable.CheckVerifStoreDBPersonal=="Yes" && datafileTabLifeInsurance.getValue(GlobalVariable.NumofColm, 12) == 'YES'){
-	'call test case store db life insurance data'
-	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabLifeInsuranceDataStoreDBVerif'),
-			[:], FailureHandling.CONTINUE_ON_FAILURE)
-}
-
 'Verify input data'
 if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/ApplicationCurrentStep')), 
     'LIFE INSURANCE', false, FailureHandling.OPTIONAL)) {
     'click cancel'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabLifeInsuranceData/button_Cancel'))
 
-   
+	GlobalVariable.IsDataCancel = 1
 } 
+else{
+	if(GlobalVariable.Role == 'Testing' && GlobalVariable.CheckVerifStoreDBPersonal=="Yes" && datafileTabLifeInsurance.getValue(GlobalVariable.NumofColm, 12) == 'YES'){
+		'call test case store db life insurance data'
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabLifeInsuranceDataStoreDBVerif'),
+				[:], FailureHandling.CONTINUE_ON_FAILURE)
+	}
+}
 
 public checkVerifyEqualOrMatch(Boolean isMatch){
 		if(isMatch==false && GlobalVariable.FlagFailed==0){

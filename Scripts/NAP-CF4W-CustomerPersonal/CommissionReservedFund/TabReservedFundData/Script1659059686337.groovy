@@ -338,11 +338,6 @@ if(GlobalVariable.FlagFailed==0 ){
 	}
 }
 
-if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckVerifStoreDBPersonal=="Yes"){
-	'call test case reserved fund datastore db verif'
-	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/CommissionReservedFund/TabReservedFundDataStoreDBVerif'),
-			[:], FailureHandling.CONTINUE_ON_FAILURE)
-}
 
 'Pengecekan jika setelah klik save, button cancel masih bisa diklik'
 if (WebUI.verifyElementPresent(findTestObject('NAP/CommissionReservedFund/TabReservedFundData/button_Cancel'), 
@@ -357,7 +352,15 @@ if (WebUI.verifyElementPresent(findTestObject('NAP/CommissionReservedFund/TabRes
         'Klik new consumer finance'
         WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Finance Leasing'))
     }
-} 
+}
+else{
+	
+	if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckVerifStoreDBPersonal=="Yes"){
+		'call test case reserved fund datastore db verif'
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/CommissionReservedFund/TabReservedFundDataStoreDBVerif'),
+				[:], FailureHandling.CONTINUE_ON_FAILURE)
+	}
+}
 	
 public checkVerifyEqualOrMatch(Boolean isMatch, String sheetname, int numofcolm){
 	if(isMatch==false && GlobalVariable.FlagFailed==0){

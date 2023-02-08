@@ -40,7 +40,7 @@ WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP1-Cus
 if (GlobalVariable.Role == 'Testing') {
     'verify application step'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/TabCustomerData/applicationcurrentstep')), 
-            'CUSTOMER', false, FailureHandling.OPTIONAL))
+            'CUSTOMER', false))
 
     'get cust model ddl value from db'
     ArrayList<String> custmodel = CustomKeywords.'dbConnection.checkCustomer.checkCustomerModelPersonal'(sqlConnectionFOU)
@@ -283,7 +283,7 @@ if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 14) == 'Input Da
     CustomKeywords.'customizeKeyword.function.verifyInputLookup'(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData'), 
         '1.TabCustomerMainData', GlobalVariable.NumofColm)
 
-    if (GlobalVariable.Role == 'Testing') {
+    if (GlobalVariable.Role == 'Testing' && GlobalVariable.FlagFailed == 0) {
         getDataCust()
 
         'call test case customer data verif'
@@ -340,7 +340,7 @@ if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 14) == 'Input Da
         }
     }
     
-    if (GlobalVariable.Role == 'Testing') {
+    if (GlobalVariable.Role == 'Testing' && GlobalVariable.FlagFailed == 0) {
         'call function getdatacust'
         getDataCust()
     }
@@ -423,27 +423,29 @@ if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NA
         'Klik new consumer finance'
         WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'))
     }
+	GlobalVariable.IsDataCancel = 1
 } else {
     if (flagWarning > 0) {
         'write to excel status warning'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 
             0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusWarning)
     }
+	if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 14) == 'Input Data') {
+		if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckVerifStoreDBPersonal == 'Yes')) {
+			'call test case customer data store verif'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/Customer/TabCustomerDataStoreDBVerif'),
+				[:], FailureHandling.CONTINUE_ON_FAILURE)
+		}
+	} else if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 14) == 'LookUp') {
+		if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckVerifStoreDBPersonal == 'Yes')) {
+			'call test case customer data store verif lookup'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/Customer/TabCustomerDataStoreDBVerif-LookUp'),
+				[:], FailureHandling.CONTINUE_ON_FAILURE)
+		}
+	}
 }
 
-if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 14) == 'Input Data') {
-    if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckVerifStoreDBPersonal == 'Yes')) {
-        'call test case customer data store verif'
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/Customer/TabCustomerDataStoreDBVerif'), 
-            [:], FailureHandling.STOP_ON_FAILURE)
-    }
-} else if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 14) == 'LookUp') {
-    if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckVerifStoreDBPersonal == 'Yes')) {
-        'call test case customer data store verif lookup'
-        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/Customer/TabCustomerDataStoreDBVerif-LookUp'), 
-            [:], FailureHandling.CONTINUE_ON_FAILURE)
-    }
-}
+
 
 GlobalVariable.FlagFailed = 0
 

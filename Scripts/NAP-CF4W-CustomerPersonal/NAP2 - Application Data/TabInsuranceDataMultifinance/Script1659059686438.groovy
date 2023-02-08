@@ -83,6 +83,8 @@ if (WebUI.verifyTextNotPresent('INSURANCE FEE', false, FailureHandling.OPTIONAL)
 	'click cancel'
 	WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/button_Cancel'))
 
+	GlobalVariable.IsDataCancel = 1
+	
 	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusReasonGenerateGagal'
 	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('8.TabInsuranceData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.StatusReasonGenerateGagal)
 	

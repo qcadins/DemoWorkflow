@@ -999,12 +999,7 @@ if(!appLastStep.equalsIgnoreCase("UPL_DOC") && GlobalVariable.FirstTimeEntry=="Y
 		}
 	}
 	
-	if (GlobalVariable.Role == 'Testing' && GlobalVariable.CheckVerifStoreDBPersonal=="Yes") {
-		'call test case commission datastore db verif'
-		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/CommissionReservedFund/TabCommissionDataStoreDBVerif'),
-				[:], FailureHandling.CONTINUE_ON_FAILURE)
-		
-	}
+	
 	
 	'Pengecekan jika setelah klik save, dropdownlist allocation type masih bisa diklik/dipilih'
 	if (WebUI.verifyElementPresent(findTestObject('NAP/CommissionReservedFund/TabCommissionData/select_AmountPercentage'),
@@ -1018,6 +1013,14 @@ if(!appLastStep.equalsIgnoreCase("UPL_DOC") && GlobalVariable.FirstTimeEntry=="Y
 		if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
 			'Klik new consumer finance'
 			WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_Consumer Finance'))
+		}
+	}
+	else{
+		if (GlobalVariable.Role == 'Testing' && GlobalVariable.CheckVerifStoreDBPersonal=="Yes") {
+			'call test case commission datastore db verif'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/CommissionReservedFund/TabCommissionDataStoreDBVerif'),
+					[:], FailureHandling.CONTINUE_ON_FAILURE)
+			
 		}
 	}
 

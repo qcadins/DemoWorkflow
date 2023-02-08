@@ -301,11 +301,7 @@ if (GlobalVariable.FlagFailed == 0) {
 	}
 }
 
-if (GlobalVariable.Role == 'Testing' && GlobalVariable.CheckVerifStoreDBPersonal=="Yes") {
-	'call test case store db TC'
-	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabTCDataStoreDBVerif'),
-		[:], FailureHandling.CONTINUE_ON_FAILURE)
-}
+
 
 'Verify input data'
 if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/ApplicationCurrentStep')),
@@ -313,9 +309,17 @@ if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NA
 	'click cancel'
 	WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabTermConditionData/button_Cancel'))
 
+	GlobalVariable.IsDataCancel = 1
    
 }
-	
+else{
+	if (GlobalVariable.Role == 'Testing' && GlobalVariable.CheckVerifStoreDBPersonal=="Yes") {
+		'call test case store db TC'
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabTCDataStoreDBVerif'),
+			[:], FailureHandling.CONTINUE_ON_FAILURE)
+	}
+}
+
 public writeToExcelFailedVerifRule(){
 		
 	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyRule'

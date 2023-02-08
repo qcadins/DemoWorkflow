@@ -128,17 +128,21 @@ if (GlobalVariable.FlagFailed == 0) {
     }
 }
 
-if (GlobalVariable.Role == 'Testing' && GlobalVariable.CheckVerifStoreDBPersonal=="Yes") {
-	'call test case verify store to db'
-	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabInsuranceDataStoreDBVerif'),
-		[:], FailureHandling.CONTINUE_ON_FAILURE)
-}
+
 
 'Verify input data'
 if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/select_InsuredBy'), 
     GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
     'click cancel'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/button_Cancel'))
+	GlobalVariable.IsDataCancel = 1
+}
+else{
+	if (GlobalVariable.Role == 'Testing' && GlobalVariable.CheckVerifStoreDBPersonal=="Yes") {
+		'call test case verify store to db'
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabInsuranceDataStoreDBVerif'),
+			[:], FailureHandling.CONTINUE_ON_FAILURE)
+	}
 }
 
 public checkVerifyEqualOrMatch(Boolean isMatch){

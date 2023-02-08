@@ -887,14 +887,15 @@ if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NA
     'APPLICATION DATA', false, FailureHandling.OPTIONAL)) {
     'click cancel'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/button_Cancel'))
+	GlobalVariable.IsDataCancel = 1
 }
-
-if(GlobalVariable.Role == 'Testing' && GlobalVariable.CheckVerifStoreDBPersonal=="Yes"){
-		'call test case store db application data'
-		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabApplicationDataStoreDBVerif'),
-				[:], FailureHandling.CONTINUE_ON_FAILURE)
+else{
+	if(GlobalVariable.Role == 'Testing' && GlobalVariable.CheckVerifStoreDBPersonal=="Yes"){
+			'call test case store db application data'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabApplicationDataStoreDBVerif'),
+					[:], FailureHandling.CONTINUE_ON_FAILURE)
+	}
 }
-
 public checkVerifyEqualOrMatch(Boolean isMatch){
 	if(isMatch==false && GlobalVariable.FlagFailed==0){
 
