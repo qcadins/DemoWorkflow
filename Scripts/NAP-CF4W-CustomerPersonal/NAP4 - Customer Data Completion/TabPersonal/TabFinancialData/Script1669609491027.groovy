@@ -26,33 +26,7 @@ GlobalVariable.StartIndex = 0
 
 def datafilecustdetail 
 
-if(GlobalVariable.APPSTEP == 'CUSTOMER'){
-	'get data file path'
-	GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileCustomerPersonal)
-
-	'declare datafilecustdetail'
-	datafilecustdetail = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail')
-	
-	'declare data file Global variable'
-	GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData')
-}else if(GlobalVariable.APPSTEP == 'FAMILY'){
-	'get data file path'
-	GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileFamilyPersonal)
-	
-	'declare datafilecustdetail'
-	datafilecustdetail = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/FamilyPersonal/CustomerDetail')
-	
-	'declare data file Global variable'
-	GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/FamilyPersonal/FinancialData')
-}else if(GlobalVariable.APPSTEP == 'GUARANTOR PERSONAL'){
-	'get data file path'
-	GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorPersonal)
-	
-	'declare datafilecustdetail'
-	datafilecustdetail = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/CustomerDetail')
-	
-	GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/FinancialData')
-}
+getDataFile()
 
 'get count colm'
 countcolm = GlobalVariable.FindDataFile.getColumnNumbers()
@@ -169,9 +143,10 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 	}
 	
 	if (financialDateDelete.size() > 0) {
-
+		getDataFile()
+		
 		'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedDelete'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('5.FinancialData', GlobalVariable.StartIndex, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedDelete + financialDateDelete)
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('5.FinancialData', GlobalVariable.StartIndex, GlobalVariable.StatusWarning, GlobalVariable.FindDataFile.getValue(GlobalVariable.StartIndex, 2) + ';' +GlobalVariable.ReasonFailedDelete + financialDateDelete)
 
 		(GlobalVariable.FlagWarning)++
 	}
@@ -356,9 +331,10 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 	}
 	
 	if (bankAccDelete.size() > 0) {
-
+		getDataFile()
+		
 		'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedDelete'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('5.FinancialData', GlobalVariable.StartIndex, GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedDelete + financialDateDelete)
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('5.FinancialData', GlobalVariable.StartIndex, GlobalVariable.StatusWarning, GlobalVariable.FindDataFile.getValue(GlobalVariable.StartIndex, 2) + ';' +GlobalVariable.ReasonFailedDelete + financialDateDelete)
 
 		(GlobalVariable.FlagWarning)++
 	}
@@ -573,8 +549,10 @@ def inputBank(String copyapp, ArrayList<String> variable, int flagFailed) {
             'click cancel'
             WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/button_Cancel'))
 			
+			getDataFile()
+			
 			'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.StatusReasonLookup'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('5.FinancialData', financialdata, GlobalVariable.StatusWarning, GlobalVariable.StatusReasonLookup)
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('5.FinancialData', financialdata, GlobalVariable.StatusWarning, GlobalVariable.FindDataFile.getValue(GlobalVariable.StartIndex, 2) + ';' +GlobalVariable.StatusReasonLookup)
 
             (GlobalVariable.FlagWarning)++
         }
@@ -967,4 +945,34 @@ def inputBankStatementFromEmpty() {
             inputBankStatement(BSindex)
         }
     }
+}
+
+def getDataFile(){
+	if(GlobalVariable.APPSTEP == 'CUSTOMER'){
+		'get data file path'
+		GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileCustomerPersonal)
+	
+		'declare datafilecustdetail'
+		datafilecustdetail = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail')
+		
+		'declare data file Global variable'
+		GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData')
+	}else if(GlobalVariable.APPSTEP == 'FAMILY'){
+		'get data file path'
+		GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileFamilyPersonal)
+		
+		'declare datafilecustdetail'
+		datafilecustdetail = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/FamilyPersonal/CustomerDetail')
+		
+		'declare data file Global variable'
+		GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/FamilyPersonal/FinancialData')
+	}else if(GlobalVariable.APPSTEP == 'GUARANTOR PERSONAL'){
+		'get data file path'
+		GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorPersonal)
+		
+		'declare datafilecustdetail'
+		datafilecustdetail = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/CustomerDetail')
+		
+		GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/FinancialData')
+	}
 }

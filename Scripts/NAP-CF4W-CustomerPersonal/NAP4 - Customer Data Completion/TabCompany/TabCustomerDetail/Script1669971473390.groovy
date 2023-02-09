@@ -21,11 +21,8 @@ GlobalVariable.FlagFailed = 0
 
 GlobalVariable.FlagWarning = 0
 
-'get data file path'
-GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorCompany)	
-	
-'declare data file Global variable'
-GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorCompany/CustomerDetail')
+'call function get data file'
+getDataFile()
 
 if(GlobalVariable.RoleCompany == 'Testing'){
 	'connect DB FOU'
@@ -44,8 +41,11 @@ if(GlobalVariable.RoleCompany == 'Testing'){
 	if (WebUI.verifyOptionsPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/CustomerDetail/select_Select One Corporate  Non Corporate'),
 		custmodel) == false) {
 
+		'call function get data file'
+		getDataFile()
+	
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.CustomerDetail', GlobalVariable.ColmNAP4, GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'custmodel')
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.CustomerDetail', GlobalVariable.ColmNAP4, GlobalVariable.StatusFailed, GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 2) + ';' +GlobalVariable.ReasonFailedDDL + 'custmodel')
 
 		(GlobalVariable.FlagFailed)++
 	}
@@ -138,8 +138,11 @@ if (WebUI.verifyElementPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/C
 	'click button back'
 	WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Back'))
 
+	'call function get data file'
+	getDataFile()
+	
 	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusReasonLookup'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.CustomerDetail', Address, GlobalVariable.StatusFailed, GlobalVariable.StatusReasonLookup)
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.CustomerDetail', GlobalVariable.ColmNAP4, GlobalVariable.StatusFailed, GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 2) + ';' +GlobalVariable.StatusReasonLookup)
 
 	'Flagfailed +1 karena gagal melakukan lookup'
 	(GlobalVariable.FlagFailed)++
@@ -190,6 +193,7 @@ if (WebUI.verifyElementPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/C
 } else {
 	'check if flagwarning = 0'
 	if (GlobalVariable.FlagWarning > 0) {
+		
 		'write to excel status warning'
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.CustomerDetail',
 			0, GlobalVariable.ColmNAP4 - 1, GlobalVariable.StatusWarning)
@@ -204,4 +208,12 @@ if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckVerifStoreDBPerso
     'call test case verify customer detail store data'
     WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Company/TabCustomerDetailVerifStoreDataDB'), 
         [:], FailureHandling.CONTINUE_ON_FAILURE)
+}
+
+def getDataFile(){
+	'get data file path'
+	GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorCompany)
+		
+	'declare data file Global variable'
+	GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorCompany/CustomerDetail')
 }

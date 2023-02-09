@@ -15,11 +15,8 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 
-'get data file path'
-GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorCompany)
-
-'declare data file Global variable'
-GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorCompany/ContactInformation')
+'call function get data file'
+getDataFile()
 
 'delay supaya section address info keload'
 WebUI.delay(3)
@@ -221,9 +218,13 @@ def checkDDL() {
         'verify isi ddl IDType confins = db'
         if (WebUI.verifyOptionsPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/ContactInformation/select_Id Type'), 
             IDType) == false) {
+		
+			'call function get data file'
+			getDataFile()
+			
             'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3.ContactInformation', GlobalVariable.NumofColm, 
-                GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'ID Type')
+                GlobalVariable.StatusFailed, GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 2) + ';' +GlobalVariable.ReasonFailedDDL + 'ID Type')
 
             (GlobalVariable.FlagFailed)++
         }
@@ -240,9 +241,13 @@ def checkDDL() {
         'verify isi ddl Gender confins = db'
         if (WebUI.verifyOptionsPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/ContactInformation/select_Select One Female  Male'), 
             Gender) == false) {
+		
+			'call function get data file'
+			getDataFile()
+		
             'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3.ContactInformation', GlobalVariable.NumofColm, 
-                GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'Gender')
+                GlobalVariable.StatusFailed, GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 2) + ';' +GlobalVariable.ReasonFailedDDL + 'Gender')
 
             (GlobalVariable.FlagFailed)++
         }
@@ -259,9 +264,13 @@ def checkDDL() {
         'verify isi ddl jobposition confins = db'
         if (WebUI.verifyOptionsPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/ContactInformation/select_Select Job Position'), 
             jobposition) == false) {
+		
+			'call function get data file'
+			getDataFile()
+		
             'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3.ContactInformation', GlobalVariable.NumofColm, 
-                GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'jobposition')
+                GlobalVariable.StatusFailed, GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 2) + ';' +GlobalVariable.ReasonFailedDDL + 'jobposition')
 
             (GlobalVariable.FlagFailed)++
         }
@@ -278,11 +287,23 @@ def checkDDL() {
         'verify isi ddl relationship confins = db'
         if (WebUI.verifyOptionsPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/ContactInformation/select_Relation'), 
             relationship) == false) {
+		
+			'call function get data file'
+			getDataFile()
+		
             'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3.ContactInformation', GlobalVariable.NumofColm, 
-                GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'relationship')
+                GlobalVariable.StatusFailed, GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofColm, 2) + ';' +GlobalVariable.ReasonFailedDDL + 'relationship')
 
             (GlobalVariable.FlagFailed)++
         }
     }
+}
+
+def getDataFile(){
+	'get data file path'
+	GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorCompany)
+	
+	'declare data file Global variable'
+	GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorCompany/ContactInformation')
 }

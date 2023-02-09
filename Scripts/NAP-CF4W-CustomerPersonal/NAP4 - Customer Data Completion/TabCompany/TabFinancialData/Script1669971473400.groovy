@@ -24,14 +24,7 @@ import internal.GlobalVariable as GlobalVariable
 'declare copyappcolm = 0'
 GlobalVariable.StartIndex = 0
 
-'get data file path'
-GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorCompany)
-	
-'get data file customer'
-datafilecustdetail = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorCompany/CustomerDetail')
-	
-'declare data file Global variable'
-GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorCompany/FinancialData')
+getDataFile()
 
 'get count colm'
 countcolm = GlobalVariable.FindDataFile.getColumnNumbers()
@@ -146,9 +139,11 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 	}
 	
 	if (financialDateDelete.size() > 0) {
+		getDataFile()
+		
 		'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedDelete'
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('4.FinancialData', GlobalVariable.StartIndex,
-			GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedDelete + financialDateDelete)
+			GlobalVariable.StatusWarning, GlobalVariable.FindDataFile.getValue(GlobalVariable.StartIndex, 2) + ';' +GlobalVariable.ReasonFailedDelete + financialDateDelete)
 
 		(GlobalVariable.FlagWarning)++
 	}
@@ -337,9 +332,11 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 	}
 	
 	if (bankAccDelete.size() > 0) {
+		getDataFile()
+		
 		'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedDelete'
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('4.FinancialData', GlobalVariable.StartIndex,
-			GlobalVariable.StatusWarning, GlobalVariable.ReasonFailedDelete + bankAccDelete)
+			GlobalVariable.StatusWarning, GlobalVariable.FindDataFile.getValue(GlobalVariable.StartIndex, 2) + ';' +GlobalVariable.ReasonFailedDelete + bankAccDelete)
 
 		(GlobalVariable.FlagWarning)++
 	}
@@ -577,8 +574,10 @@ def inputBank(String copyapp, ArrayList<WebElement> variable, int flagFailed) {
             'Click cancel'
             WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/button_Cancel'))
 
+			getDataFile()
+			
 			'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.StatusReasonLookup'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('4.FinancialData', financialdata, GlobalVariable.StatusWarning, GlobalVariable.StatusReasonLookup)
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('4.FinancialData', financialdata, GlobalVariable.StatusWarning, GlobalVariable.FindDataFile.getValue(GlobalVariable.StartIndex, 2) + ';' +GlobalVariable.StatusReasonLookup)
 
             (GlobalVariable.FlagWarning)++
         }
@@ -962,4 +961,16 @@ def inputBankStatementFromEmpty() {
             inputBankStatement(BSindex)
         }
     }
+}
+
+def getDataFile(){
+	'get data file path'
+	GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorCompany)
+		
+	'get data file customer'
+	datafilecustdetail = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorCompany/CustomerDetail')
+		
+	'declare data file Global variable'
+	GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorCompany/FinancialData')
+	
 }

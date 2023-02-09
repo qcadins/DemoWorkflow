@@ -481,8 +481,10 @@ def verifyInputError(){
 		'click button back'
 		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP-CF4W-Personal/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/button_Back'))
 	
+		getDataFile()
+		
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusReasonLookup'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3.JobData', GlobalVariable.ColmNAP4, GlobalVariable.StatusFailed, GlobalVariable.StatusReasonLookup)
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3.JobData', GlobalVariable.ColmNAP4, GlobalVariable.StatusFailed, GlobalVariable.FindDataFile(GlobalVariable.ColmNAP4, 2) + ';' +GlobalVariable.StatusReasonLookup)
 	
 		GlobalVariable.FlagFailed = 1
 	}
@@ -505,9 +507,11 @@ def checkDDL(){
         'verify isi ddl jobposition confins = db'
         if (WebUI.verifyOptionsPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/input_Other Job Position_'), 
             jobposition) == false) {
+		getDataFile()
+		
             'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-            CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3.JobData', GlobalVariable.NumofColm, 
-                GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'jobposition')
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3.JobData', GlobalVariable.ColmNAP4, 
+                GlobalVariable.StatusFailed, GlobalVariable.FindDataFile(GlobalVariable.ColmNAP4, 2) + ';' +GlobalVariable.ReasonFailedDDL + 'jobposition')
 
             (GlobalVariable.FlagFailed)++
         }
@@ -524,9 +528,11 @@ def checkDDL(){
         'verify isi ddl jobStatus confins = db'
         if (WebUI.verifyOptionsPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/select_--Select One-- Contract  Permanent'), 
             jobStatus) == false) {
+			getDataFile()
+		
             'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-            CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3.JobData', GlobalVariable.NumofColm, 
-                GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'jobposition')
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3.JobData', GlobalVariable.ColmNAP4, 
+                GlobalVariable.StatusFailed, GlobalVariable.FindDataFile(GlobalVariable.ColmNAP4, 2) + ';' +GlobalVariable.ReasonFailedDDL + 'jobposition')
 
             (GlobalVariable.FlagFailed)++
         }
@@ -543,9 +549,12 @@ def checkDDL(){
         'verify isi ddl companyScale confins = db'
         if (WebUI.verifyOptionsPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/select_--Select One-- Big  Medium  Small'), 
             companyScale) == false) {
+		
+			getDataFile()
+		
             'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-            CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3.JobData', GlobalVariable.NumofColm, 
-                GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'jobposition')
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3.JobData', GlobalVariable.ColmNAP4, 
+                GlobalVariable.StatusFailed, GlobalVariable.FindDataFile(GlobalVariable.ColmNAP4, 2) + ';' +GlobalVariable.ReasonFailedDDL + 'jobposition')
 
             (GlobalVariable.FlagFailed)++
         }
@@ -570,9 +579,11 @@ def checkDDL(){
         'verify array dari db == option list confins job addr'
         if (WebUI.verifyOptionsPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/select_Select One Dinas  Family  KPR  Rented  Self - Owned'), 
             Ownership) == false) {
+			getDataFile()
+		
             'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-            CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3.JobData', GlobalVariable.NumofColm, 
-                GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'job addr ownership')
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3.JobData', GlobalVariable.ColmNAP4, 
+                GlobalVariable.StatusFailed, GlobalVariable.FindDataFile(GlobalVariable.ColmNAP4, 2) + ';' +GlobalVariable.ReasonFailedDDL + 'job addr ownership')
 
             GlobalVariable.FlagFailed = 1
         }
@@ -580,9 +591,11 @@ def checkDDL(){
         'verify array dari db == option list confins prev job addr'
         if (WebUI.verifyOptionsPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/select_OwnerShip PreviousJobAddress'), 
             Ownership) == false) {
+			getDataFile()
+		
             'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-            CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3.JobData', GlobalVariable.NumofColm, 
-                GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'prev job ownership')
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3.JobData', GlobalVariable.ColmNAP4, 
+                GlobalVariable.StatusFailed, GlobalVariable.FindDataFile(GlobalVariable.ColmNAP4, 2) + ';' +GlobalVariable.ReasonFailedDDL + 'prev job ownership')
 
             GlobalVariable.FlagFailed = 1
         }
@@ -590,11 +603,34 @@ def checkDDL(){
         'verify array dari db == option list confins othbiz'
         if (WebUI.verifyOptionsPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/select_Ownership OtherBusinessAddress'), 
             Ownership) == false) {
+			getDataFile()
+		
             'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-            CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3.JobData', GlobalVariable.NumofColm, 
-                GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedDDL + 'other biz ownership')
+            CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3.JobData', GlobalVariable.ColmNAP4, 
+                GlobalVariable.StatusFailed, GlobalVariable.FindDataFile(GlobalVariable.ColmNAP4, 2) + ';' +GlobalVariable.ReasonFailedDDL + 'other biz ownership')
 
             GlobalVariable.FlagFailed = 1
         }
     }
+}
+
+def getDataFile(){
+	if(GlobalVariable.APPSTEP == 'CUSTOMER'){
+		'get data file path'
+		GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileCustomerPersonal)
+		
+		'declare data file Global variable'
+		GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/JobData')
+	}else if(GlobalVariable.APPSTEP == 'FAMILY'){
+		'get data file path'
+		GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileFamilyPersonal)
+		
+		'declare data file Global variable'
+		GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/FamilyPersonal/JobData')
+	}else if(GlobalVariable.APPSTEP == 'GUARANTOR PERSONAL'){
+		'get data file path'
+		GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorPersonal)
+		
+		GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/JobData')
+	}
 }
