@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>/html/body/app-root/app-content-layout/div/app-app-view/div/div/div/div/div[2]/mat-tab-group/div/mat-tab-body[1]/div/app-view-app-cust-data-company/app-view-app-cust-data-completion-company/app-view-app-cust-detail/div[1]/button</value>
+         <value>//div[@class=&quot;modal-header&quot;]/button</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -17,6 +17,6 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>/html/body/app-root/app-content-layout/div/app-app-view/div/div/div/div/div[2]/mat-tab-group/div/mat-tab-body[1]/div/app-view-app-cust-data-company/app-view-app-cust-data-completion-company/app-view-app-cust-detail/div[1]/button</value>
+      <value>//div[@class=&quot;modal-header&quot;]/button</value>
    </webElementProperties>
 </WebElementEntity>

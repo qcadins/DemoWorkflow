@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/app-rule-files/lib-ucpaging/lib-ucgridview/div/table/tbody/tr/td[5]/span/span/span/a</value>
+         <value>//lib-ucgridview/div/table/tbody/tr[1]/td[5]/span/span/span/a[@class=&quot;success&quot;]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -17,6 +17,6 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/app-rule-files/lib-ucpaging/lib-ucgridview/div/table/tbody/tr/td[5]/span/span/span/a</value>
+      <value>//lib-ucgridview/div/table/tbody/tr[1]/td[5]/span/span/span/a[@class=&quot;success&quot;]</value>
    </webElementProperties>
 </WebElementEntity>

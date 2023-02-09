@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-inquiry-paging/lib-ucpaging/div/lib-ucgridfooter/div/div[2]/ngb-pagination/ul/li[2]</value>
+         <value>//ul[@class=&quot;pagination&quot;]/li[2]/a[@class=&quot;page-link ng-star-inserted&quot;]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -17,6 +17,6 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-inquiry-paging/lib-ucpaging/div/lib-ucgridfooter/div/div[2]/ngb-pagination/ul/li[2]</value>
+      <value>//ul[@class=&quot;pagination&quot;]/li[2]/a[@class=&quot;page-link ng-star-inserted&quot;]</value>
    </webElementProperties>
 </WebElementEntity>

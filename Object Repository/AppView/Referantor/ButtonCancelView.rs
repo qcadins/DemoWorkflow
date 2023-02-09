@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>/html/body/ngb-modal-window/div/div/app-tab-referantor-multi-detail/div[3]/button</value>
+         <value>//app-tab-referantor-multi-detail/div[@class=&quot;modal-footer&quot;]/button</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -17,6 +17,6 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>/html/body/ngb-modal-window/div/div/app-tab-referantor-multi-detail/div[3]/button</value>
+      <value>//app-tab-referantor-multi-detail/div[@class=&quot;modal-footer&quot;]/button</value>
    </webElementProperties>
 </WebElementEntity>
