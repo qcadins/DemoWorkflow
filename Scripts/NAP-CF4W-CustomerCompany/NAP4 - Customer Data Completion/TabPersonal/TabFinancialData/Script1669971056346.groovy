@@ -144,7 +144,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 	}
 	
 	if (financialDateDelete.size() > 0) {
-
+		getDataFile()
 		'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedDelete'
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('5.FinancialData', GlobalVariable.StartIndex, GlobalVariable.StatusWarning, GlobalVariable.FindDataFile.getValue(GlobalVariable.StartIndex, 2) + ';' + GlobalVariable.ReasonFailedDelete + financialDateDelete)
 
