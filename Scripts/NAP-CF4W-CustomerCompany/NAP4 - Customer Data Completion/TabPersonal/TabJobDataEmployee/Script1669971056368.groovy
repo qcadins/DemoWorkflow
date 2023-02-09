@@ -572,6 +572,8 @@ def checkDDL() {
         'verify array dari db == option list confins job addr'
         if (WebUI.verifyOptionsPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/select_Select One Dinas  Family  KPR  Rented  Self - Owned'), 
             Ownership) == false) {
+			getDataFile()
+		
             'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3.JobData', GlobalVariable.ColmNAP4, 
                 GlobalVariable.StatusFailed, GlobalVariable.FindDataFile(GlobalVariable.ColmNAP4, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'job addr ownership')
@@ -582,6 +584,9 @@ def checkDDL() {
         'verify array dari db == option list confins prev job addr'
         if (WebUI.verifyOptionsPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/select_OwnerShip PreviousJobAddress'), 
             Ownership) == false) {
+		
+			getDataFile()
+			
             'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3.JobData', GlobalVariable.ColmNAP4, 
                 GlobalVariable.StatusFailed, GlobalVariable.FindDataFile(GlobalVariable.ColmNAP4, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'prev job ownership')

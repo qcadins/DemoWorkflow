@@ -443,9 +443,26 @@ def verifyInputError(){
 		'click button back'
 		WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataProfessional/button_Back'))
 		
+		getDataFile()
+		
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusReasonLookup'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3.JobData', GlobalVariable.ColmNAP4, GlobalVariable.StatusFailed, GlobalVariable.StatusReasonLookup)
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3.JobData', GlobalVariable.ColmNAP4, GlobalVariable.StatusFailed, GlobalVariable.FindDataFile(GlobalVariable.ColmNAP4, 2) + ';' +GlobalVariable.StatusReasonLookup)
 		
 		GlobalVariable.FlagFailed = 1
+	}
+}
+
+def getDataFile(){
+	if(GlobalVariable.APPSTEP == 'SHAREHOLDER PERSONAL'){
+		'get data file path'
+		GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileManagementShareholderPersonal)
+		
+		'declare data file Global variable'
+		GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/JobData')
+	}else if(GlobalVariable.APPSTEP == 'GUARANTOR PERSONAL'){
+		'get data file path'
+		GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorPersonalCompany)
+		
+		GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/JobData')
 	}
 }
