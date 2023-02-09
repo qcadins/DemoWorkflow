@@ -39,12 +39,14 @@ String appNo = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-Customer
 ArrayList<String> addtCvgType, addtPremiRate, sumInsuredAmt, addtCvg, addtpremitype
 
 if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckRuleCompany=="Yes" && GlobalVariable.FirstTimeEntry == "Yes"){
-	'Ambil nilai asset region dari rule excel berdasarkan condition-condition'
-	String defaultAssetReg = CustomKeywords.'insuranceData.verifyAssetRegion.checkAssetRegionBasedOnRule'(sqlConnectionLOS, appNo, sqlConnectionFOU)
-	
-	'Verif default asset region based on rule'
-	if(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/select_AssetRegionMF'),'value'),defaultAssetReg, false)==false){
-		writeFailedReasonVerifyRule()
+	if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 22).length() > 0){
+		'Ambil nilai asset region dari rule excel berdasarkan condition-condition'
+		String defaultAssetReg = CustomKeywords.'insuranceData.verifyAssetRegion.checkAssetRegionBasedOnRule'(sqlConnectionLOS, appNo, sqlConnectionFOU)
+		
+		'Verif default asset region based on rule'
+		if(WebUI.verifyMatch(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/select_AssetRegionMF'),'value'),defaultAssetReg, false)==false){
+			writeFailedReasonVerifyRule()
+		}
 	}
 
 }

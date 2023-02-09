@@ -938,12 +938,6 @@ if(GlobalVariable.FlagFailed==0){
 	}
 }
 
-if (GlobalVariable.RoleCompany == 'Testing' && GlobalVariable.CheckVerifStoreDBCompany=="Yes") {
-	'call test case commission datastore db verif'
-	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionDataStoreDBVerif'),
-			[:], FailureHandling.CONTINUE_ON_FAILURE)
-	
-}
 
 'Pengecekan jika setelah klik save, dropdownlist allocation type masih bisa diklik/dipilih'
 if (WebUI.verifyElementPresent(findTestObject('NAP/CommissionReservedFund/TabCommissionData/select_AmountPercentage'),
@@ -958,6 +952,14 @@ if (WebUI.verifyElementPresent(findTestObject('NAP/CommissionReservedFund/TabCom
 		'Klik new consumer finance'
 		WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_Consumer Finance'))
 	}
+}else{
+	if (GlobalVariable.RoleCompany == 'Testing' && GlobalVariable.CheckVerifStoreDBCompany=="Yes") {
+		'call test case commission datastore db verif'
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionDataStoreDBVerif'),
+				[:], FailureHandling.CONTINUE_ON_FAILURE)
+		
+	}
+
 }
 	
 public checkVerifyEqualOrMatch(Boolean isMatch, String sheetname, int numofcolm){

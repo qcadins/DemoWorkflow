@@ -80,7 +80,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
 } else {
 
 	if(GlobalVariable.IsDataCancel == 1){
-		KeywordUtil.markFailedAndStop('Failed NAP1')
+		KeywordUtil.markFailedAndStop('Failed ComResFund')
 	}
 	
 	'Mengambil nilai row keberapa dimulai data return pada excel'
@@ -130,7 +130,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
 	}
 	
 	if(GlobalVariable.IsDataCancel == 1){
-		KeywordUtil.markFailedAndStop('Failed NAP1')
+		KeywordUtil.markFailedAndStop('Failed ComResFund')
 	}
 	
 	returnRowCom = returnRow

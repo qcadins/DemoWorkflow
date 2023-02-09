@@ -334,7 +334,7 @@ def inputaddress(int Address) {
 	
 	if (WebUI.verifyElementPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/AddressInformation/button_Cancel'),
 		GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
-		'click button c'
+		'click button cancel'
 		WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/AddressInformation/button_Cancel'))
 	}
     

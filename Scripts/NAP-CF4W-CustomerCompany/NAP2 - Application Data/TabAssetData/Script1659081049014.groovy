@@ -72,32 +72,8 @@ String office = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-Custome
 'click button supplier lookup'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Supplier Name_btn btn-raised btn-primary'))
 
-if (GlobalVariable.RoleCompany == 'Testing') {
-    'Ambil text supplier scheme dari db'
-    String suppschm = CustomKeywords.'assetData.checkSupplier.checkSupplierScheme'(sqlConnectionLOS, POName)
-
-    'click search button'
-    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Search Supplier'))
-
-    'Ambil nilai total count supplier data dari db'
-    Integer countSupplierData = CustomKeywords.'assetData.checkSupplier.countSupplierData'(sqlConnectionFOU, suppschm, office)
-
-    'Ambil nilai total data supplier pada lookup confins'
-    String[] textTotalDataSupplier = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/label_totalSupplier')).replace(
-        ' ', '').replace(':', ';').split(';')
-
-    'Parsing nilai total data supplier confins ke integer(angka)'
-    Integer totalDataSupplier = Integer.parseInt(textTotalDataSupplier[1])
-
-    'Verify total count data lookup supplier pada confins sama dengan db'
-    if (WebUI.verifyEqual(totalDataSupplier, countSupplierData) == false) {
-        'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDataLookup'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, 
-            GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDataLookup)
-
-        GlobalVariable.FlagFailed = 1
-    }
-}
+'call function check SupplierScheme'
+checkSupplierScheme(sqlConnectionLOS, sqlConnectionFOU, POName, office)
 
 'input supplier code'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_SupplierCode'), datafileTabAsset.getValue(
@@ -135,37 +111,8 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-App
     }
 }
 
-if (GlobalVariable.RoleCompany == 'Testing') {
-    ArrayList<String> adminHead
-
-    ArrayList<String> salesPerson
-
-    'Ambil array string admin head dari db'
-    adminHead = CustomKeywords.'assetData.checkSupplier.checkAdminHead'(sqlConnectionFOU, suppName)
-
-    'Ambil array string sales person dari db'
-    salesPerson = CustomKeywords.'assetData.checkSupplier.checkSalesPerson'(sqlConnectionFOU, suppName)
-
-    'Verify array sales person dari db sama dengan opsi dropdownlist sales person confins'
-    if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/select_SalesPerson'), 
-        salesPerson) == false) {
-        'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, 
-            GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'Sales Person')
-
-        GlobalVariable.FlagFailed = 1
-    }
-    
-    'Verify array admin head dari db sama dengan opsi dropdownlist admin head confins'
-    if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/select_AdminHead'), 
-        adminHead) == false) {
-        'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, 
-            GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'Admin Head')
-
-        GlobalVariable.FlagFailed = 1
-    }
-}
+'call function check ddl supplier info'
+checkDDLSupplierInfo(sqlConnectionFOU, suppName)
 
 'select sales person'
 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/select_SalesPerson'), 
@@ -180,30 +127,8 @@ if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 15).length() > 0) {
 'click button asset lookup'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Asset Name_btn btn-raised btn-primary'))
 
-if (GlobalVariable.RoleCompany == 'Testing') {
-    'click search button'
-    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Search Asset'))
-
-    'Ambil nilai total count asset data dari db'
-    Integer countAssetData = CustomKeywords.'assetData.checkAssetData.countAssetName'(sqlConnectionLOS, sqlConnectionFOU, 
-        POName)
-
-    'Ambil nilai total data asset pada lookup confins'
-    String[] textTotalDataAsset = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/label_totalSupplier')).replace(
-        ' ', '').replace(':', ';').split(';')
-
-    'Parsing nilai total data Asset confins ke integer(angka)'
-    Integer totalDataAsset = Integer.parseInt(textTotalDataAsset[1])
-
-    'Verify total count data lookup asset pada confins sama dengan db'
-    if (WebUI.verifyEqual(totalDataAsset, countAssetData) == false) {
-        'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDataLookup'
-        CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, 
-            GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDataLookup)
-
-        GlobalVariable.FlagFailed = 1
-    }
-}
+'call function check lookup asset'
+checkLookupAsset(sqlConnectionLOS, sqlConnectionFOU, POName)
 
 'input asset name'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_FullAssetCode'), datafileTabAsset.getValue(
@@ -216,57 +141,8 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAss
 CustomKeywords.'customizeKeyword.function.verifyInputLookup'(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData'), 
     '7.TabAssetData', GlobalVariable.NumofColm)
 
-if (GlobalVariable.RoleCompany == 'Testing') {
-	'Ambil array string (text) asset usage dari db'
-	ArrayList<String> assetUsage = CustomKeywords.'assetData.checkAssetData.checkAssetUsageDDL'(sqlConnectionFOU)
-	
-	'Ambil array string (text) asset condition dari db'
-	ArrayList<String> assetCondition = CustomKeywords.'assetData.checkAssetData.checkAssetConditionDDL'(sqlConnectionFOU)
-
-	'Ambil nilai jumlah option/pilihan asset usage dari confins'
-	Integer totalAssetUsage = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/select_-Select One- Commercial  Non Commercial'))
-	
-	'Ambil nilai jumlah option/pilihan asset Condition dari confins'
-	Integer totalAssetCondition = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/select_Asset ConditionNew Used'))
-	
-	'Verif jumlah asset usage yang muncul pada confins sesuai dengan jumlah asset usage pada db'
-	if (WebUI.verifyEqual(totalAssetUsage - 1, assetUsage.size()) == false) {
-		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm,
-			GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'Jumlah Asset Usage')
-
-		GlobalVariable.FlagFailed = 1
-	}
-	
-	'Verif jumlah asset condition yang muncul pada confins sesuai dengan jumlah asset usage pada db'
-	if (WebUI.verifyEqual(totalAssetCondition, assetCondition.size()) == false) {
-		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm,
-			GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'Jumlah Asset Condition')
-
-		GlobalVariable.FlagFailed = 1
-	}
-	
-	'Verif dropdownlist asset usage yang muncul pada confins sesuai dengan array string asset usage dari db'
-	if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/select_-Select One- Commercial  Non Commercial'),
-		assetUsage) == false) {
-		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm,
-			GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'Value Asset Usage')
-
-		GlobalVariable.FlagFailed = 1
-	}
-		
-	'Verif dropdownlist asset condition yang muncul pada confins sesuai dengan array string asset condition dari db'
-	if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/select_Asset ConditionNew Used'),
-			assetCondition) == false) {
-		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm,
-				GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'value Asset condition')
-		
-		GlobalVariable.FlagFailed = 1
-	}
-}
+'call function check asset info dll'
+checkDDLAssetInfo(sqlConnectionFOU)
 
 'select asset condition'
 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/select_Asset ConditionNew Used'), 
@@ -1087,4 +963,148 @@ def getDataOwner() {
 			'value'))
 	
 	GlobalVariable.Confinsdata = confinsdata
+}
+
+def checkDDLSupplierInfo(Sql sqlConnectionFOU, String suppName){
+	if (GlobalVariable.RoleCompany == 'Testing') {
+		ArrayList<String> adminHead
+	
+		ArrayList<String> salesPerson
+	
+		'Ambil array string admin head dari db'
+		adminHead = CustomKeywords.'assetData.checkSupplier.checkAdminHead'(sqlConnectionFOU, suppName)
+	
+		'Ambil array string sales person dari db'
+		salesPerson = CustomKeywords.'assetData.checkSupplier.checkSalesPerson'(sqlConnectionFOU, suppName)
+	
+		'Verify array sales person dari db sama dengan opsi dropdownlist sales person confins'
+		if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/select_SalesPerson'),
+			salesPerson) == false) {
+			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm,
+				GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'Sales Person')
+	
+			GlobalVariable.FlagFailed = 1
+		}
+		
+		'Verify array admin head dari db sama dengan opsi dropdownlist admin head confins'
+		if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/select_AdminHead'),
+			adminHead) == false) {
+			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm,
+				GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'Admin Head')
+	
+			GlobalVariable.FlagFailed = 1
+		}
+	}
+}
+
+def checkSupplierScheme(Sql sqlConnectionLOS, Sql sqlConnectionFOU, String POName, String office){
+	if (GlobalVariable.RoleCompany == 'Testing') {
+		'Ambil text supplier scheme dari db'
+		String suppschm = CustomKeywords.'assetData.checkSupplier.checkSupplierScheme'(sqlConnectionLOS, POName)
+	
+		'click search button'
+		WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Search Supplier'))
+	
+		'Ambil nilai total count supplier data dari db'
+		Integer countSupplierData = CustomKeywords.'assetData.checkSupplier.countSupplierData'(sqlConnectionFOU, suppschm, office)
+	
+		'Ambil nilai total data supplier pada lookup confins'
+		String[] textTotalDataSupplier = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/label_totalSupplier')).replace(
+			' ', '').replace(':', ';').split(';')
+	
+		'Parsing nilai total data supplier confins ke integer(angka)'
+		Integer totalDataSupplier = Integer.parseInt(textTotalDataSupplier[1])
+	
+		'Verify total count data lookup supplier pada confins sama dengan db'
+		if (WebUI.verifyEqual(totalDataSupplier, countSupplierData) == false) {
+			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDataLookup'
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm,
+				GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDataLookup)
+	
+			GlobalVariable.FlagFailed = 1
+		}
+	}
+}
+
+def checkLookupAsset(Sql sqlConnectionLOS, Sql sqlConnectionFOU, String POName){
+	if (GlobalVariable.RoleCompany == 'Testing') {
+		'click search button'
+		WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Search Asset'))
+	
+		'Ambil nilai total count asset data dari db'
+		Integer countAssetData = CustomKeywords.'assetData.checkAssetData.countAssetName'(sqlConnectionLOS, sqlConnectionFOU,
+			POName)
+	
+		'Ambil nilai total data asset pada lookup confins'
+		String[] textTotalDataAsset = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/label_totalSupplier')).replace(
+			' ', '').replace(':', ';').split(';')
+	
+		'Parsing nilai total data Asset confins ke integer(angka)'
+		Integer totalDataAsset = Integer.parseInt(textTotalDataAsset[1])
+	
+		'Verify total count data lookup asset pada confins sama dengan db'
+		if (WebUI.verifyEqual(totalDataAsset, countAssetData) == false) {
+			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDataLookup'
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm,
+				GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDataLookup)
+	
+			GlobalVariable.FlagFailed = 1
+		}
+	}
+}
+
+def checkDDLAssetInfo(Sql sqlConnectionFOU){
+	if(GlobalVariable.RoleCompany == 'Testing'){
+		'Ambil array string (text) asset usage dari db'
+		ArrayList<String> assetUsage = CustomKeywords.'assetData.checkAssetData.checkAssetUsageDDL'(sqlConnectionFOU)
+		
+		'Ambil array string (text) asset condition dari db'
+		ArrayList<String> assetCondition = CustomKeywords.'assetData.checkAssetData.checkAssetConditionDDL'(sqlConnectionFOU)
+	
+		'Ambil nilai jumlah option/pilihan asset usage dari confins'
+		Integer totalAssetUsage = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/select_-Select One- Commercial  Non Commercial'))
+		
+		'Ambil nilai jumlah option/pilihan asset Condition dari confins'
+		Integer totalAssetCondition = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/select_Asset ConditionNew Used'))
+		
+		'Verif jumlah asset usage yang muncul pada confins sesuai dengan jumlah asset usage pada db'
+		if (WebUI.verifyEqual(totalAssetUsage - 1, assetUsage.size()) == false) {
+			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm,
+				GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'Jumlah Asset Usage')
+	
+			GlobalVariable.FlagFailed = 1
+		}
+		
+		'Verif jumlah asset condition yang muncul pada confins sesuai dengan jumlah asset usage pada db'
+		if (WebUI.verifyEqual(totalAssetCondition, assetCondition.size()) == false) {
+			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm,
+				GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'Jumlah Asset Condition')
+	
+			GlobalVariable.FlagFailed = 1
+		}
+		
+		'Verif dropdownlist asset usage yang muncul pada confins sesuai dengan array string asset usage dari db'
+		if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/select_-Select One- Commercial  Non Commercial'),
+			assetUsage) == false) {
+			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm,
+				GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'Value Asset Usage')
+	
+			GlobalVariable.FlagFailed = 1
+		}
+			
+		'Verif dropdownlist asset condition yang muncul pada confins sesuai dengan array string asset condition dari db'
+		if (WebUI.verifyOptionsPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/select_Asset ConditionNew Used'),
+				assetCondition) == false) {
+			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm,
+					GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'value Asset condition')
+			
+			GlobalVariable.FlagFailed = 1
+		}
+	}
 }
