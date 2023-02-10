@@ -32,7 +32,7 @@ GlobalVariable.FlagFailed = 0
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
 
 'Klik tab asset'
-WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/buttonTabAsset'))
+WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/buttonTabAsset'))
 
 Sql sqlConnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 

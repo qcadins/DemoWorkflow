@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>buttonTabInsurance</name>
+   <tag></tag>
+   <elementGuidId>fe4f0bc2-626d-4f37-9158-fd364d77ba70</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;stepperCompany&quot;]/div[1]/div[7]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;stepperCompany&quot;]/div[1]/div[7]</value>
+   </webElementProperties>
+</WebElementEntity>
