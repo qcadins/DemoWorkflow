@@ -6,11 +6,15 @@
    <elementGuidId>37aa49be-dba7-4fb2-b1de-dae1bcffdebc</elementGuidId>
    <selectorCollection>
       <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;ListAllocatedAC_BR_YAN&quot;]/div/div/div[2]/div[3]/div/div[2]/input</value>
+      </entry>
+      <entry>
          <key>XPATH</key>
          <value>(//input[@type='text'])[38]</value>
       </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -34,18 +38,18 @@
       <value>AllocationPercentage</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>type</name>
       <type>Main</type>
       <value>text</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>false</isSelected>
+      <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>id(&quot;formInformationReferantor&quot;)/div[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;ng-untouched ng-pristine ng-valid&quot;]/div[2]/div[@id=&quot;ListAllocatedAGENCY_MRA_GROSS_1&quot;]/div[@class=&quot;form-group&quot;]/div[@class=&quot;row&quot;]/div[@class=&quot;col-md-6&quot;]/div[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;form-group row ng-untouched ng-pristine ng-valid ng-star-inserted&quot;]/div[@class=&quot;col-md-3&quot;]/input[@class=&quot;form-control adInsInput text-right ng-untouched ng-pristine ng-valid ng-star-inserted&quot;]</value>
+      <value>//*[@id=&quot;ListAllocatedAC_BR_YAN&quot;]/div/div/div[2]/div[3]/div/div[2]/input</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>id(&quot;formInformationSupplierEmployee&quot;)/div[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;ng-untouched ng-pristine ng-valid&quot;]/div[3]/div[@class=&quot;form-group row&quot;]/div[@class=&quot;col-md-4&quot;]/select[@class=&quot;form-control full-width adInsInput ng-untouched ng-pristine ng-valid&quot;]</value>
+         <value>//*[@id=&quot;formInformationSupplierEmployee&quot;]/div[2]/div/div[3]/div[1]/div[2]/select</value>
       </entry>
       <entry>
          <key>XPATH</key>
@@ -49,7 +49,7 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>id(&quot;formInformationSupplierEmployee&quot;)/div[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;ng-untouched ng-pristine ng-valid&quot;]/div[3]/div[@class=&quot;form-group row&quot;]/div[@class=&quot;col-md-4&quot;]/select[@class=&quot;form-control full-width adInsInput ng-untouched ng-pristine ng-valid&quot;]</value>
+      <value>//*[@id=&quot;formInformationSupplierEmployee&quot;]/div[2]/div/div[3]/div[1]/div[2]/select</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

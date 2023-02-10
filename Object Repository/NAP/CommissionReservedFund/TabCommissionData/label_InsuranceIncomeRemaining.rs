@@ -6,11 +6,15 @@
    <elementGuidId>020af656-4b25-444a-afa7-85410b35208d</elementGuidId>
    <selectorCollection>
       <entry>
+         <key>BASIC</key>
+         <value>//div[@id='viewRemainIncomeInfo']/div[2]/div/div[2]/label</value>
+      </entry>
+      <entry>
          <key>XPATH</key>
          <value>//div[@id='viewRemainIncomeInfo']/div[2]/div/div[2]/label</value>
       </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -27,18 +31,18 @@
       <value>label-control ng-star-inserted</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>text</name>
       <type>Main</type>
       <value> 0.00 </value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>false</isSelected>
+      <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>id(&quot;viewRemainIncomeInfo&quot;)/div[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;row&quot;]/div[@class=&quot;col-md-6 form-inline-right&quot;]/label[@class=&quot;label-control ng-star-inserted&quot;]</value>
+      <value>//div[@id='viewRemainIncomeInfo']/div[2]/div/div[2]/label</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

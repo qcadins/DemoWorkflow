@@ -6,11 +6,15 @@
    <elementGuidId>821f63cd-72b3-49c4-8cbe-3e121ec12a72</elementGuidId>
    <selectorCollection>
       <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;ListAllocatedSUPPLIER_MRA_EMP01&quot;]/div/div/div[1]/div[3]/div/div[2]/input</value>
+      </entry>
+      <entry>
          <key>XPATH</key>
          <value>(//input[@type=''])[6]</value>
       </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -38,7 +42,7 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>id(&quot;ListAllocatedFT ADMIN HEAD1&quot;)/div[@class=&quot;form-group&quot;]/div[@class=&quot;row&quot;]/div[@class=&quot;col-md-6&quot;]/div[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;form-group row ng-pristine ng-valid ng-star-inserted ng-touched&quot;]/div[@class=&quot;col-md-3&quot;]/input[@class=&quot;form-control adInsInput text-right ng-pristine ng-star-inserted ng-valid ng-touched&quot;]</value>
+      <value>//*[@id=&quot;ListAllocatedSUPPLIER_MRA_EMP01&quot;]/div/div/div[1]/div[3]/div/div[2]/input</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>id(&quot;formInformationReferantor&quot;)/div[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;ng-untouched ng-pristine ng-valid&quot;]/div[@class=&quot;form-group row&quot;]/div[@class=&quot;col-md-4&quot;]/div[@class=&quot;row&quot;]/div[@class=&quot;col-md-10&quot;]/label[@class=&quot;adInsLabel ng-star-inserted&quot;]</value>
+         <value>//*[@id=&quot;formInformationReferantor&quot;]/div[2]/div/div[1]/div[2]/div/div[1]/label</value>
       </entry>
       <entry>
          <key>XPATH</key>
@@ -42,7 +42,7 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>id(&quot;formInformationReferantor&quot;)/div[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;ng-untouched ng-pristine ng-valid&quot;]/div[@class=&quot;form-group row&quot;]/div[@class=&quot;col-md-4&quot;]/div[@class=&quot;row&quot;]/div[@class=&quot;col-md-10&quot;]/label[@class=&quot;adInsLabel ng-star-inserted&quot;]</value>
+      <value>//*[@id=&quot;formInformationReferantor&quot;]/div[2]/div/div[1]/div[2]/div/div[1]/label</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

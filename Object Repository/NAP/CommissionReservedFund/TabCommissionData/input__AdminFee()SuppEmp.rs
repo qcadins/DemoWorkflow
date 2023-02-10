@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>id(&quot;ListAllocatedFT ADMIN HEAD1&quot;)/div[@class=&quot;form-group&quot;]/div[@class=&quot;row&quot;]/div[@class=&quot;col-md-6&quot;]/div[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;form-group row ng-pristine ng-valid ng-star-inserted ng-touched&quot;]/div[@class=&quot;col-md-3&quot;]/input[@class=&quot;form-control adInsInput text-right ng-pristine ng-star-inserted ng-valid ng-touched&quot;][count(. | //input[@formcontrolname = 'AllocationPercentage']) = count(//input[@formcontrolname = 'AllocationPercentage'])]</value>
+         <value>//*[@id=&quot;ListAllocatedSUPPLIER_MRA_EMP01&quot;]/div/div/div[1]/div[1]/div/div[2]/input</value>
       </entry>
       <entry>
          <key>XPATH</key>
@@ -17,7 +17,7 @@
    <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>tag</name>
       <type>Main</type>
@@ -31,7 +31,7 @@
       <value>form-control adInsInput text-right ng-pristine ng-star-inserted ng-valid ng-touched</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>formcontrolname</name>
       <type>Main</type>
@@ -42,7 +42,7 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>id(&quot;ListAllocatedFT ADMIN HEAD1&quot;)/div[@class=&quot;form-group&quot;]/div[@class=&quot;row&quot;]/div[@class=&quot;col-md-6&quot;]/div[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;form-group row ng-pristine ng-valid ng-star-inserted ng-touched&quot;]/div[@class=&quot;col-md-3&quot;]/input[@class=&quot;form-control adInsInput text-right ng-pristine ng-star-inserted ng-valid ng-touched&quot;]</value>
+      <value>//*[@id=&quot;ListAllocatedSUPPLIER_MRA_EMP01&quot;]/div/div/div[1]/div[1]/div/div[2]/input</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

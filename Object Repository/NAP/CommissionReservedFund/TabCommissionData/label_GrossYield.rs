@@ -6,11 +6,15 @@
    <elementGuidId>3389b9a0-70ef-471a-ac2c-b686827ef502</elementGuidId>
    <selectorCollection>
       <entry>
+         <key>BASIC</key>
+         <value>//div[@id='viewSummary']/div/div[7]/div[2]/label</value>
+      </entry>
+      <entry>
          <key>XPATH</key>
          <value>//div[@id='viewSummary']/div/div[7]/div[2]/label</value>
       </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -27,18 +31,18 @@
       <value>ng-star-inserted</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>text</name>
       <type>Main</type>
       <value> 0.000000%</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>false</isSelected>
+      <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>id(&quot;viewSummary&quot;)/div[@class=&quot;col-md-12&quot;]/div[@class=&quot;row&quot;]/div[@class=&quot;col-md-3&quot;]/label[@class=&quot;ng-star-inserted&quot;]</value>
+      <value>//div[@id='viewSummary']/div/div[7]/div[2]/label</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

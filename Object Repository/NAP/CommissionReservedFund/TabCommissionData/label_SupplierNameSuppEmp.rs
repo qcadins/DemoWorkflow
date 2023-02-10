@@ -9,8 +9,12 @@
          <key>XPATH</key>
          <value>//div[@id='formInformationSupplierEmployee']/div[2]/div/div[2]/div[4]/label</value>
       </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//div[@id='formInformationSupplierEmployee']/div[2]/div/div[2]/div[4]/label</value>
+      </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -27,18 +31,18 @@
       <value>adInsLabel</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>text</name>
       <type>Main</type>
       <value> FT SUPPLIER BARU </value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>false</isSelected>
+      <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>id(&quot;formInformationSupplierEmployee&quot;)/div[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;ng-pristine ng-valid ng-touched&quot;]/div[@class=&quot;form-group row ng-star-inserted&quot;]/div[@class=&quot;col-md-4&quot;]/label[@class=&quot;adInsLabel&quot;]</value>
+      <value>//div[@id='formInformationSupplierEmployee']/div[2]/div/div[2]/div[4]/label</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

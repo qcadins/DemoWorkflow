@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>id(&quot;ListAllocated0002SB20211203141&quot;)/div[@class=&quot;form-group&quot;]/div[@class=&quot;row&quot;]/div[@class=&quot;col-md-6&quot;]/div[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;form-group row ng-untouched ng-pristine ng-valid ng-star-inserted&quot;]/label[@class=&quot;col-md-4 adInsLabel&quot;]</value>
+         <value>//div[@id='ListAllocated0002SB20211203141']/div/div/div/div/div/label</value>
       </entry>
       <entry>
          <key>XPATH</key>
@@ -42,7 +42,7 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>id(&quot;ListAllocated0002SB20211203141&quot;)/div[@class=&quot;form-group&quot;]/div[@class=&quot;row&quot;]/div[@class=&quot;col-md-6&quot;]/div[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;form-group row ng-untouched ng-pristine ng-valid ng-star-inserted&quot;]/label[@class=&quot;col-md-4 adInsLabel&quot;]</value>
+      <value>//div[@id='ListAllocated0002SB20211203141']/div/div/div/div/div/label</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

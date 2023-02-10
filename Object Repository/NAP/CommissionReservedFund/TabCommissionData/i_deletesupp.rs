@@ -7,14 +7,14 @@
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>id(&quot;formInformationSupplier&quot;)/div[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;ng-pristine ng-valid ng-touched&quot;]/div[@class=&quot;form-group row&quot;]/div[@class=&quot;col-md-4&quot;]/div[@class=&quot;row&quot;]/div[@class=&quot;col-md-2&quot;]/button[@class=&quot;btn btn-raised&quot;]/i[@class=&quot;ft-trash-2 font-medium-2&quot;]</value>
+         <value>//div[@id='formInformationSupplier']/div[2]/div/div/div[2]/div/div[2]/button/i</value>
       </entry>
       <entry>
          <key>XPATH</key>
          <value>//div[@id='formInformationSupplier']/div[2]/div/div/div[2]/div/div[2]/button/i</value>
       </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -35,7 +35,7 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>id(&quot;formInformationSupplier&quot;)/div[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;ng-pristine ng-valid ng-touched&quot;]/div[@class=&quot;form-group row&quot;]/div[@class=&quot;col-md-4&quot;]/div[@class=&quot;row&quot;]/div[@class=&quot;col-md-2&quot;]/button[@class=&quot;btn btn-raised&quot;]/i[@class=&quot;ft-trash-2 font-medium-2&quot;]</value>
+      <value>//div[@id='formInformationSupplier']/div[2]/div/div/div[2]/div/div[2]/button/i</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

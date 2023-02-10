@@ -6,11 +6,15 @@
    <elementGuidId>eff9b300-5a17-46e5-9c5f-4517480b41a3</elementGuidId>
    <selectorCollection>
       <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;ListAllocatedSUPPLIER_MRA_EMP01&quot;]/div/div/div[1]/div[3]/div/div[1]/input</value>
+      </entry>
+      <entry>
          <key>XPATH</key>
          <value>(//input[@type='text'])[10]</value>
       </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -41,18 +45,18 @@
       <value>FormObj.controls.arr['controls'][i].controls.ListAllocated.controls[idx].controls.MaxAllocationAmount.value</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>type</name>
       <type>Main</type>
       <value>text</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>false</isSelected>
+      <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>id(&quot;ListAllocatedFT ADMIN HEAD1&quot;)/div[@class=&quot;form-group&quot;]/div[@class=&quot;row&quot;]/div[@class=&quot;col-md-6&quot;]/div[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;form-group row ng-untouched ng-pristine ng-valid ng-star-inserted&quot;]/div[@class=&quot;col-md-4&quot;]/input[@class=&quot;form-control adInsInput text-right ng-untouched ng-pristine ng-star-inserted&quot;]</value>
+      <value>//*[@id=&quot;ListAllocatedSUPPLIER_MRA_EMP01&quot;]/div/div/div[1]/div[3]/div/div[1]/input</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

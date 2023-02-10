@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>//*[@type = 'text']</value>
+         <value>//*[@id=&quot;ListAllocated0002SB20211103134&quot;]/div/div/div[2]/div[4]/div/div[1]/input</value>
       </entry>
       <entry>
          <key>XPATH</key>
@@ -38,18 +38,18 @@
       <value>AllocationAmount</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>type</name>
       <type>Main</type>
       <value>text</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>false</isSelected>
+      <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>id(&quot;ListAllocated0002SB20211203142&quot;)/div[@class=&quot;form-group&quot;]/div[@class=&quot;row&quot;]/div[@class=&quot;col-md-6&quot;]/div[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;form-group row ng-untouched ng-pristine ng-valid ng-star-inserted&quot;]/div[@class=&quot;col-md-4&quot;]/input[@class=&quot;form-control adInsInput text-right ng-untouched ng-pristine ng-valid ng-star-inserted&quot;]</value>
+      <value>//*[@id=&quot;ListAllocated0002SB20211103134&quot;]/div/div/div[2]/div[4]/div/div[1]/input</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
