@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>XPATH</key>
-         <value>(//input[@type='text'])[3]</value>
+         <value>//div[@id=&quot;CustMainData&quot;]/div[2]/div[1]/div/div/input[@formcontrolname=&quot;TaxIdNo&quot;]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>
