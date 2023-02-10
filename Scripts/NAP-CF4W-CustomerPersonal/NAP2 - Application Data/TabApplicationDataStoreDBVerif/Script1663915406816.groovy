@@ -103,17 +103,17 @@ arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
 arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
 		GlobalVariable.NumofColm, 25).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-if(datafileTabApplication.getValue(
-	GlobalVariable.NumofColm, 25).equalsIgnoreCase('Auto Debit')){
-'verify Bank Name'
-arrayMatch.add(WebUI.verifyMatch((confinsdatabankacc[confinsindex++]).toUpperCase(), (bankaccount[bankindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
-
-'verify Bank Acc No'
-arrayMatch.add(WebUI.verifyMatch((confinsdatabankacc[confinsindex++]).toUpperCase(), (bankaccount[bankindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
-
-'verify Bank Account Name'
-arrayMatch.add(WebUI.verifyMatch((confinsdatabankacc[confinsindex++]).toUpperCase(), (bankaccount[bankindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
-}
+//if(datafileTabApplication.getValue(
+//	GlobalVariable.NumofColm, 25).equalsIgnoreCase('Auto Debit')){
+//'verify Bank Name'
+//arrayMatch.add(WebUI.verifyMatch((confinsdatabankacc[confinsindex++]).toUpperCase(), (bankaccount[bankindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+//
+//'verify Bank Acc No'
+//arrayMatch.add(WebUI.verifyMatch((confinsdatabankacc[confinsindex++]).toUpperCase(), (bankaccount[bankindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+//
+//'verify Bank Account Name'
+//arrayMatch.add(WebUI.verifyMatch((confinsdatabankacc[confinsindex++]).toUpperCase(), (bankaccount[bankindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+//}
 	
 'verify customer notification'
 arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(

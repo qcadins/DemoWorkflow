@@ -514,7 +514,7 @@ if (datafileTabFinancial.getValue(GlobalVariable.NumofColm, 20) == 'No') {
 		}
 			
 		'get ratetype ddl value from db'
-		ArrayList<String> ratetype = CustomKeywords.'financialData.verifyFee.checkProvisionFeeDDL'(sqlConnectionFOU)
+		ArrayList<String> ratetype = CustomKeywords.'financialData.verifyFee.checkRateTypeDDL'(sqlConnectionFOU)
 				
 				'get total label from ddl ratetype'
 				int totalddlratetype = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData/select_RateType'))

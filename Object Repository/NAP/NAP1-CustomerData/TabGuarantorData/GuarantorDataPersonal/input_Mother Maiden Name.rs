@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>XPATH</key>
-         <value>(//input[@type='text'])[6]</value>
+         <value>//input[@formcontrolname='MotherMaidenName']</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

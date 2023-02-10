@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>XPATH</key>
-         <value>(//input[@type='text'])[7]</value>
+         <value>//input[@formcontrolname='MobilePhnNo1']</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>
