@@ -107,7 +107,7 @@ if (datafileTabLifeInsurance.getValue(GlobalVariable.NumofColm, 12) == 'YES') {
 		}
 		
 		'get paymentmethod ddl value from db'
-		ArrayList<String> paymentmethod = CustomKeywords.'insuranceData.checkInsRateBase.checkDDLPremiumPaymentMethod'(sqlConnectionFOU)
+		ArrayList<String> paymentmethod = CustomKeywords.'lifeInsuranceData.checkLifeInscoBranch.checkDDLPremiumPaymentMethod'(sqlConnectionFOU)
 		
 		'get total label from ddl paymentmethod'
 		int totalddlpaymentmethod = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabLifeInsuranceData/select_PremiumPaymentMethod'))
