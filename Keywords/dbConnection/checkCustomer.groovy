@@ -141,7 +141,7 @@ public class checkCustomer {
 	public checkNationality(Sql instance){
 		String value
 		ArrayList<String> listValue = new ArrayList<>()
-		instance.eachRow(("SELECT DESCR FROM FOUNDATION.dbo.REF_MASTER WHERE REF_MASTER_TYPE_CODE = 'NATIONALITY' AND IS_ACTIVE = '1'"), { def row ->
+		instance.eachRow(("SELECT UPPER(DESCR) FROM FOUNDATION.dbo.REF_MASTER WHERE REF_MASTER_TYPE_CODE = 'NATIONALITY' AND IS_ACTIVE = '1'"), { def row ->
 			value = (row[0])
 			listValue.add(value)
 		})
