@@ -45,10 +45,10 @@ public class checkLifeInscoBranch {
 
 		return countData
 	}
-	
+
 	//untuk cek db life insco branch name yang akan muncul pada dropdownlist confins
 	@Keyword
-	public checkDDLPremiumPaymentMethod(Sql instance, String officeName){
+	public checkDDLPremiumPaymentMethod(Sql instance){
 		ArrayList<String> lifeInscoBranch = new ArrayList<String>()
 
 		instance.eachRow(("SELECT UPPER(DESCR) FROM REF_MASTER WHERE REF_MASTER_TYPE_CODE = 'LIFE_INS_PAY_METHOD' and IS_ACTIVE = 1"), { def row ->
