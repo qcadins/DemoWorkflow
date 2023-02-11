@@ -29,6 +29,9 @@ Sql sqlConnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 GlobalVariable.FlagFailed = 0
 
+'Arraylist untuk menampung total amount dari allocate rsv (upping rate, admin fee, dsb)'
+ArrayList<Double> TotalAllocateRsvAmt = new ArrayList<Double>()
+
 'declare datafileReservedFund'
 datafileReservedFund = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabReservedFundData')
 
@@ -53,6 +56,7 @@ if(GlobalVariable.Role=="Testing"){
 	
 	'Looping income info'
 	for (int i = 1; i < countIncomeInfo; i++) {
+		TotalAllocateRsvAmt.add(0.00)
 		
 		'modify remaining info amt'
 		modifyRemainingInfoAmt = WebUI.modifyObjectProperty(findTestObject('NAP/CommissionReservedFund/TabReservedFundData/label_RemainingInfoAmt'),
@@ -135,6 +139,8 @@ for(int i = 0;i<allocFrom.size();i++){
 	'declare remaininginfoamt'
 	BigDecimal remainingInfoAmt
 	
+	Integer Allocindex
+	
 	'Looping remaining info'
 	for(int j =1;j<=countRemainingInfoBfrCalculate;j++){
 		
@@ -154,6 +160,9 @@ for(int i = 0;i<allocFrom.size();i++){
 			
 			'parsing double remaining info amt'
 			remainingInfoAmt = Double.parseDouble(textRemainingInfoAmt)
+			
+			Allocindex = j
+			
 			break
 		}
 	}
@@ -218,6 +227,8 @@ for(int i = 0;i<allocFrom.size();i++){
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(GlobalVariable.DataFilePath, '14.TabReservedFundData',
 			rsvAmtRow+i-1, GlobalVariable.NumofColm-1, Integer.parseInt(inputAllocAmt))
 	}
+	inputAllocAmt = WebUI.getAttribute(inputAlloc, 'value')
+	TotalAllocateRsvAmt.set(Allocindex - 1, Double.parseDouble(inputAllocAmt.replace(",","")))
 	
 //	if(GlobalVariable.Role=="Testing"){
 //		'get attribute dari inputalloc pada confins'
@@ -307,8 +318,8 @@ if(GlobalVariable.Role=="Testing"){
 		'Ambil nilai remaining info amount'
 		String textRemainingInfoAmtAftCal = WebUI.getText(modifyRemainingInfoAmtAftCal).replace(',', '')
 	
-		'verifikasi setelah calculate di tab reserve fund, nilai remaining info tidak berubah (masih sesuai setelah save dari tab commission)'
-		checkVerifyEqualOrMatch(WebUI.verifyMatch(textRemainingInfoAmtAftCal, remainingInfoRsv[(i - 1)], false), '14.TabReservedFundData',
+		'verifikasi setelah calculate di tab reserve fund, nilai remaining info berubah mengikuti nilai yang dibagikan di rsv'
+		checkVerifyEqualOrMatch(WebUI.verifyEqual(Double.parseDouble(textRemainingInfoAmtAftCal), Double.parseDouble(remainingInfoRsv[(i - 1)])-TotalAllocateRsvAmt[(i-1)]), '14.TabReservedFundData',
 			GlobalVariable.NumofColm)
 		
 	}
