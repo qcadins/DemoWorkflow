@@ -30,7 +30,7 @@ public class taxCalculation {
 		})
 		return value
 	}
-	
+
 	//keyword check tax rate company
 	@Keyword
 	public checkTaxRateCompany(Sql instance){
@@ -160,30 +160,30 @@ public class taxCalculation {
 		taxAmount.add(vatAmount)
 		return taxAmount
 	}
-	
-	@Keyword 
+
+	@Keyword
 	public checkWHTthisYear(Sql instance, Sql instanceFOU, String subject, String oriOfficeName, String subjectName){
-				
-//		String TAXPAYERNO, TAXPAYERID
-//		if(subject.equalsIgnoreCase("Supplier")){
-//			instanceFOU.eachRow(("SELECT TAXPAYER_NO FROM VENDOR WHERE MR_VENDOR_CATEGORY_CODE = 'SUPPLIER' AND VENDOR_NAME = '"+subjectName+"'"), { def row ->
-//				TAXPAYERNO = (row[0])
-//			})
-//		}
-//		else if(subject.equalsIgnoreCase("SupplierEmployee")){
-//			instanceFOU.eachRow(("SELECT TAXPAYER_NO FROM VENDOR_EMP WHERE VENDOR_EMP_NAME = '"+subjectName+"'"), { def row ->
-//				TAXPAYERNO = (row[0])
-//			})
-//		}
-//		else if(subject.equalsIgnoreCase("Referantor")){
-//			instanceFOU.eachRow(("select TAXPAYER_NO FROM LOS.dbo.APP_REFERANTOR WHERE REFERANTOR_NAME = '"+subjectName+"'"), { def row ->
-//				TAXPAYERNO = (row[0])
-//			})
-//		}
-//		
-//		instance.eachRow(("select TAXPAYER_ID FROM TAXPAYER WHERE TAXPAYER_NO = '"+TAXPAYERNO+"'"), { def row ->
-//			TAXPAYERID = (row[0])
-//		})
+
+		//		String TAXPAYERNO, TAXPAYERID
+		//		if(subject.equalsIgnoreCase("Supplier")){
+		//			instanceFOU.eachRow(("SELECT TAXPAYER_NO FROM VENDOR WHERE MR_VENDOR_CATEGORY_CODE = 'SUPPLIER' AND VENDOR_NAME = '"+subjectName+"'"), { def row ->
+		//				TAXPAYERNO = (row[0])
+		//			})
+		//		}
+		//		else if(subject.equalsIgnoreCase("SupplierEmployee")){
+		//			instanceFOU.eachRow(("SELECT TAXPAYER_NO FROM VENDOR_EMP WHERE VENDOR_EMP_NAME = '"+subjectName+"'"), { def row ->
+		//				TAXPAYERNO = (row[0])
+		//			})
+		//		}
+		//		else if(subject.equalsIgnoreCase("Referantor")){
+		//			instanceFOU.eachRow(("select TAXPAYER_NO FROM LOS.dbo.APP_REFERANTOR WHERE REFERANTOR_NAME = '"+subjectName+"'"), { def row ->
+		//				TAXPAYERNO = (row[0])
+		//			})
+		//		}
+		//
+		//		instance.eachRow(("select TAXPAYER_ID FROM TAXPAYER WHERE TAXPAYER_NO = '"+TAXPAYERNO+"'"), { def row ->
+		//			TAXPAYERID = (row[0])
+		//		})
 		Double value
 		instance.eachRow(("select sum(td.tax_amt) from TAX_H th join TAX_D td on th.TAX_H_ID = td.TAX_H_ID join REF_TAX_TYPE rtt on td.REF_TAX_TYPE_ID = rtt.REF_TAX_TYPE_ID JOIN FOUNDATION.dbo.REF_TAX_OFFICE RTO ON RTO.TAX_OFFICE_CODE = TH.TAX_OFFICE_CODE JOIN FOUNDATION.dbo.REF_OFFICE RO ON RTO.REF_TAX_OFFICE_ID = RO.REF_TAX_OFFICE_ID join taxpayer t on t.taxpayer_id = th.taxpayer_id where t.NAME = '"+subjectName+"' and th.MONTH <= 12 and th.YEAR = 2021 and th.MR_TRX_TAX_TYPE_CODE = 'PRGSV' and rtt.TAX_TYPE_CODE = 'WHT' and ro.office_name = '"+oriOfficeName+"'"), { def row ->
 			value = (row[0])

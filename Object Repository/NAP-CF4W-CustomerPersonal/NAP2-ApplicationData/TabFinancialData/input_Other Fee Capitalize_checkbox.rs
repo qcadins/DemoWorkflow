@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>XPATH</key>
-         <value>(//input[@type='checkbox'])[4]</value>
+         <value>//div[@id='FinData_Fees']/form/div/div/div/div[4]/div/div[3]/label/input</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

@@ -215,7 +215,7 @@ public class verifyFee {
 		})
 		return listValue
 	}
-	
+
 	@Keyword
 	public checkRateTypeDDL(Sql instance){
 		String value

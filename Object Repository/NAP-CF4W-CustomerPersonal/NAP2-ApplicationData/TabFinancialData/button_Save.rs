@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>//button[@type='submit'][@class='btn btn-raised btn-primary']</value>
+         <value>//div[@id='financial-tab']/app-financial-data/form/div/button[2]</value>
       </entry>
       <entry>
          <key>XPATH</key>
@@ -49,7 +49,7 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//button[@type='submit'][@class='btn btn-raised btn-primary']</value>
+      <value>//div[@id='financial-tab']/app-financial-data/form/div/button[2]</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

@@ -6,12 +6,12 @@
    <elementGuidId>1d957282-6254-4522-9680-008477429de2</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>BASIC</key>
-         <value>//*[@id=&quot;assetData&quot;]/div[10]</value>
+         <key>XPATH</key>
+         <value>//div[@id='assetData']/div[10]/button[2]</value>
       </entry>
       <entry>
-         <key>XPATH</key>
-         <value>//button[@type=&quot;submit&quot;]</value>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;assetData&quot;]/div[10]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

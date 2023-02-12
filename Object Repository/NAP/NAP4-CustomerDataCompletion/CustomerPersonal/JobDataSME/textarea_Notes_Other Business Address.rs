@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>XPATH</key>
-         <value>(//textarea[@type='text'])[3]</value>
+         <value>//div[@id='job-data-tab']/app-job-tab/div/div/div/div/form/div[2]/div[3]/div/textarea</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

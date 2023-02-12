@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>XPATH</key>
-         <value>(//select[@id='insuredBy'])[2]</value>
+         <value>//div[@id='insuranceInformation']/div[2]/div[2]/div[2]/select</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

@@ -6,12 +6,12 @@
    <elementGuidId>8801c13d-377a-4cfb-b0ae-0a51c2dc181c</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>XPATH</key>
-         <value>(//textarea[@type='text'])[2]</value>
+         <key>BASIC</key>
+         <value>//div[@id='accessoriesData']/div[2]/table/tbody/tr/td[7]/textarea</value>
       </entry>
       <entry>
-         <key>BASIC</key>
-         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[3]/app-asset-data/div/div/div/div/form/div/div[2]/div[4]/div[2]/table/tbody/tr[1]/td[7]/textarea</value>
+         <key>XPATH</key>
+         <value>(//textarea[@type='text'])[2]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -49,7 +49,7 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[3]/app-asset-data/div/div/div/div/form/div/div[2]/div[4]/div[2]/table/tbody/tr[1]/td[7]/textarea</value>
+      <value>//div[@id='accessoriesData']/div[2]/table/tbody/tr/td[7]/textarea</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

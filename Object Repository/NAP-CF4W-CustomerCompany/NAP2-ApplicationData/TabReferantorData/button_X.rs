@@ -6,12 +6,11 @@
    <elementGuidId>24ce3f95-0918-4ca1-b39b-8d42ee30b4f1</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>XPATH</key>
-         <value>/html/body/ngb-modal-window/div/div/div[1]/button/span</value>
+         <key>BASIC</key>
       </entry>
       <entry>
-         <key>BASIC</key>
-         <value></value>
+         <key>XPATH</key>
+         <value>//button[@aria-label=&quot;Close&quot;]/span</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

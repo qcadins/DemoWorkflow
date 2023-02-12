@@ -11,7 +11,7 @@
       </entry>
       <entry>
          <key>BASIC</key>
-         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[1]/app-referantor-data-new/div/div/div/div/form/div[1]/div[2]/div/div[2]/table/tbody/tr/td[3]/lib-uclookupgeneric/div/div/div[1]/span/button</value>
+         <value>//table/tbody/tr[1]/td[3]/lib-uclookupgeneric/div/div/div[1]/span/button</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -42,7 +42,7 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[1]/app-referantor-data-new/div/div/div/div/form/div[1]/div[2]/div/div[2]/table/tbody/tr/td[3]/lib-uclookupgeneric/div/div/div[1]/span/button</value>
+      <value>//table/tbody/tr[1]/td[3]/lib-uclookupgeneric/div/div/div[1]/span/button</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

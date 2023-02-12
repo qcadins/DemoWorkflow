@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>XPATH</key>
-         <value>(//input[@type=''])[2]</value>
+         <value>//div[@id='CustBankAccDetailSection']/div[3]/div/table/tbody/tr/td[6]/input</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

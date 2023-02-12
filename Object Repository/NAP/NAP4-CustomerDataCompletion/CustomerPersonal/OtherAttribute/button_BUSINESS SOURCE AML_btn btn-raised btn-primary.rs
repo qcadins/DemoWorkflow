@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>XPATH</key>
-         <value>(//button[@type='button'])[22]</value>
+         <value>//div[@id='AttributeList']/div/div[13]/div/div/lib-uclookupgeneric/div/div/div/span/button</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

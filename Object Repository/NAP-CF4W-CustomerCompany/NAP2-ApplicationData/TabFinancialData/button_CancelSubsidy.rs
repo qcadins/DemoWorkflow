@@ -6,11 +6,11 @@
    <elementGuidId>f003d030-3b65-4c93-9c39-3debadd90e42</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>BASIC</key>
+         <key>XPATH</key>
+         <value>//div[@class=&quot;modal-footer&quot;]/button[1]</value>
       </entry>
       <entry>
-         <key>XPATH</key>
-         <value>/html/body/ngb-modal-window/div/div/app-subsidy-add-edit/form/div[3]/button[1]</value>
+         <key>BASIC</key>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

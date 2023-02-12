@@ -11,7 +11,7 @@
       </entry>
       <entry>
          <key>BASIC</key>
-         <value>/html/body/ngb-modal-window/div/div/app-search-cross-app/lib-ucaddtotemp/div/div/div/button</value>
+         <value>//lib-ucaddtotemp/div/div/div/button</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -49,7 +49,7 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>/html/body/ngb-modal-window/div/div/app-search-cross-app/lib-ucaddtotemp/div/div/div/button</value>
+      <value>//lib-ucaddtotemp/div/div/div/button</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

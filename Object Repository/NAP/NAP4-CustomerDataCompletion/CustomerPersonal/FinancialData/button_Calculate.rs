@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>/html/body/ngb-modal-window/div/div/form/div[2]/div/div[9]/div/button</value>
+         <value>//div[@class=&quot;modal-body&quot;]/div/div[9]/div/button</value>
       </entry>
       <entry>
          <key>XPATH</key>
@@ -49,7 +49,7 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>/html/body/ngb-modal-window/div/div/form/div[2]/div/div[9]/div/button</value>
+      <value>//div[@class=&quot;modal-body&quot;]/div/div[9]/div/button</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

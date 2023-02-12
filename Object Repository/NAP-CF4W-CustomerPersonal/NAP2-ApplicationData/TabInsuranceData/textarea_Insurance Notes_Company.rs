@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>XPATH</key>
-         <value>(//textarea[@id='notes'])[2]</value>
+         <value>//div[@id='insuranceInformation']/div[3]/div[5]/div/textarea</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

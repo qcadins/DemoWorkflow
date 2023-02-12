@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>XPATH</key>
-         <value>(//select[@id='result'])[2]</value>
+         <value>//select[@id='result'][@formcontrolname=&quot;allocCode&quot;]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

@@ -7,11 +7,10 @@
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value></value>
       </entry>
       <entry>
          <key>XPATH</key>
-         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/cust-main-data-add/div/div/div/div[2]/div/form/div[1]/div[2]/div/lib-uclookupgeneric/div/div/div[1]/span/button</value>
+         <value>//div[@id=&quot;addApp&quot;]/div[2]/div/lib-uclookupgeneric/div/div/div[1]/span/button</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

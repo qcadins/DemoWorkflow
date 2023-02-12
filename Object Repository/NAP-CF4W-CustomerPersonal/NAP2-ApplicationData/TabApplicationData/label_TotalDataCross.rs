@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>/html/body/ngb-modal-window/div/div/app-search-cross-app/lib-ucaddtotemp/div/lib-ucgridfooter/div/div[3]</value>
+         <value>//lib-ucgridfooter/div/div[3]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -17,6 +17,6 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>/html/body/ngb-modal-window/div/div/app-search-cross-app/lib-ucaddtotemp/div/lib-ucgridfooter/div/div[3]</value>
+      <value>//lib-ucgridfooter/div/div[3]</value>
    </webElementProperties>
 </WebElementEntity>

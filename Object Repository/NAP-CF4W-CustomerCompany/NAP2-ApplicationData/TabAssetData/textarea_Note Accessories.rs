@@ -6,12 +6,12 @@
    <elementGuidId>3934d44f-a86f-450a-8a6f-3e781ff37844</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>BASIC</key>
-         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[3]/app-asset-data/div/div/div/div/form/div/div[2]/div[4]/div[2]/table/tbody/tr[1]/td[7]/textarea</value>
-      </entry>
-      <entry>
          <key>XPATH</key>
          <value>(//textarea[@type='text'])[2]</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//app-asset-data/div/div/div/div/form/div/div[2]/div[4]/div[2]/table/tbody/tr[1]/td[7]/textarea[@formcontrolname=&quot;AccessoryNotes&quot;]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -49,7 +49,7 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[3]/app-asset-data/div/div/div/div/form/div/div[2]/div[4]/div[2]/table/tbody/tr[1]/td[7]/textarea</value>
+      <value>//app-asset-data/div/div/div/div/form/div/div[2]/div[4]/div[2]/table/tbody/tr[1]/td[7]/textarea[@formcontrolname=&quot;AccessoryNotes&quot;]</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

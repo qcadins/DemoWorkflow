@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>XPATH</key>
-         <value>/html/body/ngb-modal-window/div/div/div[1]/button/span</value>
+         <value>//button[@aria-label=&quot;Close&quot;]/span</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

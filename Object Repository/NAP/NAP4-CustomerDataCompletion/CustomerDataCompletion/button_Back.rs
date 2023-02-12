@@ -6,12 +6,12 @@
    <elementGuidId>61b9c7c4-40eb-44d7-b58d-4ba8aa6ea349</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>BASIC</key>
-         <value>//*[@type = 'button' and (text() = ' Back' or . = ' Back')]</value>
-      </entry>
-      <entry>
          <key>XPATH</key>
          <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-cust-completion-detail/div/div/div/div[2]/button</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//app-cust-completion-detail/div/div/div/div[2]/button</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -31,25 +31,25 @@
       <value>btn btn-raised btn-warning</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>type</name>
       <type>Main</type>
       <value>button</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>text</name>
       <type>Main</type>
       <value> Back</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>false</isSelected>
+      <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>/html[1]/body[@class=&quot;pace-done&quot;]/app-root[1]/app-full-layout[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;wrapper&quot;]/div[@class=&quot;main-panel&quot;]/div[@class=&quot;main-content&quot;]/div[1]/div[@class=&quot;content-wrapper&quot;]/div[@class=&quot;container-fluid&quot;]/app-cust-completion-detail[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;col-md-12 text-left&quot;]/div[@class=&quot;card&quot;]/div[@class=&quot;card-body&quot;]/div[@class=&quot;ucSearch-Button-Right pr-3 pt-2&quot;]/button[@class=&quot;btn btn-raised btn-warning&quot;]</value>
+      <value>//app-cust-completion-detail/div/div/div/div[2]/button</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

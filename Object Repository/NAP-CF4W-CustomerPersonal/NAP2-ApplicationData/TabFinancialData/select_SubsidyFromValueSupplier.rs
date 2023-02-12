@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>XPATH</key>
-         <value>/html/body/ngb-modal-window/div/div/app-subsidy-add-edit/form/div[2]/div/div[2]/div/select</value>
+         <value>//select[@id='result'][@formcontrolname=&quot;fromValueCode&quot;]</value>
       </entry>
       <entry>
          <key>BASIC</key>

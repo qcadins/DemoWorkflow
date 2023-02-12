@@ -6,15 +6,15 @@
    <elementGuidId>7bfbdc42-89ea-49f5-a514-87cd9c9add9f</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>XPATH</key>
-         <value>(//button[@type='button'])[2]</value>
-      </entry>
-      <entry>
          <key>BASIC</key>
          <value>//*[@class = 'btn btn-raised btn-warning mr-1' and (text() = ' Cancel' or . = ' Cancel')]</value>
       </entry>
+      <entry>
+         <key>XPATH</key>
+         <value>//app-dup-check-md-subj-match/div/div/button[@class=&quot;btn btn-raised btn-warning mr-1&quot;]</value>
+      </entry>
    </selectorCollection>
-   <selectorMethod>BASIC</selectorMethod>
+   <selectorMethod>XPATH</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>

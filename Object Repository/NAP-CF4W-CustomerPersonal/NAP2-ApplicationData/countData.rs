@@ -10,7 +10,7 @@
       </entry>
       <entry>
          <key>BASIC</key>
-         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/nap-detail-paging/lib-ucpaging/div/lib-ucgridfooter/div/div[3]</value>
+         <value>//lib-ucgridfooter/div/div[3]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -20,6 +20,6 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/nap-detail-paging/lib-ucpaging/div/lib-ucgridfooter/div/div[3]</value>
+      <value>//lib-ucgridfooter/div/div[3]</value>
    </webElementProperties>
 </WebElementEntity>

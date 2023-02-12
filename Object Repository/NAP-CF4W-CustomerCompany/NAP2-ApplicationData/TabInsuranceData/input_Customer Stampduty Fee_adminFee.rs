@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>XPATH</key>
-         <value>(//input[@id='adminFee'])[2]
+         <value>//div[@id='insuranceFee']/div[2]/div/input
 </value>
       </entry>
       <entry>
@@ -15,7 +15,7 @@
          <value>id(&quot;insuranceFee&quot;)/div[@class=&quot;form-group row&quot;]/div[@class=&quot;col-md-4&quot;]/input[@id=&quot;adminFee&quot;][count(. | //*[@formcontrolname = 'CustStampDutyFeeAmt']) = count(//*[@formcontrolname = 'CustStampDutyFeeAmt'])]</value>
       </entry>
    </selectorCollection>
-   <selectorMethod>BASIC</selectorMethod>
+   <selectorMethod>XPATH</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>

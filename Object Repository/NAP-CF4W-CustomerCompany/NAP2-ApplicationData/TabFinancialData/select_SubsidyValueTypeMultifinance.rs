@@ -6,11 +6,11 @@
    <elementGuidId>b7896214-453f-44b3-b646-528bcf349fdb</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>BASIC</key>
+         <key>XPATH</key>
+         <value>//select[@formcontrolname=&quot;valueType&quot;]</value>
       </entry>
       <entry>
-         <key>XPATH</key>
-         <value>/html/body/ngb-modal-window/div/div/app-subsidy-add-edit/form/div[2]/div/div[4]/div/select</value>
+         <key>BASIC</key>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

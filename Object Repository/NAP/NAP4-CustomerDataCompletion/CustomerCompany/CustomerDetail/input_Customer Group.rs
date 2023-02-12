@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>XPATH</key>
-         <value>//input[@type='text']</value>
+         <value>//*[@id=&quot;CustDetail&quot;]/div/div[1]/div[3]/div/lib-uclookupgeneric/div/div/input</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

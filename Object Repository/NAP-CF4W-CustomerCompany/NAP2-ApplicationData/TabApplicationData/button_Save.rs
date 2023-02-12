@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>//button[@type=&quot;submit&quot;]</value>
+         <value>//form/div[@class=&quot;form-actions right&quot;]/button[2]</value>
       </entry>
       <entry>
          <key>XPATH</key>
@@ -49,7 +49,7 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//button[@type=&quot;submit&quot;]</value>
+      <value>//form/div[@class=&quot;form-actions right&quot;]/button[2]</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
