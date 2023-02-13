@@ -57,11 +57,13 @@ public class verifyIncomeInfo {
 		}
 
 		for(int j = 0;j<refundAllocationFrom.size();j++){
+			//jika string mengandung angka
 			if(refundAmt[j].matches(".*\\d.*")){
 				Matcher m = Pattern.compile("\\d").matcher(refundAmt[j])
 				m.find()
 				refundAmt[j] = refundAmt[j].substring(refundAmt[j].indexOf(m.group()))
 			}
+			//Jika string tidak mengandung angka
 			else{
 				refundAmt[j]="1"
 			}
@@ -140,6 +142,7 @@ public class verifyIncomeInfo {
 		return value
 	}
 
+	//keyword untuk cek nilai max refund based on rule
 	@Keyword
 	public verifyMaxAllocation(Sql instanceLOS, String appNo){
 		String lobCode
@@ -173,7 +176,7 @@ public class verifyIncomeInfo {
 
 		Matcher m = Pattern.compile("-?\\d+(\\.\\d+)?").matcher(maxrefundAmt[0])
 		while(m.find()){
-			println(Double.valueOf(m.group())+"abc")
+//			println(Double.valueOf(m.group())+"abc")
 			numbers.add(Double.valueOf(m.group()))
 		}
 

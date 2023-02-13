@@ -975,10 +975,10 @@ if(!appLastStep.equalsIgnoreCase("UPL_DOC") && GlobalVariable.FirstTimeEntry=="Y
 		
 	}
 	
-	'Klik save'
-	WebUI.click(findTestObject('NAP/CommissionReservedFund/TabCommissionData/button_Save'))
-	
-	WebUI.delay(2)
+//	'Klik save'
+//	WebUI.click(findTestObject('NAP/CommissionReservedFund/TabCommissionData/button_Save'))
+//	
+//	WebUI.delay(2)
 	
 	'Get nilai iscompletemandatory dari excel dan parsing ke integer'
 	Integer iscompleteMandatory = Integer.parseInt(datafileCommission.getValue(GlobalVariable.NumofColm, 4))
