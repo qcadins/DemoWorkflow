@@ -161,6 +161,7 @@ for(int i = 0;i<allocFrom.size();i++){
 			'parsing double remaining info amt'
 			remainingInfoAmt = Double.parseDouble(textRemainingInfoAmt)
 			
+			'Ambil index ke berapa dari remaining info yang match dengan nama section'
 			Allocindex = j
 			
 			break

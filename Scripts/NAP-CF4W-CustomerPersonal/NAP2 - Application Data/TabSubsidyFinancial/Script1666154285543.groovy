@@ -56,6 +56,7 @@ def SubsidyValuePercentageArray = datafileTabFinancial.getValue(GlobalVariable.N
 def TotalPremium = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Total Premium') +
 1
 
+//Jika override discount insurance bernilai yes pada datafile (biasanya digunakan jika ada paid by mf di tab insurance), amount akan diinsert di array yang indexnya sesuai discount insurance
 if (datafileTabFinancial.getValue(GlobalVariable.NumofColm, 51).equalsIgnoreCase('Yes')) {
 	'looping allocationformarray'
 	for (int i = 0; i < AllocationformArray.size(); i++) {
