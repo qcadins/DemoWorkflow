@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>/html/body/ngb-modal-window/div/div/form/div[3]/button[1]</value>
+         <value>//div[@class=&quot;modal-footer&quot;]/button[1]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -17,6 +17,6 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>/html/body/ngb-modal-window/div/div/form/div[3]/button[1]</value>
+      <value>//div[@class=&quot;modal-footer&quot;]/button[1]</value>
    </webElementProperties>
 </WebElementEntity>

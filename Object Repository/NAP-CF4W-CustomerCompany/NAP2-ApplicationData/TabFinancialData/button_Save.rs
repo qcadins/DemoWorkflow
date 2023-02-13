@@ -6,15 +6,15 @@
    <elementGuidId>6ddd0641-b55e-45fe-8f52-529c4b998e23</elementGuidId>
    <selectorCollection>
       <entry>
+         <key>XPATH</key>
+         <value>//div[@id='financial-tab']/app-financial-data/form/div/button[2]</value>
+      </entry>
+      <entry>
          <key>BASIC</key>
          <value>//button[@type='submit'][@class='btn btn-raised btn-primary']</value>
       </entry>
-      <entry>
-         <key>XPATH</key>
-         <value>(//button[@type='submit'])[2]</value>
-      </entry>
    </selectorCollection>
-   <selectorMethod>BASIC</selectorMethod>
+   <selectorMethod>XPATH</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>

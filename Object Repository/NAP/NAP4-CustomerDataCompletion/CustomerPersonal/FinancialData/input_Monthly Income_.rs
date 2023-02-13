@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>XPATH</key>
-         <value>/html/body/ngb-modal-window/div/div/form/div[2]/div/div[1]/div/input</value>
+         <value>//input[@formcontrolname=&quot;MonthlyIncomeAmt&quot;]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

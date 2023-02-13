@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>XPATH</key>
-         <value>//select[@id='userRelationship']</value>
+         <value>//select[@id='userRelationship'][@formcontrolname=&quot;MrUserRelationshipCode&quot;]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

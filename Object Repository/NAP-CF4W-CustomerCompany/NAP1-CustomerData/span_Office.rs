@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/cust-main-data-paging/lib-ucpaging/lib-ucgridview/div/table/thead/tr/th[3]/span</value>
+         <value>//span[@name=&quot;a.ORI_OFFICE_NAME&quot;]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -17,6 +17,6 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/cust-main-data-paging/lib-ucpaging/lib-ucgridview/div/table/thead/tr/th[3]/span</value>
+      <value>//span[@name=&quot;a.ORI_OFFICE_NAME&quot;]</value>
    </webElementProperties>
 </WebElementEntity>

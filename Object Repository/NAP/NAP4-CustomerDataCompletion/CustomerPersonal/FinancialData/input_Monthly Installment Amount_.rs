@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>(//input[@type=''])[4]</value>
+         <value>//input[@formcontrolname=&quot;MonthlyInstallmentAmt&quot;]</value>
       </entry>
       <entry>
          <key>XPATH</key>
@@ -42,7 +42,7 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>(//input[@type=''])[4]</value>
+      <value>//input[@formcontrolname=&quot;MonthlyInstallmentAmt&quot;]</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

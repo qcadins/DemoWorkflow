@@ -6,11 +6,11 @@
    <elementGuidId>3a406be5-ee4f-4af2-88ce-e491b7664a26</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>XPATH</key>
-         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[1]/div[7]/button</value>
+         <key>BASIC</key>
       </entry>
       <entry>
-         <key>BASIC</key>
+         <key>XPATH</key>
+         <value>//*[@id=&quot;ownerData&quot;]/div/div[2]/div/div[1]/div/lib-uclookupgeneric/div/div/div[1]/span/button/i</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

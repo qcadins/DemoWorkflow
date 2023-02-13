@@ -6,12 +6,12 @@
    <elementGuidId>28a920ee-e7a4-4569-a103-690555588178</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>BASIC</key>
+         <key>XPATH</key>
          <value>/html/body/ngb-modal-window/div/div/app-subsidy-add-edit/form/div[2]/div/div[4]/div/select</value>
       </entry>
       <entry>
-         <key>XPATH</key>
-         <value>/html/body/ngb-modal-window/div/div/app-subsidy-add-edit/form/div[2]/div/div[4]/div/select</value>
+         <key>BASIC</key>
+         <value>//select[@id='result'][@formcontrolname=&quot;sourceCode&quot;]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -21,6 +21,6 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>/html/body/ngb-modal-window/div/div/app-subsidy-add-edit/form/div[2]/div/div[4]/div/select</value>
+      <value>//select[@id='result'][@formcontrolname=&quot;sourceCode&quot;]</value>
    </webElementProperties>
 </WebElementEntity>

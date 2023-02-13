@@ -6,12 +6,12 @@
    <elementGuidId>88976901-6c31-4668-9f64-83d27d37db92</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>XPATH</key>
-         <value>//input[@id='AccessoryDownPaymentAmt0']</value>
+         <key>BASIC</key>
+         <value>//app-asset-data/div/div/div/div/form/div/div[2]/div[4]/div[2]/table/tbody/tr[1]/td[6]/div/div[2]/input</value>
       </entry>
       <entry>
-         <key>BASIC</key>
-         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[3]/app-asset-data/div/div/div/div/form/div/div[2]/div[4]/div[2]/table/tbody/tr[2]/td[6]/div/div[2]/input</value>
+         <key>XPATH</key>
+         <value>//input[@id='AccessoryDownPaymentAmt0']</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -49,7 +49,7 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[3]/app-asset-data/div/div/div/div/form/div/div[2]/div[4]/div[2]/table/tbody/tr[2]/td[6]/div/div[2]/input</value>
+      <value>//app-asset-data/div/div/div/div/form/div/div[2]/div[4]/div[2]/table/tbody/tr[1]/td[6]/div/div[2]/input</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

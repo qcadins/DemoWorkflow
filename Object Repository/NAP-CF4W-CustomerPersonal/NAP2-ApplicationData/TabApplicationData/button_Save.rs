@@ -6,15 +6,15 @@
    <elementGuidId>28bfb8df-5697-42d0-9aff-a644d1027b2f</elementGuidId>
    <selectorCollection>
       <entry>
+         <key>XPATH</key>
+         <value>//form/div[@class=&quot;form-actions right&quot;]/button[2]</value>
+      </entry>
+      <entry>
          <key>BASIC</key>
          <value>//button[@type='submit']</value>
       </entry>
-      <entry>
-         <key>XPATH</key>
-         <value>//*[@id=&quot;application-tab&quot;]/app-application-data/div/div/div/div/form/div[7]/button[2]</value>
-      </entry>
    </selectorCollection>
-   <selectorMethod>BASIC</selectorMethod>
+   <selectorMethod>XPATH</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>

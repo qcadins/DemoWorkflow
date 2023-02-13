@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>/html/body/ngb-modal-window/div/div/div[2]/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[1]/td[2]/span</value>
+         <value>//div[@formarrayname=&quot;AssetAccessoriesObjs&quot;]/table/tbody/tr[1]/td[2]/lib-uclookupgeneric/div/div/div/span/button</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -17,6 +17,6 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>/html/body/ngb-modal-window/div/div/div[2]/lib-ucpaging/lib-ucgridview/div/table/tbody/tr[1]/td[2]/span</value>
+      <value>//div[@formarrayname=&quot;AssetAccessoriesObjs&quot;]/table/tbody/tr[1]/td[2]/lib-uclookupgeneric/div/div/div/span/button</value>
    </webElementProperties>
 </WebElementEntity>

@@ -6,15 +6,15 @@
    <elementGuidId>9fc1f7a5-95b0-4c3b-a44f-e09713cd02cb</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>XPATH</key>
-         <value>(//button[@type='button'])[12]</value>
-      </entry>
-      <entry>
          <key>BASIC</key>
          <value>id(&quot;mailingAddr&quot;)/div[@class=&quot;form-group row&quot;]/div[@class=&quot;col-md-4&quot;]/div[@class=&quot;input-group&quot;]/div[@class=&quot;input-group-append&quot;]/span[@class=&quot;input-group-btn&quot;]/button[@class=&quot;btn btn-raised btn-primary&quot;]</value>
       </entry>
+      <entry>
+         <key>XPATH</key>
+         <value>//div[@id='mailingAddr']/div/div/div/div/span/button</value>
+      </entry>
    </selectorCollection>
-   <selectorMethod>BASIC</selectorMethod>
+   <selectorMethod>XPATH</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>

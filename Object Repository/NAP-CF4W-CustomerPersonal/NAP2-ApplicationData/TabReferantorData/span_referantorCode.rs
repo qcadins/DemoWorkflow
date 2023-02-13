@@ -11,7 +11,7 @@
       </entry>
       <entry>
          <key>BASIC</key>
-         <value>/html/body/ngb-modal-window/div/div/div[2]/lib-ucpaging/lib-ucgridview/div/table/tbody/tr/td[1]/span</value>
+         <value>//table/tbody/tr[1]/td[1]/span</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -42,7 +42,7 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>/html/body/ngb-modal-window/div/div/div[2]/lib-ucpaging/lib-ucgridview/div/table/tbody/tr/td[1]/span</value>
+      <value>//table/tbody/tr[1]/td[1]/span</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

@@ -6,12 +6,12 @@
    <elementGuidId>023a409f-ba50-4ba5-9312-fb674950d2cf</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>XPATH</key>
-         <value>//div[@id='gridLifeInsD']/table/tbody/tr/td[3]</value>
+         <key>BASIC</key>
+         <value>//div[@id=&quot;gridLifeInsD&quot;]/table/tbody/tr[1]/td[3]</value>
       </entry>
       <entry>
-         <key>BASIC</key>
-         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[5]/app-life-insurance-data/div/div/div/div/div/form/div/div[2]/div[1]/div/table/tbody/tr[1]/td[3]</value>
+         <key>XPATH</key>
+         <value>//div[@id='gridLifeInsD']/table/tbody/tr/td[3]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -35,7 +35,7 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[5]/app-life-insurance-data/div/div/div/div/div/form/div/div[2]/div[1]/div/table/tbody/tr[1]/td[3]</value>
+      <value>//div[@id=&quot;gridLifeInsD&quot;]/table/tbody/tr[1]/td[3]</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

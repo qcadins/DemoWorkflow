@@ -6,12 +6,12 @@
    <elementGuidId>f3b1b18f-f03f-4ea2-99bb-d6eab8330f21</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>XPATH</key>
-         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[3]/app-asset-data/div/div/div/div/form/div/div[2]/div[6]/div[2]/div[2]/select</value>
+         <key>BASIC</key>
+         <value>//select[@id='idType']</value>
       </entry>
       <entry>
-         <key>BASIC</key>
-         <value>id(&quot;idType&quot;)</value>
+         <key>XPATH</key>
+         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[3]/app-asset-data/div/div/div/div/form/div/div[2]/div[6]/div[2]/div[2]/select</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -56,7 +56,7 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>id(&quot;idType&quot;)</value>
+      <value>//select[@id='idType']</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

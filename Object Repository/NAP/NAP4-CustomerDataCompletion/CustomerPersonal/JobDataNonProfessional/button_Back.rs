@@ -10,7 +10,7 @@
       </entry>
       <entry>
          <key>XPATH</key>
-         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-cust-completion-detail-personal/div/div/div/div/div[1]/button[1]</value>
+         <value>//div[@class=&quot;ucSearch-Button-Right&quot;]/button[1]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

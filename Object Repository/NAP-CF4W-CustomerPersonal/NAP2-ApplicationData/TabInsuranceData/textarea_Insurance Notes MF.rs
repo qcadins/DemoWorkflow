@@ -6,12 +6,12 @@
    <elementGuidId>3b78c7cc-85c8-45e8-b034-dd5e3ec07693</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>XPATH</key>
-         <value>//textarea[@id='notes']</value>
+         <key>BASIC</key>
+         <value>//div[@id='insuranceInformation']/div[2]/div[4]/div/textarea</value>
       </entry>
       <entry>
-         <key>BASIC</key>
-         <value>//*[@id=&quot;notes&quot;]</value>
+         <key>XPATH</key>
+         <value>//textarea[@id='notes']</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -56,7 +56,7 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//*[@id=&quot;notes&quot;]</value>
+      <value>//div[@id='insuranceInformation']/div[2]/div[4]/div/textarea</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

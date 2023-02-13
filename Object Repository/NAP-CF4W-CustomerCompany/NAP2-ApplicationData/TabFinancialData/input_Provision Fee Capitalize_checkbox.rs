@@ -6,12 +6,12 @@
    <elementGuidId>f11c7f8b-2ab0-45d4-85bd-0de06871b49c</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>BASIC</key>
-         <value>//*[@id=&quot;FinData_Fees&quot;]/form/div/div/div[2]/div[6]/div/div/div[11]/label/input</value>
+         <key>XPATH</key>
+         <value>//div[@id='FinData_Fees']/form/div/div/div[2]/div[6]/div/div/div[11]/label/input</value>
       </entry>
       <entry>
-         <key>XPATH</key>
-         <value>(//input[@type='checkbox'])[6]</value>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;FinData_Fees&quot;]/form/div/div/div[2]/div[6]/div/div/div[11]/label/input</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

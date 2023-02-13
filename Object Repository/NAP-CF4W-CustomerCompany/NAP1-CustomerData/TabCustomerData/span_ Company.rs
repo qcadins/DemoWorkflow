@@ -6,12 +6,12 @@
    <elementGuidId>be2ed586-fa86-4d7c-9870-2bf20ba28e83</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>XPATH</key>
-         <value>//mat-radio-button[@id='mat-radio-2']/label/span[2]</value>
+         <key>BASIC</key>
+         <value>//mat-radio-group/mat-radio-button[1]/label</value>
       </entry>
       <entry>
-         <key>BASIC</key>
-         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-cust-main-data/div/div/div/div/div[3]/div[2]/div[1]/app-cust-main-data/div/div/div/div/mat-radio-group/mat-radio-button[1]/label</value>
+         <key>XPATH</key>
+         <value>//mat-radio-button[@id='mat-radio-2']/label/span[2]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -42,7 +42,7 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-cust-main-data/div/div/div/div/div[3]/div[2]/div[1]/app-cust-main-data/div/div/div/div/mat-radio-group/mat-radio-button[1]/label</value>
+      <value>//mat-radio-group/mat-radio-button[1]/label</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

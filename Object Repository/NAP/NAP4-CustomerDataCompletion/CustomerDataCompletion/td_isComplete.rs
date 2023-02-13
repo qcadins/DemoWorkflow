@@ -6,12 +6,12 @@
    <elementGuidId>d3d8a808-bec8-41d2-aff1-2e22a8e90db7</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>BASIC</key>
-         <value>/html[1]/body[@class=&quot;pace-done&quot;]/app-root[1]/app-full-layout[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;wrapper&quot;]/div[@class=&quot;main-panel&quot;]/div[@class=&quot;main-content&quot;]/div[1]/div[@class=&quot;content-wrapper&quot;]/div[@class=&quot;container-fluid&quot;]/app-cust-completion-detail[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;col-md-12 text-left&quot;]/div[@class=&quot;card&quot;]/div[@class=&quot;card-body&quot;]/div[@class=&quot;px-3&quot;]/lib-ucgridview[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;table-responsive&quot;]/table[@class=&quot;table table-bordered table-striped text-center table-hover&quot;]/tbody[1]/tr[@class=&quot;ng-star-inserted&quot;]/td[@class=&quot;ng-star-inserted&quot;]</value>
-      </entry>
-      <entry>
          <key>XPATH</key>
          <value>(.//*[normalize-space(text()) and normalize-space(.)='Father'])[1]/following::td[3]</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//table/tbody/tr[1]/td[7]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -42,7 +42,7 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-cust-completion-detail/div/div/div/div[3]/lib-ucgridview/div/table/tbody/tr[1]/td[7]</value>
+      <value>//table/tbody/tr[1]/td[7]</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
