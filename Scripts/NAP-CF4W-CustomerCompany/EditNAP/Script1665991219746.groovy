@@ -970,7 +970,7 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
         
         'untuk mendapatkan posisi copy app dari excel'
         for (GlobalVariable.NumofGuarantorCompany = 2; GlobalVariable.NumofGuarantorCompany <= (datafileGuarantorCompany.getColumnNumbers() - 1); (GlobalVariable.NumofGuarantorCompany)++) {
-            if (datafileGuarantorCompany.getValue(GlobalVariable.NumofGuarantorPersonal, 12) == datafileCustomerCompany.getValue(
+            if (datafileGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 12) == datafileCustomerCompany.getValue(
                 GlobalVariable.NumofColm, 13)) {
                 GlobalVariable.StartIndex = GlobalVariable.NumofGuarantorCompany
 

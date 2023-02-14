@@ -35,10 +35,10 @@ public class checkDDL {
 	}
 
 	@Keyword
-	public checkDDLInstallmentScheme(Sql instance){
+	public checkDDLInstallmentScheme(Sql instance, String product){
 		String value
 		ArrayList<String> listValue = new ArrayList<>()
-		instance.eachRow(("SELECT UPPER(pism.DESCR) FROM PROD_OFFERING_D pod CROSS APPLY STRING_SPLIT(pod.COMPNT_VALUE,';') join FOUNDATION.dbo.REF_MASTER pism on pism.MASTER_CODE = value join prod_offering_h poh on poh.PROD_OFFERING_H_ID = pod.PROD_OFFERING_H_ID join prod_offering po on po.PROD_OFFERING_ID = poh.PROD_OFFERING_ID where REF_PROD_COMPNT_CODE = 'INST_SCHM' and prod_offering_name = 'CF4W MRA' and prod_stat = 'ACT'"), { def row ->
+		instance.eachRow(("SELECT UPPER(pism.DESCR) FROM PROD_OFFERING_D pod CROSS APPLY STRING_SPLIT(pod.COMPNT_VALUE,';') join FOUNDATION.dbo.REF_MASTER pism on pism.MASTER_CODE = value join prod_offering_h poh on poh.PROD_OFFERING_H_ID = pod.PROD_OFFERING_H_ID join prod_offering po on po.PROD_OFFERING_ID = poh.PROD_OFFERING_ID where REF_PROD_COMPNT_CODE = 'INST_SCHM' and prod_offering_name = '"+ product +"' and prod_stat = 'ACT'"), { def row ->
 			value = (row[0])
 			listValue.add(value)
 		})

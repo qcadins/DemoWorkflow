@@ -22,8 +22,10 @@ WebUI.callTestCase(findTestCase('Login/LoginR3BranchManagerSuperuser - NEW'), [:
 'get data file path'
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
 
+lob = 'CF4W'
+
 'declare datafileCustomerCompany'
-datafileCustomerCompany = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData')
+datafileCustomerCompany = findTestData('NAP-' + lob + '-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData')
 
 countCustomerCompany = datafileCustomerCompany.getColumnNumbers()
 
@@ -33,7 +35,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
             break
         }
         
-        if ((datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 1) != 'Unexecuted') || (datafileCustomerCompany.getValue(
+        if (!(datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 1).equalsIgnoreCase('Unexecuted')) || (datafileCustomerCompany.getValue(
             GlobalVariable.NumofColm, 12).length() == 0)) {
             continue
         }
@@ -76,7 +78,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
             break
         }
         
-        if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 1).equalsIgnoreCase('Success') || (datafileCustomerCompany.getValue(
+        if (!datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 1).equalsIgnoreCase('Unexecuted') || (datafileCustomerCompany.getValue(
             GlobalVariable.NumofColm, 12).length() == 0)) {
             continue
         }

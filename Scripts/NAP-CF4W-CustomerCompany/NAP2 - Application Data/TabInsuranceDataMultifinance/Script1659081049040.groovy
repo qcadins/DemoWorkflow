@@ -728,6 +728,8 @@ if(capinssetting=="YEARLY"){
 	'Klik calculate insurance'
 	WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/button_Calculate Insurance'))
 	
+	if(GlobalVariable.RoleCompany == 'Testing'){
+		
 	ArrayList<String> MainRate = new ArrayList<String>()
 	ArrayList<String> AddtRate = new ArrayList<String>()
 	
@@ -781,6 +783,7 @@ if(capinssetting=="YEARLY"){
 	
 	GlobalVariable.MainPremiRate = MainRate
 	GlobalVariable.AdditionalPremiRate = AddtRate
+	}
 
 	if(GlobalVariable.FlagFailed==0){
 		'cek alert'

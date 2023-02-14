@@ -33,8 +33,8 @@ GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPat
 'declare datafileTabApplication'
 datafileTabApplication = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData')
 
-//'Klik tab application'
-//WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/buttonTabApplication'))
+'Klik tab application'
+WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/buttonTabApplication'))
 
 GlobalVariable.FlagFailed = 0
 
@@ -77,11 +77,14 @@ if (GlobalVariable.RoleCompany == 'Testing') {
     String textInterest = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/select_InterestType'), 
         'value')
 
+	'get text Product Offering'
+	product = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/POName')) 
+	
     'Verif interest type pada confins dengan db'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(textInterest, '(?i)' + InterestType, true,FailureHandling.OPTIONAL))
 	
 	ArrayList<String> appsource = CustomKeywords.'applicationData.checkDDL.checkDDLApplicationSource'(sqlConnectionLOS)
-	ArrayList<String> installmentscheme = CustomKeywords.'applicationData.checkDDL.checkDDLInstallmentScheme'(sqlConnectionLOS)
+	ArrayList<String> installmentscheme = CustomKeywords.'applicationData.checkDDL.checkDDLInstallmentScheme'(sqlConnectionLOS, product)
 	ArrayList<String> wop = CustomKeywords.'applicationData.checkDDL.checkDDLWOP'(sqlConnectionFOU)
 	ArrayList<String> InstType = CustomKeywords.'applicationData.checkDDL.checkDDLInstallmentType'(sqlConnectionFOU)
 	ArrayList<String> COC = CustomKeywords.'applicationData.checkDDL.checkDDLCOC'(sqlConnectionFOU)
