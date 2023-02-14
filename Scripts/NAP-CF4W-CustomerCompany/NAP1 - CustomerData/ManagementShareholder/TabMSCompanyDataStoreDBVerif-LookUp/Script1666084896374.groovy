@@ -22,12 +22,12 @@ Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 'declare arraymatch arraylist'
 ArrayList<String> arrayMatch = new ArrayList<String>()
 
-'declare datafileMS'
-datafileMS = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder')
+'declare excelPathMS'
+excelPathMS = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder'
 
 'call keyword Ms data company store db lookup'
 ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.MSDataStoreDBCompanyLookUp'(sqlconnectionLOS, 
-    datafileMS.getValue(GlobalVariable.NumofMS, 12), datafileMS.getValue(GlobalVariable.NumofMS, 50))
+    findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 12), findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 50))
 
 'looping verif confinsdata = db'
 for (int i = 0; i < GlobalVariable.Confinsdata.size(); i++) {
@@ -40,6 +40,6 @@ for (int i = 0; i < GlobalVariable.Confinsdata.size(); i++) {
 if (arrayMatch.contains(false)) {
 	
 	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedStoredDB'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('2.TabManagementShareholderData', GlobalVariable.NumofMS, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder').getValue(GlobalVariable.NumofMS, 2) + ';' + GlobalVariable.ReasonFailedStoredDB)
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('2.TabManagementShareholderData', GlobalVariable.NumofMS, GlobalVariable.StatusFailed, findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 2) + ';' + GlobalVariable.ReasonFailedStoredDB)
 }
 

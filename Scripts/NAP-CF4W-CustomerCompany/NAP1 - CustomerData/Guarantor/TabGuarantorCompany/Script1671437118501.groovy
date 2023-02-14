@@ -28,16 +28,16 @@ GlobalVariable.FlagWarning = 0
 'get data file path'
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
 
-'declare datafileCustomerCompany'
-datafileCustomerCompany = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData')
+'declare excelPathCustomerCompany'
+excelPathCustomerCompany = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData'
 
-'declare datafileGuarantorCompany'
-datafileGuarantorCompany = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany')
+'declare excelPathGuarantorCompany'
+excelPathGuarantorCompany = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany'
 
 'get copyapp status dari data file/excel'
-copyapp = datafileGuarantorCompany.getValue(GlobalVariable.NumofGuarantorPersonal, 10)
+copyapp = findTestData(excelPathGuarantorCompany).getValue(GlobalVariable.NumofGuarantorPersonal, 10)
 
-countGuarantorCompany = datafileGuarantorCompany.getColumnNumbers()
+countGuarantorCompany = findTestData(excelPathGuarantorCompany).getColumnNumbers()
 
 'declare variableData'
 ArrayList<String> variableData
@@ -45,7 +45,7 @@ ArrayList<String> variableData
 for (GlobalVariable.NumofGuarantorCompany = GlobalVariable.StartIndex; GlobalVariable.NumofGuarantorCompany <= (countGuarantorCompany - 1); (GlobalVariable.NumofGuarantorCompany)++) {
     GlobalVariable.FlagFailed = 0
 
-    if (datafileGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 12) == datafileCustomerCompany.getValue(
+    if (findTestData(excelPathGuarantorCompany).getValue(GlobalVariable.NumofGuarantorCompany, 12) == findTestData(excelPathCustomerCompany).getValue(
         GlobalVariable.NumofColm, 13)) {
         if (WebUI.verifyElementPresent(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/label_NO DATA AVAILABLE'), 
             GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
@@ -68,8 +68,8 @@ for (GlobalVariable.NumofGuarantorCompany = GlobalVariable.StartIndex; GlobalVar
                     GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                     copyapp == 'No'
                 } else if (WebUI.verifyElementPresent(modifyNewGuarantorName, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
-                    if (WebUI.getText(modifyNewGuarantorName).equalsIgnoreCase(datafileGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 
-                            18)) || WebUI.getText(modifyNewGuarantorName).equalsIgnoreCase(datafileGuarantorCompany.getValue(
+                    if (WebUI.getText(modifyNewGuarantorName).equalsIgnoreCase(findTestData(excelPathGuarantorCompany).getValue(GlobalVariable.NumofGuarantorCompany, 
+                            18)) || WebUI.getText(modifyNewGuarantorName).equalsIgnoreCase(findTestData(excelPathGuarantorCompany).getValue(
                             GlobalVariable.NumofGuarantorCompany, 16))) {
                         break
                     }
@@ -88,28 +88,28 @@ for (GlobalVariable.NumofGuarantorCompany = GlobalVariable.StartIndex; GlobalVar
 					'call function check dll'
 					checkDDL()
 					
-                    if (datafileGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 13) == 'Input Data') {
+                    if (findTestData(excelPathGuarantorCompany).getValue(GlobalVariable.NumofGuarantorCompany, 13) == 'Input Data') {
                         'select customer relationship'
                         WebUI.selectOptionByLabel(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/select_CustomerRelationship'), 
-                            datafileGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 17), false)
+                            findTestData(excelPathGuarantorCompany).getValue(GlobalVariable.NumofGuarantorCompany, 17), false)
 
                         'input guarantor name'
                         WebUI.setText(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/input_Guarantor Legal Name'), 
-                            datafileGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 18))
+                            findTestData(excelPathGuarantorCompany).getValue(GlobalVariable.NumofGuarantorCompany, 18))
 
                         'input tax id'
                         WebUI.setText(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/input_Tax Id No_form-control ng-untouched ng-pristine ng-invalid'), 
-                            datafileGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 19))
+                            findTestData(excelPathGuarantorCompany).getValue(GlobalVariable.NumofGuarantorCompany, 19))
 
                         'select customer type'
                         WebUI.selectOptionByLabel(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/select_CustomerType'), 
-                            datafileGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 20), false)
+                            findTestData(excelPathGuarantorCompany).getValue(GlobalVariable.NumofGuarantorCompany, 20), false)
 
                         'select customer model'
                         WebUI.selectOptionByLabel(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/select_CustomerModel'), 
-                            datafileGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 21), false)
+                            findTestData(excelPathGuarantorCompany).getValue(GlobalVariable.NumofGuarantorCompany, 21), false)
 
-                        if (datafileGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 23) == 'Yes') {
+                        if (findTestData(excelPathGuarantorCompany).getValue(GlobalVariable.NumofGuarantorCompany, 23) == 'Yes') {
                             'click button copy'
                             WebUI.click(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_Copy'))
 							
@@ -118,34 +118,34 @@ for (GlobalVariable.NumofGuarantorCompany = GlobalVariable.StartIndex; GlobalVar
                         } else {
                             'input text address'
                             WebUI.setText(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/textarea_Address'), 
-                                datafileGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 24))
+                                findTestData(excelPathGuarantorCompany).getValue(GlobalVariable.NumofGuarantorCompany, 24))
 
                             'input RT'
                             WebUI.setText(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/input_RT'), 
-                                datafileGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 25))
+                                findTestData(excelPathGuarantorCompany).getValue(GlobalVariable.NumofGuarantorCompany, 25))
 
                             'input RW'
                             WebUI.setText(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/input_RW'), 
-                                datafileGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 26))
+                                findTestData(excelPathGuarantorCompany).getValue(GlobalVariable.NumofGuarantorCompany, 26))
 
                             'click button zipcode'
                             WebUI.click(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/button_Zipcode_btn btn-raised btn-primary'))
 
                             'input zipcode'
                             WebUI.setText(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/input_Zipcode'), 
-                                datafileGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 27))
+                                findTestData(excelPathGuarantorCompany).getValue(GlobalVariable.NumofGuarantorCompany, 27))
 
                             'input Kecamatan'
                             WebUI.setText(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/input Kecamatan'), 
-                                datafileGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 28))
+                                findTestData(excelPathGuarantorCompany).getValue(GlobalVariable.NumofGuarantorCompany, 28))
 
                             'input Kelurahan'
                             WebUI.setText(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/input kelurahan'), 
-                                datafileGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 29))
+                                findTestData(excelPathGuarantorCompany).getValue(GlobalVariable.NumofGuarantorCompany, 29))
 
                             'input kota'
                             WebUI.setText(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/input kota'), 
-                                datafileGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 30))
+                                findTestData(excelPathGuarantorCompany).getValue(GlobalVariable.NumofGuarantorCompany, 30))
 
                             'click search'
                             WebUI.click(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_Search'))
@@ -170,9 +170,9 @@ for (GlobalVariable.NumofGuarantorCompany = GlobalVariable.StartIndex; GlobalVar
                             
                             'select ownership'
                             WebUI.selectOptionByLabel(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/select_Ownership'), 
-                                datafileGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 31), false)
+                                findTestData(excelPathGuarantorCompany).getValue(GlobalVariable.NumofGuarantorCompany, 31), false)
                         }
-                    } else if (datafileGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 13) == 'LookUp') {
+                    } else if (findTestData(excelPathGuarantorCompany).getValue(GlobalVariable.NumofGuarantorCompany, 13) == 'LookUp') {
                         if (WebUI.verifyElementPresent(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_3Guarantor Data'), 
                             GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                             'click guarantor lookup'
@@ -180,11 +180,11 @@ for (GlobalVariable.NumofGuarantorCompany = GlobalVariable.StartIndex; GlobalVar
 
                             'input customer no'
                             WebUI.setText(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/input_Customer No_custNoId'), 
-                                datafileGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 15))
+                                findTestData(excelPathGuarantorCompany).getValue(GlobalVariable.NumofGuarantorCompany, 15))
 
                             'input customer name'
                             WebUI.setText(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/input_Customer Name_custNameId'), 
-                                datafileGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 16))
+                                findTestData(excelPathGuarantorCompany).getValue(GlobalVariable.NumofGuarantorCompany, 16))
 
                             'click search'
                             WebUI.click(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/button_Search'))
@@ -209,7 +209,7 @@ for (GlobalVariable.NumofGuarantorCompany = GlobalVariable.StartIndex; GlobalVar
                             
                             'select customer relationship'
                             WebUI.selectOptionByLabel(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/select_CustomerRelationship'), 
-                                datafileGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 17), false)
+                                findTestData(excelPathGuarantorCompany).getValue(GlobalVariable.NumofGuarantorCompany, 17), false)
 
                             'check if role testing untuk get data customer digunakan untuk data verif'
                             if (GlobalVariable.RoleCompany == 'Testing') {
@@ -221,16 +221,16 @@ for (GlobalVariable.NumofGuarantorCompany = GlobalVariable.StartIndex; GlobalVar
                                     [:], FailureHandling.CONTINUE_ON_FAILURE)
                             }
                             
-                            if (datafileGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 20).length() > 1) {
+                            if (findTestData(excelPathGuarantorCompany).getValue(GlobalVariable.NumofGuarantorCompany, 20).length() > 1) {
                                 'select customer type'
                                 WebUI.selectOptionByLabel(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/select_CustomerType'), 
-                                    datafileGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 20), false)
+                                    findTestData(excelPathGuarantorCompany).getValue(GlobalVariable.NumofGuarantorCompany, 20), false)
                             }
                         }
                     }
                     
                     'check if role testing dan diinput dengan lookup untuk get data customer digunakan untuk Store DB Verif'
-                    if ((GlobalVariable.RoleCompany == 'Testing') && (datafileGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 
+                    if ((GlobalVariable.RoleCompany == 'Testing') && (findTestData(excelPathGuarantorCompany).getValue(GlobalVariable.NumofGuarantorCompany, 
                         13) == 'LookUp')) {
                         'call function get data guarantor company'
                         getDataGuarCompany()
@@ -250,7 +250,7 @@ for (GlobalVariable.NumofGuarantorCompany = GlobalVariable.StartIndex; GlobalVar
                     'Click save'
                     WebUI.click(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/button_Save'))
 
-                    if ((Integer.parseInt(datafileGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 4)) == 
+                    if ((Integer.parseInt(findTestData(excelPathGuarantorCompany).getValue(GlobalVariable.NumofGuarantorCompany, 4)) == 
                     0) && (GlobalVariable.FlagFailed == 0)) {
                         'Check alert'
                         GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofGuarantorCompany, 
@@ -260,14 +260,14 @@ for (GlobalVariable.NumofGuarantorCompany = GlobalVariable.StartIndex; GlobalVar
                     'verify flagfailed  lookup == 0'
                     if (GlobalVariable.FlagFailed == 0) {
                         'Check save Process write to excel'
-                        CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(datafileGuarantorCompany.getValue(
+                        CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(findTestData(excelPathGuarantorCompany).getValue(
                                     GlobalVariable.NumofGuarantorCompany, 4)), findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/TableheaderGuarantor'), 
                             GlobalVariable.NumofGuarantorCompany, '3b.TabGuarantorDataCompany')
 
                         'customer added +1'
                         (GlobalVariable.CountNumofCustomer)++
 
-                        if (Integer.parseInt(datafileGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 4)) == 
+                        if (Integer.parseInt(findTestData(excelPathGuarantorCompany).getValue(GlobalVariable.NumofGuarantorCompany, 4)) == 
                         0) {
                             'Check error validasi'
                             CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/errorvalidasi'), 
@@ -291,13 +291,13 @@ for (GlobalVariable.NumofGuarantorCompany = GlobalVariable.StartIndex; GlobalVar
                         }
 						
 						
-						if (datafileGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 13) == 'Input Data') {
+						if (findTestData(excelPathGuarantorCompany).getValue(GlobalVariable.NumofGuarantorCompany, 13) == 'Input Data') {
 							if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany == 'Yes')) {
 								'call test case guarantor data company store verif'
 								WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/Guarantor/TabGuarantorDataCompanyStoreDBVerif'),
 									[:], FailureHandling.CONTINUE_ON_FAILURE)
 							}
-						} else if (datafileGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 13) == 'LookUp') {
+						} else if (findTestData(excelPathGuarantorCompany).getValue(GlobalVariable.NumofGuarantorCompany, 13) == 'LookUp') {
 							if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany == 'Yes')) {
 								'call test case guarantor data company store verif'
 								WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/Guarantor/TabGuarantorDataCompanyStoreDBVerif-LookUp'),
@@ -328,7 +328,7 @@ def getDataGuarCompany() {
     'declare array for confins data'
     def confinsdata = []
 
-	if(datafileGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany,13) == 'LookUp'){
+	if(findTestData(excelPathGuarantorCompany).getValue(GlobalVariable.NumofGuarantorCompany,13) == 'LookUp'){
 	    'add customer name to array'
 	    confinsdata.add(WebUI.getAttribute(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/input_Guarantor Legal Name'), 
 	            'value'))
@@ -366,7 +366,7 @@ def getDataGuarCompany() {
     confinsdata.add(WebUI.getAttribute(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/LabelKota'), 
             'value'))
 
-    if(datafileGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany,13) == 'LookUp'){
+    if(findTestData(excelPathGuarantorCompany).getValue(GlobalVariable.NumofGuarantorCompany,13) == 'LookUp'){
 	    'add company type to array'
 	    confinsdata.add(WebUI.getAttribute(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/select_CustomerType'), 
 	            'value'))
@@ -378,7 +378,7 @@ def getDataGuarCompany() {
 	    'add ownership to array'
 	    confinsdata.add(WebUI.getAttribute(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/select_Ownership'), 
 	            'value'))
-	}else if(datafileGuarantorCompany.getValue(GlobalVariable.NumofGuarantorCompany, 13) == 'Input Data'){
+	}else if(findTestData(excelPathGuarantorCompany).getValue(GlobalVariable.NumofGuarantorCompany, 13) == 'Input Data'){
 		Select select = new Select(DriverFactory.getWebDriver().findElement(By.xpath("//div[@id='Address']/div/div[2]/div[2]/div/div/div/div/select")))
 		String optionLabel = select.getFirstSelectedOption().getText()
 		
@@ -423,7 +423,7 @@ def checkDDL(){
 		custmodel) == false) {
 
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(GlobalVariable.NumofGuarantorCompany, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'Customer Model')
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathGuarantorCompany).getValue(GlobalVariable.NumofGuarantorCompany, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'Customer Model')
 
 		(GlobalVariable.FlagFailed)++
 	}
@@ -443,7 +443,7 @@ def checkDDL(){
 		companyType) == false) {
 
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorCompany').getValue(GlobalVariable.NumofGuarantorCompany, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'Company Type')
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathGuarantorCompany).getValue(GlobalVariable.NumofGuarantorCompany, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'Company Type')
 
 		(GlobalVariable.FlagFailed)++
 	}

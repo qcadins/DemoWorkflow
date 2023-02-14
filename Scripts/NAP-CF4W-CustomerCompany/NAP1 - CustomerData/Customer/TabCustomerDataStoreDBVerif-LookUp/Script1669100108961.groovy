@@ -19,15 +19,15 @@ import groovy.sql.Sql as Sql
 'connect DB LOS'
 Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
-'declare datafileCustomerCompany'
-datafileCustomerCompany = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData')
+'declare excelPathCustomerCompany'
+excelPathCustomerCompany = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData'
 
 'declare arrayMatch arraylist'
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
 
 'call keyowrd get customer data store db company'
-ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.CustomerDataStoreDBCompanyLookUp'(sqlconnectionLOS, datafileCustomerCompany.getValue(
-        GlobalVariable.NumofColm, 13), datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 17))
+ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.CustomerDataStoreDBCompanyLookUp'(sqlconnectionLOS, findTestData(excelPathCustomerCompany).getValue(
+        GlobalVariable.NumofColm, 13), findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm, 17))
 
 'looping verif confinsdata = db'
 for (int i = 0; i < result.size(); i++) {
@@ -39,5 +39,5 @@ for (int i = 0; i < result.size(); i++) {
 if(arrayMatch.contains(false)){
 	
 	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedStoredDB'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedStoredDB)
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedStoredDB)
 }

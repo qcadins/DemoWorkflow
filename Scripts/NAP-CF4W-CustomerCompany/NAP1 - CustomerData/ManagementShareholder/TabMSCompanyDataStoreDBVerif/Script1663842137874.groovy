@@ -22,52 +22,49 @@ Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 'declare arraymatch arraylist'
 ArrayList<String> arrayMatch = new ArrayList<String>()
 
-'declare datafileCustomerCompany'
-datafileCustomerCompany = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData')
-
-'declare datafileMS'
-datafileMS = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder')
+'declare excelPathMS'
+excelPathMS = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder'
 
 'call keyword get ms data company store db'
-ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.MSDataStoreDBCompany'(sqlconnectionLOS, datafileMS.getValue(
-        GlobalVariable.NumofMS, 12), datafileMS.getValue(GlobalVariable.NumofMS, 52))
+ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.MSDataStoreDBCompany'(sqlconnectionLOS, findTestData(excelPathMS).getValue(
+        GlobalVariable.NumofMS, 12), findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 52))
 
 int arrayindex = 0
 
 'verify shareholder name'
-arrayMatch.add(WebUI.verifyMatch(datafileMS.getValue(GlobalVariable.NumofMS, 52).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 52).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
         false, FailureHandling.OPTIONAL))
 
 'verify tax id no'
-arrayMatch.add(WebUI.verifyMatch(datafileMS.getValue(GlobalVariable.NumofMS, 53).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 53).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
         false, FailureHandling.OPTIONAL))
 
 'verify position slik'
-arrayMatch.add(WebUI.verifyMatch(datafileMS.getValue(GlobalVariable.NumofMS, 55).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 55).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
         false, FailureHandling.OPTIONAL))
 
 'verify company type'
-arrayMatch.add(WebUI.verifyMatch(datafileMS.getValue(GlobalVariable.NumofMS, 56).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 56).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
         false, FailureHandling.OPTIONAL))
 
 'verify customer model'
-arrayMatch.add(WebUI.verifyMatch(datafileMS.getValue(GlobalVariable.NumofMS, 57).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 57).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
         false, FailureHandling.OPTIONAL))
 
 'verify share percent'
-arrayMatch.add(WebUI.verifyMatch(datafileMS.getValue(GlobalVariable.NumofMS, 58).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 58).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
         false, FailureHandling.OPTIONAL))
 
 'verify is active'
-arrayMatch.add(WebUI.verifyMatch(datafileMS.getValue(GlobalVariable.NumofMS, 59).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 59).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
         false, FailureHandling.OPTIONAL))
 
 'verify is owner'
-arrayMatch.add(WebUI.verifyMatch(datafileMS.getValue(GlobalVariable.NumofMS, 60).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 60).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
         false, FailureHandling.OPTIONAL))
 
 'verify is addres copy atau tidak'
-if (datafileMS.getValue(GlobalVariable.NumofMS, 70).length() > 0) {
+if (findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 70).length() > 0) {
 	confinsindex = 0
 	
 	'verify address copy dari customer'
@@ -103,35 +100,35 @@ if (datafileMS.getValue(GlobalVariable.NumofMS, 70).length() > 0) {
 			(result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 } else {
     'verify address'
-    arrayMatch.add(WebUI.verifyMatch(datafileMS.getValue(GlobalVariable.NumofMS, 71).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
+    arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 71).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
             false, FailureHandling.OPTIONAL))
 
     'verify RT'
-    arrayMatch.add(WebUI.verifyMatch(datafileMS.getValue(GlobalVariable.NumofMS, 72).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
+    arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 72).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
             false, FailureHandling.OPTIONAL))
 
     'verify RW'
-    arrayMatch.add(WebUI.verifyMatch(datafileMS.getValue(GlobalVariable.NumofMS, 73).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
+    arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 73).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
             false, FailureHandling.OPTIONAL))
 
     'verify Zipcode'
-    arrayMatch.add(WebUI.verifyMatch(datafileMS.getValue(GlobalVariable.NumofMS, 74).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
+    arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 74).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
             false, FailureHandling.OPTIONAL))
 
     'verify kecamatan'
-    arrayMatch.add(WebUI.verifyMatch(datafileMS.getValue(GlobalVariable.NumofMS, 75).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
+    arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 75).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
             false, FailureHandling.OPTIONAL))
 
     'verify kelurahan'
-    arrayMatch.add(WebUI.verifyMatch(datafileMS.getValue(GlobalVariable.NumofMS, 76).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
+    arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 76).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
             false, FailureHandling.OPTIONAL))
 
     'verify kota'
-    arrayMatch.add(WebUI.verifyMatch(datafileMS.getValue(GlobalVariable.NumofMS, 77).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
+    arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 77).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
             false, FailureHandling.OPTIONAL))
 
     'verify ownership'
-    arrayMatch.add(WebUI.verifyMatch(datafileMS.getValue(GlobalVariable.NumofMS, 78).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
+    arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 78).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
             false, FailureHandling.OPTIONAL))
 }
 
@@ -139,6 +136,6 @@ if (datafileMS.getValue(GlobalVariable.NumofMS, 70).length() > 0) {
 if (arrayMatch.contains(false)) {
 
 	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedStoredDB'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('2.TabManagementShareholderData', GlobalVariable.NumofMS, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder').getValue(GlobalVariable.NumofMS, 2) + ';' + GlobalVariable.ReasonFailedStoredDB)
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('2.TabManagementShareholderData', GlobalVariable.NumofMS, GlobalVariable.StatusFailed, findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 2) + ';' + GlobalVariable.ReasonFailedStoredDB)
 }
 

@@ -19,28 +19,29 @@ import internal.GlobalVariable as GlobalVariable
 'call test case login R3'
 WebUI.callTestCase(findTestCase('Login/LoginR3BranchManagerSuperuser - NEW'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 
+'declare LOB'
+GlobalVariable.LOB = 'CF4W'
+
 'get data file path'
-GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getexcelPathCustomerCompany'(GlobalVariable.PathCompany)
 
-lob = 'CF4W'
+'declare findTestData(excelPathCustomerCompany)'
+excelPathCustomerCompany = 'NAP-' + GlobalVariable.LOB + '-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData'
 
-'declare datafileCustomerCompany'
-datafileCustomerCompany = findTestData('NAP-' + lob + '-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData')
-
-countCustomerCompany = datafileCustomerCompany.getColumnNumbers()
+countCustomerCompany = findTestData(excelPathCustomerCompany).getColumnNumbers()
 
 if (GlobalVariable.RoleCompany == 'Data Entry') {
     for (GlobalVariable.NumofColm; GlobalVariable.NumofColm <= (countCustomerCompany - 1); (GlobalVariable.NumofColm)++) {
-        if (CustomKeywords.'customizeKeyword.function.checkNAPExist'(datafileCustomerCompany) == true) {
+        if (CustomKeywords.'customizeKeyword.function.checkNAPExist'(findTestData(excelPathCustomerCompany)) == true) {
             break
         }
         
-        if (!(datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 1).equalsIgnoreCase('Unexecuted')) || (datafileCustomerCompany.getValue(
+        if (!(findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm, 1).equalsIgnoreCase('Unexecuted')) || (findTestData(excelPathCustomerCompany).getValue(
             GlobalVariable.NumofColm, 12).length() == 0)) {
             continue
         }
         
-        if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 8) != '') {
+        if (findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm, 8) != '') {
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/EditNAP'), [:], FailureHandling.CONTINUE_ON_FAILURE)
         } else {
             'call test case NAP1'
@@ -74,16 +75,16 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
     for (GlobalVariable.NumofColm; GlobalVariable.NumofColm <= (countCustomerCompany - 1); (GlobalVariable.NumofColm)++) {
         GlobalVariable.IsDataCancel = 0
 
-        if (CustomKeywords.'customizeKeyword.function.checkNAPExist'(datafileCustomerCompany) == true) {
+        if (CustomKeywords.'customizeKeyword.function.checkNAPExist'(findTestData(excelPathCustomerCompany)) == true) {
             break
         }
         
-        if (!datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 1).equalsIgnoreCase('Unexecuted') || (datafileCustomerCompany.getValue(
+        if (!findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm, 1).equalsIgnoreCase('Unexecuted') || (findTestData(excelPathCustomerCompany).getValue(
             GlobalVariable.NumofColm, 12).length() == 0)) {
             continue
         }
         
-        if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 8) != '') {
+        if (findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm, 8) != '') {
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/EditNAP'), [:], FailureHandling.CONTINUE_ON_FAILURE)
         } else {
             if (GlobalVariable.IsDataCancel == 1) {

@@ -50,6 +50,7 @@ public class function {
 		}
 	}
 
+	//keyowrd untuk check apakah NAP exist
 	@Keyword
 	public checkNAPExist(TestData datafilecust){
 		if(datafilecust.getValue(GlobalVariable.NumofColm, 8)=="" && datafilecust.getValue(GlobalVariable.NumofColm, 12)=="" &&datafilecust.getValue(GlobalVariable.NumofColm, 9)==""){

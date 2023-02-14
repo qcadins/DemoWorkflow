@@ -27,8 +27,8 @@ GlobalVariable.FlagFailed = 0
 'get data file path'
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
 
-'declare datafileCustomerCompany'
-datafileCustomerCompany = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData')
+'declare findTestData(excelPathCustomerCompany)'
+excelPathCustomerCompany = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData'
 
 'connect DB FOU'
 Sql sqlConnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
@@ -45,7 +45,7 @@ if (GlobalVariable.RoleCompany == 'Testing') {
             'CUSTOMER', false))
 }
 
-if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 14) == 'Input Data') {
+if (findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm, 14) == 'Input Data') {
     'click radio button Personal'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/Radio_Personal'))
 
@@ -57,65 +57,65 @@ if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 14) == 'Input Dat
 	
     'input customer name'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/input_Customer Legal Name_form-control ng-untouched ng-pristine ng-invalid'), 
-        datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 19))
+        findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm, 19))
 
     'input tax id no'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/input_Tax Id No_form-control ng-untouched ng-pristine ng-invalid'), 
-        datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 20))
+        findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm, 20))
 
     'select company type'
     WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/select_Select One CV  Koperasi  PT'), 
-        datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 21), false)
+        findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm, 21), false)
 
     'select customer model'
     WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/select_Select One Corporate  Non Corporate'), 
-        datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 22), false)
+        findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm, 22), false)
 
     'input address'
-    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/textarea_Address'), datafileCustomerCompany.getValue(
+    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/textarea_Address'), findTestData(excelPathCustomerCompany).getValue(
             GlobalVariable.NumofColm, 24))
 
     'input RT'
-    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/input_RT'), datafileCustomerCompany.getValue(
+    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/input_RT'), findTestData(excelPathCustomerCompany).getValue(
             GlobalVariable.NumofColm, 25))
 
     'input RW'
-    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/input_RW'), datafileCustomerCompany.getValue(
+    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/input_RW'), findTestData(excelPathCustomerCompany).getValue(
             GlobalVariable.NumofColm, 26))
 
     'click lookup zipcode'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/button_Zipcode_btn btn-raised btn-primary'))
 
     'input zip code'
-    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/input_Zip Code_ZipCode'), datafileCustomerCompany.getValue(
+    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/input_Zip Code_ZipCode'), findTestData(excelPathCustomerCompany).getValue(
             GlobalVariable.NumofColm, 27))
 
     'input kecamatan'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/input_Kecamatan_kecamatan'), 
-        datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 28))
+        findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm, 28))
 
     'input kelurahan'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/input_Kelurahan_Kelurahan'), 
-        datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 29))
+        findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm, 29))
 
     'input kota'
-    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/input_Kota_kota'), datafileCustomerCompany.getValue(
+    WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/input_Kota_kota'), findTestData(excelPathCustomerCompany).getValue(
             GlobalVariable.NumofColm, 30))
 
     'click button search'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/button_Search'))
 
     'verify input error'
-    CustomKeywords.'customizeKeyword.function.verifyInputLookup'(findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData'), 
+    CustomKeywords.'customizeKeyword.function.verifyInputLookup'(findTestData(excelPathCustomerCompany), 
         '1.TabCustomerMainData', GlobalVariable.NumofColm)
 
     'select ownership'
     WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/select_Select One Dinas  Family  KPR  Rented  Self - Owned'), 
-        datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 31), false)
-} else if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 14) == 'LookUp') {
+        findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm, 31), false)
+} else if (findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm, 14) == 'LookUp') {
     'double check untuk copy app data'
-    if (((datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 16).length() > 0) || (datafileCustomerCompany.getValue(
-        GlobalVariable.NumofColm, 17).length() > 0)) || (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 18).length() > 
+    if (((findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm, 16).length() > 0) || (findTestData(excelPathCustomerCompany).getValue(
+        GlobalVariable.NumofColm, 17).length() > 0)) || (findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm, 18).length() > 
     0)) {
         'click radio button company'
         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/span_ Company'))
@@ -128,21 +128,21 @@ if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 14) == 'Input Dat
 
         'input customer no'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/input_Customer No_custNoId'), 
-            datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 16))
+            findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm, 16))
 
         'input customer name'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/input_Customer Name_custNameId'), 
-            datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 17))
+            findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm, 17))
 
         'input tax id no'
-        WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/input_NPWP_NpwpId'), datafileCustomerCompany.getValue(
+        WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/input_NPWP_NpwpId'), findTestData(excelPathCustomerCompany).getValue(
                 GlobalVariable.NumofColm, 18))
 
         'click button search'
         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/button_Search'))
 
         'verify input error'
-        CustomKeywords.'customizeKeyword.function.verifyInputLookup'(findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData'), 
+        CustomKeywords.'customizeKeyword.function.verifyInputLookup'(findTestData(excelPathCustomerCompany), 
             '1.TabCustomerMainData', GlobalVariable.NumofColm)
     }
     
@@ -168,15 +168,15 @@ if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 14) == 'Input Dat
             FailureHandling.CONTINUE_ON_FAILURE)
     }
     
-    if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 21).length() > 0) {
+    if (findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm, 21).length() > 0) {
         'select company type'
         WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/select_Select One CV  Koperasi  PT'), 
-            datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 21), false)
+            findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm, 21), false)
     }
 }
 
 'check if role testing dan diinput dengan lookup untuk get data customer digunakan untuk Store DB Verif'
-if ((GlobalVariable.RoleCompany == 'Testing') && (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 14) == 'LookUp') && GlobalVariable.FlagFailed == 0) {
+if ((GlobalVariable.RoleCompany == 'Testing') && (findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm, 14) == 'LookUp') && GlobalVariable.FlagFailed == 0) {
     'call function get data cust'
     getDataCust()
 
@@ -206,7 +206,7 @@ GlobalVariable.CustomerName = custname
 'click button save'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/button_Save'))
 
-if ((Integer.parseInt(datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 4)) == 0) && (GlobalVariable.FlagFailed == 
+if ((Integer.parseInt(findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm, 4)) == 0) && (GlobalVariable.FlagFailed == 
 0)) {
     'Check alert'
     GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofColm, 
@@ -224,16 +224,16 @@ if ((Integer.parseInt(datafileCustomerCompany.getValue(GlobalVariable.NumofColm,
 }
 
 if (GlobalVariable.FlagFailed == 0) {
-    if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No')) {
+    if (findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No')) {
         'Check save Process write to excel'
-        CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(datafileCustomerCompany.getValue(
+        CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(findTestData(excelPathCustomerCompany).getValue(
                     GlobalVariable.NumofColm, 4)), findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Tableheadermanagementshareholder'), 
             GlobalVariable.NumofColm, '1.TabCustomerMainData')
 
         'customer added +1'
         (GlobalVariable.CountNumofCustomer)++
 
-        if (Integer.parseInt(datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 4)) == 0) {
+        if (Integer.parseInt(findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm, 4)) == 0) {
             'Check Validasi error'
             CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/errorvalidasi'), 
                 GlobalVariable.NumofColm, '1.TabCustomerMainData')
@@ -281,13 +281,13 @@ if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP
             0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusWarning)
     }
 	
-	if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 14) == 'Input Data') {
+	if (findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm, 14) == 'Input Data') {
 		if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany == 'Yes')) {
 			'call test case verif customer store data'
 			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/Customer/TabCustomerDataStoreDBVerif'),
 				[:], FailureHandling.CONTINUE_ON_FAILURE)
 		}
-	} else if (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 14) == 'LookUp') {
+	} else if (findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm, 14) == 'LookUp') {
 		if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany == 'Yes')) {
 			'call test case verif customer store data'
 			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP1 - CustomerData/Customer/TabCustomerDataStoreDBVerif-LookUp'),
@@ -346,7 +346,7 @@ def checkVerifyEqualOrMatch(Boolean isMatch) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
         'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, 
-            GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+            GlobalVariable.StatusFailed, findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
         GlobalVariable.FlagFailed = 1
     }
@@ -368,7 +368,7 @@ def checkDDL(Sql sqlConnectionFOU){
 		custmodel) == false) {
 
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'Customer Model')
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'Customer Model')
 
 		(GlobalVariable.FlagFailed)++
 	}
@@ -388,7 +388,7 @@ def checkDDL(Sql sqlConnectionFOU){
 		companyType) == false) {
 
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'Company Type')
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'Company Type')
 
 		(GlobalVariable.FlagFailed)++
 	}

@@ -16,17 +16,17 @@ import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
 import groovy.sql.Sql as Sql
 
-'declare datafileCustomerCompany'
-datafileCustomerCompany = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData')
+'declare excelPathCustomerCompany'
+excelPathCustomerCompany = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData'
 
-'declare datafileGuarantorPersonal'
-datafileGuarantorPersonal = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorPersonal')
+'declare excelPathGuarantorPersonal'
+excelPathGuarantorPersonal = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorPersonal'
 
 'get departmentAML dari data file'
-String DepartmentAML = datafileGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 33)
+String DepartmentAML = findTestData(excelPathGuarantorPersonal).getValue(GlobalVariable.NumofGuarantorPersonal, 33)
 
 'get AuthorityAML dari data file'
-String AuthorityAML = datafileGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 35)
+String AuthorityAML = findTestData(excelPathGuarantorPersonal).getValue(GlobalVariable.NumofGuarantorPersonal, 35)
 
 'connect DB LOS'
 Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
@@ -36,76 +36,76 @@ ArrayList<String> arrayMatch = new ArrayList<String>()
 
 'call keyword guarantor data store db personal'
 ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.GuarantorDataStoreDBPersonal'(sqlconnectionLOS, 
-    datafileGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 12), datafileGuarantorPersonal.getValue(
+    findTestData(excelPathGuarantorPersonal).getValue(GlobalVariable.NumofGuarantorPersonal, 12), findTestData(excelPathGuarantorPersonal).getValue(
         GlobalVariable.NumofGuarantorPersonal, 19))
 
 int arrayindex = 0
 
 'verify relationship'
-arrayMatch.add(WebUI.verifyMatch(datafileGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 18).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathGuarantorPersonal).getValue(GlobalVariable.NumofGuarantorPersonal, 18).toUpperCase(), 
         (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify guarantor name'
-arrayMatch.add(WebUI.verifyMatch(datafileGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 19).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathGuarantorPersonal).getValue(GlobalVariable.NumofGuarantorPersonal, 19).toUpperCase(), 
         (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify birth place'
-arrayMatch.add(WebUI.verifyMatch(datafileGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 20).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathGuarantorPersonal).getValue(GlobalVariable.NumofGuarantorPersonal, 20).toUpperCase(), 
         (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify id type'
-arrayMatch.add(WebUI.verifyMatch(datafileGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 21).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathGuarantorPersonal).getValue(GlobalVariable.NumofGuarantorPersonal, 21).toUpperCase(), 
         (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-if ((datafileGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 21).equalsIgnoreCase('E-KTP') || datafileGuarantorPersonal.getValue(
-    GlobalVariable.NumofGuarantorPersonal, 21).equalsIgnoreCase('AKTA')) || datafileGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 
+if ((findTestData(excelPathGuarantorPersonal).getValue(GlobalVariable.NumofGuarantorPersonal, 21).equalsIgnoreCase('E-KTP') || findTestData(excelPathGuarantorPersonal).getValue(
+    GlobalVariable.NumofGuarantorPersonal, 21).equalsIgnoreCase('AKTA')) || findTestData(excelPathGuarantorPersonal).getValue(GlobalVariable.NumofGuarantorPersonal, 
     21).equalsIgnoreCase('NPWP')) {
     'skip id expired date'
     arrayindex++
 } else {
     'verify id expired date'
-    arrayMatch.add(WebUI.verifyMatch(datafileGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 22).toUpperCase(), 
+    arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathGuarantorPersonal).getValue(GlobalVariable.NumofGuarantorPersonal, 22).toUpperCase(), 
             (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 }
 
 'verify marital status'
-arrayMatch.add(WebUI.verifyMatch(datafileGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 23).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathGuarantorPersonal).getValue(GlobalVariable.NumofGuarantorPersonal, 23).toUpperCase(), 
         (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify mobile phone'
-arrayMatch.add(WebUI.verifyMatch(datafileGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 24).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathGuarantorPersonal).getValue(GlobalVariable.NumofGuarantorPersonal, 24).toUpperCase(), 
         (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify customer model'
-arrayMatch.add(WebUI.verifyMatch(datafileGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 25).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathGuarantorPersonal).getValue(GlobalVariable.NumofGuarantorPersonal, 25).toUpperCase(), 
         (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify gender'
-arrayMatch.add(WebUI.verifyMatch(datafileGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 26).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathGuarantorPersonal).getValue(GlobalVariable.NumofGuarantorPersonal, 26).toUpperCase(), 
         (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify birth date'
-arrayMatch.add(WebUI.verifyMatch(datafileGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 27).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathGuarantorPersonal).getValue(GlobalVariable.NumofGuarantorPersonal, 27).toUpperCase(), 
         (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify id no'
-arrayMatch.add(WebUI.verifyMatch(datafileGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 28).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathGuarantorPersonal).getValue(GlobalVariable.NumofGuarantorPersonal, 28).toUpperCase(), 
         (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify tax id no'
-arrayMatch.add(WebUI.verifyMatch(datafileGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 29).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathGuarantorPersonal).getValue(GlobalVariable.NumofGuarantorPersonal, 29).toUpperCase(), 
         (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify mother maiden name'
-arrayMatch.add(WebUI.verifyMatch(datafileGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 30).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathGuarantorPersonal).getValue(GlobalVariable.NumofGuarantorPersonal, 30).toUpperCase(), 
         (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify email'
-arrayMatch.add(WebUI.verifyMatch(datafileGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 31).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathGuarantorPersonal).getValue(GlobalVariable.NumofGuarantorPersonal, 31).toUpperCase(), 
         (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 //'verify department aml value'
-//if (datafileGuarantorPersonal.getValue(
+//if (findTestData(excelPathGuarantorPersonal).getValue(
 //    GlobalVariable.NumofGuarantorPersonal, 33) == '#N/A') {
 //    'set department aml value menjadi string kosong'
 //    DepartmentAML = ''
@@ -115,7 +115,7 @@ arrayMatch.add(WebUI.verifyMatch(datafileGuarantorPersonal.getValue(GlobalVariab
 //WebUI.verifyMatch(DepartmentAML.toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 //
 //'verify authority aml value'
-//if (datafileGuarantorPersonal.getValue(
+//if (findTestData(excelPathGuarantorPersonal).getValue(
 //    GlobalVariable.NumofGuarantorPersonal, 35) == '#N/A') {
 //    'set authority aml value menjadi kosong'
 //    AuthorityAML = ''
@@ -124,7 +124,7 @@ arrayMatch.add(WebUI.verifyMatch(datafileGuarantorPersonal.getValue(GlobalVariab
 //'verify authority aml'
 //WebUI.verifyMatch(AuthorityAML.toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 'verify copy address atau tidak'
-if (datafileGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 38).equalsIgnoreCase('Yes')) {
+if (findTestData(excelPathGuarantorPersonal).getValue(GlobalVariable.NumofGuarantorPersonal, 38).equalsIgnoreCase('Yes')) {
 	confinsindex = 0
 	
 	'verify address copy dari customer'
@@ -160,35 +160,35 @@ if (datafileGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 38
 			(result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 } else {
     'verify address'
-    arrayMatch.add(WebUI.verifyMatch(datafileGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 39).toUpperCase(), 
+    arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathGuarantorPersonal).getValue(GlobalVariable.NumofGuarantorPersonal, 39).toUpperCase(), 
             (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
     'verify rt'
-    arrayMatch.add(WebUI.verifyMatch(datafileGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 40).toUpperCase(), 
+    arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathGuarantorPersonal).getValue(GlobalVariable.NumofGuarantorPersonal, 40).toUpperCase(), 
             (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
     'verify rw'
-    arrayMatch.add(WebUI.verifyMatch(datafileGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 41).toUpperCase(), 
+    arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathGuarantorPersonal).getValue(GlobalVariable.NumofGuarantorPersonal, 41).toUpperCase(), 
             (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
     'verify zipcode'
-    arrayMatch.add(WebUI.verifyMatch(datafileGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 42).toUpperCase(), 
+    arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathGuarantorPersonal).getValue(GlobalVariable.NumofGuarantorPersonal, 42).toUpperCase(), 
             (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
     'verify kecamatan'
-    arrayMatch.add(WebUI.verifyMatch(datafileGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 43).toUpperCase(), 
+    arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathGuarantorPersonal).getValue(GlobalVariable.NumofGuarantorPersonal, 43).toUpperCase(), 
             (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
     'verify kelurahan'
-    arrayMatch.add(WebUI.verifyMatch(datafileGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 44).toUpperCase(), 
+    arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathGuarantorPersonal).getValue(GlobalVariable.NumofGuarantorPersonal, 44).toUpperCase(), 
             (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
     'verify kota'
-    arrayMatch.add(WebUI.verifyMatch(datafileGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 45).toUpperCase(), 
+    arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathGuarantorPersonal).getValue(GlobalVariable.NumofGuarantorPersonal, 45).toUpperCase(), 
             (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
     'verify ownership'
-    arrayMatch.add(WebUI.verifyMatch(datafileGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 46).toUpperCase(), 
+    arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathGuarantorPersonal).getValue(GlobalVariable.NumofGuarantorPersonal, 46).toUpperCase(), 
             (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 }
 
@@ -196,6 +196,6 @@ if (datafileGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 38
 if (arrayMatch.contains(false)) {
 
 	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3a.TabGuarantorDataPersonal', GlobalVariable.NumofGuarantorPersonal, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabGuarantorPersonal').getValue(GlobalVariable.NumofGuarantorPersonal, 2) + ';' + GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedStoredDB)
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3a.TabGuarantorDataPersonal', GlobalVariable.NumofGuarantorPersonal, findTestData(excelPathGuarantorPersonal).getValue(GlobalVariable.NumofGuarantorPersonal, 2) + ';' + GlobalVariable.StatusFailed, GlobalVariable.ReasonFailedStoredDB)
 }
 
