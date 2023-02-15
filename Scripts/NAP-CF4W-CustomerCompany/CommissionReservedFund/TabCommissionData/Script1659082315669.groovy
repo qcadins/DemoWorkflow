@@ -26,8 +26,8 @@ GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPat
 
 GlobalVariable.FlagFailed = 0
 
-'declare datafileCommission'
-datafileCommission = findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData')
+'declare excelPathCommission'
+excelPathCommission = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/CommissionReservedFund/TabCommissionData'
 
 'Koneksi database'
 Sql sqlConnection = CustomKeywords.'dbConnection.connectDB.connectFOU'()
@@ -143,7 +143,7 @@ if(GlobalVariable.RoleCompany == "Testing"){
 				if(WebUI.verifyEqual(Math.round(Double.parseDouble(textIncomeInfoAmt.replace(",",""))),Math.round(getAmountFromAppDB*Double.parseDouble(refundAmt[i])))==false){
 					
 					'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyRule'
-					CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('12.TabCommissionData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedVerifyRule)
+					CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('12.TabCommissionData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathCommission).getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedVerifyRule)
 					
 					GlobalVariable.FlagFailed=1
 				}
@@ -153,7 +153,7 @@ if(GlobalVariable.RoleCompany == "Testing"){
 }
 
 'Mengambil nilai allocation type dari excel'
-allocationType = datafileCommission.getValue(GlobalVariable.NumofColm, 12)
+allocationType = findTestData(excelPathCommission).getValue(GlobalVariable.NumofColm, 12)
 
 'Select dropdownlist allocation type'
 WebUI.selectOptionByLabel(findTestObject('NAP/CommissionReservedFund/TabCommissionData/select_AmountPercentage'),
@@ -172,7 +172,7 @@ if (variableSupp.size() > 0) {
 	String supplierName = WebUI.getText(findTestObject('NAP/CommissionReservedFund/TabCommissionData/label_SupplierName'))
 
 	'Mengambil nilai supplier name yang akan didelete dari excel'
-	String deleteSupp = datafileCommission.getValue(
+	String deleteSupp = findTestData(excelPathCommission).getValue(
 		GlobalVariable.NumofColm, supRow+1)
 
 	'Pengecekan jika supplier name pada confins sama dengan supplier name yang akan didelete'
@@ -193,7 +193,7 @@ if (variableSupp.size() > 0) {
 
 		'Select dropdownlist bank account pada supplier'
 		WebUI.selectOptionByIndex(findTestObject('NAP/CommissionReservedFund/TabCommissionData/select_BankAccountSupplier'),
-			datafileCommission.getValue(
+			findTestData(excelPathCommission).getValue(
 				GlobalVariable.NumofColm, supRow+2), FailureHandling.OPTIONAL)
 
 		'Query Select pada database untuk mengambil nilai supplier code'
@@ -257,18 +257,18 @@ if (variableSupp.size() > 0) {
 
 			'Pengecekan allocation type jika amount'
 			if (allocationType == 'Amount') {
-				if (datafileCommission.getValue(GlobalVariable.NumofColm, (2 * i) + 1 + supRow) != '') {
+				if (findTestData(excelPathCommission).getValue(GlobalVariable.NumofColm, (2 * i) + 1 + supRow) != '') {
 					'Input Amount, 2i+1, +1 berdasarkan perhitungan dari baris di excel, contoh admin fee dibaca saat i = 1, maka nilai ada di baris ke 2*1+1 = 3+supRow  pada excel dan seterusnya. Supaya katalon dapat membaca tambahan label fee/income pada list masing-masing dibawah fee/income terakhir'
-					WebUI.setText(modifyObjectCommissionAmt, datafileCommission.getValue(
+					WebUI.setText(modifyObjectCommissionAmt, findTestData(excelPathCommission).getValue(
 							GlobalVariable.NumofColm, (2 * i) + 1 + supRow), FailureHandling.OPTIONAL)
 				}
 				
 				'Klik pada inputan percentage untuk merefresh/merubah nilai percentage'
 				WebUI.click(modifyObjectCommissionPercentage)
 			} else if(allocationType == 'Percentage') {
-				if (datafileCommission.getValue(GlobalVariable.NumofColm, (2 * i) + 2 + supRow) != '') {
+				if (findTestData(excelPathCommission).getValue(GlobalVariable.NumofColm, (2 * i) + 2 + supRow) != '') {
 					'Input Percentage, 2i+2, +2 berdasarkan perhitungan dari baris di excel, contoh admin fee dibaca saat i = 1, maka nilai ada di baris ke 2*1+2 = 4+supRow  pada excel dan seterusnya. Supaya katalon dapat membaca tambahan label fee/income pada list masing-masing dibawah fee/income terakhir'
-					WebUI.setText(modifyObjectCommissionPercentage, datafileCommission.getValue(
+					WebUI.setText(modifyObjectCommissionPercentage, findTestData(excelPathCommission).getValue(
 							GlobalVariable.NumofColm, (2 * i) + 2 + supRow), FailureHandling.OPTIONAL)
 				}
 				
@@ -315,10 +315,10 @@ if (variableSupp.size() > 0) {
 						GetTotalAllocateCommissionAmt = TotalAllocateCommissionAmt.get(j - 1)
 	
 //						'Pengecekan apakah amount dan percentage keduanya tidak bernilai 0 atau tidak'
-//						if ((amt != 0) && (pctg != 0) &&  datafileCommission.getValue(GlobalVariable.NumofColm, 12) == 'Percentage') {
+//						if ((amt != 0) && (pctg != 0) &&  findTestData(excelPathCommission).getValue(GlobalVariable.NumofColm, 12) == 'Percentage') {
 //							'Tambahkan komponen fee allocate commission from ke arraylist'
 //							TotalAllocateCommissionAmt.set(j - 1, GetTotalAllocateCommissionAmt + ((pctg / 100) * incomeInfoAmt))
-//						} else if ((amt == 0) || (pctg == 0) &&  datafileCommission.getValue(GlobalVariable.NumofColm, 12) == 'Amount'){
+//						} else if ((amt == 0) || (pctg == 0) &&  findTestData(excelPathCommission).getValue(GlobalVariable.NumofColm, 12) == 'Amount'){
 							'Tambahkan komponen fee allocate commission from ke arraylist'
 							TotalAllocateCommissionAmt.set(j - 1, GetTotalAllocateCommissionAmt + amt)
 //						}
@@ -382,11 +382,11 @@ if (variableSuppEmp.size() > 0) {
 		String supplierEmpPos = WebUI.getText(modifyObjectSupplierEmpPos)
 
 		'Mengambil dan menyimpan nama supplier employee dari excel yang akan didelete'
-		def deleteSuppEmpName = datafileCommission.getValue(
+		def deleteSuppEmpName = findTestData(excelPathCommission).getValue(
 			GlobalVariable.NumofColm, suppEmpRow + 1)
 
 		'Mengambil dan menyimpan posisi dari supplier employee dari excel yang akan didelete'
-		def deleteSuppEmpPos = datafileCommission.getValue(
+		def deleteSuppEmpPos = findTestData(excelPathCommission).getValue(
 			GlobalVariable.NumofColm, suppEmpRow + 2)
 
 		'Pengecekan pada excel jika ada supplier employee yang ingin didelete'
@@ -454,7 +454,7 @@ if (variableSuppEmp.size() > 0) {
 			'xpath', 'equals', (('//*[@id=\'formInformationSupplierEmployee\']/div[' + (i + 1)) + ']/div/div[3]/div[1]/div[2]/select'), true)
 
 		'Mengambil nama bank account supplier employee pada excel'
-		def bankAccSuppEmp = datafileCommission.getValue(
+		def bankAccSuppEmp = findTestData(excelPathCommission).getValue(
 			GlobalVariable.NumofColm, suppEmpRow + 3).split(';')
 
 		'Select dropdownlist bank account dari supplier employee'
@@ -524,9 +524,9 @@ if (variableSuppEmp.size() > 0) {
 			'Pengecekan allocation type jika amount'
 			if (allocationType == 'Amount') {
 				'Mengambil nilai amount dari excel, 2j+2, +2 berdasarkan perhitungan dari baris di excel, contoh admin fee dibaca saat j = 1, maka nilai ada di baris ke 2*1+2+16(suppEmpRow) = 20  pada excel dan seterusnya. Supaya katalon dapat membaca tambahan label fee/income pada list masing-masing dibawah fee/income terakhir'
-				value = datafileCommission.getValue(GlobalVariable.NumofColm, ((2 * j) + 2) + suppEmpRow).split(';', -1)
+				value = findTestData(excelPathCommission).getValue(GlobalVariable.NumofColm, ((2 * j) + 2) + suppEmpRow).split(';', -1)
 
-				if (datafileCommission.getValue(GlobalVariable.NumofColm, ((2 * j) + 2) + suppEmpRow).length() > 0) {
+				if (findTestData(excelPathCommission).getValue(GlobalVariable.NumofColm, ((2 * j) + 2) + suppEmpRow).length() > 0) {
 					if ((value[(i - 1)]) != '') {
 						'Input Amount'
 						WebUI.setText(modifyObjectCommissionAmt, value[(i - 1)], FailureHandling.OPTIONAL)
@@ -537,9 +537,9 @@ if (variableSuppEmp.size() > 0) {
 				WebUI.click(modifyObjectCommissionPercentage)
 			} else if(allocationType =='Percentage'){
 				'Mengambil nilai percentage dari excel, 2j+3, +3 berdasarkan perhitungan dari baris di excel, contoh admin fee dibaca saat j = 1, maka nilai ada di baris ke 2*1+3+16(suppEmpRow) = 21  pada excel dan seterusnya. Supaya katalon dapat membaca tambahan label fee/income pada list masing-masing dibawah fee/income terakhir'
-				value = datafileCommission.getValue(GlobalVariable.NumofColm, ((2 * j) + 3) + suppEmpRow).split(';', -1)
+				value = findTestData(excelPathCommission).getValue(GlobalVariable.NumofColm, ((2 * j) + 3) + suppEmpRow).split(';', -1)
 
-				if (datafileCommission.getValue(GlobalVariable.NumofColm, ((2 * j) + 3) + suppEmpRow).length() > 0) {
+				if (findTestData(excelPathCommission).getValue(GlobalVariable.NumofColm, ((2 * j) + 3) + suppEmpRow).length() > 0) {
 					if ((value[(i - 1)]) != '') {
 						'Input Percentage'
 						WebUI.setText(modifyObjectCommissionPercentage, value[(i - 1)], FailureHandling.OPTIONAL)
@@ -589,10 +589,10 @@ if (variableSuppEmp.size() > 0) {
 						GetTotalAllocateCommissionAmt = TotalAllocateCommissionAmt.get(k - 1)
 	
 //						'Pengecekan apakah amount dan percentage keduanya tidak bernilai 0 atau tidak'
-//						if ((amt != 0) && (pctg != 0)  &&  datafileCommission.getValue(GlobalVariable.NumofColm, 12) == 'Percentage') {
+//						if ((amt != 0) && (pctg != 0)  &&  findTestData(excelPathCommission).getValue(GlobalVariable.NumofColm, 12) == 'Percentage') {
 //							'Tambahkan komponen fee allocate commission from ke arraylist'
 //							TotalAllocateCommissionAmt.set(k - 1, GetTotalAllocateCommissionAmt + ((pctg / 100) * incomeInfoAmt))
-//						} else if((amt == 0) || (pctg == 0)  &&  datafileCommission.getValue(GlobalVariable.NumofColm, 12) == 'Amount') {
+//						} else if((amt == 0) || (pctg == 0)  &&  findTestData(excelPathCommission).getValue(GlobalVariable.NumofColm, 12) == 'Amount') {
 							'Tambahkan komponen fee allocate commission from ke arraylist'
 							TotalAllocateCommissionAmt.set(k - 1, GetTotalAllocateCommissionAmt + amt)
 //						}
@@ -645,7 +645,7 @@ if (variableRef.size() > 0) {
 		String refName = WebUI.getText(modifyObjectRefName)
 
 		'Mengambil dan menyimpan nama referantor dari excel yang akan didelete'
-		def deleteRefName = datafileCommission.getValue(
+		def deleteRefName = findTestData(excelPathCommission).getValue(
 			GlobalVariable.NumofColm, refRow + 1)
 
 		'Pengecekan pada excel jika ada referantor yang ingin didelete'
@@ -707,7 +707,7 @@ if (variableRef.size() > 0) {
 			'xpath', 'equals', (('//*[@id=\'formInformationReferantor\']/div[' + (i + 1)) + ']/div/div[2]/div[1]/div[2]/select'), true)
 
 		'Mengambil nama bank account referantor pada excel'
-		def bankAccRef = datafileCommission.getValue(
+		def bankAccRef = findTestData(excelPathCommission).getValue(
 			GlobalVariable.NumofColm, refRow + 2).split(';')
 
 		'Select dropdownlist bank account referantor'
@@ -771,9 +771,9 @@ if (variableRef.size() > 0) {
 			'Pengecekan allocation type jika amount'
 			if (allocationType == 'Amount') {
 				'Mengambil nilai amount dari excel, 2j+1, +1 berdasarkan perhitungan dari baris di excel, contoh admin fee dibaca saat j = 1, maka nilai ada di baris ke 2*1+1+32(refRow) = 35  pada excel dan seterusnya. Supaya katalon dapat membaca tambahan label fee/income pada list masing-masing dibawah fee/income terakhir'
-				value = datafileCommission.getValue(GlobalVariable.NumofColm, ((2 * j) + 1) + refRow).split(';', -1)
+				value = findTestData(excelPathCommission).getValue(GlobalVariable.NumofColm, ((2 * j) + 1) + refRow).split(';', -1)
 
-				if (datafileCommission.getValue(GlobalVariable.NumofColm, ((2 * j) + 1) + refRow).length() > 0) {
+				if (findTestData(excelPathCommission).getValue(GlobalVariable.NumofColm, ((2 * j) + 1) + refRow).length() > 0) {
 					if ((value[(i - 1)]) != '') {
 						'Input Amount'
 						WebUI.setText(modifyObjectCommissionAmt, value[(i - 1)], FailureHandling.OPTIONAL)
@@ -784,9 +784,9 @@ if (variableRef.size() > 0) {
 				WebUI.click(modifyObjectCommissionPercentage)
 			} else if(allocationType=="Percentage"){
 				'Mengambil nilai percentage dari excel, 2j+2, +2 berdasarkan perhitungan dari baris di excel, contoh admin fee dibaca saat j = 1, maka nilai ada di baris ke 2*1+2+32(refRow) = 36  pada excel dan seterusnya. Supaya katalon dapat membaca tambahan label fee/income pada list masing-masing dibawah fee/income terakhir'
-				value = datafileCommission.getValue(GlobalVariable.NumofColm, ((2 * j) + 2) + refRow).split(';', -1)
+				value = findTestData(excelPathCommission).getValue(GlobalVariable.NumofColm, ((2 * j) + 2) + refRow).split(';', -1)
 
-				if (datafileCommission.getValue(GlobalVariable.NumofColm, ((2 * j) + 2) + refRow).length() > 0) {
+				if (findTestData(excelPathCommission).getValue(GlobalVariable.NumofColm, ((2 * j) + 2) + refRow).length() > 0) {
 					if ((value[(i - 1)]) != '') {
 						'Input Percentage'
 						WebUI.setText(modifyObjectCommissionPercentage, value[(i - 1)], FailureHandling.OPTIONAL)
@@ -836,10 +836,10 @@ if (variableRef.size() > 0) {
 						GetTotalAllocateCommissionAmt = TotalAllocateCommissionAmt.get(k - 1)
 	
 						'Pengecekan apakah amount dan percentage keduanya tidak bernilai 0 atau tidak'
-//						if ((amt != 0) && (pctg != 0)  &&  datafileCommission.getValue(GlobalVariable.NumofColm, 12) == 'Percentage') {
+//						if ((amt != 0) && (pctg != 0)  &&  findTestData(excelPathCommission).getValue(GlobalVariable.NumofColm, 12) == 'Percentage') {
 //							'Tambahkan komponen fee allocate commission from ke arraylist'
 //							TotalAllocateCommissionAmt.set(k - 1, GetTotalAllocateCommissionAmt + ((pctg / 100) * incomeInfoAmt))
-//						} else if((amt == 0) || (pctg == 0)  &&  datafileCommission.getValue(GlobalVariable.NumofColm, 12) == 'Amount') {
+//						} else if((amt == 0) || (pctg == 0)  &&  findTestData(excelPathCommission).getValue(GlobalVariable.NumofColm, 12) == 'Amount') {
 							'Tambahkan komponen fee allocate commission from ke arraylist'
 							TotalAllocateCommissionAmt.set(k - 1, GetTotalAllocateCommissionAmt + amt)
 //						}
@@ -873,7 +873,7 @@ if (variableRef.size() > 0) {
 if(commissiondelete.size() > 0){
 	
 	'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedStoredDB'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('12.TabCommissionData', GlobalVariable.NumofColm, GlobalVariable.StatusWarning, findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDelete + commissiondelete)
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('12.TabCommissionData', GlobalVariable.NumofColm, GlobalVariable.StatusWarning, findTestData(excelPathCommission).getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDelete + commissiondelete)
 	
 	GlobalVariable.FlagWarning++
 }
@@ -920,7 +920,7 @@ WebUI.click(findTestObject('NAP/CommissionReservedFund/TabCommissionData/button_
 
 WebUI.delay(2)
 
-Integer iscompleteMandatory = Integer.parseInt(datafileCommission.getValue(GlobalVariable.NumofColm, 4))
+Integer iscompleteMandatory = Integer.parseInt(findTestData(excelPathCommission).getValue(GlobalVariable.NumofColm, 4))
 
 if(iscompleteMandatory==0 && GlobalVariable.FlagFailed==0){
 	'cek alert'
@@ -966,7 +966,7 @@ public checkVerifyEqualOrMatch(Boolean isMatch, String sheetname, int numofcolm)
 		if(isMatch==false && GlobalVariable.FlagFailed==0){
 
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'(sheetname, numofcolm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'(sheetname, numofcolm, GlobalVariable.StatusFailed, findTestData(excelPathCommission).getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
 			GlobalVariable.FlagFailed=1
 	}

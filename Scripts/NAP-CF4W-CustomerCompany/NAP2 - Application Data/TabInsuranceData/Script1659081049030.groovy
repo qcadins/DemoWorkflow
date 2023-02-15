@@ -23,8 +23,8 @@ import internal.GlobalVariable as GlobalVariable
 'get data file path'
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
 
-'declare datafileTabInsurance'
-datafileTabInsurance = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData')
+'declare excelPathTabInsurance'
+excelPathTabInsurance = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP2-ApplicationData/TabInsuranceData'
 
 'Klik tab insurance'
 WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/buttonTabInsurance'))
@@ -47,10 +47,10 @@ if (GlobalVariable.RoleCompany == 'Testing') {
 		int rowAssetPrice = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Calculate Fee Result')
 		
 		'Verifikasi perhitungan asset price'
-		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/label_AssetPrice')).replace('.00',''), datafileTabInsurance.getValue(GlobalVariable.NumofColm, rowAssetPrice+3), false))
+		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/label_AssetPrice')).replace('.00',''), findTestData(excelPathTabInsurance).getValue(GlobalVariable.NumofColm, rowAssetPrice+3), false))
 	
 		'Verifikasi perhitungan asset price incl accessories'
-		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/label_AssetPriceInclAcc')).replace('.00',''), datafileTabInsurance.getValue(GlobalVariable.NumofColm, rowAssetPrice+4), false))
+		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/label_AssetPriceInclAcc')).replace('.00',''), findTestData(excelPathTabInsurance).getValue(GlobalVariable.NumofColm, rowAssetPrice+4), false))
 	}
 	
 	'koneksi fou'
@@ -76,7 +76,7 @@ if (GlobalVariable.RoleCompany == 'Testing') {
 	}
 }
 
-String insuredBy = datafileTabInsurance.getValue(
+String insuredBy = findTestData(excelPathTabInsurance).getValue(
 	GlobalVariable.NumofColm, 12)
 
 'Select option dropdownlist insured by'
@@ -109,7 +109,7 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabIns
 
 WebUI.delay(2)
 
-Integer iscompleteMandatory = Integer.parseInt(datafileTabInsurance.getValue(
+Integer iscompleteMandatory = Integer.parseInt(findTestData(excelPathTabInsurance).getValue(
 		GlobalVariable.NumofColm, 4))
 
 if (iscompleteMandatory == 0 && GlobalVariable.FlagFailed == 0) {
@@ -150,7 +150,7 @@ public checkVerifyEqualOrMatch(Boolean isMatch){
 		if(isMatch==false && GlobalVariable.FlagFailed==0){
 	
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('8.TabInsuranceData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('8.TabInsuranceData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathTabInsurance).getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 	
 			GlobalVariable.FlagFailed=1
 		}

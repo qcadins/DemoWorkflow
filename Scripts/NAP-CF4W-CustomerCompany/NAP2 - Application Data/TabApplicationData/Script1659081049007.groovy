@@ -30,8 +30,8 @@ ArrayList<Integer> posAddCross = new ArrayList<>()
 'get data file path'
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
 
-'declare datafileTabApplication'
-datafileTabApplication = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData')
+'declare excelPathTabApplication'
+excelPathTabApplication = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP2-ApplicationData/TabApplicationData'
 
 'Klik tab application'
 WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/buttonTabApplication'))
@@ -151,7 +151,7 @@ if (GlobalVariable.RoleCompany == 'Testing') {
 		appsource) == false) {
 
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.TabApplicationData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'Application Source')
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.TabApplicationData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathTabApplication).getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'Application Source')
 
 		(GlobalVariable.FlagFailed)++
 	}
@@ -161,7 +161,7 @@ if (GlobalVariable.RoleCompany == 'Testing') {
 			installmentscheme) == false) {
 		
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.TabApplicationData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'Installment Scheme')
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.TabApplicationData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathTabApplication).getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'Installment Scheme')
 		
 		(GlobalVariable.FlagFailed)++
 	}
@@ -171,7 +171,7 @@ if (GlobalVariable.RoleCompany == 'Testing') {
 			wop) == false) {
 		
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.TabApplicationData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'WOP')
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.TabApplicationData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathTabApplication).getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'WOP')
 		
 		(GlobalVariable.FlagFailed)++
 	}
@@ -181,7 +181,7 @@ if (GlobalVariable.RoleCompany == 'Testing') {
 			InstType) == false) {
 		
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.TabApplicationData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'InstType')
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.TabApplicationData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathTabApplication).getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'InstType')
 		
 		(GlobalVariable.FlagFailed)++
 	}
@@ -191,7 +191,7 @@ if (GlobalVariable.RoleCompany == 'Testing') {
 			COC) == false) {
 		
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.TabApplicationData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'COC')
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.TabApplicationData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathTabApplication).getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'COC')
 		
 		(GlobalVariable.FlagFailed)++
 	}
@@ -201,7 +201,7 @@ if (GlobalVariable.RoleCompany == 'Testing') {
 			PayFreq) == false) {
 		
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.TabApplicationData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'PayFreq')
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.TabApplicationData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathTabApplication).getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'PayFreq')
 		
 		(GlobalVariable.FlagFailed)++
 	}
@@ -211,7 +211,7 @@ if (GlobalVariable.RoleCompany == 'Testing') {
 			PayType, FailureHandling.OPTIONAL) == false) {
 		
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.TabApplicationData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'DP Source PayType')
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.TabApplicationData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathTabApplication).getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'DP Source PayType')
 		
 		(GlobalVariable.FlagFailed)++
 	}
@@ -221,7 +221,7 @@ if (GlobalVariable.RoleCompany == 'Testing') {
 			PayType, FailureHandling.OPTIONAL) == false) {
 		
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.TabApplicationData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'Installment Source PayType')
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.TabApplicationData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathTabApplication).getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'Installment Source PayType')
 		
 		(GlobalVariable.FlagFailed)++
 	}
@@ -231,7 +231,7 @@ if (GlobalVariable.RoleCompany == 'Testing') {
 			CustNotif) == false) {
 		
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.TabApplicationData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'CustNotif')
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.TabApplicationData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathTabApplication).getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'CustNotif')
 		
 		(GlobalVariable.FlagFailed)++
 	}
@@ -303,7 +303,7 @@ if (findTestData('Login/Login').getValue(5, 2).toLowerCase().contains('Credit Ma
 			if(WebUI.verifyEqual(totalDataOfficer, countOfficer)==false){
 			
 				'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDataLookup'
-				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.TabApplicationData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDataLookup)
+				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.TabApplicationData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathTabApplication).getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDataLookup)
 				
 				GlobalVariable.FlagFailed=1
 			}
@@ -311,17 +311,17 @@ if (findTestData('Login/Login').getValue(5, 2).toLowerCase().contains('Credit Ma
 		
 		'Input MO Code'
 		WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/input_MO Code'),
-			datafileTabApplication.getValue(
+			findTestData(excelPathTabApplication).getValue(
 				GlobalVariable.NumofColm, 12))
 
 		'Input MO Head Name'
 		WebUI.setText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/input_MO Head Name'),
-			datafileTabApplication.getValue(
+			findTestData(excelPathTabApplication).getValue(
 				GlobalVariable.NumofColm, 13))
 
 		'Input MO Office Name'
 		WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/input_MOOfficeName'),
-			datafileTabApplication.getValue(
+			findTestData(excelPathTabApplication).getValue(
 				GlobalVariable.NumofColm, 14))
 
 		'Click Search'
@@ -354,12 +354,9 @@ if (findTestData('Login/Login').getValue(5, 2).toLowerCase().contains('Credit Ma
 		} else {
 			'click X'
 			WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/Button_X'))
-
-			'click cancel'
-			WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/button_Cancel'))
 			
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDataLookup'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.TabApplicationData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDataLookup)
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.TabApplicationData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathTabApplication).getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDataLookup)
 
 			GlobalVariable.FlagFailed = 1
 
@@ -374,21 +371,21 @@ if (findTestData('Login/Login').getValue(5, 2).toLowerCase().contains('Credit Ma
 
 'Input MO Notes'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/textarea_MONotes'),
-	datafileTabApplication.getValue(
+	findTestData(excelPathTabApplication).getValue(
 		GlobalVariable.NumofColm, 15))
 
 'Select option dropdownlist App Source'
 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/select_ApplicationSource'),
-	datafileTabApplication.getValue(
+	findTestData(excelPathTabApplication).getValue(
 		GlobalVariable.NumofColm, 17), false, FailureHandling.OPTIONAL)
 
 'Select option dropdownlist First Installment Type'
 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/select_FirstInstallmentType'),
-	datafileTabApplication.getValue(
+	findTestData(excelPathTabApplication).getValue(
 		GlobalVariable.NumofColm, 18), false)
 
 'Inisialisasi Variabel'
-String payFreq = datafileTabApplication.getValue(
+String payFreq = findTestData(excelPathTabApplication).getValue(
 	GlobalVariable.NumofColm, 19)
 
 'Select option dropdownlist Payment Frequency'
@@ -396,7 +393,7 @@ WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-Applicat
 	payFreq, false)
 
 'Inisialisasi Variabel'
-String tenorString = datafileTabApplication.getValue(GlobalVariable.NumofColm, 20)
+String tenorString = findTestData(excelPathTabApplication).getValue(GlobalVariable.NumofColm, 20)
 
 'Input tenor'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/input_Tenor'),
@@ -434,10 +431,10 @@ if (GlobalVariable.RoleCompany == 'Testing') {
 		numOfInstallment.toString())
 }
 
-if (datafileTabApplication.getValue(GlobalVariable.NumofColm, 21).length() > 0) {
+if (findTestData(excelPathTabApplication).getValue(GlobalVariable.NumofColm, 21).length() > 0) {
 	'Select option dropdownlist DPSourcePaymentType'
 	WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/select_DPSourcePaymentType'),
-		datafileTabApplication.getValue(GlobalVariable.NumofColm, 21), false)
+		findTestData(excelPathTabApplication).getValue(GlobalVariable.NumofColm, 21), false)
 }
 
 String textInterestType = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/select_InterestType'),
@@ -460,15 +457,15 @@ inssource = findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApp
 if (textInterestType.equalsIgnoreCase('Float Rate')) {
 	'Select option dropdownlist Floating Period'
 	WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/select_FloatingPeriod'),
-		datafileTabApplication.getValue(
+		findTestData(excelPathTabApplication).getValue(
 			GlobalVariable.NumofColm, 23), false)
 }
 
 'Select option dropdownlist installment scheme'
-WebUI.selectOptionByLabel(scheme, datafileTabApplication.getValue(
+WebUI.selectOptionByLabel(scheme, findTestData(excelPathTabApplication).getValue(
 		GlobalVariable.NumofColm, 24), false)
 
-textwop = datafileTabApplication.getValue(GlobalVariable.NumofColm, 25)
+textwop = findTestData(excelPathTabApplication).getValue(GlobalVariable.NumofColm, 25)
 
 'Select option dropdownlist Way of Payment'
 WebUI.selectOptionByLabel(wop, textwop, false)
@@ -478,7 +475,7 @@ if (textwop == 'Auto Debit') {
     bankacc = findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/select_CustomerBankAccount')
 
     'Select option dropdownlist Customer Bank Account'
-    WebUI.selectOptionByIndex(bankacc, datafileTabApplication.getValue(GlobalVariable.NumofColm, 26))
+    WebUI.selectOptionByIndex(bankacc, findTestData(excelPathTabApplication).getValue(GlobalVariable.NumofColm, 26))
 
     Select select = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//select[@formcontrolname = \'CustBankAcc\']')))
 
@@ -486,20 +483,20 @@ if (textwop == 'Auto Debit') {
 }
 
 'Select option dropdownlist Customer Notification By'
-WebUI.selectOptionByLabel(notif, datafileTabApplication.getValue(
+WebUI.selectOptionByLabel(notif, findTestData(excelPathTabApplication).getValue(
 		GlobalVariable.NumofColm, 27), false)
 
-if (datafileTabApplication.getValue(
+if (findTestData(excelPathTabApplication).getValue(
 	GlobalVariable.NumofColm, 28).length() > 0) {
 	'Select option dropdownlist Installment Source Payment'
-	WebUI.selectOptionByLabel(inssource, datafileTabApplication.getValue(
+	WebUI.selectOptionByLabel(inssource, findTestData(excelPathTabApplication).getValue(
 			GlobalVariable.NumofColm, 28), false)
 }
 
 //Cross App/Agr
-def appCross = datafileTabApplication.getValue(GlobalVariable.NumofColm, 63)
-def agrCross = datafileTabApplication.getValue(GlobalVariable.NumofColm, 64)
-def custCross = datafileTabApplication.getValue(GlobalVariable.NumofColm, 65)
+def appCross = findTestData(excelPathTabApplication).getValue(GlobalVariable.NumofColm, 63)
+def agrCross = findTestData(excelPathTabApplication).getValue(GlobalVariable.NumofColm, 64)
+def custCross = findTestData(excelPathTabApplication).getValue(GlobalVariable.NumofColm, 65)
 	
 'declare driver'
 WebDriver driver = DriverFactory.getWebDriver()
@@ -588,7 +585,7 @@ if(appCross.length()>0 && agrCross.length()>0 && custCross.length()>0){
 	if(crossfaileddelete.size() > 0){
 			
 		'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedDelete'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.TabApplicationData', GlobalVariable.NumofColm, GlobalVariable.StatusWarning, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDelete + crossfaileddelete)
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.TabApplicationData', GlobalVariable.NumofColm, GlobalVariable.StatusWarning, findTestData(excelPathTabApplication).getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDelete + crossfaileddelete)
 			
 		GlobalVariable.FlagWarning++
 	}
@@ -630,7 +627,7 @@ if(appCross.length()>0 && agrCross.length()>0 && custCross.length()>0){
 				}
 			} else if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/tablenodata'),FailureHandling.OPTIONAL),
 				'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)) {
-				if (datafileTabApplication.getValue(GlobalVariable.NumofColm, 63) != '') {
+				if (findTestData(excelPathTabApplication).getValue(GlobalVariable.NumofColm, 63) != '') {
 					if (appCrossArr.size() > 0) {
 						'add posisi data crossapp pada excel ke arraylist'
 						posAddCross.add(s-1)
@@ -646,11 +643,11 @@ if(appCross.length()>0 && agrCross.length()>0 && custCross.length()>0){
 //}
 
 'Jika/Verify Copy Address From ada isi/tidak kosong pada excel'
-if (datafileTabApplication.getValue(
+if (findTestData(excelPathTabApplication).getValue(
 	GlobalVariable.NumofColm, 30).length() > 1) {
 	'Select option dropdownlist Copy Address From '
 	WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/select_CopyAddressFrom'),
-		datafileTabApplication.getValue(
+		findTestData(excelPathTabApplication).getValue(
 			GlobalVariable.NumofColm, 30), false)
 
 	'Click copy'
@@ -662,17 +659,17 @@ if (datafileTabApplication.getValue(
 } else {
 	'Input Address'
 	WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/textarea_Address'),
-		datafileTabApplication.getValue(
+		findTestData(excelPathTabApplication).getValue(
 			GlobalVariable.NumofColm, 31))
 
 	'Input RT'
 	WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/input_RT'),
-		datafileTabApplication.getValue(
+		findTestData(excelPathTabApplication).getValue(
 			GlobalVariable.NumofColm, 32))
 
 	'Input RW'
 	WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/input_RW'),
-		datafileTabApplication.getValue(
+		findTestData(excelPathTabApplication).getValue(
 			GlobalVariable.NumofColm, 33))
 
 	'Click Lookup Zipcode'
@@ -680,87 +677,87 @@ if (datafileTabApplication.getValue(
 
 	'Input Zipcode'
 	WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/input_ZipCodeLookup'),
-		datafileTabApplication.getValue(
+		findTestData(excelPathTabApplication).getValue(
 			GlobalVariable.NumofColm, 34))
 
 	'Input Kecamatan'
 	WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/input_Kecamatan_kecamatan'),
-		datafileTabApplication.getValue(
+		findTestData(excelPathTabApplication).getValue(
 			GlobalVariable.NumofColm, 35))
 
 	'Input Kelurahan'
 	WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/input_Kelurahan_Kelurahan'),
-		datafileTabApplication.getValue(
+		findTestData(excelPathTabApplication).getValue(
 			GlobalVariable.NumofColm, 36))
 
 	'Input Kota'
 	WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/input_Kota_kota'),
-		datafileTabApplication.getValue(
+		findTestData(excelPathTabApplication).getValue(
 			GlobalVariable.NumofColm, 37))
 
 	'Click search'
 	WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/button_Search'))
 
 	'verify input error'
-    CustomKeywords.'customizeKeyword.function.verifyInputLookup'(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData'), '6.TabApplicationData', GlobalVariable.NumofColm)
+    CustomKeywords.'customizeKeyword.function.verifyInputLookup'(findTestData(excelPathTabApplication), '6.TabApplicationData', GlobalVariable.NumofColm)
 }
 
 'Input Phone 1 Area'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/input_Phone 1 area'),
-	datafileTabApplication.getValue(
+	findTestData(excelPathTabApplication).getValue(
 		GlobalVariable.NumofColm, 38))
 
 'Input Phone 1 Number'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/input_Phone 1 number'),
-	datafileTabApplication.getValue(
+	findTestData(excelPathTabApplication).getValue(
 		GlobalVariable.NumofColm, 39))
 
 'Input Phone 1 Extension'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/input_Phone 1 extension'),
-	datafileTabApplication.getValue(
+	findTestData(excelPathTabApplication).getValue(
 		GlobalVariable.NumofColm, 40))
 
 'Input Phone 2 Area'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/input_Phone 2 area'),
-	datafileTabApplication.getValue(
+	findTestData(excelPathTabApplication).getValue(
 		GlobalVariable.NumofColm, 41))
 
 'Input Phone 2 Number'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/input_Phone 2 number'),
-	datafileTabApplication.getValue(
+	findTestData(excelPathTabApplication).getValue(
 		GlobalVariable.NumofColm, 42))
 
 'Input Phone 2 Extension'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/input_Phone 2 extension'),
-	datafileTabApplication.getValue(
+	findTestData(excelPathTabApplication).getValue(
 		GlobalVariable.NumofColm, 43))
 
 'Input Phone 3 Area'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/input_Phone 3 area'),
-	datafileTabApplication.getValue(
+	findTestData(excelPathTabApplication).getValue(
 		GlobalVariable.NumofColm, 44))
 
 'Input Phone 3 Number'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/input_Phone 3 number'),
-	datafileTabApplication.getValue(
+	findTestData(excelPathTabApplication).getValue(
 		GlobalVariable.NumofColm, 45))
 
 'Input Phone 3 Extension'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/input_Phone 3 extension'),
-	datafileTabApplication.getValue(
+	findTestData(excelPathTabApplication).getValue(
 		GlobalVariable.NumofColm, 46))
 
 'Input Fax Area'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/input_Fax area'),
-	datafileTabApplication.getValue(
+	findTestData(excelPathTabApplication).getValue(
 		GlobalVariable.NumofColm, 47))
 
 'Input Fax Number'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/input_Fax number'),
-	datafileTabApplication.getValue(
+	findTestData(excelPathTabApplication).getValue(
 		GlobalVariable.NumofColm, 48))
 
-String coc = datafileTabApplication.getValue(
+String coc = findTestData(excelPathTabApplication).getValue(
 	GlobalVariable.NumofColm, 50)
 
 slikbtn = findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/button_Economic Sector (Slik)')
@@ -773,12 +770,12 @@ WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-Applicat
 if (coc != 'Lainnya') {
 	'Input prev agreement no'
 	WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/input_PrevAgreementNo'),
-		datafileTabApplication.getValue(
+		findTestData(excelPathTabApplication).getValue(
 			GlobalVariable.NumofColm, 51))
 
 	'Select option dropdownlist way of restructure '
 	WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/select_WayOfRestructure'),
-		datafileTabApplication.getValue(
+		findTestData(excelPathTabApplication).getValue(
 			GlobalVariable.NumofColm, 52), false)
 }
 
@@ -787,28 +784,28 @@ WebUI.click(slikbtn)
 
 'Input Economic Sector Code'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/input_Economic Sector Code'),
-	datafileTabApplication.getValue(
+	findTestData(excelPathTabApplication).getValue(
 		GlobalVariable.NumofColm, 53))
 
 'Click Search'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/button_Search'))
 
 'verify input error'
-CustomKeywords.'customizeKeyword.function.verifyInputLookup'(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData'), '6.TabApplicationData', GlobalVariable.NumofColm)
+CustomKeywords.'customizeKeyword.function.verifyInputLookup'(findTestData(excelPathTabApplication), '6.TabApplicationData', GlobalVariable.NumofColm)
 
 'Select option dropdownlist Blacklist APPI'
 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/select_BlackListAppi'),
-	datafileTabApplication.getValue(
+	findTestData(excelPathTabApplication).getValue(
 		GlobalVariable.NumofColm, 56), false)
 
 'Input APPI Score'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/input_APPI SCORE'),
-	datafileTabApplication.getValue(
+	findTestData(excelPathTabApplication).getValue(
 		GlobalVariable.NumofColm, 57))
 
 'Input Date APP DATA'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/input_DATE APP DATA'),
-	datafileTabApplication.getValue(
+	findTestData(excelPathTabApplication).getValue(
 		GlobalVariable.NumofColm, 58))
 
 'Click Lookup REF MASTER APP DATA'
@@ -816,18 +813,18 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApp
 
 'Input Code REF MASTER APP DATA'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/input_Code_RefMasterAppData'),
-	datafileTabApplication.getValue(
+	findTestData(excelPathTabApplication).getValue(
 		GlobalVariable.NumofColm, 59))
 
 'Click Search'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/button_Search'))
 
 'verify input error'
-CustomKeywords.'customizeKeyword.function.verifyInputLookup'(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData'), '6.TabApplicationData', GlobalVariable.NumofColm)
+CustomKeywords.'customizeKeyword.function.verifyInputLookup'(findTestData(excelPathTabApplication), '6.TabApplicationData', GlobalVariable.NumofColm)
 
 'Input Jumlah Asset'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/input_JUMLAH ASSET'),
-	datafileTabApplication.getValue(
+	findTestData(excelPathTabApplication).getValue(
 		GlobalVariable.NumofColm, 61))
 
 WebUI.delay(3)
@@ -835,7 +832,7 @@ WebUI.delay(3)
 'click Save'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/button_Save'))
 
-Integer iscompleteMandatory = Integer.parseInt(datafileTabApplication.getValue(
+Integer iscompleteMandatory = Integer.parseInt(findTestData(excelPathTabApplication).getValue(
 		GlobalVariable.NumofColm, 4))
 
 if (iscompleteMandatory == 0 && GlobalVariable.FlagFailed==0) {
@@ -877,7 +874,7 @@ public checkVerifyEqualOrMatch(Boolean isMatch){
 	if(isMatch==false && GlobalVariable.FlagFailed==0){
 
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.TabApplicationData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.TabApplicationData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathTabApplication).getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
 		GlobalVariable.FlagFailed=1
 	}
@@ -911,7 +908,7 @@ public addCrossAppAgr(ArrayList<Integer> s, Sql sqlConnectionLOS){
 		if(WebUI.verifyEqual(totalDataCross, countDataCross)==false){
 		
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDataLookup'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.TabApplicationData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDataLookup)
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.TabApplicationData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathTabApplication).getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDataLookup)
 			
 			GlobalVariable.FlagFailed=1
 		}

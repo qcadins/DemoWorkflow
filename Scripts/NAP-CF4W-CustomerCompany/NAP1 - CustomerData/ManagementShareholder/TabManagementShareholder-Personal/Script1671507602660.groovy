@@ -693,7 +693,7 @@ for (GlobalVariable.NumofMS = GlobalVariable.StartIndex; GlobalVariable.NumofMS 
 						}
 					}
                 }
-					break			
+					continue			
 				}
         }
         }

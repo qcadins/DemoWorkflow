@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>//div[@formarrayname=&quot;AssetAccessoriesObjs&quot;]/table/tbody/tr[1]/td[2]/lib-uclookupgeneric/div/div/div/span/button</value>
+         <value>(.//*[normalize-space(text()) and normalize-space(.)='Select'])[1]/following::span[2]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -17,6 +17,6 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//div[@formarrayname=&quot;AssetAccessoriesObjs&quot;]/table/tbody/tr[1]/td[2]/lib-uclookupgeneric/div/div/div/span/button</value>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Select'])[1]/following::span[2]</value>
    </webElementProperties>
 </WebElementEntity>

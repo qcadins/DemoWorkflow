@@ -24,14 +24,14 @@ import org.openqa.selenium.By as By
 'get data file path'
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
 
-'declare datafileCustomerCompany'
-datafileCustomerCompany = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData')
+'declare excelPathCustomerCompany'
+excelPathCustomerCompany = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData'
 
-'declare datafileCommission'
-datafileCommission = findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData')
+'declare excelPathCommission'
+excelPathCommission = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/CommissionReservedFund/TabCommissionData'
 
-'declare datafileReservedFund'
-datafileReservedFund = findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData')
+'declare excelPathReservedFund'
+excelPathReservedFund = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/CommissionReservedFund/TabReservedFundData'
 
 if (WebUI.verifyElementNotVisible(findTestObject('NAP/CommissionReservedFund/TabCommissionData/a_Commission Reserved Fund'), 
     FailureHandling.OPTIONAL)) {
@@ -49,7 +49,7 @@ pagingTesting()
 
 'Input Appno'
 WebUI.setText(findTestObject('NAP/CommissionReservedFund/TabCommissionData/input_Application No_AppNoId'), 
-    datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 13))
+    findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm, 13))
 
 'Klik Search'
 WebUI.click(findTestObject('NAP/CommissionReservedFund/TabCommissionData/button_Search'))
@@ -61,20 +61,20 @@ WebUI.delay(5)
 
 if (GlobalVariable.RoleCompany == 'Data Entry') {
     'dijalankan tanpa copy app / dengan edit hasil copy app'
-    if (datafileCommission.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || datafileCommission.getValue(
+    if (findTestData(excelPathCommission).getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || findTestData(excelPathCommission).getValue(
         GlobalVariable.NumofColm, 10).equalsIgnoreCase('Edit')) {
         'call test case tab commission'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData'), [:], FailureHandling.CONTINUE_ON_FAILURE) //dijalankan dengan copy app
-    } else if (datafileCommission.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('Yes')) {
+    } else if (findTestData(excelPathCommission).getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('Yes')) {
 		copyAppYesCommission()
     }
     
     'dijalankan tanpa copy app / dengan edit hasil copy app'
-    if (datafileReservedFund.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || datafileReservedFund.getValue(
+    if (findTestData(excelPathReservedFund).getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || findTestData(excelPathReservedFund).getValue(
         GlobalVariable.NumofColm, 10).equalsIgnoreCase('Edit')) {
         'call test case tab reserved fund data'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData'), [:], FailureHandling.CONTINUE_ON_FAILURE) //dijalankan dengan copy app
-    } else if (datafileReservedFund.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('Yes')) {
+    } else if (findTestData(excelPathReservedFund).getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('Yes')) {
 		copyAppYesReservedFund()
     }
 } else {
@@ -87,18 +87,18 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
 	def returnRow = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '12.TabCommissionData', 'Return Commission & Reserved Fund') +
 	1
 
-	if(datafileCommission.getValue(GlobalVariable.NumofColm, returnRow+1).equalsIgnoreCase("Yes")){
+	if(findTestData(excelPathCommission).getValue(GlobalVariable.NumofColm, returnRow+1).equalsIgnoreCase("Yes")){
 		'Klik button return'
 		WebUI.click(findTestObject('Object Repository/NAP/CommissionReservedFund/TabCommissionData/button_Return'))
 		
 		'select return to'
-		WebUI.selectOptionByLabel(findTestObject('Object Repository/NAP/CommissionReservedFund/select_ReturnTo'),datafileCommission.getValue(GlobalVariable.NumofColm, returnRow+2),false)
+		WebUI.selectOptionByLabel(findTestObject('Object Repository/NAP/CommissionReservedFund/select_ReturnTo'),findTestData(excelPathCommission).getValue(GlobalVariable.NumofColm, returnRow+2),false)
 		
 		'select return reason'
-		WebUI.selectOptionByLabel(findTestObject('Object Repository/NAP/CommissionReservedFund/select_ReturnReason'),datafileCommission.getValue(GlobalVariable.NumofColm, returnRow+3),false)
+		WebUI.selectOptionByLabel(findTestObject('Object Repository/NAP/CommissionReservedFund/select_ReturnReason'),findTestData(excelPathCommission).getValue(GlobalVariable.NumofColm, returnRow+3),false)
 		
 		'input note'
-		WebUI.setText(findTestObject('Object Repository/NAP/CommissionReservedFund/textarea_ReturnNotes'), datafileCommission.getValue(GlobalVariable.NumofColm, returnRow+4))
+		WebUI.setText(findTestObject('Object Repository/NAP/CommissionReservedFund/textarea_ReturnNotes'), findTestData(excelPathCommission).getValue(GlobalVariable.NumofColm, returnRow+4))
 	
 		'klik save'
 		WebUI.click(findTestObject('Object Repository/NAP/CommissionReservedFund/button_SaveReturn'))
@@ -118,13 +118,13 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
 		'call test case main return handling'
 		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/ReturnHandling/MAINReturnHandling'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 	}
-	else if(datafileCommission.getValue(GlobalVariable.NumofColm, returnRow+1).equalsIgnoreCase("No")||datafileCommission.getValue(GlobalVariable.NumofColm, returnRow+1).equalsIgnoreCase("Done")||datafileCommission.getValue(GlobalVariable.NumofColm, returnRow+1).length()==0){
+	else if(findTestData(excelPathCommission).getValue(GlobalVariable.NumofColm, returnRow+1).equalsIgnoreCase("No")||findTestData(excelPathCommission).getValue(GlobalVariable.NumofColm, returnRow+1).equalsIgnoreCase("Done")||findTestData(excelPathCommission).getValue(GlobalVariable.NumofColm, returnRow+1).length()==0){
 	    'dijalankan tanpa copy app / dengan edit hasil copy app'
-	    if (datafileCommission.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || datafileCommission.getValue(
+	    if (findTestData(excelPathCommission).getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || findTestData(excelPathCommission).getValue(
 	        GlobalVariable.NumofColm, 10).equalsIgnoreCase('Edit')) {
 	        'call test case tab commission'
 	        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData'), [:], FailureHandling.CONTINUE_ON_FAILURE)
-	    } else if (datafileCommission.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('Yes')) {
+	    } else if (findTestData(excelPathCommission).getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('Yes')) {
 			copyAppYesCommission()
 	    }
 	}
@@ -139,18 +139,18 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
 	returnRow = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '13.TabReservedFundData', 'Return Commission & Reserved Fund') +
 	1
 	
-	if(datafileReservedFund.getValue(GlobalVariable.NumofColm, returnRow+1).equalsIgnoreCase("Yes") && !datafileCommission.getValue(GlobalVariable.NumofColm, returnRowCom+1).equalsIgnoreCase("Yes")){
+	if(findTestData(excelPathReservedFund).getValue(GlobalVariable.NumofColm, returnRow+1).equalsIgnoreCase("Yes") && !findTestData(excelPathCommission).getValue(GlobalVariable.NumofColm, returnRowCom+1).equalsIgnoreCase("Yes")){
 		'Klik button return'
 		WebUI.click(findTestObject('Object Repository/NAP/CommissionReservedFund/TabReservedFundData/button_Return'))
 		
 		'select return to'
-		WebUI.selectOptionByLabel(findTestObject('Object Repository/NAP/CommissionReservedFund/select_ReturnTo'),datafileReservedFund.getValue(GlobalVariable.NumofColm, returnRow+2),false)
+		WebUI.selectOptionByLabel(findTestObject('Object Repository/NAP/CommissionReservedFund/select_ReturnTo'),findTestData(excelPathReservedFund).getValue(GlobalVariable.NumofColm, returnRow+2),false)
 		
 		'select return reason'
-		WebUI.selectOptionByLabel(findTestObject('Object Repository/NAP/CommissionReservedFund/select_ReturnReason'),datafileReservedFund.getValue(GlobalVariable.NumofColm, returnRow+3),false)
+		WebUI.selectOptionByLabel(findTestObject('Object Repository/NAP/CommissionReservedFund/select_ReturnReason'),findTestData(excelPathReservedFund).getValue(GlobalVariable.NumofColm, returnRow+3),false)
 		
 		'input note'
-		WebUI.setText(findTestObject('Object Repository/NAP/CommissionReservedFund/textarea_ReturnNotes'), datafileReservedFund.getValue(GlobalVariable.NumofColm, returnRow+4))
+		WebUI.setText(findTestObject('Object Repository/NAP/CommissionReservedFund/textarea_ReturnNotes'), findTestData(excelPathReservedFund).getValue(GlobalVariable.NumofColm, returnRow+4))
 	
 		'klik save'
 		WebUI.click(findTestObject('Object Repository/NAP/CommissionReservedFund/button_SaveReturn'))
@@ -172,13 +172,13 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
 		
 		
 	}
-	else if((datafileReservedFund.getValue(GlobalVariable.NumofColm, returnRow+1).equalsIgnoreCase("No")||datafileReservedFund.getValue(GlobalVariable.NumofColm, returnRow+1).equalsIgnoreCase("Done")||datafileReservedFund.getValue(GlobalVariable.NumofColm, returnRow+1).length()==0) && !datafileCommission.getValue(GlobalVariable.NumofColm, returnRowCom+1).equalsIgnoreCase("Yes")){
+	else if((findTestData(excelPathReservedFund).getValue(GlobalVariable.NumofColm, returnRow+1).equalsIgnoreCase("No")||findTestData(excelPathReservedFund).getValue(GlobalVariable.NumofColm, returnRow+1).equalsIgnoreCase("Done")||findTestData(excelPathReservedFund).getValue(GlobalVariable.NumofColm, returnRow+1).length()==0) && !findTestData(excelPathCommission).getValue(GlobalVariable.NumofColm, returnRowCom+1).equalsIgnoreCase("Yes")){
 	    'dijalankan tanpa copy app / dengan edit hasil copy app'
-	    if (datafileReservedFund.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || datafileReservedFund.getValue(
+	    if (findTestData(excelPathReservedFund).getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || findTestData(excelPathReservedFund).getValue(
 	        GlobalVariable.NumofColm, 10).equalsIgnoreCase('Edit')) {
 	        'call test case tab reserved fund data'
 	        WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData'), [:], FailureHandling.CONTINUE_ON_FAILURE)
-	    } else if (datafileReservedFund.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('Yes')) {
+	    } else if (findTestData(excelPathReservedFund).getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('Yes')) {
 			copyAppYesReservedFund()
 	    }
 	}
@@ -427,31 +427,31 @@ public pagingTesting(){
 		'keyword untuk verif data yang muncul pada paging jumlahnya sesuai'
 		checkVerifyFooter.add(WebUI.verifyEqual(CustomKeywords.'paging.verifyPaging.ComResFundCountDataInPage'(), true))
 	
-		if (resultReset.contains(false) && (GlobalVariable.StatusFailed != datafileCustomerCompany.getValue(GlobalVariable.NumofColm,
+		if (resultReset.contains(false) && (GlobalVariable.StatusFailed != findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm,
 			1))) {
 						
 			'Write To Excel GlobalVariable.StatusWarning and reason'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusWarning, ((datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 2).replace('-',
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusWarning, ((findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm, 2).replace('-',
 					'') + GlobalVariable.ReasonFailedReset) + 'Comresfund') + ';\n')
 	
 			GlobalVariable.FlagWarning = 1
 		}
 		
-		if (checkVerifySort.contains(false) && (GlobalVariable.StatusFailed != datafileCustomerCompany.getValue(GlobalVariable.NumofColm,
+		if (checkVerifySort.contains(false) && (GlobalVariable.StatusFailed != findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm,
 			1))) {
 						
 			'Write To Excel GlobalVariable.StatusWarning and reason'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusWarning, datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 2).replace('-',
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusWarning, findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm, 2).replace('-',
 					'') + ((GlobalVariable.ReasonFailedSort + 'Comresfund') + ';\n'))
 	
 			GlobalVariable.FlagWarning = 1
 		}
 		
-		if (checkVerifyFooter.contains(false) && (GlobalVariable.StatusFailed != datafileCustomerCompany.getValue(GlobalVariable.NumofColm,
+		if (checkVerifyFooter.contains(false) && (GlobalVariable.StatusFailed != findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm,
 			1))) {
 				
 			'Write To Excel GlobalVariable.StatusWarning and reason'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusWarning, datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 2).replace('-',
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusWarning, findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm, 2).replace('-',
 					'') + ((GlobalVariable.ReasonFailedFooter + 'Comresfund') + ';\n'))
 	
 			GlobalVariable.FlagWarning = 1

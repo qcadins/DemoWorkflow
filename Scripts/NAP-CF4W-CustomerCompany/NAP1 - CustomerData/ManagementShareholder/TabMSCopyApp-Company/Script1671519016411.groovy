@@ -27,11 +27,11 @@ GlobalVariable.FlagFailed = 0
 'get data file path'
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
 
-'declare datafileCustomerCompany'
-datafileCustomerCompany = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData')
+'declare excelPathCustomerCompany'
+excelPathCustomerCompany = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData'
 
-'declare datafileMS'
-datafileMS = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder')
+'declare excelPathMS'
+excelPathMS = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder'
 
 'klik tab management shareholder'
 WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/buttonTabMS'))
@@ -72,8 +72,8 @@ def getDataMS() {
     'declare array for confins data'
     def confinsdata = []
 
-    if (datafileMS.getValue(GlobalVariable.NumofMS, 14).equalsIgnoreCase('Company')) {
-        if (datafileMS.getValue(GlobalVariable.NumofMS, 13) == 'LookUp') {
+    if (findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 14).equalsIgnoreCase('Company')) {
+        if (findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 13) == 'LookUp') {
             'add customer name to array'
             confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/input_Shareholder Legal Name_form-control ng-untouched ng-pristine ng-invalid'), 
                     'value'))
@@ -111,7 +111,7 @@ def getDataMS() {
         confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/LabelKota'), 
                 'value'))
 
-        if (datafileMS.getValue(GlobalVariable.NumofMS, 13) == 'Input Data') {
+        if (findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 13) == 'Input Data') {
             Select select = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//*[@id="Address"]/div/div[2]/div[2]/div/div/div/div/select')))
 
             String optionLabel = select.getFirstSelectedOption().getText()
@@ -126,8 +126,8 @@ def getDataMS() {
 
 def getData() {
     'check if role testing dan input dengan lookup maka get data dari confins untuk verif store DB'
-    if ((GlobalVariable.RoleCompany == 'Testing') && datafileMS.getValue(GlobalVariable.NumofMS, 13).equalsIgnoreCase('LookUp')) {
-        if (datafileMS.getValue(GlobalVariable.NumofMS, 14).equalsIgnoreCase('Company')) {
+    if ((GlobalVariable.RoleCompany == 'Testing') && findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 13).equalsIgnoreCase('LookUp')) {
+        if (findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 14).equalsIgnoreCase('Company')) {
             'call function MS get Data'
             getDataMS()
 
@@ -177,35 +177,35 @@ def getData() {
 
 def mscopyapp(){
 	'Loop Multiple Shareholder data'
-	for (GlobalVariable.NumofMS = GlobalVariable.StartIndex; GlobalVariable.NumofMS <= (datafileMS.getColumnNumbers() -
+	for (GlobalVariable.NumofMS = GlobalVariable.StartIndex; GlobalVariable.NumofMS <= (findTestData(excelPathMS).getColumnNumbers() -
 	1); (GlobalVariable.NumofMS)++) {
-		if (datafileMS.getValue(GlobalVariable.NumofMS, 12) == datafileCustomerCompany.getValue(GlobalVariable.NumofColm,
+		if (findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 12) == findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm,
 			13)) {
-			if (datafileMS.getValue(GlobalVariable.NumofMS, 14).equalsIgnoreCase('Company')) {
-				if (WebUI.getText(modifyNewMSName).equalsIgnoreCase(datafileMS.getValue(GlobalVariable.NumofMS, 52)) ||
-				WebUI.getText(modifyNewMSName).equalsIgnoreCase(datafileMS.getValue(GlobalVariable.NumofMS, 50))) {
+			if (findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 14).equalsIgnoreCase('Company')) {
+				if (WebUI.getText(modifyNewMSName).equalsIgnoreCase(findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 52)) ||
+				WebUI.getText(modifyNewMSName).equalsIgnoreCase(findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 50))) {
 					'click button edit'
 					WebUI.click(modifyNewButtonEdit, FailureHandling.OPTIONAL)
 
 					'check if '
-					if (datafileMS.getValue(GlobalVariable.NumofMS, 13) == 'Input Data') {
+					if (findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 13) == 'Input Data') {
 						'click radio company'
 						WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/span_ Company'))
 
 						'input shareholder name'
 						WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/input_Shareholder Legal Name_form-control ng-untouched ng-pristine ng-invalid'),
-							datafileMS.getValue(GlobalVariable.NumofMS, 52))
+							findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 52))
 
 						'input tax id'
 						WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/input_Tax Id No_form-control ng-untouched ng-pristine ng-invalid'),
-							datafileMS.getValue(GlobalVariable.NumofMS, 53))
+							findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 53))
 
 						'click button position SLIK'
 						WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/button_Position SLIK_btn btn-raised btn-primary'))
 
 						'input jabatan code'
 						WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/input_Jabatan Code_JabatanCodeId'),
-							datafileMS.getValue(GlobalVariable.NumofMS, 54))
+							findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 54))
 
 						'click button search'
 						WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/button_Search'))
@@ -226,25 +226,25 @@ def mscopyapp(){
 						
 						'select company type'
 						WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/select_Select One CV  Koperasi  PT'),
-							datafileMS.getValue(GlobalVariable.NumofMS, 56), false)
+							findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 56), false)
 
 						'select customer model'
 						WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/select_Select One Corporate  Non Corporate'),
-							datafileMS.getValue(GlobalVariable.NumofMS, 57), false)
+							findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 57), false)
 
 						'input share'
 						WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/input_Share()_form-control ng-untouched ng-pristine ng-valid'),
-							datafileMS.getValue(GlobalVariable.NumofMS, 58))
+							findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 58))
 
 						if (WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Is Owner_ng-untouched ng-pristine ng-valid'),
 							GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
-							if (datafileMS.getValue(GlobalVariable.NumofMS, 60).equalsIgnoreCase('Yes')) {
+							if (findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 60).equalsIgnoreCase('Yes')) {
 								'click check box is Owner'
 								WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/input_Is Owner_ng-untouched ng-pristine ng-valid'))
 							}
 						} else if (WebUI.verifyElementChecked(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Is Owner_ng-untouched ng-pristine ng-valid'),
 							GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
-							if (datafileMS.getValue(GlobalVariable.NumofMS, 60).equalsIgnoreCase('No')) {
+							if (findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 60).equalsIgnoreCase('No')) {
 								'click check box is Owner'
 								WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/input_Is Owner_ng-untouched ng-pristine ng-valid'))
 							}
@@ -252,19 +252,19 @@ def mscopyapp(){
 						
 						if (WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Is Active_ng-untouched ng-pristine ng-valid'),
 							GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
-							if (datafileMS.getValue(GlobalVariable.NumofMS, 59).equalsIgnoreCase('Yes')) {
+							if (findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 59).equalsIgnoreCase('Yes')) {
 								'click check box is Active'
 								WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/input_Is Active_ng-untouched ng-pristine ng-valid'))
 							}
 						} else if (WebUI.verifyElementChecked(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Is Active_ng-untouched ng-pristine ng-valid'),
 							GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
-							if (datafileMS.getValue(GlobalVariable.NumofMS, 59).equalsIgnoreCase('No')) {
+							if (findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 59).equalsIgnoreCase('No')) {
 								'click check box is Active'
 								WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/input_Is Active_ng-untouched ng-pristine ng-valid'))
 							}
 						}
 						
-						if (datafileMS.getValue(GlobalVariable.NumofMS, 70).length() > 1) {
+						if (findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 70).length() > 1) {
 							'click button copy'
 							WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_Copy'))
 
@@ -273,34 +273,34 @@ def mscopyapp(){
 						} else {
 							'input address'
 							WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/textarea_Address_form-control ng-untouched ng-pristine ng-invalid'),
-								datafileMS.getValue(GlobalVariable.NumofMS, 71))
+								findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 71))
 
 							'input RT'
 							WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/input_RT'),
-								datafileMS.getValue(GlobalVariable.NumofMS, 72))
+								findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 72))
 
 							'input RW'
 							WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/input_RW'),
-								datafileMS.getValue(GlobalVariable.NumofMS, 73))
+								findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 73))
 
 							'click button lookup zipcode'
 							WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_Zipcode_btn btn-raised btn-primary'))
 
 							'input zipcode'
 							WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/input_Zip Code_ZipCode'),
-								datafileMS.getValue(GlobalVariable.NumofMS, 74))
+								findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 74))
 
 							'input kecamatan'
 							WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/input_Kecamatan_kecamatan'),
-								datafileMS.getValue(GlobalVariable.NumofMS, 75))
+								findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 75))
 
 							'input kelurahan'
 							WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/input_Kelurahan_Kelurahan'),
-								datafileMS.getValue(GlobalVariable.NumofMS, 76))
+								findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 76))
 
 							'input kota'
 							WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/input_Kota_kota'),
-								datafileMS.getValue(GlobalVariable.NumofMS, 77))
+								findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 77))
 
 							'klik button search'
 							WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/button_Search'))
@@ -321,9 +321,9 @@ def mscopyapp(){
 							
 							'select ownership'
 							WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/select_Select One Dinas  Family  KPR  Rented  Self - Owned'),
-								datafileMS.getValue(GlobalVariable.NumofMS, 78), false)
+								findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 78), false)
 						}
-					} else if ((datafileMS.getValue(GlobalVariable.NumofMS, 13) == 'LookUp') && datafileMS.getValue(GlobalVariable.NumofMS,
+					} else if ((findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 13) == 'LookUp') && findTestData(excelPathMS).getValue(GlobalVariable.NumofMS,
 						14).equalsIgnoreCase('Company')) {
 						'click radio company'
 						WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/span_ Company'))
@@ -333,15 +333,15 @@ def mscopyapp(){
 
 						'input customer no'
 						WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/input_Customer No_custNoId'),
-							datafileMS.getValue(GlobalVariable.NumofMS, 49))
+							findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 49))
 
 						'input customer name'
 						WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/input_Customer Name_custNameId'),
-							datafileMS.getValue(GlobalVariable.NumofMS, 50))
+							findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 50))
 
 						'input NPWP'
 						WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/input_NPWP_NpwpId'),
-							datafileMS.getValue(GlobalVariable.NumofMS, 51))
+							findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 51))
 
 						'click button search'
 						WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/button_Search'))
@@ -392,7 +392,7 @@ def mscopyapp(){
 
 						'input jabatan code'
 						WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/input_Jabatan Code_JabatanCodeId'),
-							datafileMS.getValue(GlobalVariable.NumofMS, 54))
+							findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 54))
 
 						WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/button_Search'))
 
@@ -412,21 +412,21 @@ def mscopyapp(){
 						
 						'select company type'
 						WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/select_Select One CV  Koperasi  PT'),
-							datafileMS.getValue(GlobalVariable.NumofMS, 56), false)
+							findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 56), false)
 
 						'input share'
 						WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/input_Share()_form-control ng-untouched ng-pristine ng-valid'),
-							datafileMS.getValue(GlobalVariable.NumofMS, 58))
+							findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 58))
 
 						if (WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Is Owner_ng-untouched ng-pristine ng-valid'),
 							GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
-							if (datafileMS.getValue(GlobalVariable.NumofMS, 60).equalsIgnoreCase('Yes')) {
+							if (findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 60).equalsIgnoreCase('Yes')) {
 								'click check box is Owner'
 								WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/input_Is Owner_ng-untouched ng-pristine ng-valid'))
 							}
 						} else if (WebUI.verifyElementChecked(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Is Owner_ng-untouched ng-pristine ng-valid'),
 							GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
-							if (datafileMS.getValue(GlobalVariable.NumofMS, 60).equalsIgnoreCase('No')) {
+							if (findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 60).equalsIgnoreCase('No')) {
 								'click check box is Owner'
 								WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/input_Is Owner_ng-untouched ng-pristine ng-valid'))
 							}
@@ -434,13 +434,13 @@ def mscopyapp(){
 						
 						if (WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Is Active_ng-untouched ng-pristine ng-valid'),
 							GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
-							if (datafileMS.getValue(GlobalVariable.NumofMS, 59).equalsIgnoreCase('Yes')) {
+							if (findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 59).equalsIgnoreCase('Yes')) {
 								'click check box is Active'
 								WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/input_Is Active_ng-untouched ng-pristine ng-valid'))
 							}
 						} else if (WebUI.verifyElementChecked(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/input_Is Active_ng-untouched ng-pristine ng-valid'),
 							GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
-							if (datafileMS.getValue(GlobalVariable.NumofMS, 59).equalsIgnoreCase('No')) {
+							if (findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 59).equalsIgnoreCase('No')) {
 								'click check box is Active'
 								WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Company/input_Is Active_ng-untouched ng-pristine ng-valid'))
 							}
@@ -460,7 +460,7 @@ def mscopyapp(){
 					'click button save'
 					WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Personal/button_Save'))
 
-					if ((Integer.parseInt(datafileMS.getValue(GlobalVariable.NumofMS, 4)) == 0) && (GlobalVariable.FlagFailed ==
+					if ((Integer.parseInt(findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 4)) == 0) && (GlobalVariable.FlagFailed ==
 					0)) {
 						'Check alert'
 						GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.NumofMS,
@@ -486,14 +486,14 @@ def mscopyapp(){
 					'verify flagfailed lookup == 0 '
 					if (GlobalVariable.FlagFailed == 0) {
 						'Check save Process write to excel'
-						CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(datafileMS.getValue(
+						CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(findTestData(excelPathMS).getValue(
 									GlobalVariable.NumofMS, 4)), findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabManagementShareholderData/Tableheadermanagementshareholder'),
 							GlobalVariable.NumofMS, '2.TabManagementShareholderData')
 
 						'customer added +1'
 						(GlobalVariable.CountNumofCustomer)++
 
-						if (Integer.parseInt(datafileMS.getValue(GlobalVariable.NumofMS, 4)) == 0) {
+						if (Integer.parseInt(findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 4)) == 0) {
 							'Check error validasi'
 							CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP1-CustomerData/TabCustomerData/errorvalidasi'),
 								GlobalVariable.NumofMS, '2.TabManagementShareholderData')
@@ -516,7 +516,7 @@ def mscopyapp(){
 						}
 						
 						
-						if (datafileMS.getValue(GlobalVariable.NumofMS, 13) == 'Input Data') {
+						if (findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 13) == 'Input Data') {
 							if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany ==
 							'Yes')) {
 								'call test case MS Company data store verif'
@@ -536,7 +536,7 @@ def mscopyapp(){
 					
 					break
 				} else {
-					if (datafileMS.getValue(GlobalVariable.NumofMS + 1, 12) != datafileCustomerCompany.getValue(GlobalVariable.NumofColm,
+					if (findTestData(excelPathMS).getValue(GlobalVariable.NumofMS + 1, 12) != findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm,
 						13)) {
 						'click button edit'
 						WebUI.click(modifyNewButtonEdit, FailureHandling.OPTIONAL)
@@ -555,7 +555,7 @@ def mscopyapp(){
 							break
 						} else {
 							CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '2.TabManagementShareholderData',
-								0, GlobalVariable.NumofMS - 1, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabManagementShareholder').getValue(GlobalVariable.NumofMS, 2) + ';' + GlobalVariable.ReasonFailedDelete + customertype)
+								0, GlobalVariable.NumofMS - 1, findTestData(excelPathMS).getValue(GlobalVariable.NumofMS, 2) + ';' + GlobalVariable.ReasonFailedDelete + customertype)
 						}
 						
 						break

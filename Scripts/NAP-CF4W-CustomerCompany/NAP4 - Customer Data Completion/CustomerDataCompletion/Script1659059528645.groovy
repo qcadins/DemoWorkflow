@@ -36,11 +36,11 @@ GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPat
 //'get gen set cdc'
 //ArrayLis<String> Excluded = CustomKeywords.'nap4Data.checkNAP4.GenSetCDC'(sqlConnectionFOU)
 
-'declare datafileCustomerCompany'
-datafileCustomerCompany = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData')
+'declare excelPathCustomerCompany'
+excelPathCustomerCompany = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData'
 
-'declare datafileCustomerCompany'
-datafileCDC = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion')
+'declare excelPathCDC'
+excelPathCDC = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion'
 
 'click menu Customer Data Completion'
 WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompletion/a_CUSTOMER DATA COMPLETION'))
@@ -49,7 +49,7 @@ WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompleti
 pagingTesting()
 
 'input Appno'
-WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompletion/input_Application No_AppNoId'), datafileCDC.getValue(
+WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompletion/input_Application No_AppNoId'), findTestData(excelPathCDC).getValue(
         GlobalVariable.NumofColm, 12))
 
 'click search'
@@ -67,7 +67,7 @@ int count = variable.size()
 GlobalVariable.FlagFailed = 0
 
 //'Jika role testing dan edit appno tidak ada isinya pada excel'
-//if ((GlobalVariable.Role == 'Testing') && (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 8).length() ==
+//if ((GlobalVariable.Role == 'Testing') && (findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm, 8).length() ==
 //0)) {
 //	'verify equal number of customer'
 //	checkVerifyEqualOrMatch(WebUI.verifyEqual(GlobalVariable.CountNumofCustomer, count, FailureHandling.OPTIONAL))
@@ -101,20 +101,20 @@ for (int i = 1; i <= count; i++) {
     String CustomerType = WebUI.getText(modifynewCustomerType)
 
     'tampung customer array excel'
-    def CustomerArray = datafileCDC.getValue(GlobalVariable.NumofColm, 13).split(';')
+    def CustomerArray = findTestData(excelPathCDC).getValue(GlobalVariable.NumofColm, 13).split(';')
 
     'tampung managementshareholder array excel'
-    def ManagementShareholderArray = datafileCDC.getValue(GlobalVariable.NumofColm, 15).split(';')
+    def ManagementShareholderArray = findTestData(excelPathCDC).getValue(GlobalVariable.NumofColm, 15).split(';')
 
     'tampung guarantor array excel'
-    def GuarantorArray = datafileCDC.getValue(GlobalVariable.NumofColm, 17).split(';')
+    def GuarantorArray = findTestData(excelPathCDC).getValue(GlobalVariable.NumofColm, 17).split(';')
 
     'verify customerarray > 0'
     if (CustomerArray.size() > 0) {
         'looping customer array'
         for (c = 1; c <= CustomerArray.size(); c++) {
             'verify action == Yes'
-            if ((GlobalVariable.RoleCompany == 'Testing' && datafileCDC.getValue(GlobalVariable.NumofColm, 14) == 'YES') || 
+            if ((GlobalVariable.RoleCompany == 'Testing' && findTestData(excelPathCDC).getValue(GlobalVariable.NumofColm, 14) == 'YES') || 
 				(GlobalVariable.RoleCompany == 'Data Entry' && isComplete.equalsIgnoreCase('NO'))) {
                 'verify if customerarray == customer name'
                 if (CustomerName.equalsIgnoreCase(CustomerArray[(c - 1)])) {
@@ -142,7 +142,7 @@ for (int i = 1; i <= count; i++) {
         'looping managementshareholder array'
         for (f = 1; f <= ManagementShareholderArray.size(); f++) {
             'verify action == Yes'
-            if (datafileCDC.getValue(GlobalVariable.NumofColm, 16) == 'YES') {
+            if (findTestData(excelPathCDC).getValue(GlobalVariable.NumofColm, 16) == 'YES') {
                 'verify customername == managementshareholder array'
                 if (CustomerName.equalsIgnoreCase(ManagementShareholderArray[(f - 1)]) && (CustomerType == 'PERSONAL')) {
                     'click button action'
@@ -181,7 +181,7 @@ for (int i = 1; i <= count; i++) {
         'looping guarantor array'
         for (g = 1; g <= GuarantorArray.size(); g++) {
             'verify action == YES'
-            if (datafileCDC.getValue(GlobalVariable.NumofColm, 18) == 'YES') {
+            if (findTestData(excelPathCDC).getValue(GlobalVariable.NumofColm, 18) == 'YES') {
                 'verify customername == guarantorarray'
                 if (CustomerName.equalsIgnoreCase(GuarantorArray[(g - 1)]) && (CustomerType == 'PERSONAL')) {
                     WebUI.click(modifynewButtonAction)
@@ -219,7 +219,7 @@ WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompleti
 'get data file path'
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
 
-//Integer iscompleteMandatory = Integer.parseInt(datafileCDC.getValue(GlobalVariable.NumofColm, 4))
+//Integer iscompleteMandatory = Integer.parseInt(findTestData(excelPathCDC).getValue(GlobalVariable.NumofColm, 4))
 
 if (GlobalVariable.FlagFailed == 0) {
     'cek alert'
@@ -253,7 +253,7 @@ def checkVerifyEqualOrMatch(Boolean isMatch) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
         'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('14.CustomerDataCompletion', GlobalVariable.NumofColm, 
-            GlobalVariable.StatusWarning, (findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion').getValue(
+            GlobalVariable.StatusWarning, (findTestData(excelPathCDC).getValue(
                 GlobalVariable.NumofColm, 2) + ';') + GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
         GlobalVariable.FlagFailed = 1
@@ -504,31 +504,31 @@ def pagingTesting() {
 
         checkVerifyFooter.add(WebUI.verifyEqual(CustomKeywords.'paging.verifyPaging.NAP4CountDataInPage'(), true))
 
-        if (resultReset.contains(false) && (GlobalVariable.StatusFailed != datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 
+        if (resultReset.contains(false) && (GlobalVariable.StatusFailed != findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm, 
             1))) {
             'Write To Excel GlobalVariable.StatusWarning and reason'
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, 
-                GlobalVariable.StatusWarning, ((datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 2).replace('-', 
+                GlobalVariable.StatusWarning, ((findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm, 2).replace('-', 
                     '') + GlobalVariable.ReasonFailedReset) + 'NAP4') + ';\n')
 
             GlobalVariable.FlagWarning = 1
         }
         
-        if (checkVerifySort.contains(false) && (GlobalVariable.StatusFailed != datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 
+        if (checkVerifySort.contains(false) && (GlobalVariable.StatusFailed != findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm, 
             1))) {
             'Write To Excel GlobalVariable.StatusWarning and reason'
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, 
-                GlobalVariable.StatusWarning, datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 2).replace('-', 
+                GlobalVariable.StatusWarning, findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm, 2).replace('-', 
                     '') + ((GlobalVariable.ReasonFailedSort + 'NAP4') + ';\n'))
 
             GlobalVariable.FlagWarning = 1
         }
         
-        if (checkVerifyFooter.contains(false) && (GlobalVariable.StatusFailed != datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 
+        if (checkVerifyFooter.contains(false) && (GlobalVariable.StatusFailed != findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm, 
             1))) {
             'Write To Excel GlobalVariable.StatusWarning and reason'
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, 
-                GlobalVariable.StatusWarning, datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 2).replace('-', 
+                GlobalVariable.StatusWarning, findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm, 2).replace('-', 
                     '') + ((GlobalVariable.ReasonFailedFooter + 'NAP4') + ';\n'))
 
             GlobalVariable.FlagWarning = 1

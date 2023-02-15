@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>td_0002APP20211201128</name>
+   <name>td_MRA SUPPLIER COMPANY</name>
    <tag></tag>
-   <elementGuidId>830093ef-7635-41f8-b357-b05a52a83ac8</elementGuidId>
+   <elementGuidId>bf5e2981-df8f-4dcc-9a66-98a99f09b0af</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>
-         <value>(.//*[normalize-space(text()) and normalize-space(.)='Kebon Jeruk'])[3]/following::td[1]</value>
-      </entry>
-      <entry>
-         <key>BASIC</key>
-         <value></value>
+         <value>(.//*[normalize-space(text()) and normalize-space(.)='Select'])[1]/following::td[2]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>
@@ -31,52 +27,45 @@
       <value>text-left ng-star-inserted</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>false</isSelected>
+      <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>text</name>
       <type>Main</type>
-      <value>0002APP20211201128</value>
+      <value>MRA SUPPLIER COMPANY</value>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>/html[1]/body[@class=&quot;pace-done&quot;]/app-root[1]/app-full-layout[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;wrapper&quot;]/div[@class=&quot;main-panel&quot;]/div[@class=&quot;main-content&quot;]/div[1]/div[@class=&quot;content-wrapper&quot;]/div[@class=&quot;container-fluid&quot;]/app-cust-completion-paging[@class=&quot;ng-star-inserted&quot;]/lib-ucpaging[1]/lib-ucgridview[1]/div[@class=&quot;table-responsive&quot;]/table[@class=&quot;table table-bordered table-striped text-center table-hover&quot;]/tbody[1]/tr[@class=&quot;ng-star-inserted&quot;]/td[@class=&quot;text-left ng-star-inserted&quot;]</value>
+      <value>/html[1]/body[@class=&quot;pace-done modal-open&quot;]/ngb-modal-window[@class=&quot;d-block modal fade show&quot;]/div[@class=&quot;modal-dialog&quot;]/div[@class=&quot;modal-content&quot;]/div[@class=&quot;modal-body&quot;]/lib-ucpaging[1]/lib-ucgridview[1]/div[@class=&quot;table-responsive&quot;]/table[@class=&quot;table table-bordered table-striped text-center table-hover table-layout-fixed&quot;]/tbody[1]/tr[@class=&quot;text-break ng-star-inserted&quot;]/td[@class=&quot;text-left ng-star-inserted&quot;]</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath:neighbor</name>
       <type>Main</type>
-      <value>(.//*[normalize-space(text()) and normalize-space(.)='Kebon Jeruk'])[3]/following::td[1]</value>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Select'])[1]/following::td[2]</value>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath:neighbor</name>
       <type>Main</type>
-      <value>(.//*[normalize-space(text()) and normalize-space(.)='Action'])[1]/following::td[4]</value>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Supplier Name'])[4]/following::td[2]</value>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath:neighbor</name>
       <type>Main</type>
-      <value>(.//*[normalize-space(text()) and normalize-space(.)='FT TIO'])[1]/preceding::td[2]</value>
-   </webElementXpaths>
-   <webElementXpaths>
-      <isSelected>false</isSelected>
-      <matchCondition>equals</matchCondition>
-      <name>xpath:neighbor</name>
-      <type>Main</type>
-      <value>(.//*[normalize-space(text()) and normalize-space(.)='FT PRODUCT OFFERING CF4W'])[1]/preceding::td[3]</value>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Select'])[2]/preceding::td[1]</value>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath:position</name>
       <type>Main</type>
-      <value>//td[4]</value>
+      <value>//lib-ucgridview/div/table/tbody/tr/td[2]</value>
    </webElementXpaths>
 </WebElementEntity>

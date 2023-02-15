@@ -3,7 +3,6 @@
    <description></description>
    <name>MAIN_NAP2_ApplicationData</name>
    <tag></tag>
-   <comment>Verify tab insurance, financial apakah ada nilai yang berubah (membandingkan app sumber dengan app hasil copy dalam database
-</comment>
+   <comment>Verify tab insurance, financial apakah ada nilai yang berubah (membandingkan app sumber dengan app hasil copy dalam database</comment>
    <testCaseGuid>fc84cf4e-838e-47ce-aadb-a74c8a67b6ca</testCaseGuid>
 </TestCaseEntity>

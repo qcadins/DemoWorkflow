@@ -22,28 +22,28 @@ import internal.GlobalVariable as GlobalVariable
 'connect DB'
 Sql sqlconnection = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
-'declare datafileCustomerCompany'
-datafileCustomerCompany = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData')
+'declare excelPathCustomerCompany'
+excelPathCustomerCompany = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData'
 
-'declare datafileTabApplication'
-datafileTabApplication = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData')
+'declare excelPathTabApplication'
+excelPathTabApplication = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP2-ApplicationData/TabApplicationData'
 
 String custname = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/labelCustomerName'))
 
-ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2TabApplicationStoreDB'(sqlconnection, datafileCustomerCompany.getValue(
+ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2TabApplicationStoreDB'(sqlconnection, findTestData(excelPathCustomerCompany).getValue(
 		GlobalVariable.NumofColm, 13), custname)
 		
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
 
-ArrayList<String> resultattr = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2TabApplicationAttrStoreDB'(sqlconnection, datafileCustomerCompany.getValue(
+ArrayList<String> resultattr = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2TabApplicationAttrStoreDB'(sqlconnection, findTestData(excelPathCustomerCompany).getValue(
 		GlobalVariable.NumofColm, 13))
 		
 ArrayList<String> bankaccount
 def bankarray, confinsdatabankacc
 
-	if(datafileTabApplication.getValue(GlobalVariable.NumofColm, 25).equalsIgnoreCase('Auto Debit')){
+	if(findTestData(excelPathTabApplication).getValue(GlobalVariable.NumofColm, 25).equalsIgnoreCase('Auto Debit')){
 
-	 bankaccount = CustomKeywords.'dbConnection.CustomerDataVerif.BankAccountTabApplicationDataStoreDB'(sqlconnection, datafileCustomerCompany.getValue(
+	 bankaccount = CustomKeywords.'dbConnection.CustomerDataVerif.BankAccountTabApplicationDataStoreDB'(sqlconnection, findTestData(excelPathCustomerCompany).getValue(
 		GlobalVariable.NumofColm, 13))
 	 
 			 confinsdatabankacc = GlobalVariable.BankAccount.split(' - ')
@@ -54,47 +54,47 @@ int bankindex = 0
 int confinsindex = 0
 
 'verify application source'
-arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabApplication).getValue(
 		GlobalVariable.NumofColm, 17).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify First installment type'
-arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabApplication).getValue(
 		GlobalVariable.NumofColm, 18).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify payment frequency'
-arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabApplication).getValue(
 		GlobalVariable.NumofColm, 19).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify tenor'
-arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabApplication).getValue(
 		GlobalVariable.NumofColm, 20).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify dp source payment type'
-arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabApplication).getValue(
 		GlobalVariable.NumofColm, 21).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify interest type'
-arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabApplication).getValue(
 		GlobalVariable.NumofColm, 22).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-if(datafileTabApplication.getValue(
+if(findTestData(excelPathTabApplication).getValue(
 		GlobalVariable.NumofColm, 22) == 'Float Rate'){
 	'verify floating period'
-	arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
+	arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabApplication).getValue(
 		GlobalVariable.NumofColm, 23).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 }else{
 	arrayindex++
 }
 
 'verify installment scheme'
-arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabApplication).getValue(
 		GlobalVariable.NumofColm, 24).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify WOP'
-arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabApplication).getValue(
 		GlobalVariable.NumofColm, 25).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-//if(datafileTabApplication.getValue(
+//if(findTestData(excelPathTabApplication).getValue(
 //	GlobalVariable.NumofColm, 25).equalsIgnoreCase('Auto Debit')){
 //'verify Bank Name'
 //arrayMatch.add(WebUI.verifyMatch((confinsdatabankacc[confinsindex++]).toUpperCase(), (bankaccount[bankindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
@@ -107,15 +107,15 @@ arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
 //}
 	
 'verify customer notification'
-arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabApplication).getValue(
 		GlobalVariable.NumofColm, 27).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify installment source payment type'
-arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabApplication).getValue(
 		GlobalVariable.NumofColm, 28).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify if copy address'
-if(datafileTabApplication.getValue(GlobalVariable.NumofColm, 30).length() > 0){
+if(findTestData(excelPathTabApplication).getValue(GlobalVariable.NumofColm, 30).length() > 0){
 
 	address = 0
 	
@@ -175,90 +175,90 @@ if(datafileTabApplication.getValue(GlobalVariable.NumofColm, 30).length() > 0){
 }else{
 
 	'verify address'
-	arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
+	arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabApplication).getValue(
 			GlobalVariable.NumofColm, 31).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	
 	'verify rt'
-	arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
+	arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabApplication).getValue(
 			GlobalVariable.NumofColm, 32).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	
 	'verify rw'
-	arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
+	arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabApplication).getValue(
 			GlobalVariable.NumofColm, 33).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	
 	'verify zipcode'
-	arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
+	arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabApplication).getValue(
 			GlobalVariable.NumofColm, 34).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	
 	'verify kecamatan'
-	arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
+	arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabApplication).getValue(
 			GlobalVariable.NumofColm, 35).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	
 	'verify kelurahan'
-	arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
+	arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabApplication).getValue(
 			GlobalVariable.NumofColm, 36).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	
 	'verify kota'
-	arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
+	arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabApplication).getValue(
 			GlobalVariable.NumofColm, 37).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 	'verify phone area 1'
-	arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
+	arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabApplication).getValue(
 			GlobalVariable.NumofColm, 38).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	
 	'verify phone number 1'
-	arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
+	arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabApplication).getValue(
 			GlobalVariable.NumofColm, 39).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	
 	'verify phone ext 1'
-	arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
+	arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabApplication).getValue(
 			GlobalVariable.NumofColm, 40).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	
 	'verify phone area 2'
-	arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
+	arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabApplication).getValue(
 			GlobalVariable.NumofColm, 41).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	
 	'verify phone number 2'
-	arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
+	arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabApplication).getValue(
 			GlobalVariable.NumofColm, 42).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	
 	'verify phone ext 2'
-	arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
+	arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabApplication).getValue(
 			GlobalVariable.NumofColm, 43).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	
 	'verify phone area 3'
-	arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
+	arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabApplication).getValue(
 			GlobalVariable.NumofColm, 44).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	
 	'verify phone number 3'
-	arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
+	arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabApplication).getValue(
 			GlobalVariable.NumofColm, 45).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	
 	'verify phone ext 3'
-	arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
+	arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabApplication).getValue(
 			GlobalVariable.NumofColm, 46).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	
 	'verify fax area'
-	arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
+	arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabApplication).getValue(
 			GlobalVariable.NumofColm, 47).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 	'verify fax number'
-	arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
+	arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabApplication).getValue(
 			GlobalVariable.NumofColm, 48).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 }
 
 'verify Characteristic of credit'
-arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabApplication).getValue(
 		GlobalVariable.NumofColm, 50).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-if(!(datafileTabApplication.getValue(GlobalVariable.NumofColm, 50).equalsIgnoreCase('Lainnya'))){
+if(!(findTestData(excelPathTabApplication).getValue(GlobalVariable.NumofColm, 50).equalsIgnoreCase('Lainnya'))){
 'verify previous number of aggrmnt'
-arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabApplication).getValue(
 		GlobalVariable.NumofColm, 51).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify WOS'
-arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabApplication).getValue(
 		GlobalVariable.NumofColm, 52).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 }else{
 'skipp'
@@ -267,38 +267,38 @@ arrayindex++
 }
 
 'verify economic sector code'
-arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabApplication).getValue(
 		GlobalVariable.NumofColm, 53).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify Blacklist APPI'
-arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabApplication).getValue(
 		GlobalVariable.NumofColm, 56).toUpperCase(), (resultattr[attrindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify APPI score'
-arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabApplication).getValue(
 		GlobalVariable.NumofColm, 57).toUpperCase(), (resultattr[attrindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-if(datafileTabApplication.getValue(GlobalVariable.NumofColm, 58).length() > 0){
+if(findTestData(excelPathTabApplication).getValue(GlobalVariable.NumofColm, 58).length() > 0){
 'verify Date app data'
-arrayMatch.add(WebUI.verifyMatch(convertDateFormat(datafileTabApplication.getValue(
+arrayMatch.add(WebUI.verifyMatch(convertDateFormat(findTestData(excelPathTabApplication).getValue(
 			GlobalVariable.NumofColm, 58)), (resultattr[attrindex++]), false, FailureHandling.OPTIONAL))
 }else{
 attrindex++
 }
 
 'verify app data code'
-arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabApplication).getValue(
 		GlobalVariable.NumofColm, 59).toUpperCase(), (resultattr[attrindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify jumlah asset'
-arrayMatch.add(WebUI.verifyMatch(datafileTabApplication.getValue(
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabApplication).getValue(
 		GlobalVariable.NumofColm, 61).toUpperCase(), (resultattr[attrindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'Jika nilai di confins ada yang tidak sesuai dengan db'
 if (arrayMatch.contains(false)) {
 	
 	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedStoredDB'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.TabApplicationData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedStoredDB)
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.TabApplicationData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathTabApplication).getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedStoredDB)
 
 }
 

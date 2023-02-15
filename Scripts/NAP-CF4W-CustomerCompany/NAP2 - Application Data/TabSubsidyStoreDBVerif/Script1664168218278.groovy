@@ -25,22 +25,22 @@ ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2Su
 
 int arrayindexdb = 0
 
-'declare datafileTabFinancial'
-datafileTabFinancial = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData')
+'declare excelPathTabFinancial'
+excelPathTabFinancial = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP2-ApplicationData/TabFinancialData'
 
-def SubsidyTypeArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 12).split(';', -1)
+def SubsidyTypeArray = findTestData(excelPathTabFinancial).getValue(GlobalVariable.NumofColm, 12).split(';', -1)
 
-def SubsidyfromValueArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 13).split(';', -1)
+def SubsidyfromValueArray = findTestData(excelPathTabFinancial).getValue(GlobalVariable.NumofColm, 13).split(';', -1)
 
-def AllocationformArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 14).split(';', -1)
+def AllocationformArray = findTestData(excelPathTabFinancial).getValue(GlobalVariable.NumofColm, 14).split(';', -1)
 
-def SubsidySourceArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 15).split(';', -1)
+def SubsidySourceArray = findTestData(excelPathTabFinancial).getValue(GlobalVariable.NumofColm, 15).split(';', -1)
 
-def SubsidyValueTypeArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 16).split(';', -1)
+def SubsidyValueTypeArray = findTestData(excelPathTabFinancial).getValue(GlobalVariable.NumofColm, 16).split(';', -1)
 
-def SubsidyValueAmountArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 17).split(';', -1)
+def SubsidyValueAmountArray = findTestData(excelPathTabFinancial).getValue(GlobalVariable.NumofColm, 17).split(';', -1)
 
-def SubsidyValuePercentageArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 18).split(';', -1)
+def SubsidyValuePercentageArray = findTestData(excelPathTabFinancial).getValue(GlobalVariable.NumofColm, 18).split(';', -1)
 
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
 
@@ -114,6 +114,6 @@ if(result.size() > 0){
 if (arrayMatch.contains(false)) {
 	
 	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedStoredDB'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('9.TabFinancialData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabFinancialData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedStoredDB)
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('9.TabFinancialData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathTabFinancial).getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedStoredDB)
 
 }

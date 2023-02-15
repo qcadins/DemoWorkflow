@@ -18,16 +18,16 @@ import internal.GlobalVariable as GlobalVariable
 'get data file path'
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
 
-'declare datafileCustomerCompany'
-datafileCustomerCompany = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData')
+'declare excelPathCustomerCompany'
+excelPathCustomerCompany = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData'
 
-'declare datafileTabUploadDoc'
-datafileTabUploadDoc = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument')
+'declare excelPathTabUploadDoc'
+excelPathTabUploadDoc = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP2-ApplicationData/TabUploadDocument'
 
 'Klik tab upload doc'
 WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/buttonTabUploadDoc'))
 
-countUploadDoc = datafileTabUploadDoc.getColumnNumbers()
+countUploadDoc = findTestData(excelPathTabUploadDoc).getColumnNumbers()
 
 if (GlobalVariable.RoleCompany == 'Testing') {
     'verify application step'
@@ -36,7 +36,7 @@ if (GlobalVariable.RoleCompany == 'Testing') {
 }
 
 for (GlobalVariable.NumofUploadDocument = 2; GlobalVariable.NumofUploadDocument <= (countUploadDoc - 1); (GlobalVariable.NumofUploadDocument)++) {
-    if (datafileTabUploadDoc.getValue(GlobalVariable.NumofUploadDocument, 12) == datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 
+    if (findTestData(excelPathTabUploadDoc).getValue(GlobalVariable.NumofUploadDocument, 12) == findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm, 
         13)) {
         'click menu titik 3'
         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/span_VIEW APPLICATION  0002APP20211201128_spanMenu'))
@@ -52,23 +52,23 @@ for (GlobalVariable.NumofUploadDocument = 2; GlobalVariable.NumofUploadDocument 
         
         'upload file'
         CustomKeywords.'customizeKeyword.uploadFile.uploadcustomizeKeyword.Function'(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/img_Upload _thumbnail thumbnail-change'), 
-            datafileTabUploadDoc.getValue(GlobalVariable.NumofUploadDocument, 13))
+            findTestData(excelPathTabUploadDoc).getValue(GlobalVariable.NumofUploadDocument, 13))
 
         'input document name'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/input_Document Name  _gvMetadatactl02txtRecordValue'), 
-            datafileTabUploadDoc.getValue(GlobalVariable.NumofUploadDocument, 14))
+            findTestData(excelPathTabUploadDoc).getValue(GlobalVariable.NumofUploadDocument, 14))
 
         'select jenis document'
         WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/select_Jenis Document'), 
-            datafileTabUploadDoc.getValue(GlobalVariable.NumofUploadDocument, 15), false)
+            findTestData(excelPathTabUploadDoc).getValue(GlobalVariable.NumofUploadDocument, 15), false)
 
         'input MOU Id'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/input_Mou Id_gvMetadatactl05txtRecordValue'), 
-            datafileTabUploadDoc.getValue(GlobalVariable.NumofUploadDocument, 16))
+            findTestData(excelPathTabUploadDoc).getValue(GlobalVariable.NumofUploadDocument, 16))
 
         'input notes'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/input_Notes_gvMetadatactl06txtRecordValue'), 
-            datafileTabUploadDoc.getValue(GlobalVariable.NumofUploadDocument, 17))
+            findTestData(excelPathTabUploadDoc).getValue(GlobalVariable.NumofUploadDocument, 17))
 
         'click button save'
         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/button_save'))
@@ -108,20 +108,20 @@ WebUI.delay(3)
 
 'input app no'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/input_Application No_AppNoId'), 
-    datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 13))
+    findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm, 13))
 
 'click button search'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/button_Search'))
 
 'verify appno'
 WebUI.verifyElementText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabUploadDocument/td_0002APP20211201128'), 
-    datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 13), FailureHandling.OPTIONAL)
+    findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm, 13), FailureHandling.OPTIONAL)
 
 def checkVerifyEqualOrMatch(Boolean isMatch) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
         'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('11.TabUploadDocument', GlobalVariable.NumofUploadDocument, 
-            GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabTermConditionData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+            GlobalVariable.StatusFailed, findTestData(excelPathTabUploadDoc).getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
         GlobalVariable.FlagFailed = 1
     }

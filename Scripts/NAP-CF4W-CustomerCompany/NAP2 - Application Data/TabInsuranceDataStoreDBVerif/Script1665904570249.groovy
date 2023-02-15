@@ -27,10 +27,10 @@ Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 Sql sqlconnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
-'declare datafileTabInsurance'
-datafileTabInsurance = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData')
+'declare excelPathTabInsurance'
+excelPathTabInsurance = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP2-ApplicationData/TabInsuranceData'
 
-String insuredBy = datafileTabInsurance.getValue(GlobalVariable.NumofColm, 12)
+String insuredBy = findTestData(excelPathTabInsurance).getValue(GlobalVariable.NumofColm, 12)
 
 int arrayindex = 0
 
@@ -53,7 +53,7 @@ if (insuredBy == 'Customer') {
 if (arrayMatch.contains(false)) {
 
 	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedStoredDB'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('8.TabInsuranceData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedStoredDB)
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('8.TabInsuranceData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathTabInsurance).getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedStoredDB)
 }
 
 public insuredCust(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS){
@@ -68,7 +68,7 @@ public insuredCust(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS){
 	'index 14 karena mengikuti row di data file / excel'
 	for (int index = 14; index < (result.size() + 14); index++) {
 		'verify insco branch name'
-		arrayMatch.add(WebUI.verifyMatch(datafileTabInsurance.getValue(
+		arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabInsurance).getValue(
 					GlobalVariable.NumofColm, index).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	}
 }
@@ -92,12 +92,12 @@ public insuredCustMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sq
 		'index -13 supaya dapat verif apakah index sudah sampai index terakhir dari array'
 		if ((index - 13) != resultCustomerInsurance.size()) {
 			'verify insco branch name'
-			arrayMatch.add(WebUI.verifyMatch(datafileTabInsurance.getValue(
+			arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabInsurance).getValue(
 					GlobalVariable.NumofColm, index).toUpperCase().replace(',', ''), (resultCustomerInsurance[arrayindex++]).toUpperCase(),
 					false, FailureHandling.OPTIONAL))
 		} else if ((index - 13) == resultCustomerInsurance.size()) {
 			
-			String countDate = CustomKeywords.'customizeKeyword.convertDate.countDateInsurance'(datafileTabInsurance.getValue(GlobalVariable.NumofColm, 19))
+			String countDate = CustomKeywords.'customizeKeyword.convertDate.countDateInsurance'(findTestData(excelPathTabInsurance).getValue(GlobalVariable.NumofColm, 19))
 					
 					arrayMatch.add(WebUI.verifyMatch(countDate, (resultCustomerInsurance[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 		}
@@ -106,56 +106,56 @@ public insuredCustMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sq
 	arrayindex = 0
 			
 			'verify asset region'
-			arrayMatch.add(WebUI.verifyMatch(datafileTabInsurance.getValue(
+			arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabInsurance).getValue(
 					GlobalVariable.NumofColm, 22).toUpperCase().replace(',', ''), (resultMFinsurance[arrayindex++]).toUpperCase(),
 					false, FailureHandling.OPTIONAL))
 			
 			'verify coverage amount'
-			arrayMatch.add(WebUI.verifyMatch(datafileTabInsurance.getValue(
+			arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabInsurance).getValue(
 					GlobalVariable.NumofColm, 23).toUpperCase().replace(',', ''), (resultMFinsurance[arrayindex++]).toUpperCase(),
 					false, FailureHandling.OPTIONAL))
 			
 			'verify cover period'
-			arrayMatch.add(WebUI.verifyMatch(datafileTabInsurance.getValue(
+			arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabInsurance).getValue(
 					GlobalVariable.NumofColm, 24).toUpperCase().replace(',', ''), (resultMFinsurance[arrayindex++]).toUpperCase(),
 					false, FailureHandling.OPTIONAL))
 			
 			'verify payment type'
-			arrayMatch.add(WebUI.verifyMatch(datafileTabInsurance.getValue(
+			arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabInsurance).getValue(
 					GlobalVariable.NumofColm, 25).toUpperCase().replace(',', ''), (resultMFinsurance[arrayindex++]).toUpperCase(),
 					false, FailureHandling.OPTIONAL))
 			
 			'verify insco branch name'
-			arrayMatch.add(WebUI.verifyMatch(datafileTabInsurance.getValue(
+			arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabInsurance).getValue(
 					GlobalVariable.NumofColm, 26).toUpperCase().replace(',', ''), (resultMFinsurance[arrayindex++]).toUpperCase(),
 					false, FailureHandling.OPTIONAL))
 			
 			'verify insurance note'
-			arrayMatch.add(WebUI.verifyMatch(datafileTabInsurance.getValue(
+			arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabInsurance).getValue(
 					GlobalVariable.NumofColm, 27).toUpperCase().replace(',', ''), (resultMFinsurance[arrayindex++]).toUpperCase(),
 					false, FailureHandling.OPTIONAL))
 			
-			if ((datafileTabInsurance.getValue(
-					GlobalVariable.NumofColm, 24) == 'Partial Tenor') || (datafileTabInsurance.getValue(
+			if ((findTestData(excelPathTabInsurance).getValue(
+					GlobalVariable.NumofColm, 24) == 'Partial Tenor') || (findTestData(excelPathTabInsurance).getValue(
 							GlobalVariable.NumofColm, 24) == 'Over Tenor')) {
 				'verify insurance length'
-				arrayMatch.add(WebUI.verifyMatch(datafileTabInsurance.getValue(
+				arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabInsurance).getValue(
 						GlobalVariable.NumofColm, 28).toUpperCase().replace(',', ''), (resultMFinsurance[arrayindex++]).toUpperCase(),
 						false, FailureHandling.OPTIONAL))
-			} else if ((datafileTabInsurance.getValue(
-					GlobalVariable.NumofColm, 24) == 'Annualy') || (datafileTabInsurance.getValue(
+			} else if ((findTestData(excelPathTabInsurance).getValue(
+					GlobalVariable.NumofColm, 24) == 'Annualy') || (findTestData(excelPathTabInsurance).getValue(
 							GlobalVariable.NumofColm, 24) == 'Full Tenor')) {
 				'skip verify length insurance'
 				resultMFinsurance[arrayindex++]
 			}
 	
 	'verify admin fee'
-	arrayMatch.add(WebUI.verifyMatch(datafileTabInsurance.getValue(
+	arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabInsurance).getValue(
 			GlobalVariable.NumofColm, 31).toUpperCase().replace(',', ''), (resultMFinsurance[arrayindex++]).toUpperCase(),
 			false, FailureHandling.OPTIONAL))
 	
 	'verify customer stampduty fee'
-	arrayMatch.add(WebUI.verifyMatch(datafileTabInsurance.getValue(
+	arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabInsurance).getValue(
 			GlobalVariable.NumofColm, 32).toUpperCase().replace(',', ''), (resultMFinsurance[arrayindex++]).toUpperCase(),
 			false, FailureHandling.OPTIONAL))
 	
@@ -165,7 +165,7 @@ public insuredCustMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sq
 					GlobalVariable.NumofColm, 13))
 	
 	'verify main coverage'
-	arrayMatch.add(WebUI.verifyMatch(datafileTabInsurance.getValue(
+	arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabInsurance).getValue(
 			GlobalVariable.NumofColm, 34).toUpperCase().replace(',', ''), (resultMainCVG[0]).toUpperCase(), false,
 			FailureHandling.OPTIONAL))
 	
@@ -178,10 +178,10 @@ public insuredCustMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sq
 					GlobalVariable.NumofColm, 13))
 	
 	for(i = rowAddCvg+2; i <= rowEditInsTable; i++){
-		if (datafileTabInsurance.getValue(GlobalVariable.NumofColm, i).equalsIgnoreCase('Yes')) {
+		if (findTestData(excelPathTabInsurance).getValue(GlobalVariable.NumofColm, i).equalsIgnoreCase('Yes')) {
 			for (int index = 0; index < resultAddCVG.size(); index++) {
-				if ((resultAddCVG[index]).equalsIgnoreCase(datafileTabInsurance.getValue(1, i).replace('$',''))) {
-					arrayMatch.add(WebUI.verifyMatch(datafileTabInsurance.getValue(
+				if ((resultAddCVG[index]).equalsIgnoreCase(findTestData(excelPathTabInsurance).getValue(1, i).replace('$',''))) {
+					arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabInsurance).getValue(
 							GlobalVariable.NumofColm, i), 'YES', false, FailureHandling.OPTIONAL))
 					
 					break
@@ -195,24 +195,24 @@ public insuredCustMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sq
 	'Mengambil nilai setting cap insurance dari db'
 	String capinssetting = CustomKeywords.'insuranceData.checkCapitalizeSetting.checkInsuranceCapSetting'(sqlconnectionFOU)
 			
-			if (datafileTabInsurance.getValue(GlobalVariable.NumofColm, rowEditInsTable+2).length() > 0 || datafileTabInsurance.getValue(GlobalVariable.NumofColm, rowEditInsTable+3).length() > 0
-					|| datafileTabInsurance.getValue(GlobalVariable.NumofColm, rowEditInsTable+4).length() > 0 || datafileTabInsurance.getValue(GlobalVariable.NumofColm, rowEditInsTable+5).length() > 0) {
+			if (findTestData(excelPathTabInsurance).getValue(GlobalVariable.NumofColm, rowEditInsTable+2).length() > 0 || findTestData(excelPathTabInsurance).getValue(GlobalVariable.NumofColm, rowEditInsTable+3).length() > 0
+					|| findTestData(excelPathTabInsurance).getValue(GlobalVariable.NumofColm, rowEditInsTable+4).length() > 0 || findTestData(excelPathTabInsurance).getValue(GlobalVariable.NumofColm, rowEditInsTable+5).length() > 0) {
 				
 				'call keyword NAP2InsuranceMultiMainCVGtoreDB untuk get data dari db'
 				ArrayList<String> resultMultiMainCVG = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2InsuranceMultiMainCVGtoreDB'(
 						sqlconnectionLOS, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
 								GlobalVariable.NumofColm, 13))
 						
-						def capitalizedarray = datafileTabInsurance.getValue(
+						def capitalizedarray = findTestData(excelPathTabInsurance).getValue(
 								GlobalVariable.NumofColm, rowEditInsTable+2).split(';', -1)
 						
-						def paidbyarray = datafileTabInsurance.getValue(GlobalVariable.NumofColm,
+						def paidbyarray = findTestData(excelPathTabInsurance).getValue(GlobalVariable.NumofColm,
 								rowEditInsTable+3).split(';', -1)
 						
-						def suminsuredarray = datafileTabInsurance.getValue(
+						def suminsuredarray = findTestData(excelPathTabInsurance).getValue(
 								GlobalVariable.NumofColm, rowEditInsTable+4).split(';', -1)
 						
-						def maincvgarray = datafileTabInsurance.getValue(GlobalVariable.NumofColm,
+						def maincvgarray = findTestData(excelPathTabInsurance).getValue(GlobalVariable.NumofColm,
 								rowEditInsTable+5).split(';', -1)
 						
 						int indexdb = 0
@@ -223,7 +223,7 @@ public insuredCustMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sq
 							
 							if (capinssetting.equalsIgnoreCase('YEARLY')) {
 								'verif capitalized'
-								if (datafileTabInsurance.getValue(GlobalVariable.NumofColm, rowEditInsTable+2).length() > 0) {
+								if (findTestData(excelPathTabInsurance).getValue(GlobalVariable.NumofColm, rowEditInsTable+2).length() > 0) {
 									arrayMatch.add(WebUI.verifyMatch((capitalizedarray[index]).toUpperCase(), (resultMultiMainCVG[indexdb]).toUpperCase(),
 											false, FailureHandling.OPTIONAL))
 								}
@@ -235,7 +235,7 @@ public insuredCustMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sq
 							indexdb++
 							
 							'verif paid by'
-							if (datafileTabInsurance.getValue(GlobalVariable.NumofColm, rowEditInsTable+3).length() > 0) {
+							if (findTestData(excelPathTabInsurance).getValue(GlobalVariable.NumofColm, rowEditInsTable+3).length() > 0) {
 								arrayMatch.add(WebUI.verifyMatch((paidbyarray[index]).toUpperCase(), (resultMultiMainCVG[indexdb]).toUpperCase(),
 										false, FailureHandling.OPTIONAL))
 							}
@@ -243,7 +243,7 @@ public insuredCustMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sq
 							indexdb++
 							
 							'verif sum insured'
-							if (datafileTabInsurance.getValue(GlobalVariable.NumofColm, rowEditInsTable+4).length() > 0) {
+							if (findTestData(excelPathTabInsurance).getValue(GlobalVariable.NumofColm, rowEditInsTable+4).length() > 0) {
 								arrayMatch.add(WebUI.verifyMatch((suminsuredarray[index]).toUpperCase(), (resultMultiMainCVG[indexdb]).toUpperCase(),
 										false, FailureHandling.OPTIONAL))
 							}
@@ -251,7 +251,7 @@ public insuredCustMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sq
 							indexdb++
 							
 							'verif main cvg'
-							if (datafileTabInsurance.getValue(GlobalVariable.NumofColm, rowEditInsTable+5).length() > 0) {
+							if (findTestData(excelPathTabInsurance).getValue(GlobalVariable.NumofColm, rowEditInsTable+5).length() > 0) {
 								arrayMatch.add(WebUI.verifyMatch((maincvgarray[index]).toUpperCase(), (resultMultiMainCVG[indexdb]).toUpperCase(),
 										false, FailureHandling.OPTIONAL))
 							}
@@ -260,7 +260,7 @@ public insuredCustMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sq
 						}
 			}
 	if(capinssetting.equalsIgnoreCase('PARTIAL')){
-		if (datafileTabInsurance.getValue(GlobalVariable.NumofColm,
+		if (findTestData(excelPathTabInsurance).getValue(GlobalVariable.NumofColm,
 				84).equalsIgnoreCase('NO')) {
 			
 			'call keyword NAP2InsurancePartialCaptilizeStoreDB'
@@ -268,7 +268,7 @@ public insuredCustMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sq
 					sqlconnectionLOS, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
 							GlobalVariable.NumofColm, 13))
 					
-					arrayMatch.add(WebUI.verifyMatch(datafileTabInsurance.getValue(
+					arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabInsurance).getValue(
 							GlobalVariable.NumofColm, 85), (resultPartialCaptilized[0]).replace('.00', ''), false,
 							FailureHandling.OPTIONAL))
 		}
@@ -283,11 +283,11 @@ public insuredCustMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sq
 							GlobalVariable.NumofColm, 13))
 			
 			for(i = rowEditAddCvg+2; i <= rowSuminsuredAmt; i++){
-				if (datafileTabInsurance.getValue(GlobalVariable.NumofColm, i).length() > 0) {
+				if (findTestData(excelPathTabInsurance).getValue(GlobalVariable.NumofColm, i).length() > 0) {
 					
 					ArrayList<String> AddRate = GlobalVariable.AdditionalPremiRate
 							
-							def arrayAddCvg = datafileTabInsurance.getValue(GlobalVariable.NumofColm, i).split(';', -1)
+							def arrayAddCvg = findTestData(excelPathTabInsurance).getValue(GlobalVariable.NumofColm, i).split(';', -1)
 							
 							indexdb = 0
 							
@@ -298,8 +298,8 @@ public insuredCustMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sq
 										
 										addpremirate = Double.parseDouble(resultAddCVG[indexdb++])
 										
-										if (addcvg.equalsIgnoreCase(datafileTabInsurance.getValue(1, i))) {
-											if(datafileTabInsurance.getValue(GlobalVariable.NumofColm, i).length() > 0){
+										if (addcvg.equalsIgnoreCase(findTestData(excelPathTabInsurance).getValue(1, i))) {
+											if(findTestData(excelPathTabInsurance).getValue(GlobalVariable.NumofColm, i).length() > 0){
 												if ((arrayAddCvg[(year - 1)]).length() > 0) {
 													arrayMatch.add(WebUI.verifyMatch((arrayAddCvg[(year - 1)]).toUpperCase(), 'YES', false, FailureHandling.OPTIONAL))
 													
@@ -318,7 +318,7 @@ public insuredCustMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sq
 			}
 	
 	'cek jika ada main premi rate'
-	if (datafileTabInsurance.getValue(GlobalVariable.NumofColm, 69).length() > 0) {
+	if (findTestData(excelPathTabInsurance).getValue(GlobalVariable.NumofColm, 69).length() > 0) {
 		ArrayList<String> MainRate = GlobalVariable.MainPremiRate
 				'get arraylist main premi rate dari DB'
 				ArrayList<String> resultMainPremiRate = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2InsuranceMainPremiRateStoreDB'(
@@ -326,7 +326,7 @@ public insuredCustMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sq
 								GlobalVariable.NumofColm, 13))
 				
 				'get arraylist main premi rate dari excel'
-				def mainpremirateArray = datafileTabInsurance.getValue(
+				def mainpremirateArray = findTestData(excelPathTabInsurance).getValue(
 						GlobalVariable.NumofColm, 69).split(';', -1)
 				
 				'looping untuk verify mainpremirate db = confins'
@@ -349,60 +349,60 @@ public insuredMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sqlcon
 							GlobalVariable.NumofColm, 13))
 			
 			'verify asset region'
-			arrayMatch.add(WebUI.verifyMatch(datafileTabInsurance.getValue(
+			arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabInsurance).getValue(
 					GlobalVariable.NumofColm, 22).toUpperCase().replace(',', ''), (resultMFinsurance[arrayindex++]).toUpperCase(),
 					false, FailureHandling.OPTIONAL))
 			
 			'verify coverage amount'
-			arrayMatch.add(WebUI.verifyMatch(datafileTabInsurance.getValue(
+			arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabInsurance).getValue(
 					GlobalVariable.NumofColm, 23).toUpperCase().replace(',', ''), (resultMFinsurance[arrayindex++]).toUpperCase(),
 					false, FailureHandling.OPTIONAL))
 			
 			'verify cover period'
-			arrayMatch.add(WebUI.verifyMatch(datafileTabInsurance.getValue(
+			arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabInsurance).getValue(
 					GlobalVariable.NumofColm, 24).toUpperCase().replace(',', ''), (resultMFinsurance[arrayindex++]).toUpperCase(),
 					false, FailureHandling.OPTIONAL))
 			
 			'verify payment type'
-			arrayMatch.add(WebUI.verifyMatch(datafileTabInsurance.getValue(
+			arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabInsurance).getValue(
 					GlobalVariable.NumofColm, 25).toUpperCase().replace(',', ''), (resultMFinsurance[arrayindex++]).toUpperCase(),
 					false, FailureHandling.OPTIONAL))
 			
 			'verify insco branch name'
-			arrayMatch.add(WebUI.verifyMatch(datafileTabInsurance.getValue(
+			arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabInsurance).getValue(
 					GlobalVariable.NumofColm, 26).toUpperCase().replace(',', ''), (resultMFinsurance[arrayindex++]).toUpperCase(),
 					false, FailureHandling.OPTIONAL))
 			
-			if(datafileTabInsurance.getValue(GlobalVariable.NumofColm, 27).length() > 0){
+			if(findTestData(excelPathTabInsurance).getValue(GlobalVariable.NumofColm, 27).length() > 0){
 				'verify insurance note'
-				arrayMatch.add(WebUI.verifyMatch(datafileTabInsurance.getValue(
+				arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabInsurance).getValue(
 						GlobalVariable.NumofColm, 27).toUpperCase().replace(',', ''), (resultMFinsurance[arrayindex++]).toUpperCase(),
 						false, FailureHandling.OPTIONAL))
 			}else{
 				arrayindex++
 			}
 	
-	if ((datafileTabInsurance.getValue(
-			GlobalVariable.NumofColm, 24) == 'Partial Tenor') || (datafileTabInsurance.getValue(
+	if ((findTestData(excelPathTabInsurance).getValue(
+			GlobalVariable.NumofColm, 24) == 'Partial Tenor') || (findTestData(excelPathTabInsurance).getValue(
 					GlobalVariable.NumofColm, 24) == 'Over Tenor')) {
 		'verify insurance length'
-		arrayMatch.add(WebUI.verifyMatch(datafileTabInsurance.getValue(
+		arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabInsurance).getValue(
 				GlobalVariable.NumofColm, 28).toUpperCase().replace(',', ''), (resultMFinsurance[arrayindex++]).toUpperCase(),
 				false, FailureHandling.OPTIONAL))
-	} else if ((datafileTabInsurance.getValue(
-			GlobalVariable.NumofColm, 24) == 'Annualy') || (datafileTabInsurance.getValue(
+	} else if ((findTestData(excelPathTabInsurance).getValue(
+			GlobalVariable.NumofColm, 24) == 'Annualy') || (findTestData(excelPathTabInsurance).getValue(
 					GlobalVariable.NumofColm, 24) == 'Full Tenor')) {
 		'skip verify length insurance'
 		resultMFinsurance[arrayindex++]
 	}
 	
 	'verify admin fee'
-	arrayMatch.add(WebUI.verifyMatch(datafileTabInsurance.getValue(
+	arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabInsurance).getValue(
 			GlobalVariable.NumofColm, 31).toUpperCase().replace(',', ''), (resultMFinsurance[arrayindex++]).toUpperCase(),
 			false, FailureHandling.OPTIONAL))
 	
 	'verify customer stampduty fee'
-	arrayMatch.add(WebUI.verifyMatch(datafileTabInsurance.getValue(
+	arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabInsurance).getValue(
 			GlobalVariable.NumofColm, 32).toUpperCase().replace(',', ''), (resultMFinsurance[arrayindex++]).toUpperCase(),
 			false, FailureHandling.OPTIONAL))
 	
@@ -412,10 +412,10 @@ public insuredMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sqlcon
 			findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
 					GlobalVariable.NumofColm, 13))
 	
-	if(datafileTabInsurance.getValue(GlobalVariable.NumofColm, 48).length() == 0){
+	if(findTestData(excelPathTabInsurance).getValue(GlobalVariable.NumofColm, 48).length() == 0){
 		for(int cvg = 0; cvg < resultMainCVG.size(); cvg++){
 			'verify main coverage'
-			arrayMatch.add(WebUI.verifyMatch(datafileTabInsurance.getValue(GlobalVariable.NumofColm, 34).toUpperCase(), resultMainCVG[cvg].toUpperCase(), false, FailureHandling.OPTIONAL))
+			arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabInsurance).getValue(GlobalVariable.NumofColm, 34).toUpperCase(), resultMainCVG[cvg].toUpperCase(), false, FailureHandling.OPTIONAL))
 		}
 	}
 	
@@ -428,10 +428,10 @@ public insuredMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sqlcon
 							GlobalVariable.NumofColm, 13))
 			
 			for(i = rowAddCvg+2; i <= rowEditInsTable; i++){
-				if (datafileTabInsurance.getValue(GlobalVariable.NumofColm, i).equalsIgnoreCase('Yes')) {
+				if (findTestData(excelPathTabInsurance).getValue(GlobalVariable.NumofColm, i).equalsIgnoreCase('Yes')) {
 					for (int index = 0; index < resultAddCVG.size(); index++) {
-						if ((resultAddCVG[index]).equalsIgnoreCase(datafileTabInsurance.getValue(1, i).replace('$',''))) {
-							arrayMatch.add(WebUI.verifyMatch(datafileTabInsurance.getValue(
+						if ((resultAddCVG[index]).equalsIgnoreCase(findTestData(excelPathTabInsurance).getValue(1, i).replace('$',''))) {
+							arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabInsurance).getValue(
 									GlobalVariable.NumofColm, i), 'YES', false, FailureHandling.OPTIONAL))
 							
 							break
@@ -445,24 +445,24 @@ public insuredMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sqlcon
 	'Mengambil nilai setting cap insurance dari db'
 	String capinssetting = CustomKeywords.'insuranceData.checkCapitalizeSetting.checkInsuranceCapSetting'(sqlconnectionFOU)
 			
-			if (datafileTabInsurance.getValue(GlobalVariable.NumofColm, rowEditInsTable+2).length() > 0 || datafileTabInsurance.getValue(GlobalVariable.NumofColm, rowEditInsTable+3).length() > 0
-					|| datafileTabInsurance.getValue(GlobalVariable.NumofColm, rowEditInsTable+4).length() > 0 || datafileTabInsurance.getValue(GlobalVariable.NumofColm, rowEditInsTable+5).length() > 0) {
+			if (findTestData(excelPathTabInsurance).getValue(GlobalVariable.NumofColm, rowEditInsTable+2).length() > 0 || findTestData(excelPathTabInsurance).getValue(GlobalVariable.NumofColm, rowEditInsTable+3).length() > 0
+					|| findTestData(excelPathTabInsurance).getValue(GlobalVariable.NumofColm, rowEditInsTable+4).length() > 0 || findTestData(excelPathTabInsurance).getValue(GlobalVariable.NumofColm, rowEditInsTable+5).length() > 0) {
 				
 				'call keyword NAP2InsuranceMultiMainCVGtoreDB untuk get data dari db'
 				ArrayList<String> resultMultiMainCVG = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2InsuranceMultiMainCVGtoreDB'(
 						sqlconnectionLOS, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
 								GlobalVariable.NumofColm, 13))
 						
-						def capitalizedarray = datafileTabInsurance.getValue(
+						def capitalizedarray = findTestData(excelPathTabInsurance).getValue(
 								GlobalVariable.NumofColm, rowEditInsTable+2).split(';', -1)
 						
-						def paidbyarray = datafileTabInsurance.getValue(GlobalVariable.NumofColm,
+						def paidbyarray = findTestData(excelPathTabInsurance).getValue(GlobalVariable.NumofColm,
 								rowEditInsTable+3).split(';', -1)
 						
-						def suminsuredarray = datafileTabInsurance.getValue(
+						def suminsuredarray = findTestData(excelPathTabInsurance).getValue(
 								GlobalVariable.NumofColm, rowEditInsTable+4).split(';', -1)
 						
-						def maincvgarray = datafileTabInsurance.getValue(GlobalVariable.NumofColm,
+						def maincvgarray = findTestData(excelPathTabInsurance).getValue(GlobalVariable.NumofColm,
 								rowEditInsTable+5).split(';', -1)
 						
 						int indexdb = 0
@@ -473,7 +473,7 @@ public insuredMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sqlcon
 							
 							if (capinssetting.equalsIgnoreCase('YEARLY')) {
 								'verif capitalized'
-								if (datafileTabInsurance.getValue(GlobalVariable.NumofColm, rowEditInsTable+2).length() > 0) {
+								if (findTestData(excelPathTabInsurance).getValue(GlobalVariable.NumofColm, rowEditInsTable+2).length() > 0) {
 									arrayMatch.add(WebUI.verifyMatch((capitalizedarray[index]).toUpperCase(), (resultMultiMainCVG[indexdb]).toUpperCase(),
 											false, FailureHandling.OPTIONAL))
 								}
@@ -485,7 +485,7 @@ public insuredMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sqlcon
 							indexdb++
 							
 							'verif paid by'
-							if (datafileTabInsurance.getValue(GlobalVariable.NumofColm, rowEditInsTable+3).length() > 0) {
+							if (findTestData(excelPathTabInsurance).getValue(GlobalVariable.NumofColm, rowEditInsTable+3).length() > 0) {
 								arrayMatch.add(WebUI.verifyMatch((paidbyarray[index]).toUpperCase(), (resultMultiMainCVG[indexdb]).toUpperCase(),
 										false, FailureHandling.OPTIONAL))
 							}
@@ -493,7 +493,7 @@ public insuredMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sqlcon
 							indexdb++
 							
 							'verif sum insured'
-							if (datafileTabInsurance.getValue(GlobalVariable.NumofColm, rowEditInsTable+4).length() > 0) {
+							if (findTestData(excelPathTabInsurance).getValue(GlobalVariable.NumofColm, rowEditInsTable+4).length() > 0) {
 								arrayMatch.add(WebUI.verifyMatch((suminsuredarray[index]).toUpperCase(), (resultMultiMainCVG[indexdb]).toUpperCase(),
 										false, FailureHandling.OPTIONAL))
 							}
@@ -501,7 +501,7 @@ public insuredMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sqlcon
 							indexdb++
 							
 							'verif main cvg'
-							if (datafileTabInsurance.getValue(GlobalVariable.NumofColm, rowEditInsTable+5).length() > 0) {
+							if (findTestData(excelPathTabInsurance).getValue(GlobalVariable.NumofColm, rowEditInsTable+5).length() > 0) {
 								arrayMatch.add(WebUI.verifyMatch((maincvgarray[index]).toUpperCase(), (resultMultiMainCVG[indexdb]).toUpperCase(),
 										false, FailureHandling.OPTIONAL))
 							}
@@ -510,7 +510,7 @@ public insuredMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sqlcon
 						}
 			}
 	if(capinssetting.equalsIgnoreCase('PARTIAL')){
-		if (datafileTabInsurance.getValue(GlobalVariable.NumofColm,
+		if (findTestData(excelPathTabInsurance).getValue(GlobalVariable.NumofColm,
 				84).equalsIgnoreCase('NO')) {
 			
 			'call keyword NAP2InsurancePartialCaptilizeStoreDB'
@@ -518,7 +518,7 @@ public insuredMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sqlcon
 					sqlconnectionLOS, findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
 							GlobalVariable.NumofColm, 13))
 					
-					arrayMatch.add(WebUI.verifyMatch(datafileTabInsurance.getValue(
+					arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabInsurance).getValue(
 							GlobalVariable.NumofColm, 85), (resultPartialCaptilized[0]).replace('.00', ''), false,
 							FailureHandling.OPTIONAL))
 		}
@@ -533,11 +533,11 @@ public insuredMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sqlcon
 							GlobalVariable.NumofColm, 13))
 			
 			for(i = rowEditAddCvg+2; i <= rowSuminsuredAmt; i++){
-				if (datafileTabInsurance.getValue(GlobalVariable.NumofColm, i).length() > 0) {
+				if (findTestData(excelPathTabInsurance).getValue(GlobalVariable.NumofColm, i).length() > 0) {
 					
 					ArrayList<String> AddRate = GlobalVariable.AdditionalPremiRate
 							
-							def arrayAddCvg = datafileTabInsurance.getValue(GlobalVariable.NumofColm, i).split(';', -1)
+							def arrayAddCvg = findTestData(excelPathTabInsurance).getValue(GlobalVariable.NumofColm, i).split(';', -1)
 							
 							indexdb = 0
 							
@@ -548,8 +548,8 @@ public insuredMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sqlcon
 										
 										addpremirate = Double.parseDouble(resultAddCVG[indexdb++])
 										
-										if (addcvg.equalsIgnoreCase(datafileTabInsurance.getValue(1, i))) {
-											if(datafileTabInsurance.getValue(GlobalVariable.NumofColm, i).length() > 0){
+										if (addcvg.equalsIgnoreCase(findTestData(excelPathTabInsurance).getValue(1, i))) {
+											if(findTestData(excelPathTabInsurance).getValue(GlobalVariable.NumofColm, i).length() > 0){
 												if ((arrayAddCvg[(year - 1)]).length() > 0) {
 													arrayMatch.add(WebUI.verifyMatch((arrayAddCvg[(year - 1)]).toUpperCase(), 'YES', false, FailureHandling.OPTIONAL))
 													
@@ -568,7 +568,7 @@ public insuredMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sqlcon
 			}
 	
 	'cek jika ada main premi rate'
-	if (datafileTabInsurance.getValue(GlobalVariable.NumofColm, 69).length() > 0) {
+	if (findTestData(excelPathTabInsurance).getValue(GlobalVariable.NumofColm, 69).length() > 0) {
 		ArrayList<String> MainRate = GlobalVariable.MainPremiRate
 				'get arraylist main premi rate dari DB'
 				ArrayList<String> resultMainPremiRate = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2InsuranceMainPremiRateStoreDB'(
@@ -576,7 +576,7 @@ public insuredMF(ArrayList<Boolean> arrayMatch, Sql sqlconnectionLOS, Sql sqlcon
 								GlobalVariable.NumofColm, 13))
 				
 				'get arraylist main premi rate dari excel'
-				def mainpremirateArray = datafileTabInsurance.getValue(
+				def mainpremirateArray = findTestData(excelPathTabInsurance).getValue(
 						GlobalVariable.NumofColm, 69).split(';', -1)
 				
 				'looping untuk verify mainpremirate db = confins'

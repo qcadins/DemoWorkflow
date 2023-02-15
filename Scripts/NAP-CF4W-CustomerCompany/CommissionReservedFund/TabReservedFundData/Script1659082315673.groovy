@@ -32,8 +32,8 @@ GlobalVariable.FlagFailed = 0
 'Arraylist untuk menampung total amount dari allocate rsv (upping rate, admin fee, dsb)'
 ArrayList<Double> TotalAllocateRsvAmt = new ArrayList<Double>()
 
-'declare datafileReservedFund'
-datafileReservedFund = findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData')
+'declare excelPathReservedFund'
+excelPathReservedFund = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/CommissionReservedFund/TabReservedFundData'
 
 'Inisialisasi driver'
 WebDriver driver = DriverFactory.getWebDriver()
@@ -187,7 +187,7 @@ for(int i = 0;i<allocFrom.size();i++){
 			}
 			
 			'Input Alloc Reserved Fund Amount'
-			WebUI.setText(inputAlloc, datafileReservedFund.getValue(
+			WebUI.setText(inputAlloc, findTestData(excelPathReservedFund).getValue(
 				GlobalVariable.NumofColm, rsvAmtRow+i), FailureHandling.OPTIONAL)
 		}
 		else if(allocBhv[i].equalsIgnoreCase("lock")){
@@ -317,7 +317,7 @@ WebUI.delay(5)
 'Klik save'
 WebUI.click(findTestObject('NAP/CommissionReservedFund/TabReservedFundData/button_Save'))
 
-Integer iscompleteMandatory = Integer.parseInt(datafileReservedFund.getValue(GlobalVariable.NumofColm, 4))
+Integer iscompleteMandatory = Integer.parseInt(findTestData(excelPathReservedFund).getValue(GlobalVariable.NumofColm, 4))
 
 if(iscompleteMandatory==0 && GlobalVariable.FlagFailed==0){
 	'cek alert'
@@ -362,7 +362,7 @@ public checkVerifyEqualOrMatch(Boolean isMatch, String sheetname, int numofcolm)
 	if(isMatch==false && GlobalVariable.FlagFailed==0){
 	
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'(sheetname, numofcolm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'(sheetname, numofcolm, GlobalVariable.StatusFailed, findTestData(excelPathReservedFund).getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 	
 		GlobalVariable.FlagFailed=1
 	}

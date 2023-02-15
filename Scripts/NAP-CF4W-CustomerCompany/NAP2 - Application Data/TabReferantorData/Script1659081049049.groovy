@@ -30,13 +30,16 @@ WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-Appl
 'get applaststep dari confins'
 String appLastStep = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/label_AppLastStep'))
 
-if ((!(appLastStep.equalsIgnoreCase('GUARANTOR')) && !(appLastStep.equalsIgnoreCase('NAP DETAIL'))) && (GlobalVariable.FirstTimeEntry == 
+if ((!(appLastStep.equalsIgnoreCase('GUARANTOR')) && !(appLastStep.equalsIgnoreCase('NAP DETAIL')) && !(appLastStep.equalsIgnoreCase('REFERANTOR'))) && (GlobalVariable.FirstTimeEntry == 
 'Yes')) {
     GlobalVariable.FirstTimeEntry = 'No'
 }
 
-'declare datafileCustomerCompany'
-datafileCustomerCompany = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData')
+'declare excelPathCustomerCompany'
+excelPathCustomerCompany = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData'
+
+'declare excelPathReferantor'
+excelPathReferantor = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP2-ApplicationData/TabReferantorData'
 
 if (GlobalVariable.RoleCompany == 'Testing') {
     'verify application step'
@@ -44,10 +47,7 @@ if (GlobalVariable.RoleCompany == 'Testing') {
             'REFERANTOR', false, FailureHandling.OPTIONAL))
 }
 
-'declare datafileReferantor'
-datafileReferantor = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData')
-
-countReferantor = datafileReferantor.getColumnNumbers()
+countReferantor = findTestData(excelPathReferantor).getColumnNumbers()
 
 Sql sqlConnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
@@ -64,7 +64,7 @@ String officeName = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-Cus
 //pengecekan pada excel data referantor ada lebih dari atau sama dengan 1
 'Looping untuk mencari nilai colm yang menunjukkan colm appno'
 for (GlobalVariable.NumofReferantor = GlobalVariable.StartIndex; GlobalVariable.NumofReferantor <= (countReferantor - 1); (GlobalVariable.NumofReferantor)++) {
-    if (datafileReferantor.getValue(GlobalVariable.NumofReferantor, 12) == datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 
+    if (findTestData(excelPathReferantor).getValue(GlobalVariable.NumofReferantor, 12) == findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm, 
         13)) {
         if (WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/CheckboxReferantor'), 
             'aria-checked') == 'false') {
@@ -75,7 +75,7 @@ for (GlobalVariable.NumofReferantor = GlobalVariable.StartIndex; GlobalVariable.
         variable = driver.findElements(By.cssSelector('#accessoriesData > div.table-responsive > table > tbody > tr'))
 
         break
-    } else if (datafileReferantor.getValue(GlobalVariable.NumofReferantor + 1, 12) != datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 
+    } else if (findTestData(excelPathReferantor).getValue(GlobalVariable.NumofReferantor + 1, 12) != findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm, 
         13)) {
         if (WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/CheckboxReferantor'), 
             'aria-checked') == 'true') {
@@ -88,7 +88,7 @@ for (GlobalVariable.NumofReferantor = GlobalVariable.StartIndex; GlobalVariable.
 }
 
 //Jika copy app edit
-if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('Edit')) {
+if (findTestData(excelPathReferantor).getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('Edit')) {
     'arraylist referantor name yang gagal'
     ArrayList<WebElement> referantorfaileddelete = new ArrayList<WebElement>()
 
@@ -148,12 +148,12 @@ if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase(
             'Looping excel referantor'
             for (GlobalVariable.NumofReferantor = GlobalVariable.StartIndex; GlobalVariable.NumofReferantor <= (countReferantor - 
             1); (GlobalVariable.NumofReferantor)++) {
-                if (datafileReferantor.getValue(GlobalVariable.NumofReferantor, 12) == datafileCustomerCompany.getValue(
+                if (findTestData(excelPathReferantor).getValue(GlobalVariable.NumofReferantor, 12) == findTestData(excelPathCustomerCompany).getValue(
                     GlobalVariable.NumofColm, 13)) {
 				
-					if (textRefCategory.equalsIgnoreCase(datafileReferantor.getValue(GlobalVariable.NumofReferantor, 13)) &&
-						WebUI.getAttribute(modifyObjectReferantorName, 'value').equalsIgnoreCase(datafileReferantor.getValue(
-						GlobalVariable.NumofReferantor, 14)) && textTaxCalculation.equalsIgnoreCase(datafileReferantor.getValue(
+					if (textRefCategory.equalsIgnoreCase(findTestData(excelPathReferantor).getValue(GlobalVariable.NumofReferantor, 13)) &&
+						WebUI.getAttribute(modifyObjectReferantorName, 'value').equalsIgnoreCase(findTestData(excelPathReferantor).getValue(
+						GlobalVariable.NumofReferantor, 14)) && textTaxCalculation.equalsIgnoreCase(findTestData(excelPathReferantor).getValue(
 						GlobalVariable.NumofReferantor, 17))) {
 						'call function gettext bankaccount'
 						getTextBankAccount(('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + i) + ']/td[5]/select')
@@ -166,27 +166,27 @@ if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase(
 					}
 				
                     'Pengecekan jika referantor category dan referantor name pada confins sesuai dengan excel datafile'
-                    if (textRefCategory.equalsIgnoreCase(datafileReferantor.getValue(GlobalVariable.NumofReferantor, 13)) && 
-                    WebUI.getAttribute(modifyObjectReferantorName, 'value').equalsIgnoreCase(datafileReferantor.getValue(
+                    if (textRefCategory.equalsIgnoreCase(findTestData(excelPathReferantor).getValue(GlobalVariable.NumofReferantor, 13)) && 
+                    WebUI.getAttribute(modifyObjectReferantorName, 'value').equalsIgnoreCase(findTestData(excelPathReferantor).getValue(
                             GlobalVariable.NumofReferantor, 14))) {
                         'select bank account'
-                        WebUI.selectOptionByIndex(modifySelectBankAccount, datafileReferantor.getValue(GlobalVariable.NumofReferantor, 
+                        WebUI.selectOptionByIndex(modifySelectBankAccount, findTestData(excelPathReferantor).getValue(GlobalVariable.NumofReferantor, 
                                 16), FailureHandling.OPTIONAL)
 
                         'call function gettext bankaccount'
                         getTextBankAccount(('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + i) + ']/td[5]/select')
 
                         'select tax calculation'
-                        WebUI.selectOptionByLabel(modifySelectTaxCalcualtion, datafileReferantor.getValue(GlobalVariable.NumofReferantor, 
+                        WebUI.selectOptionByLabel(modifySelectTaxCalcualtion, findTestData(excelPathReferantor).getValue(GlobalVariable.NumofReferantor, 
                                 17), false, FailureHandling.OPTIONAL)
 						
 						referantorType = WebUI.getText(modifyReferantorType)
 						
 						if(referantorType.equalsIgnoreCase("Customer Company")){
-							if(datafileReferantor.getValue(GlobalVariable.NumofReferantor, 18).equalsIgnoreCase("Yes") && WebUI.verifyElementNotChecked(modifycheckboxVAT,GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
+							if(findTestData(excelPathReferantor).getValue(GlobalVariable.NumofReferantor, 18).equalsIgnoreCase("Yes") && WebUI.verifyElementNotChecked(modifycheckboxVAT,GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
 							   WebUI.check(modifycheckboxVAT)
 							}
-							else if(datafileReferantor.getValue(GlobalVariable.NumofReferantor, 18).equalsIgnoreCase("No") && WebUI.verifyElementChecked(modifycheckboxVAT,GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
+							else if(findTestData(excelPathReferantor).getValue(GlobalVariable.NumofReferantor, 18).equalsIgnoreCase("No") && WebUI.verifyElementChecked(modifycheckboxVAT,GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
 								WebUI.uncheck(modifycheckboxVAT)
 							}
 						}
@@ -265,8 +265,8 @@ if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase(
 	
 						i--
 	
-						if ((i == variable.size()) && (datafileReferantor.getValue(GlobalVariable.NumofReferantor +
-							1, 12) != datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 13))) {
+						if ((i == variable.size()) && (findTestData(excelPathReferantor).getValue(GlobalVariable.NumofReferantor +
+							1, 12) != findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm, 13))) {
 							break
 						}
 					} else {
@@ -281,7 +281,7 @@ if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase(
     if (referantorfaileddelete.size() > 0) {
         'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedDelete'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('5.TabReferantorData', GlobalVariable.NumofReferantor, 
-            GlobalVariable.StatusWarning, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDelete + referantorfaileddelete)
+            GlobalVariable.StatusWarning, findTestData(excelPathReferantor).getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDelete + referantorfaileddelete)
 
         (GlobalVariable.FlagWarning)++
     }
@@ -297,7 +297,7 @@ if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase(
 		
 		int add = 0
 		
-        if (datafileReferantor.getValue(GlobalVariable.NumofReferantor, 12) == datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 
+        if (findTestData(excelPathReferantor).getValue(GlobalVariable.NumofReferantor, 12) == findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm, 
             13)) {
             'Looping confins referantor'
             for (int j = 1; j <= countData; j++) {
@@ -340,7 +340,7 @@ if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase(
                         FailureHandling.OPTIONAL), 'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)) {
                     if (add == 1) {
                         'select referantor category'
-                        WebUI.selectOptionByLabel(modifyObjectSelectReferantorCategory, datafileReferantor.getValue(GlobalVariable.NumofReferantor, 
+                        WebUI.selectOptionByLabel(modifyObjectSelectReferantorCategory, findTestData(excelPathReferantor).getValue(GlobalVariable.NumofReferantor, 
                                 13), false, FailureHandling.OPTIONAL)
 
                         'Ambil dan simpan nilai referantor category dari confins'
@@ -374,7 +374,7 @@ if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase(
                         
                         'input referantor name'
                         WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/input_Referantor Name_referantorName'), 
-                            datafileReferantor.getValue(GlobalVariable.NumofReferantor, 14))
+                            findTestData(excelPathReferantor).getValue(GlobalVariable.NumofReferantor, 14))
 
                         'click button search'
                         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/Button_SearchReferantor'))
@@ -437,20 +437,20 @@ if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase(
                         }
                         
                         'select bank account'
-                        WebUI.selectOptionByIndex(modifySelectBankAccount, datafileReferantor.getValue(GlobalVariable.NumofReferantor, 
+                        WebUI.selectOptionByIndex(modifySelectBankAccount, findTestData(excelPathReferantor).getValue(GlobalVariable.NumofReferantor, 
                                 16), FailureHandling.OPTIONAL)
 
                         'select tax calculation method'
-                        WebUI.selectOptionByLabel(modifySelectTaxCalcualtion, datafileReferantor.getValue(GlobalVariable.NumofReferantor, 
+                        WebUI.selectOptionByLabel(modifySelectTaxCalcualtion, findTestData(excelPathReferantor).getValue(GlobalVariable.NumofReferantor, 
                                 17), false, FailureHandling.OPTIONAL)
 						
 						referantorType = WebUI.getText(modifyReferantorType)
 						
 						if(referantorType.equalsIgnoreCase("Customer Company")){
-							if(datafileReferantor.getValue(GlobalVariable.NumofReferantor, 18).equalsIgnoreCase("Yes") && WebUI.verifyElementNotChecked(modifycheckboxVAT,GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
+							if(findTestData(excelPathReferantor).getValue(GlobalVariable.NumofReferantor, 18).equalsIgnoreCase("Yes") && WebUI.verifyElementNotChecked(modifycheckboxVAT,GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
 							   WebUI.check(modifycheckboxVAT)
 							}
-							else if(datafileReferantor.getValue(GlobalVariable.NumofReferantor, 18).equalsIgnoreCase("No") && WebUI.verifyElementChecked(modifycheckboxVAT,GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
+							else if(findTestData(excelPathReferantor).getValue(GlobalVariable.NumofReferantor, 18).equalsIgnoreCase("No") && WebUI.verifyElementChecked(modifycheckboxVAT,GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
 								WebUI.uncheck(modifycheckboxVAT)
 							}
 						}
@@ -491,8 +491,8 @@ if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase(
                     'Ambil referantor category yang dipilih pada confins'
                     String textRefCategory = selectedRefCategory.getFirstSelectedOption().getText()
 
-                    if (!(datafileReferantor.getValue(GlobalVariable.NumofReferantor, 13).equalsIgnoreCase(textRefCategory)) || 
-                    !(datafileReferantor.getValue(GlobalVariable.NumofReferantor, 14).equalsIgnoreCase(WebUI.getAttribute(
+                    if (!(findTestData(excelPathReferantor).getValue(GlobalVariable.NumofReferantor, 13).equalsIgnoreCase(textRefCategory)) || 
+                    !(findTestData(excelPathReferantor).getValue(GlobalVariable.NumofReferantor, 14).equalsIgnoreCase(WebUI.getAttribute(
                             modifyObjectReferantorName, 'value')))) {
                         if (countData == j) {
                             'click button add'
@@ -514,7 +514,7 @@ if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase(
                     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/button_Add'))
 
                     'select referantor category'
-                    WebUI.selectOptionByLabel(modifyObjectSelectReferantorCategory, datafileReferantor.getValue(GlobalVariable.NumofReferantor, 
+                    WebUI.selectOptionByLabel(modifyObjectSelectReferantorCategory, findTestData(excelPathReferantor).getValue(GlobalVariable.NumofReferantor, 
                             13), false, FailureHandling.OPTIONAL)
 
                     'Ambil dan simpan nilai referantor category dari confins'
@@ -548,7 +548,7 @@ if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase(
                     
                     'input referantor name'
                     WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/input_Referantor Name_referantorName'), 
-                        datafileReferantor.getValue(GlobalVariable.NumofReferantor, 14))
+                        findTestData(excelPathReferantor).getValue(GlobalVariable.NumofReferantor, 14))
 
                     'click button search'
                     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/Button_SearchReferantor'))
@@ -612,20 +612,20 @@ if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase(
                     }
                     
                     'select bank account'
-                    WebUI.selectOptionByIndex(modifySelectBankAccount, datafileReferantor.getValue(GlobalVariable.NumofReferantor, 
+                    WebUI.selectOptionByIndex(modifySelectBankAccount, findTestData(excelPathReferantor).getValue(GlobalVariable.NumofReferantor, 
                             16), FailureHandling.OPTIONAL)
 
                     'select tax calculation method'
-                    WebUI.selectOptionByLabel(modifySelectTaxCalcualtion, datafileReferantor.getValue(GlobalVariable.NumofReferantor, 
+                    WebUI.selectOptionByLabel(modifySelectTaxCalcualtion, findTestData(excelPathReferantor).getValue(GlobalVariable.NumofReferantor, 
                             17), false, FailureHandling.OPTIONAL)
 
 					referantorType = WebUI.getText(modifyReferantorType)
 					
 					if(referantorType.equalsIgnoreCase("Customer Company")){
-						if(datafileReferantor.getValue(GlobalVariable.NumofReferantor, 18).equalsIgnoreCase("Yes") && WebUI.verifyElementNotChecked(modifycheckboxVAT,GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
+						if(findTestData(excelPathReferantor).getValue(GlobalVariable.NumofReferantor, 18).equalsIgnoreCase("Yes") && WebUI.verifyElementNotChecked(modifycheckboxVAT,GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
 						   WebUI.check(modifycheckboxVAT)
 						}
-						else if(datafileReferantor.getValue(GlobalVariable.NumofReferantor, 18).equalsIgnoreCase("No") && WebUI.verifyElementChecked(modifycheckboxVAT,GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
+						else if(findTestData(excelPathReferantor).getValue(GlobalVariable.NumofReferantor, 18).equalsIgnoreCase("No") && WebUI.verifyElementChecked(modifycheckboxVAT,GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
 							WebUI.uncheck(modifycheckboxVAT)
 						}
 					}
@@ -664,13 +664,13 @@ if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase(
 }
 
 //Jika copy app no
-if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('No')) {
+if (findTestData(excelPathReferantor).getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('No')) {
     int modifyObjectIndex = 1
 
     'looping referantor'
     for (GlobalVariable.NumofReferantor = GlobalVariable.StartIndex; GlobalVariable.NumofReferantor <= (countReferantor - 
     1); (GlobalVariable.NumofReferantor)++) {
-        if (datafileReferantor.getValue(GlobalVariable.NumofReferantor, 12) == datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 
+        if (findTestData(excelPathReferantor).getValue(GlobalVariable.NumofReferantor, 12) == findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm, 
             13)) {
             'click button add'
             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/button_Add'))
@@ -706,7 +706,7 @@ if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase(
 			
 
             'select referantor category'
-            WebUI.selectOptionByLabel(modifyObjectSelectReferantorCategory, datafileReferantor.getValue(GlobalVariable.NumofReferantor, 
+            WebUI.selectOptionByLabel(modifyObjectSelectReferantorCategory, findTestData(excelPathReferantor).getValue(GlobalVariable.NumofReferantor, 
                     13), false, FailureHandling.OPTIONAL)
 
             'Ambil dan simpan nilai referantor category dari confins'
@@ -740,7 +740,7 @@ if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase(
             
             'input referantor name'
             WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/input_Referantor Name_referantorName'), 
-                datafileReferantor.getValue(GlobalVariable.NumofReferantor, 14))
+                findTestData(excelPathReferantor).getValue(GlobalVariable.NumofReferantor, 14))
 
             'click button search'
             WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/Button_SearchReferantor'))
@@ -803,23 +803,23 @@ if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase(
             }
             
             'select bank account'
-            WebUI.selectOptionByIndex(modifySelectBankAccount, datafileReferantor.getValue(GlobalVariable.NumofReferantor, 
+            WebUI.selectOptionByIndex(modifySelectBankAccount, findTestData(excelPathReferantor).getValue(GlobalVariable.NumofReferantor, 
                     16), FailureHandling.OPTIONAL)
 
             'call function gettext bankaccount'
             getTextBankAccount(('//*[@id="accessoriesData"]/div[2]/table/tbody/tr[' + modifyObjectIndex) + ']/td[5]/select')
 
             'select tax calculation method'
-            WebUI.selectOptionByLabel(modifySelectTaxCalcualtion, datafileReferantor.getValue(GlobalVariable.NumofReferantor, 
+            WebUI.selectOptionByLabel(modifySelectTaxCalcualtion, findTestData(excelPathReferantor).getValue(GlobalVariable.NumofReferantor, 
                     17), false, FailureHandling.OPTIONAL)
 			
 			referantorType = WebUI.getText(modifyReferantorType)
 			
 			if(referantorType.equalsIgnoreCase("Customer Company")){
-				if(datafileReferantor.getValue(GlobalVariable.NumofReferantor, 18).equalsIgnoreCase("Yes") && WebUI.verifyElementNotChecked(modifycheckboxVAT,GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
+				if(findTestData(excelPathReferantor).getValue(GlobalVariable.NumofReferantor, 18).equalsIgnoreCase("Yes") && WebUI.verifyElementNotChecked(modifycheckboxVAT,GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
 				   WebUI.check(modifycheckboxVAT)
 				}
-				else if(datafileReferantor.getValue(GlobalVariable.NumofReferantor, 18).equalsIgnoreCase("No") && WebUI.verifyElementChecked(modifycheckboxVAT,GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
+				else if(findTestData(excelPathReferantor).getValue(GlobalVariable.NumofReferantor, 18).equalsIgnoreCase("No") && WebUI.verifyElementChecked(modifycheckboxVAT,GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
 					WebUI.uncheck(modifycheckboxVAT)
 				}
 			}
@@ -902,7 +902,7 @@ addArrayVAT()
 'click button save'
 WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/Button Save'))
 
-Integer iscompleteMandatory = Integer.parseInt(datafileReferantor.getValue(GlobalVariable.NumofReferantor - 1, 4))
+Integer iscompleteMandatory = Integer.parseInt(findTestData(excelPathReferantor).getValue(GlobalVariable.StartIndex, 4))
 
 if ((iscompleteMandatory == 0) && (GlobalVariable.FlagFailed == 0)) {
     'cek alert'
@@ -982,13 +982,13 @@ def adddatatoarraylist(ArrayList<WebElement> referantorDetail) {
 def writeReasonFailedDelete() {
     'Write To Excel GlobalVariable.ReasonFailedDelete'
     CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '5.TabReferantorData', 1, GlobalVariable.NumofReferantor - 
-        1, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDelete)
+        1, findTestData(excelPathReferantor).getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDelete)
 }
 
 def writeReasonFailedLookup() {
     'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDataLookup'
     CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('5.TabReferantorData', GlobalVariable.NumofReferantor, 
-        GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDataLookup)
+        GlobalVariable.StatusFailed, findTestData(excelPathReferantor).getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDataLookup)
 
     GlobalVariable.FlagFailed = 1
 }
@@ -996,7 +996,7 @@ def writeReasonFailedLookup() {
 def writeReasonFailedDDL() {
     'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
     CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('5.TabReferantorData', GlobalVariable.NumofReferantor, 
-        GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDDL)
+        GlobalVariable.StatusFailed, findTestData(excelPathReferantor).getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDDL)
 
     GlobalVariable.FlagFailed = 1
 }
@@ -1028,7 +1028,7 @@ def checkVerifyEqualOrMatch(Boolean isMatch) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
         'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
         CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('5.TabReferantorData', GlobalVariable.NumofReferantor, 
-            GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+            GlobalVariable.StatusFailed, findTestData(excelPathReferantor).getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
         GlobalVariable.FlagFailed = 1
     }
@@ -1079,7 +1079,7 @@ def checkDDL(Sql sqlConnectionFOU){
 			ReferantorType) == false) {
 	
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('5.TabReferantorData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'ReferantorType')
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('5.TabReferantorData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathReferantor).getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'ReferantorType')
 	
 			(GlobalVariable.FlagFailed)++
 		}
@@ -1099,7 +1099,7 @@ def checkDDL(Sql sqlConnectionFOU){
 			taxcalcu) == false) {
 	
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('5.TabReferantorData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'tax calculation')
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('5.TabReferantorData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathReferantor).getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'tax calculation')
 	
 			(GlobalVariable.FlagFailed)++
 		}

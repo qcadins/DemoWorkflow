@@ -32,7 +32,7 @@ GlobalVariable.ColmNAP4 = 2
 getDataFile()
 
 'get count colm'
-countcolm = GlobalVariable.FindDataFile.getColumnNumbers()
+countcolm = findTestData(GlobalVariable.excelPath).getColumnNumbers()
 
 'declare financialDateDelete arraylist'
 ArrayList<String> financialDateDelete = new ArrayList<String>()
@@ -43,8 +43,8 @@ ArrayList<String> bankAccDelete = new ArrayList<String>()
 'untuk mendapatkan posisi copy app dari excel'
 for (index = 2; index <= (countcolm + 1); index++) {
 	
-    if (GlobalVariable.FindDataFile.getValue(index, 9).equalsIgnoreCase(datafilecustdetail.getValue(GlobalVariable.ColmNAP4, 
-            12)) && GlobalVariable.FindDataFile.getValue(index, 10).equalsIgnoreCase(datafilecustdetail.getValue(GlobalVariable.ColmNAP4, 
+    if (findTestData(GlobalVariable.excelPath).getValue(index, 9).equalsIgnoreCase(findTestData(excelPathCustDetail).getValue(GlobalVariable.ColmNAP4, 
+            12)) && findTestData(GlobalVariable.excelPath).getValue(index, 10).equalsIgnoreCase(findTestData(excelPathCustDetail).getValue(GlobalVariable.ColmNAP4, 
             13))) {
         'declare copyappcolm = index'
         GlobalVariable.StartIndex = index
@@ -77,10 +77,10 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 			for (financialdata = GlobalVariable.StartIndex; financialdata < (countcolm + 1); financialdata++) {
 				GlobalVariable.FlagFailed = 0
 
-					if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(
-							GlobalVariable.ColmNAP4, 12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(
-						datafilecustdetail.getValue(GlobalVariable.ColmNAP4, 13))) {
-						String converteddate = CustomKeywords.'customizeKeyword.convertDate.convertDateSdf'(GlobalVariable.FindDataFile.getValue(financialdata, 35))
+					if (findTestData(GlobalVariable.excelPath).getValue(financialdata, 9).equalsIgnoreCase(findTestData(excelPathCustDetail).getValue(
+							GlobalVariable.ColmNAP4, 12)) && findTestData(GlobalVariable.excelPath).getValue(financialdata, 10).equalsIgnoreCase(
+						findTestData(excelPathCustDetail).getValue(GlobalVariable.ColmNAP4, 13))) {
+						String converteddate = CustomKeywords.'customizeKeyword.convertDate.convertDateSdf'(findTestData(GlobalVariable.excelPath).getValue(financialdata, 35))
 
 						if (WebUI.getText(modifyNewDate).replace('-', ' ').equalsIgnoreCase(converteddate)) {
 							'modify object button edit'
@@ -95,7 +95,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 
 							break
 						} else {
-							if (GlobalVariable.FindDataFile.getValue(financialdata + 1, 9).length() == 0) {
+							if (findTestData(GlobalVariable.excelPath).getValue(financialdata + 1, 9).length() == 0) {
 								'modify object button delete'
 								modifyNewbuttondelete = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/select_Month'),
 									'xpath', 'equals', ('//*[@id="ListCustFinData"]/table/tbody/tr[' + i) + ']/td[2]/a[2]/i',
@@ -146,12 +146,9 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 	
 	if (financialDateDelete.size() > 0) {
 
-		'call function get data file'
-		getDataFile()
-		
 		'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedDelete'
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('4.FinancialData', GlobalVariable.StartIndex,
-			GlobalVariable.StatusWarning, GlobalVariable.FindDataFile.getValue(GlobalVariable.StartIndex, 2) + ';' + GlobalVariable.ReasonFailedDelete + financialDateDelete)
+			GlobalVariable.StatusWarning, findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.StartIndex, 2) + ';' + GlobalVariable.ReasonFailedDelete + financialDateDelete)
 
 		(GlobalVariable.FlagWarning)++
 	}
@@ -163,9 +160,9 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 		for (financialdata = GlobalVariable.StartIndex; financialdata < (countcolm + 1); financialdata++) {
 			GlobalVariable.FlagFailed = 0
 
-			if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(
-				GlobalVariable.ColmNAP4, 12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(
-				datafilecustdetail.getValue(GlobalVariable.ColmNAP4, 13))) {
+			if (findTestData(GlobalVariable.excelPath).getValue(financialdata, 9).equalsIgnoreCase(findTestData(excelPathCustDetail).getValue(
+				GlobalVariable.ColmNAP4, 12)) && findTestData(GlobalVariable.excelPath).getValue(financialdata, 10).equalsIgnoreCase(
+				findTestData(excelPathCustDetail).getValue(GlobalVariable.ColmNAP4, 13))) {
 		
 				for (int i = 1; i <= variable.size(); i++) {
 					'modify object Date'
@@ -173,8 +170,8 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 						'xpath', 'equals', ('//*[@id="ListCustFinData"]/table/tbody/tr[' + i) + ']/td[1]', true)
 
 					
-						if (GlobalVariable.FindDataFile.getValue(financialdata, 12).length() > 0) {
-							String converteddate = CustomKeywords.'customizeKeyword.convertDate.convertDateSdf'(GlobalVariable.FindDataFile.getValue(financialdata, 35))
+						if (findTestData(GlobalVariable.excelPath).getValue(financialdata, 12).length() > 0) {
+							String converteddate = CustomKeywords.'customizeKeyword.convertDate.convertDateSdf'(findTestData(GlobalVariable.excelPath).getValue(financialdata, 35))
 
 							'verify date beda'
 							if (!(WebUI.getText(modifyNewDate, FailureHandling.OPTIONAL).replace('-', ' ').equalsIgnoreCase(
@@ -204,10 +201,10 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 		}
 	} else {
 		for (financialdata = GlobalVariable.StartIndex; financialdata < (countcolm + 1); financialdata++) {
-				if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(
-						GlobalVariable.ColmNAP4, 12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(
-					datafilecustdetail.getValue(GlobalVariable.ColmNAP4, 13))) {
-					if (GlobalVariable.FindDataFile.getValue(financialdata, 12).length() > 0) {
+				if (findTestData(GlobalVariable.excelPath).getValue(financialdata, 9).equalsIgnoreCase(findTestData(excelPathCustDetail).getValue(
+						GlobalVariable.ColmNAP4, 12)) && findTestData(GlobalVariable.excelPath).getValue(financialdata, 10).equalsIgnoreCase(
+					findTestData(excelPathCustDetail).getValue(GlobalVariable.ColmNAP4, 13))) {
+					if (findTestData(GlobalVariable.excelPath).getValue(financialdata, 12).length() > 0) {
 						'click button add'
 						WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/button_Add'))
 
@@ -222,10 +219,10 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 	}
 } else if (copyapp == 'No') {
 	for (financialdata = GlobalVariable.StartIndex; financialdata < (countcolm + 1); financialdata++) {
-			if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(GlobalVariable.ColmNAP4,
-					12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(datafilecustdetail.getValue(
+			if (findTestData(GlobalVariable.excelPath).getValue(financialdata, 9).equalsIgnoreCase(findTestData(excelPathCustDetail).getValue(GlobalVariable.ColmNAP4,
+					12)) && findTestData(GlobalVariable.excelPath).getValue(financialdata, 10).equalsIgnoreCase(findTestData(excelPathCustDetail).getValue(
 					GlobalVariable.ColmNAP4, 13))) {
-				if (GlobalVariable.FindDataFile.getValue(financialdata, 12).length() > 0) {
+				if (findTestData(GlobalVariable.excelPath).getValue(financialdata, 12).length() > 0) {
 					'click button add'
 					WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/button_Add'))
 
@@ -250,7 +247,7 @@ for (i = 1; i <= variable.size(); i++) {
 		'xpath', 'equals', ('//*[@id="AttributeList"]/div/div[' + i) + ']/div/div/input', true)
 
 	'input posisi laporan'
-	WebUI.setText(modifyinputFinAttr, GlobalVariable.FindDataFile.getValue(GlobalVariable.StartIndex, row++))
+	WebUI.setText(modifyinputFinAttr, findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.StartIndex, row++))
 }
 
 'Check if Edit Untuk Bank Account dan Bank Statement'
@@ -269,13 +266,13 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 			for (financialdata = GlobalVariable.StartIndex; financialdata < (countcolm + 1); financialdata++) {
 				int flagFailed = 0
 
-					if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(
-							GlobalVariable.ColmNAP4, 12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(
-						datafilecustdetail.getValue(GlobalVariable.ColmNAP4, 13))) {
-						if (GlobalVariable.FindDataFile.getValue(financialdata, 67).length() > 0) {
-							bankdetailexcel = ((((((('- ' + GlobalVariable.FindDataFile.getValue(financialdata, 67)) + ' - ') +
-							GlobalVariable.FindDataFile.getValue(financialdata, 68)) + ' - ') + GlobalVariable.FindDataFile.getValue(
-								financialdata, 70)) + ' - ') + GlobalVariable.FindDataFile.getValue(financialdata, 69))
+					if (findTestData(GlobalVariable.excelPath).getValue(financialdata, 9).equalsIgnoreCase(findTestData(excelPathCustDetail).getValue(
+							GlobalVariable.ColmNAP4, 12)) && findTestData(GlobalVariable.excelPath).getValue(financialdata, 10).equalsIgnoreCase(
+						findTestData(excelPathCustDetail).getValue(GlobalVariable.ColmNAP4, 13))) {
+						if (findTestData(GlobalVariable.excelPath).getValue(financialdata, 67).length() > 0) {
+							bankdetailexcel = ((((((('- ' + findTestData(GlobalVariable.excelPath).getValue(financialdata, 67)) + ' - ') +
+							findTestData(GlobalVariable.excelPath).getValue(financialdata, 68)) + ' - ') + findTestData(GlobalVariable.excelPath).getValue(
+								financialdata, 70)) + ' - ') + findTestData(GlobalVariable.excelPath).getValue(financialdata, 69))
 
 							if (BankDetail.equalsIgnoreCase(bankdetailexcel)) {
 								'modify button edit'
@@ -291,7 +288,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 
 								break
 							} else {
-								if (GlobalVariable.FindDataFile.getValue(financialdata + 1, 10).length() == 0) {
+								if (findTestData(GlobalVariable.excelPath).getValue(financialdata + 1, 10).length() == 0) {
 									'modify button delete'
 									modifyNewbuttondelete = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/select_Month'),
 										'xpath', 'equals', ('//*[@id="CustBankAccSection"]/div/div/div[' + i) + ']/div[1]/div/button[2]',
@@ -340,12 +337,10 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 	}
 	
 	if (bankAccDelete.size() > 0) {
-		'call function get data file'
-		getDataFile()
-		
+
 		'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedDelete'
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('4.FinancialData', GlobalVariable.StartIndex,
-			GlobalVariable.StatusWarning, GlobalVariable.FindDataFile.getValue(GlobalVariable.StartIndex, 2) + ';' + GlobalVariable.ReasonFailedDelete + bankAccDelete)
+			GlobalVariable.StatusWarning, findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.StartIndex, 2) + ';' + GlobalVariable.ReasonFailedDelete + bankAccDelete)
 
 		(GlobalVariable.FlagWarning)++
 	}
@@ -357,9 +352,9 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 		for (financialdata = GlobalVariable.StartIndex; financialdata < (countcolm + 1); financialdata++) {
 			int flagFailed = 0
 
-			if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(
-				GlobalVariable.ColmNAP4, 12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(
-			datafilecustdetail.getValue(GlobalVariable.ColmNAP4, 13))) {
+			if (findTestData(GlobalVariable.excelPath).getValue(financialdata, 9).equalsIgnoreCase(findTestData(excelPathCustDetail).getValue(
+				GlobalVariable.ColmNAP4, 12)) && findTestData(GlobalVariable.excelPath).getValue(financialdata, 10).equalsIgnoreCase(
+			findTestData(excelPathCustDetail).getValue(GlobalVariable.ColmNAP4, 13))) {
 		
 				for (i = 1; i <= variable.size(); i++) {
 					'modify bank name - branch - bank no'
@@ -369,10 +364,10 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 					BankDetail = WebUI.getText(modifyNewbankaccdetail)
 
 					
-						if (GlobalVariable.FindDataFile.getValue(financialdata, 67).length() > 0) {
-							bankdetailexcel = ((((((('- ' + GlobalVariable.FindDataFile.getValue(financialdata, 67)) + ' - ') +
-							GlobalVariable.FindDataFile.getValue(financialdata, 68)) + ' - ') + GlobalVariable.FindDataFile.getValue(
-								financialdata, 70)) + ' - ') + GlobalVariable.FindDataFile.getValue(financialdata, 69))
+						if (findTestData(GlobalVariable.excelPath).getValue(financialdata, 67).length() > 0) {
+							bankdetailexcel = ((((((('- ' + findTestData(GlobalVariable.excelPath).getValue(financialdata, 67)) + ' - ') +
+							findTestData(GlobalVariable.excelPath).getValue(financialdata, 68)) + ' - ') + findTestData(GlobalVariable.excelPath).getValue(
+								financialdata, 70)) + ' - ') + findTestData(GlobalVariable.excelPath).getValue(financialdata, 69))
 
 							'verify bank beda'
 							if (!(BankDetail.equalsIgnoreCase(bankdetailexcel))) {
@@ -397,10 +392,10 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 		for (financialdata = GlobalVariable.StartIndex; financialdata < (countcolm + 1); financialdata++) {
 			int flagFailed = 0
 
-			if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(
-						GlobalVariable.ColmNAP4, 12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(
-					datafilecustdetail.getValue(GlobalVariable.ColmNAP4, 13))) {
-					if (GlobalVariable.FindDataFile.getValue(financialdata, 67).length() > 0) {
+			if (findTestData(GlobalVariable.excelPath).getValue(financialdata, 9).equalsIgnoreCase(findTestData(excelPathCustDetail).getValue(
+						GlobalVariable.ColmNAP4, 12)) && findTestData(GlobalVariable.excelPath).getValue(financialdata, 10).equalsIgnoreCase(
+					findTestData(excelPathCustDetail).getValue(GlobalVariable.ColmNAP4, 13))) {
+					if (findTestData(GlobalVariable.excelPath).getValue(financialdata, 67).length() > 0) {
 						'click button add bank'
 						WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/button_addBank'))
 
@@ -419,10 +414,10 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 	for (financialdata = GlobalVariable.StartIndex; financialdata < (countcolm + 1); financialdata++) {
 		int flagFailed = 0
 
-		if (GlobalVariable.FindDataFile.getValue(financialdata, 9).equalsIgnoreCase(datafilecustdetail.getValue(GlobalVariable.ColmNAP4,
-					12)) && GlobalVariable.FindDataFile.getValue(financialdata, 10).equalsIgnoreCase(datafilecustdetail.getValue(
+		if (findTestData(GlobalVariable.excelPath).getValue(financialdata, 9).equalsIgnoreCase(findTestData(excelPathCustDetail).getValue(GlobalVariable.ColmNAP4,
+					12)) && findTestData(GlobalVariable.excelPath).getValue(financialdata, 10).equalsIgnoreCase(findTestData(excelPathCustDetail).getValue(
 					GlobalVariable.ColmNAP4, 13))) {
-				if (GlobalVariable.FindDataFile.getValue(financialdata, 67).length() > 0) {
+				if (findTestData(GlobalVariable.excelPath).getValue(financialdata, 67).length() > 0) {
 					'click button add bank'
 					WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/button_addBank'))
 
@@ -455,99 +450,99 @@ def inputDataFinancial() {
 
     'input gross monthly income amount'
     WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/input_Monthly Income'), 
-        GlobalVariable.FindDataFile.getValue(financialdata, 12))
+        findTestData(GlobalVariable.excelPath).getValue(financialdata, 12))
 
     'input gross profit amount'
     WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/input_Monthly Expense'), 
-        GlobalVariable.FindDataFile.getValue(financialdata, 13))
+        findTestData(GlobalVariable.excelPath).getValue(financialdata, 13))
 
     'input return of investment percentage'
     WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/input_Return Of Investment()'), 
-        GlobalVariable.FindDataFile.getValue(financialdata, 14))
+        findTestData(GlobalVariable.excelPath).getValue(financialdata, 14))
 
     'input return of equity percentage'
     WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/input_Return Of Equity()'), 
-        GlobalVariable.FindDataFile.getValue(financialdata, 15))
+        findTestData(GlobalVariable.excelPath).getValue(financialdata, 15))
 
     'input return of asset percentage'
     WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/input_Return Of Asset()'), 
-        GlobalVariable.FindDataFile.getValue(financialdata, 16))
+        findTestData(GlobalVariable.excelPath).getValue(financialdata, 16))
 
     'input profit margin percentage'
     WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/input_Profit Margin()'), 
-        GlobalVariable.FindDataFile.getValue(financialdata, 17))
+        findTestData(GlobalVariable.excelPath).getValue(financialdata, 17))
 
     'input current ratio percentage'
     WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/input_Current Ratio()'), 
-        GlobalVariable.FindDataFile.getValue(financialdata, 18))
+        findTestData(GlobalVariable.excelPath).getValue(financialdata, 18))
 
     'debt equity ratio percentage'
     WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/input_Debt Equity Ratio()'), 
-        GlobalVariable.FindDataFile.getValue(financialdata, 19))
+        findTestData(GlobalVariable.excelPath).getValue(financialdata, 19))
 
     'inventory turn over percentage'
     WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/input_Invetory Turn Over()'), 
-        GlobalVariable.FindDataFile.getValue(financialdata, 20))
+        findTestData(GlobalVariable.excelPath).getValue(financialdata, 20))
 
     'input account receivable turn over'
     WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/input_AR Turn Over()'), 
-        GlobalVariable.FindDataFile.getValue(financialdata, 21))
+        findTestData(GlobalVariable.excelPath).getValue(financialdata, 21))
 
     'input growth percentage'
     WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/input_Growth()'), 
-        GlobalVariable.FindDataFile.getValue(financialdata, 22))
+        findTestData(GlobalVariable.excelPath).getValue(financialdata, 22))
 
     'input working capital amount'
     WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/input_Working Capital (Amount)'), 
-        GlobalVariable.FindDataFile.getValue(financialdata, 23))
+        findTestData(GlobalVariable.excelPath).getValue(financialdata, 23))
 
     'input other monthly installment amount'
     WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/input_Other Monthly Installment'), 
-        GlobalVariable.FindDataFile.getValue(financialdata, 24))
+        findTestData(GlobalVariable.excelPath).getValue(financialdata, 24))
 
     'input operational cost'
     WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/input_Operational Cost'), 
-        GlobalVariable.FindDataFile.getValue(financialdata, 26))
+        findTestData(GlobalVariable.excelPath).getValue(financialdata, 26))
 
     'input revenue '
     WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/input_Revenue'), 
-        GlobalVariable.FindDataFile.getValue(financialdata, 25))
+        findTestData(GlobalVariable.excelPath).getValue(financialdata, 25))
 
     'input current asset'
     WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/input_Current Asset'), 
-        GlobalVariable.FindDataFile.getValue(financialdata, 28))
+        findTestData(GlobalVariable.excelPath).getValue(financialdata, 28))
 
     'input net fixed asset'
     WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/input_Profit Before Tax'), 
-        GlobalVariable.FindDataFile.getValue(financialdata, 27))
+        findTestData(GlobalVariable.excelPath).getValue(financialdata, 27))
 
     'input total asset'
     WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/input_Total Asset'), 
-        GlobalVariable.FindDataFile.getValue(financialdata, 30))
+        findTestData(GlobalVariable.excelPath).getValue(financialdata, 30))
 
     'input profit before tax'
     WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/input_Nett Fixed Asset'), 
-        GlobalVariable.FindDataFile.getValue(financialdata, 29))
+        findTestData(GlobalVariable.excelPath).getValue(financialdata, 29))
 
     'input long term liabilities'
     WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/input_Long Term Liabilities'), 
-        GlobalVariable.FindDataFile.getValue(financialdata, 32))
+        findTestData(GlobalVariable.excelPath).getValue(financialdata, 32))
 
     'input current liabilities'
     WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/input_Current Liabilities'), 
-        GlobalVariable.FindDataFile.getValue(financialdata, 31))
+        findTestData(GlobalVariable.excelPath).getValue(financialdata, 31))
 
     'input current ratio'
     WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/input_Current Ratio'), 
-        GlobalVariable.FindDataFile.getValue(financialdata, 34))
+        findTestData(GlobalVariable.excelPath).getValue(financialdata, 34))
 
     'input shareholder equity'
     WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/input_Shareholder Equity'), 
-        GlobalVariable.FindDataFile.getValue(financialdata, 33))
+        findTestData(GlobalVariable.excelPath).getValue(financialdata, 33))
 
     'input date as of'
     WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/input_Date As Of'), 
-        GlobalVariable.FindDataFile.getValue(financialdata, 35))
+        findTestData(GlobalVariable.excelPath).getValue(financialdata, 35))
 
     WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/button_SaveFinancialData'))
 }
@@ -555,17 +550,17 @@ def inputDataFinancial() {
 def inputBank(String copyapp, ArrayList<String> variable, int flagFailed) {
     GlobalVariable.FlagWarning = 0
 
-    if (GlobalVariable.FindDataFile.getValue(financialdata, 67).length() > 1) {
+    if (findTestData(GlobalVariable.excelPath).getValue(financialdata, 67).length() > 1) {
         'click bank lookup'
         WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/button_Bank Name_btn btn-raised btn-primary'))
 
         'input bank code'
         WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/input_Bank Code_BankCode'), 
-            GlobalVariable.FindDataFile.getValue(financialdata, 66))
+            findTestData(GlobalVariable.excelPath).getValue(financialdata, 66))
 
         'input bank name'
         WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/input_Bank Name_BankName'), 
-            GlobalVariable.FindDataFile.getValue(financialdata, 67))
+            findTestData(GlobalVariable.excelPath).getValue(financialdata, 67))
 
         'click button search'
         WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/button_Search'), 
@@ -592,25 +587,25 @@ def inputBank(String copyapp, ArrayList<String> variable, int flagFailed) {
         
         'input bank branch'
         WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/input_Bank Branch'), 
-            GlobalVariable.FindDataFile.getValue(financialdata, 68))
+            findTestData(GlobalVariable.excelPath).getValue(financialdata, 68))
 
         'input account name'
         WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/input_Account Name'), 
-            GlobalVariable.FindDataFile.getValue(financialdata, 69))
+            findTestData(GlobalVariable.excelPath).getValue(financialdata, 69))
 
         'input account no'
         WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/input_Account No'), 
-            GlobalVariable.FindDataFile.getValue(financialdata, 70))
+            findTestData(GlobalVariable.excelPath).getValue(financialdata, 70))
 
         if (WebUI.verifyElementNotChecked(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/input_Is Default'), 
             GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
-            if (GlobalVariable.FindDataFile.getValue(financialdata, 71) == 'Yes') {
+            if (findTestData(GlobalVariable.excelPath).getValue(financialdata, 71) == 'Yes') {
                 'click is default'
                 WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/input_Is Default'))
             }
         } else if (WebUI.verifyElementChecked(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/input_Is Default'), 
             GlobalVariable.TimeOut)) {
-            if (GlobalVariable.FindDataFile.getValue(financialdata, 71) == 'No') {
+            if (findTestData(GlobalVariable.excelPath).getValue(financialdata, 71) == 'No') {
                 'click is default'
                 WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/input_Is Default'))
             }
@@ -618,13 +613,13 @@ def inputBank(String copyapp, ArrayList<String> variable, int flagFailed) {
         
         if (WebUI.verifyElementNotChecked(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/input_Is Active'), 
             GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
-            if (GlobalVariable.FindDataFile.getValue(financialdata, 72) == 'Yes') {
+            if (findTestData(GlobalVariable.excelPath).getValue(financialdata, 72) == 'Yes') {
                 'click is active'
                 WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/input_Is Active'))
             }
         } else if (WebUI.verifyElementChecked(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/input_Is Active'), 
             GlobalVariable.TimeOut)) {
-            if (GlobalVariable.FindDataFile.getValue(financialdata, 72) == 'No') {
+            if (findTestData(GlobalVariable.excelPath).getValue(financialdata, 72) == 'No') {
                 'click is active'
                 WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/input_Is Active'))
             }
@@ -632,25 +627,25 @@ def inputBank(String copyapp, ArrayList<String> variable, int flagFailed) {
         
         'input begining balance'
         WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/input_Beginning Balance'), 
-            GlobalVariable.FindDataFile.getValue(financialdata, 73))
+            findTestData(GlobalVariable.excelPath).getValue(financialdata, 73))
 
         'Month array'
-        montharray = GlobalVariable.FindDataFile.getValue(financialdata, 74).split(';', -1)
+        montharray = findTestData(GlobalVariable.excelPath).getValue(financialdata, 74).split(';', -1)
 
         'Year array'
-        yeararray = GlobalVariable.FindDataFile.getValue(financialdata, 75).split(';', -1)
+        yeararray = findTestData(GlobalVariable.excelPath).getValue(financialdata, 75).split(';', -1)
 
         'Debit Transaction count array'
-        debitTransactionarray = GlobalVariable.FindDataFile.getValue(financialdata, 76).split(';', -1)
+        debitTransactionarray = findTestData(GlobalVariable.excelPath).getValue(financialdata, 76).split(';', -1)
 
         'debit array'
-        debitarray = GlobalVariable.FindDataFile.getValue(financialdata, 77).split(';', -1)
+        debitarray = findTestData(GlobalVariable.excelPath).getValue(financialdata, 77).split(';', -1)
 
         'credit transaction count array'
-        creditTransactionArray = GlobalVariable.FindDataFile.getValue(financialdata, 78).split(';', -1)
+        creditTransactionArray = findTestData(GlobalVariable.excelPath).getValue(financialdata, 78).split(';', -1)
 
         'credit array'
-        creditarray = GlobalVariable.FindDataFile.getValue(financialdata, 79).split(';', -1)
+        creditarray = findTestData(GlobalVariable.excelPath).getValue(financialdata, 79).split(';', -1)
 
         if (copyapp.equalsIgnoreCase('Edit')) {
             variablebankstatement = DriverFactory.getWebDriver().findElements(By.xpath('//*[@id="CustBankAccDetailSection"]/div[3]/div[1]/table/tbody[2]/tr'))
@@ -699,10 +694,10 @@ def inputBank(String copyapp, ArrayList<String> variable, int flagFailed) {
 
                     year = WebUI.getAttribute(modifyNewinputYear, 'value')
 
-                    if ((((((GlobalVariable.FindDataFile.getValue(financialdata, 74).length() > 0) || (GlobalVariable.FindDataFile.getValue(
-                        financialdata, 75).length() > 0)) || (GlobalVariable.FindDataFile.getValue(financialdata, 76).length() > 
-                    0)) || (GlobalVariable.FindDataFile.getValue(financialdata, 77).length() > 0)) || (GlobalVariable.FindDataFile.getValue(
-                        financialdata, 78).length() > 0)) || (GlobalVariable.FindDataFile.getValue(financialdata, 79).length() > 
+                    if ((((((findTestData(GlobalVariable.excelPath).getValue(financialdata, 74).length() > 0) || (findTestData(GlobalVariable.excelPath).getValue(
+                        financialdata, 75).length() > 0)) || (findTestData(GlobalVariable.excelPath).getValue(financialdata, 76).length() > 
+                    0)) || (findTestData(GlobalVariable.excelPath).getValue(financialdata, 77).length() > 0)) || (findTestData(GlobalVariable.excelPath).getValue(
+                        financialdata, 78).length() > 0)) || (findTestData(GlobalVariable.excelPath).getValue(financialdata, 79).length() > 
                     0)) {
                         for (int excelindex = 0; excelindex < montharray.size(); excelindex++) {
                             if ((montharray[excelindex]).equalsIgnoreCase(month) && (yeararray[excelindex]).equalsIgnoreCase(
@@ -782,10 +777,10 @@ def inputBank(String copyapp, ArrayList<String> variable, int flagFailed) {
 
                         year = WebUI.getAttribute(modifyNewinputYear, 'value')
 
-                        if ((((((GlobalVariable.FindDataFile.getValue(financialdata, 74).length() > 0) || (GlobalVariable.FindDataFile.getValue(
-                            financialdata, 75).length() > 0)) || (GlobalVariable.FindDataFile.getValue(financialdata, 76).length() > 
-                        0)) || (GlobalVariable.FindDataFile.getValue(financialdata, 77).length() > 0)) || (GlobalVariable.FindDataFile.getValue(
-                            financialdata, 78).length() > 0)) || (GlobalVariable.FindDataFile.getValue(financialdata, 79).length() > 
+                        if ((((((findTestData(GlobalVariable.excelPath).getValue(financialdata, 74).length() > 0) || (findTestData(GlobalVariable.excelPath).getValue(
+                            financialdata, 75).length() > 0)) || (findTestData(GlobalVariable.excelPath).getValue(financialdata, 76).length() > 
+                        0)) || (findTestData(GlobalVariable.excelPath).getValue(financialdata, 77).length() > 0)) || (findTestData(GlobalVariable.excelPath).getValue(
+                            financialdata, 78).length() > 0)) || (findTestData(GlobalVariable.excelPath).getValue(financialdata, 79).length() > 
                         0)) {
                             'verify month year beda'
                             if (!((montharray[excelindex]).equalsIgnoreCase(month) && (yeararray[excelindex]).equalsIgnoreCase(
@@ -855,7 +850,7 @@ def inputBank(String copyapp, ArrayList<String> variable, int flagFailed) {
         'click button save'
         WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/button_Save'))
 
-        if ((Integer.parseInt(GlobalVariable.FindDataFile.getValue(financialdata, 4)) == 0) && (GlobalVariable.FlagFailed == 
+        if ((Integer.parseInt(findTestData(GlobalVariable.excelPath).getValue(financialdata, 4)) == 0) && (GlobalVariable.FlagFailed == 
         0)) {
             'Check alert'
             GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(financialdata, '4.FinancialData')
@@ -863,11 +858,11 @@ def inputBank(String copyapp, ArrayList<String> variable, int flagFailed) {
         
         if (GlobalVariable.FlagFailed == 0) {
             'Check save Process write to excel'
-            CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(GlobalVariable.FindDataFile.getValue(
+            CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(findTestData(GlobalVariable.excelPath).getValue(
                         financialdata, 4)), findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/button_Save  Continue'), 
                 financialdata, '4.FinancialData')
 
-            if (Integer.parseInt(GlobalVariable.FindDataFile.getValue(financialdata, 4)) == 0) {
+            if (Integer.parseInt(findTestData(GlobalVariable.excelPath).getValue(financialdata, 4)) == 0) {
                 'Check error validasi'
                 CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(findTestObject('NAP/NAP4-CustomerDataCompletion/errorvalidasi'), 
                     financialdata, '4.FinancialData')
@@ -911,27 +906,27 @@ def inputBankStatement(int index) {
 
 def inputBankStatementFromEmpty() {
     'Month array'
-    montharray = GlobalVariable.FindDataFile.getValue(financialdata, 74).split(';', -1)
+    montharray = findTestData(GlobalVariable.excelPath).getValue(financialdata, 74).split(';', -1)
 
     'Year array'
-    yeararray = GlobalVariable.FindDataFile.getValue(financialdata, 75).split(';', -1)
+    yeararray = findTestData(GlobalVariable.excelPath).getValue(financialdata, 75).split(';', -1)
 
     'Debit Transaction count array'
-    debitTransactionarray = GlobalVariable.FindDataFile.getValue(financialdata, 76).split(';', -1)
+    debitTransactionarray = findTestData(GlobalVariable.excelPath).getValue(financialdata, 76).split(';', -1)
 
     'debit array'
-    debitarray = GlobalVariable.FindDataFile.getValue(financialdata, 77).split(';', -1)
+    debitarray = findTestData(GlobalVariable.excelPath).getValue(financialdata, 77).split(';', -1)
 
     'credit transaction count array'
-    creditTransactionArray = GlobalVariable.FindDataFile.getValue(financialdata, 78).split(';', -1)
+    creditTransactionArray = findTestData(GlobalVariable.excelPath).getValue(financialdata, 78).split(';', -1)
 
     'credit array'
-    creditarray = GlobalVariable.FindDataFile.getValue(financialdata, 79).split(';', -1)
+    creditarray = findTestData(GlobalVariable.excelPath).getValue(financialdata, 79).split(';', -1)
 
-    if ((((((GlobalVariable.FindDataFile.getValue(financialdata, 74).length() > 0) || (GlobalVariable.FindDataFile.getValue(
-        financialdata, 75).length() > 0)) || (GlobalVariable.FindDataFile.getValue(financialdata, 76).length() > 0)) || 
-    (GlobalVariable.FindDataFile.getValue(financialdata, 77).length() > 0)) || (GlobalVariable.FindDataFile.getValue(financialdata, 
-        78).length() > 0)) || (GlobalVariable.FindDataFile.getValue(financialdata, 79).length() > 0)) {
+    if ((((((findTestData(GlobalVariable.excelPath).getValue(financialdata, 74).length() > 0) || (findTestData(GlobalVariable.excelPath).getValue(
+        financialdata, 75).length() > 0)) || (findTestData(GlobalVariable.excelPath).getValue(financialdata, 76).length() > 0)) || 
+    (findTestData(GlobalVariable.excelPath).getValue(financialdata, 77).length() > 0)) || (findTestData(GlobalVariable.excelPath).getValue(financialdata, 
+        78).length() > 0)) || (findTestData(GlobalVariable.excelPath).getValue(financialdata, 79).length() > 0)) {
         for (BSindex = 1; BSindex <= montharray.size(); BSindex++) {
             'modify object from input credit'
             modifyNewinputCredit = WebUI.modifyObjectProperty(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/input_credit'), 
@@ -976,30 +971,30 @@ def getDataFile(){
 		'get data file path'
 		GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileCustomerCompany)
 	
-		'get data file customer'
-		datafilecustdetail = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail')
+		'get data excelPathCustDetail'
+		excelPathCustDetail = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail'
 	
 		'declare data file Global variable'
-		GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData')
+		GlobalVariable.excelPath = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/FinancialData'
 	} else if (GlobalVariable.APPSTEP == 'SHAREHOLDER COMPANY') {
 		'get data file path'
 		GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileManagementShareholderCompany)
 	
-		'get data file customer'
-		datafilecustdetail = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/CustomerDetail')
+		'get data excelPathCustDetail'
+		excelPathCustDetail = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/CustomerDetail'
 	
 		'declare data file Global variable'
-		GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementshareholderCompany/FinancialData')
+		GlobalVariable.excelPath = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementshareholderCompany/FinancialData'
 	} else if (GlobalVariable.APPSTEP == 'GUARANTOR COMPANY') {
 		'get data file path'
 		GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorCompanyCompany)
 	
-		'get data file customer'
-		datafilecustdetail = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/CustomerDetail')
+		'get data excelPathCustDetail'
+		excelPathCustDetail = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/CustomerDetail'
 	
 		'declare data file Global variable'
-		GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/FinancialData')
+		GlobalVariable.excelPath = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/FinancialData'
 	}
 	
-	return datafilecustdetail
+	return excelPathCustDetail
 }

@@ -173,7 +173,7 @@ String appNo = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-Cust
 CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 12, GlobalVariable.NumofColm - 
     1, appNo)
 
-if (GlobalVariable.Role == 'Data Entry') {
+if (GlobalVariable.RoleCompany == 'Data Entry') {
     if ((datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || datafileCustomerCompany.getValue(
         GlobalVariable.NumofColm, 10).equalsIgnoreCase('Edit')) || (datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 
         8).length() > 1)) {

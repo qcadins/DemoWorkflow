@@ -14,6 +14,8 @@ import com.kms.katalon.core.util.KeywordUtil as KeywordUtil
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
+
+import groovy.sql.Sql
 import internal.GlobalVariable as GlobalVariable
 
 'call test case login R3'
@@ -23,7 +25,7 @@ WebUI.callTestCase(findTestCase('Login/LoginR3BranchManagerSuperuser - NEW'), [:
 GlobalVariable.LOB = 'CF4W'
 
 'get data file path'
-GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getexcelPathCustomerCompany'(GlobalVariable.PathCompany)
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
 
 'declare findTestData(excelPathCustomerCompany)'
 excelPathCustomerCompany = 'NAP-' + GlobalVariable.LOB + '-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData'
@@ -182,4 +184,3 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
         }
     }
 }
-

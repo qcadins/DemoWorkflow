@@ -29,20 +29,20 @@ int arrayindex = 0
 
 int flagFailed = 0
 
-'declare datafileTabTC'
-datafileTabTC = findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabTermConditionData')
+'declare excelPathTabTC'
+excelPathTabTC = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP2-ApplicationData/TabTermConditionData'
 
-def YesUncheckArray = datafileTabTC.getValue(GlobalVariable.NumofColm, 12).split(';', -1)
+def YesUncheckArray = findTestData(excelPathTabTC).getValue(GlobalVariable.NumofColm, 12).split(';', -1)
 
-def PromiseDateArray = datafileTabTC.getValue(GlobalVariable.NumofColm, 13).split(';', -1)
+def PromiseDateArray = findTestData(excelPathTabTC).getValue(GlobalVariable.NumofColm, 13).split(';', -1)
 
-def RequiredNoCheckArray = datafileTabTC.getValue(GlobalVariable.NumofColm, 14).split(';', -1)
+def RequiredNoCheckArray = findTestData(excelPathTabTC).getValue(GlobalVariable.NumofColm, 14).split(';', -1)
 
-def ExpiredDocArray = datafileTabTC.getValue(GlobalVariable.NumofColm, 15).split(';', -1)
+def ExpiredDocArray = findTestData(excelPathTabTC).getValue(GlobalVariable.NumofColm, 15).split(';', -1)
 
-def ExpiredDateArray = datafileTabTC.getValue(GlobalVariable.NumofColm, 16).split(';', -1)
+def ExpiredDateArray = findTestData(excelPathTabTC).getValue(GlobalVariable.NumofColm, 16).split(';', -1)
 
-def WaivedCheckArray = datafileTabTC.getValue(GlobalVariable.NumofColm, 17).split(';', -1)
+def WaivedCheckArray = findTestData(excelPathTabTC).getValue(GlobalVariable.NumofColm, 17).split(';', -1)
 
 for(index = 0 ; index < result.size()/9 ; index++){
 	TCdoc = result[arrayindex++]
@@ -93,5 +93,5 @@ for(index = 0 ; index < result.size()/9 ; index++){
 if(flagFailed > 0){
 	
 	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedStoredDB'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('10.TabTermConditionData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabTermConditionData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedStoredDB)
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('10.TabTermConditionData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathTabTC).getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedStoredDB)
 }
