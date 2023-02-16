@@ -23,32 +23,32 @@ import com.kms.katalon.core.util.KeywordUtil
 
 GlobalVariable.StartIndex = 2
 
-'declare datafileCustomerPersonal'
-datafileCustomerPersonal = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData')
+'declare excelPathCustomerPersonal'
+excelPathCustomerPersonal = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData'
 
-'declare datafileReferantor'
-datafileReferantor = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData')
+'declare excelPathReferantor'
+excelPathReferantor = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData'
 
-'declare datafileTabApplication'
-datafileTabApplication = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData')
+'declare excelPathTabApplication'
+excelPathTabApplication = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData'
 
-'declare datafileTabAsset'
-datafileTabAsset = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData')
+'declare excelPathTabAsset'
+excelPathTabAsset = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData'
 
-'declare datafileTabInsurance'
-datafileTabInsurance = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData')
+'declare excelPathTabInsurance'
+excelPathTabInsurance = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData'
 
-'declare datafileTabLifeInsurance'
-datafileTabLifeInsurance = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData')
+'declare excelPathTabLifeInsurance'
+excelPathTabLifeInsurance = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData'
 
-'declare datafileTabFinancial'
-datafileTabFinancial = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData')
+'declare excelPathTabFinancial'
+excelPathTabFinancial = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData'
 
-'declare datafileTabTC'
-datafileTabTC = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabTermConditionData')
+'declare excelPathTabTC'
+excelPathTabTC = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabTermConditionData'
 
-'declare datafileTabUploadDoc'
-datafileTabUploadDoc = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabUploadDocument')
+'declare excelPathTabUploadDoc'
+excelPathTabUploadDoc = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabUploadDocument'
 
 'click menu application data'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/a_APPLICATION DATA'))
@@ -61,7 +61,7 @@ pagingTesting()
 
 'input Appno'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabReferantorData/input_Application No_AppNoId'), 
-    datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 13))
+    findTestData(excelPathCustomerPersonal).getValue(GlobalVariable.NumofColm, 13))
 
 'Looping delay untuk handling copy app selama +- 2 menit'
 for (int i = 1; i <= 8; i++) {
@@ -86,9 +86,9 @@ GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPat
 
 if (GlobalVariable.Role == 'Data Entry') {
     'Looping untuk mencari nilai colm yang menunjukkan colm appno'
-    for (GlobalVariable.NumofReferantor = 2; GlobalVariable.NumofReferantor <= (datafileReferantor.getColumnNumbers() - 
+    for (GlobalVariable.NumofReferantor = 2; GlobalVariable.NumofReferantor <= (findTestData(excelPathReferantor).getColumnNumbers() - 
     1); (GlobalVariable.NumofReferantor)++) {
-        if (datafileReferantor.getValue(GlobalVariable.NumofReferantor, 12) == datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 
+        if (findTestData(excelPathReferantor).getValue(GlobalVariable.NumofReferantor, 12) == findTestData(excelPathCustomerPersonal).getValue(GlobalVariable.NumofColm, 
             13)) {
             GlobalVariable.StartIndex = GlobalVariable.NumofReferantor
 
@@ -97,12 +97,12 @@ if (GlobalVariable.Role == 'Data Entry') {
     }
     
     'Dijalankan tanpa copy app tab referantor atau copy app dengan edit'
-    if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('No') || datafileReferantor.getValue(
+    if (findTestData(excelPathReferantor).getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('No') || findTestData(excelPathReferantor).getValue(
         GlobalVariable.StartIndex, 10).equalsIgnoreCase('Edit')) {
         'call test case tab referantor'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabReferantorData'), [:], FailureHandling.CONTINUE_ON_FAILURE //dijalankan dengan copy app tab referantor
             )
-    } else if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('Yes')) {
+    } else if (findTestData(excelPathReferantor).getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('Yes')) {
         'click button save'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabReferantorData/Button Save'))
 
@@ -115,7 +115,7 @@ if (GlobalVariable.Role == 'Data Entry') {
             'REFERANTOR', false, FailureHandling.OPTIONAL)) {
             'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusFailedCopyApp'
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('5.TabReferantorData', GlobalVariable.StartIndex, 
-                GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(GlobalVariable.StartIndex, 2) + ';'+GlobalVariable.StatusFailedCopyApp)
+                GlobalVariable.StatusFailed, findTestData(excelPathReferantor).getValue(GlobalVariable.StartIndex, 2) + ';'+GlobalVariable.StatusFailedCopyApp)
 
             'click button cancel'
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabReferantorData/button_Cancel'))
@@ -123,12 +123,12 @@ if (GlobalVariable.Role == 'Data Entry') {
     }
     
     'Dijalankan tanpa copy app tab application atau copy app dengan edit'
-    if (datafileTabApplication.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || datafileTabApplication.getValue(
+    if (findTestData(excelPathTabApplication).getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || findTestData(excelPathTabApplication).getValue(
         GlobalVariable.NumofColm, 10).equalsIgnoreCase('Edit')) {
         'Call test case tab application data'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabApplicationData'), [:], FailureHandling.CONTINUE_ON_FAILURE //dijalankan dengan copy app tab application
             )
-    } else if (datafileTabApplication.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('Yes')) {
+    } else if (findTestData(excelPathTabApplication).getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('Yes')) {
         'click Save'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/button_Save'))
 
@@ -143,7 +143,7 @@ if (GlobalVariable.Role == 'Data Entry') {
             'APPLICATION DATA', false, FailureHandling.OPTIONAL)) {
             'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusFailedCopyApp'
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.TabApplicationData', GlobalVariable.NumofColm, 
-                GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.StatusFailedCopyApp)
+                GlobalVariable.StatusFailed, findTestData(excelPathTabApplication).getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.StatusFailedCopyApp)
 
             'click cancel'
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/button_Cancel'))
@@ -151,35 +151,35 @@ if (GlobalVariable.Role == 'Data Entry') {
     }
     
     'Dijalankan tanpa copy app tab asset atau copy app dengan edit'
-    if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || datafileTabAsset.getValue(GlobalVariable.NumofColm, 
+    if (findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 
         10).equalsIgnoreCase('Edit')) {
         'call test case tab asset data'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabAssetData'), [:], FailureHandling.CONTINUE_ON_FAILURE //dijalankan dengan copy app tab asset
             )
-    } else if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('Yes')) {
+    } else if (findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('Yes')) {
         'input chasis number'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_CHASIS NUMBER'), 
-            datafileTabAsset.getValue(GlobalVariable.NumofColm, 29))
+            findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 29))
 
         'input engine number'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_ENGINE NUMBER'), 
-            datafileTabAsset.getValue(GlobalVariable.NumofColm, 30))
+            findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 30))
 
         'input license plate number'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_LICENSE PLATE NUMBER'), 
-            datafileTabAsset.getValue(GlobalVariable.NumofColm, 31))
+            findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 31))
 
         if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_Serial4'), 
             GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
             'input serial 4'
-            WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_Serial4'), datafileTabAsset.getValue(
+            WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_Serial4'), findTestData(excelPathTabAsset).getValue(
                     GlobalVariable.NumofColm, 32), FailureHandling.OPTIONAL)
         }
         
         if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_Serial5'), 
             GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
             'input serial 5'
-            WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_Serial5'), datafileTabAsset.getValue(
+            WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_Serial5'), findTestData(excelPathTabAsset).getValue(
                     GlobalVariable.NumofColm, 33), FailureHandling.OPTIONAL)
         }
         
@@ -206,7 +206,7 @@ if (GlobalVariable.Role == 'Data Entry') {
             GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
             'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusFailedCopyApp'
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, 
-                GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.StatusFailedCopyApp)
+                GlobalVariable.StatusFailed, findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.StatusFailedCopyApp)
 
             'click button cancel'
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/button_Cancel'))
@@ -214,12 +214,12 @@ if (GlobalVariable.Role == 'Data Entry') {
     }
     
     'Dijalankan tanpa copy app tab insurance atau copy app dengan edit'
-    if (datafileTabInsurance.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || datafileTabInsurance.getValue(
+    if (findTestData(excelPathTabInsurance).getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || findTestData(excelPathTabInsurance).getValue(
         GlobalVariable.NumofColm, 10).equalsIgnoreCase('Edit')) {
         'call test case tab insurance'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabInsuranceData'), [:], FailureHandling.CONTINUE_ON_FAILURE //dijalankan dengan copy app tab insurance
             )
-    } else if (datafileTabInsurance.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('Yes')) {
+    } else if (findTestData(excelPathTabInsurance).getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('Yes')) {
         if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/button_Calculate Insurance'), 
             GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
             'Klik calculate insurance'
@@ -240,7 +240,7 @@ if (GlobalVariable.Role == 'Data Entry') {
             GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
             'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusFailedCopyApp'
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('8.TabInsuranceData', GlobalVariable.NumofColm, 
-                GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.StatusFailedCopyApp)
+                GlobalVariable.StatusFailed, findTestData(excelPathTabInsurance).getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.StatusFailedCopyApp)
 
             'click cancel'
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/button_Cancel'))
@@ -248,13 +248,13 @@ if (GlobalVariable.Role == 'Data Entry') {
     }
     
     'Dijalankan tanpa copy app tab life insurance atau copy app dengan edit'
-    if (datafileTabLifeInsurance.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || datafileTabLifeInsurance.getValue(
+    if (findTestData(excelPathTabLifeInsurance).getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || findTestData(excelPathTabLifeInsurance).getValue(
         GlobalVariable.NumofColm, 10).equalsIgnoreCase('Edit')) {
         'call test case tab life insurance'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabLifeInsuranceData'), [:], 
             FailureHandling.CONTINUE_ON_FAILURE //dijalankan dengan copy app tab life insurance
             )
-    } else if (datafileTabLifeInsurance.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('Yes')) {
+    } else if (findTestData(excelPathTabLifeInsurance).getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('Yes')) {
         'click Save'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabLifeInsuranceData/button_Save'))
 
@@ -267,7 +267,7 @@ if (GlobalVariable.Role == 'Data Entry') {
             'LIFE INSURANCE', false, FailureHandling.OPTIONAL)) {
             'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusFailedCopyApp'
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('9.TabLifeInsuranceData', GlobalVariable.NumofColm, 
-                GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.StatusFailedCopyApp)
+                GlobalVariable.StatusFailed, findTestData(excelPathTabLifeInsurance).getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.StatusFailedCopyApp)
 
             'click cancel'
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabLifeInsuranceData/button_Cancel'))
@@ -275,12 +275,12 @@ if (GlobalVariable.Role == 'Data Entry') {
     }
     
     'Dijalankan tanpa copy app tab financial atau copy app dengan edit'
-    if (datafileTabFinancial.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || datafileTabFinancial.getValue(
+    if (findTestData(excelPathTabFinancial).getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || findTestData(excelPathTabFinancial).getValue(
         GlobalVariable.NumofColm, 10).equalsIgnoreCase('Edit')) {
         'call test case tab financial'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabFinancialData'), [:], FailureHandling.CONTINUE_ON_FAILURE //Dijalankan dengan copy app tab financial
             )
-    } else if (datafileTabFinancial.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('Yes')) {
+    } else if (findTestData(excelPathTabFinancial).getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('Yes')) {
         'click button calculate'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/button_Calculate'))
 
@@ -297,7 +297,7 @@ if (GlobalVariable.Role == 'Data Entry') {
             'FINANCIAL DATA', false, FailureHandling.OPTIONAL)) {
             'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusFailedCopyApp'
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('10.TabFinancialData', GlobalVariable.NumofColm, 
-                GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.StatusFailedCopyApp)
+                GlobalVariable.StatusFailed, findTestData(excelPathTabFinancial).getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.StatusFailedCopyApp)
 
             'click button cancel'
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/button_Cancel'))
@@ -305,13 +305,13 @@ if (GlobalVariable.Role == 'Data Entry') {
     }
     
     'Dijalankan tanpa copy app tab term & condition atau copy app dengan edit'
-    if (datafileTabTC.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || datafileTabTC.getValue(GlobalVariable.NumofColm, 
+    if (findTestData(excelPathTabTC).getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || findTestData(excelPathTabTC).getValue(GlobalVariable.NumofColm, 
         10).equalsIgnoreCase('Edit')) {
         'call test case tab term condition'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabTermConditionData'), [:], 
             FailureHandling.CONTINUE_ON_FAILURE //Dijalankan dengan copy app tab term&condition
             )
-    } else if (datafileTabTC.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('Yes')) {
+    } else if (findTestData(excelPathTabTC).getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('Yes')) {
         'Save'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabTermConditionData/button_Save'))
 
@@ -324,7 +324,7 @@ if (GlobalVariable.Role == 'Data Entry') {
             'TERM AND CONDITION', false, FailureHandling.OPTIONAL)) {
             'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusFailedCopyApp'
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('11.TabTermConditionData', GlobalVariable.NumofColm, 
-                GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabTermConditionData').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.StatusFailedCopyApp)
+                GlobalVariable.StatusFailed, findTestData(excelPathTabTC).getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.StatusFailedCopyApp)
 
             'click cancel'
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabTermConditionData/button_Cancel'))
@@ -332,9 +332,9 @@ if (GlobalVariable.Role == 'Data Entry') {
     }
     
     'Looping untuk mencari nilai colm yang menunjukkan colm appno'
-    for (GlobalVariable.NumofUploadDocument = 2; GlobalVariable.NumofUploadDocument <= (datafileTabUploadDoc.getColumnNumbers() - 
+    for (GlobalVariable.NumofUploadDocument = 2; GlobalVariable.NumofUploadDocument <= (findTestData(excelPathTabUploadDoc).getColumnNumbers() - 
     1); (GlobalVariable.NumofUploadDocument)++) {
-        if (datafileTabUploadDoc.getValue(GlobalVariable.NumofUploadDocument, 12) == datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 
+        if (findTestData(excelPathTabUploadDoc).getValue(GlobalVariable.NumofUploadDocument, 12) == findTestData(excelPathCustomerPersonal).getValue(GlobalVariable.NumofColm, 
             13)) {
             GlobalVariable.StartIndex = GlobalVariable.NumofUploadDocument
 
@@ -343,7 +343,7 @@ if (GlobalVariable.Role == 'Data Entry') {
     }
     
     'Dijalankan tanpa copy app tab upload document atau copy app dengan edit'
-    if (datafileTabUploadDoc.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('No') || datafileTabUploadDoc.getValue(
+    if (findTestData(excelPathTabUploadDoc).getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('No') || findTestData(excelPathTabUploadDoc).getValue(
         GlobalVariable.StartIndex, 10).equalsIgnoreCase('Edit')) {
         'call test case tab upload document'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabUploadDocument'), [:], FailureHandling.CONTINUE_ON_FAILURE //dijalankan dengan copy app tab upload document
@@ -355,7 +355,7 @@ if (GlobalVariable.Role == 'Data Entry') {
         //Dijalankan dengan copy app tab financial
         //Dijalankan dengan copy app tab term&condition
         //dijalankan dengan copy app tab upload document
-    } else if (datafileTabUploadDoc.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('Yes')) {
+    } else if (findTestData(excelPathTabUploadDoc).getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('Yes')) {
         'click button submit'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabUploadDocument/button_Submit'))
 
@@ -367,7 +367,7 @@ if (GlobalVariable.Role == 'Data Entry') {
             GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
             'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusFailedCopyApp'
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('12.TabUploadDocument', GlobalVariable.StartIndex, 
-                GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabUploadDocument').getValue(GlobalVariable.StartIndex, 2) + ';'+GlobalVariable.StatusFailedCopyApp)
+                GlobalVariable.StatusFailed, findTestData(excelPathTabUploadDoc).getValue(GlobalVariable.StartIndex, 2) + ';'+GlobalVariable.StatusFailedCopyApp)
 
             'click cancel'
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabTermConditionData/button_Cancel'))
@@ -382,9 +382,9 @@ if (GlobalVariable.Role == 'Data Entry') {
 		KeywordUtil.markFailedAndStop('Failed NAP2')
 	}
     'Looping untuk mencari nilai colm yang menunjukkan colm appno'
-    for (GlobalVariable.NumofReferantor = 2; GlobalVariable.NumofReferantor <= (datafileReferantor.getColumnNumbers() - 
+    for (GlobalVariable.NumofReferantor = 2; GlobalVariable.NumofReferantor <= (findTestData(excelPathReferantor).getColumnNumbers() - 
     1); (GlobalVariable.NumofReferantor)++) {
-        if (datafileReferantor.getValue(GlobalVariable.NumofReferantor, 12) == datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 
+        if (findTestData(excelPathReferantor).getValue(GlobalVariable.NumofReferantor, 12) == findTestData(excelPathCustomerPersonal).getValue(GlobalVariable.NumofColm, 
             13)) {
             GlobalVariable.StartIndex = GlobalVariable.NumofReferantor
 
@@ -393,11 +393,11 @@ if (GlobalVariable.Role == 'Data Entry') {
     }
     
     'Dijalankan tanpa copy app tab referantor atau copy app dengan edit'
-    if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('No') || datafileReferantor.getValue(
+    if (findTestData(excelPathReferantor).getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('No') || findTestData(excelPathReferantor).getValue(
         GlobalVariable.StartIndex, 10).equalsIgnoreCase('Edit')) {
         'call test case tab referantor'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabReferantorData'), [:], FailureHandling.CONTINUE_ON_FAILURE)
-    } else if (datafileReferantor.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('Yes')) {
+    } else if (findTestData(excelPathReferantor).getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('Yes')) {
         'click button save'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabReferantorData/Button Save'))
 
@@ -410,7 +410,7 @@ if (GlobalVariable.Role == 'Data Entry') {
             'REFERANTOR', false, FailureHandling.OPTIONAL)) {
             'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusFailedCopyApp'
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('5.TabReferantorData', GlobalVariable.StartIndex, 
-                GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(GlobalVariable.StartIndex, 2) + ';'+GlobalVariable.StatusFailedCopyApp)
+                GlobalVariable.StatusFailed, findTestData(excelPathReferantor).getValue(GlobalVariable.StartIndex, 2) + ';'+GlobalVariable.StatusFailedCopyApp)
 
             'click button cancel'
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabReferantorData/button_Cancel'))
@@ -422,11 +422,11 @@ if (GlobalVariable.Role == 'Data Entry') {
 	}
 	
     'Dijalankan tanpa copy app tab application atau copy app dengan edit'
-    if (datafileTabApplication.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || datafileTabApplication.getValue(
+    if (findTestData(excelPathTabApplication).getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || findTestData(excelPathTabApplication).getValue(
         GlobalVariable.NumofColm, 10).equalsIgnoreCase('Edit')) {
         'Call test case tab application data'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabApplicationData'), [:], FailureHandling.CONTINUE_ON_FAILURE)
-    } else if (datafileTabApplication.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('Yes')) {
+    } else if (findTestData(excelPathTabApplication).getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('Yes')) {
         'click Save'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/button_Save'))
 
@@ -441,7 +441,7 @@ if (GlobalVariable.Role == 'Data Entry') {
             'APPLICATION DATA', false, FailureHandling.OPTIONAL)) {
             'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusFailedCopyApp'
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('6.TabApplicationData', GlobalVariable.NumofColm, 
-                GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.StatusFailedCopyApp)
+                GlobalVariable.StatusFailed, findTestData(excelPathTabApplication).getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.StatusFailedCopyApp)
 
             'click cancel'
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/button_Cancel'))
@@ -453,34 +453,34 @@ if (GlobalVariable.Role == 'Data Entry') {
 	}
 	
     'Dijalankan tanpa copy app tab asset atau copy app dengan edit'
-    if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || datafileTabAsset.getValue(GlobalVariable.NumofColm, 
+    if (findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 
         10).equalsIgnoreCase('Edit')) {
         'call test case tab asset data'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabAssetData'), [:], FailureHandling.CONTINUE_ON_FAILURE)
-    } else if (datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('Yes')) {
+    } else if (findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('Yes')) {
         'input chasis number'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_CHASIS NUMBER'), 
-            datafileTabAsset.getValue(GlobalVariable.NumofColm, 29))
+            findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 29))
 
         'input engine number'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_ENGINE NUMBER'), 
-            datafileTabAsset.getValue(GlobalVariable.NumofColm, 30))
+            findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 30))
 
         'input license plate number'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_LICENSE PLATE NUMBER'), 
-            datafileTabAsset.getValue(GlobalVariable.NumofColm, 31))
+            findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 31))
 
         if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_Serial4'), 
             GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
             'input serial 4'
-            WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_Serial4'), datafileTabAsset.getValue(
+            WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_Serial4'), findTestData(excelPathTabAsset).getValue(
                     GlobalVariable.NumofColm, 32), FailureHandling.OPTIONAL)
         }
         
         if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_Serial5'), 
             GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
             'input serial 5'
-            WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_Serial5'), datafileTabAsset.getValue(
+            WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_Serial5'), findTestData(excelPathTabAsset).getValue(
                     GlobalVariable.NumofColm, 33), FailureHandling.OPTIONAL)
         }
         
@@ -509,7 +509,7 @@ if (GlobalVariable.Role == 'Data Entry') {
             GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
             'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusFailedCopyApp'
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, 
-                GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.StatusFailedCopyApp)
+                GlobalVariable.StatusFailed, findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.StatusFailedCopyApp)
 
             'click button cancel'
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/button_Cancel'))
@@ -521,11 +521,11 @@ if (GlobalVariable.Role == 'Data Entry') {
 	}
 	
     'Dijalankan tanpa copy app tab insurance atau copy app dengan edit'
-    if (datafileTabInsurance.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || datafileTabInsurance.getValue(
+    if (findTestData(excelPathTabInsurance).getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || findTestData(excelPathTabInsurance).getValue(
         GlobalVariable.NumofColm, 10).equalsIgnoreCase('Edit')) {
         'call test case tab insurance'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabInsuranceData'), [:], FailureHandling.CONTINUE_ON_FAILURE)
-    } else if (datafileTabInsurance.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('Yes')) {
+    } else if (findTestData(excelPathTabInsurance).getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('Yes')) {
         'verify field discount ada atau tidak untuk write ulang diskon supaya tidak hilang akibat impact dari calculate insurance'
         if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/input_Discount_TotalCustDiscAmt'), 
             GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
@@ -558,7 +558,7 @@ if (GlobalVariable.Role == 'Data Entry') {
             GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
             'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusFailedCopyApp'
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('8.TabInsuranceData', GlobalVariable.NumofColm, 
-                GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.StatusFailedCopyApp)
+                GlobalVariable.StatusFailed, findTestData(excelPathTabInsurance).getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.StatusFailedCopyApp)
 
             'click cancel'
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/button_Cancel'))
@@ -570,12 +570,12 @@ if (GlobalVariable.Role == 'Data Entry') {
 	}
 	
     'Dijalankan tanpa copy app tab life insurance atau copy app dengan edit'
-    if (datafileTabLifeInsurance.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || datafileTabLifeInsurance.getValue(
+    if (findTestData(excelPathTabLifeInsurance).getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || findTestData(excelPathTabLifeInsurance).getValue(
         GlobalVariable.NumofColm, 10).equalsIgnoreCase('Edit')) {
         'call test case tab life insurance'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabLifeInsuranceData'), [:], 
             FailureHandling.CONTINUE_ON_FAILURE)
-    } else if (datafileTabLifeInsurance.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('Yes')) {
+    } else if (findTestData(excelPathTabLifeInsurance).getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('Yes')) {
         'click Save'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabLifeInsuranceData/button_Save'))
 
@@ -588,7 +588,7 @@ if (GlobalVariable.Role == 'Data Entry') {
             'LIFE INSURANCE', false, FailureHandling.OPTIONAL)) {
             'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusFailedCopyApp'
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('9.TabLifeInsuranceData', GlobalVariable.NumofColm, 
-                GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.StatusFailedCopyApp)
+                GlobalVariable.StatusFailed, findTestData(excelPathTabLifeInsurance).getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.StatusFailedCopyApp)
 
             'click cancel'
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabLifeInsuranceData/button_Cancel'))
@@ -600,11 +600,11 @@ if (GlobalVariable.Role == 'Data Entry') {
 	}
 	
     'Dijalankan tanpa copy app tab financial atau copy app dengan edit'
-    if (datafileTabFinancial.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || datafileTabFinancial.getValue(
+    if (findTestData(excelPathTabFinancial).getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || findTestData(excelPathTabFinancial).getValue(
         GlobalVariable.NumofColm, 10).equalsIgnoreCase('Edit')) {
         'call test case tab financial'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabFinancialData'), [:], FailureHandling.CONTINUE_ON_FAILURE)
-    } else if (datafileTabFinancial.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('Yes')) {
+    } else if (findTestData(excelPathTabFinancial).getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('Yes')) {
         'click button calculate'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/button_Calculate'))
 
@@ -621,7 +621,7 @@ if (GlobalVariable.Role == 'Data Entry') {
             'FINANCIAL DATA', false, FailureHandling.OPTIONAL)) {
             'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusFailedCopyApp'
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('10.TabFinancialData', GlobalVariable.NumofColm, 
-                GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.StatusFailedCopyApp)
+                GlobalVariable.StatusFailed, findTestData(excelPathTabFinancial).getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.StatusFailedCopyApp)
 
             'click button cancel'
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/button_Cancel'))
@@ -633,12 +633,12 @@ if (GlobalVariable.Role == 'Data Entry') {
 	}
 	
     'Dijalankan tanpa copy app tab term & condition atau copy app dengan edit'
-    if (datafileTabTC.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || datafileTabTC.getValue(GlobalVariable.NumofColm, 
+    if (findTestData(excelPathTabTC).getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || findTestData(excelPathTabTC).getValue(GlobalVariable.NumofColm, 
         10).equalsIgnoreCase('Edit')) {
         'call test case tab term condition'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabTermConditionData'), [:], 
             FailureHandling.CONTINUE_ON_FAILURE)
-    } else if (datafileTabTC.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('Yes')) {
+    } else if (findTestData(excelPathTabTC).getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('Yes')) {
         'Save'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabTermConditionData/button_Save'))
 
@@ -651,7 +651,7 @@ if (GlobalVariable.Role == 'Data Entry') {
             'TERM AND CONDITION', false, FailureHandling.OPTIONAL)) {
             'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusFailedCopyApp'
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('11.TabTermConditionData', GlobalVariable.NumofColm, 
-                GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabTermConditionData').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.StatusFailedCopyApp)
+                GlobalVariable.StatusFailed, findTestData(excelPathTabTC).getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.StatusFailedCopyApp)
 
             'click cancel'
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabTermConditionData/button_Cancel'))
@@ -663,9 +663,9 @@ if (GlobalVariable.Role == 'Data Entry') {
 	}
 	
     'Looping untuk mencari nilai colm yang menunjukkan colm appno'
-    for (GlobalVariable.NumofUploadDocument = 2; GlobalVariable.NumofUploadDocument <= (datafileTabUploadDoc.getColumnNumbers() - 
+    for (GlobalVariable.NumofUploadDocument = 2; GlobalVariable.NumofUploadDocument <= (findTestData(excelPathTabUploadDoc).getColumnNumbers() - 
     1); (GlobalVariable.NumofUploadDocument)++) {
-        if (datafileTabUploadDoc.getValue(GlobalVariable.NumofUploadDocument, 12) == datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 
+        if (findTestData(excelPathTabUploadDoc).getValue(GlobalVariable.NumofUploadDocument, 12) == findTestData(excelPathCustomerPersonal).getValue(GlobalVariable.NumofColm, 
             13)) {
             GlobalVariable.StartIndex = GlobalVariable.NumofUploadDocument
 
@@ -674,11 +674,11 @@ if (GlobalVariable.Role == 'Data Entry') {
     }
     
     'Dijalankan tanpa copy app tab upload document atau copy app dengan edit'
-    if (datafileTabUploadDoc.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('No') || datafileTabUploadDoc.getValue(
+    if (findTestData(excelPathTabUploadDoc).getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('No') || findTestData(excelPathTabUploadDoc).getValue(
         GlobalVariable.StartIndex, 10).equalsIgnoreCase('Edit')) {
         'call test case tab upload document'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabUploadDocument'), [:], FailureHandling.CONTINUE_ON_FAILURE)
-    } else if (datafileTabUploadDoc.getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('Yes')) {
+    } else if (findTestData(excelPathTabUploadDoc).getValue(GlobalVariable.StartIndex, 10).equalsIgnoreCase('Yes')) {
         'click button submit'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabUploadDocument/button_Submit'))
 
@@ -690,7 +690,7 @@ if (GlobalVariable.Role == 'Data Entry') {
             GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
             'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusFailedCopyApp'
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('12.TabUploadDocument', GlobalVariable.StartIndex, 
-                GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabUploadDocument').getValue(GlobalVariable.StartIndex, 2) + ';'+GlobalVariable.StatusFailedCopyApp)
+                GlobalVariable.StatusFailed, findTestData(excelPathTabUploadDoc).getValue(GlobalVariable.StartIndex, 2) + ';'+GlobalVariable.StatusFailedCopyApp)
 
             'click cancel'
             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabTermConditionData/button_Cancel'))
@@ -708,7 +708,7 @@ def verifyMatch() {
 
     'verify tab insurance, life insurance & financial, cek apakah ada nilai yang berubah, bernilai true jika tidak ada nilai yang berubah, false jika ada salah satu nilai yang berubah'
     Boolean isMatch = CustomKeywords.'dbConnection.getInfoForEditNAP.verifyMatchCopyAppYesNAP2Personal'(sqlConnectionLOS, 
-        datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 9), datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 
+        findTestData(excelPathCustomerPersonal).getValue(GlobalVariable.NumofColm, 9), findTestData(excelPathCustomerPersonal).getValue(GlobalVariable.NumofColm, 
             13))
 
     if (isMatch == true) {
@@ -969,34 +969,34 @@ def pagingTesting() {
         checkVerifyFooter.add(WebUI.verifyEqual(CustomKeywords.'paging.verifyPaging.NAP2CountDataInPage'(), true))
 
         'Jika verif reset ada yang tidak sesuai'
-        if (resultReset.contains(false) && (GlobalVariable.StatusFailed != datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 
+        if (resultReset.contains(false) && (GlobalVariable.StatusFailed != findTestData(excelPathCustomerPersonal).getValue(GlobalVariable.NumofColm, 
             1))) {
             'Write To Excel GlobalVariable.StatusWarning and reason'
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, 
-                GlobalVariable.StatusWarning, ((datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 2).replace('-', 
-                    '') + findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedReset) + 'NAP2') + ';\n')
+                GlobalVariable.StatusWarning, ((findTestData(excelPathCustomerPersonal).getValue(GlobalVariable.NumofColm, 2).replace('-', 
+                    '') + findTestData(excelPathCustomerPersonal).getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedReset) + 'NAP2') + ';\n')
 
             GlobalVariable.FlagWarning = 1
         }
         
         'Jika verif sort ada yang tidak sesuai'
-        if (checkVerifySort.contains(false) && (GlobalVariable.StatusFailed != datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 
+        if (checkVerifySort.contains(false) && (GlobalVariable.StatusFailed != findTestData(excelPathCustomerPersonal).getValue(GlobalVariable.NumofColm, 
             1))) {
             'Write To Excel GlobalVariable.StatusWarning and reason'
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, 
-                GlobalVariable.StatusWarning, datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 2).replace('-', 
-                    '') + findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(GlobalVariable.NumofColm, 2) + ';' + ((GlobalVariable.ReasonFailedSort + 'NAP2') + ';\n'))
+                GlobalVariable.StatusWarning, findTestData(excelPathCustomerPersonal).getValue(GlobalVariable.NumofColm, 2).replace('-', 
+                    '') + findTestData(excelPathCustomerPersonal).getValue(GlobalVariable.NumofColm, 2) + ';' + ((GlobalVariable.ReasonFailedSort + 'NAP2') + ';\n'))
 
             GlobalVariable.FlagWarning = 1
         }
         
         'Jika verif footer ada yang tidak sesuai'
-        if (checkVerifyFooter.contains(false) && (GlobalVariable.StatusFailed != datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 
+        if (checkVerifyFooter.contains(false) && (GlobalVariable.StatusFailed != findTestData(excelPathCustomerPersonal).getValue(GlobalVariable.NumofColm, 
             1))) {
             'Write To Excel GlobalVariable.StatusWarning and reason'
             CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, 
-                GlobalVariable.StatusWarning, datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 2).replace('-', 
-                    '') + findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(GlobalVariable.NumofColm, 2) + ';' + ((GlobalVariable.ReasonFailedFooter + 'NAP2') + ';\n'))
+                GlobalVariable.StatusWarning, findTestData(excelPathCustomerPersonal).getValue(GlobalVariable.NumofColm, 2).replace('-', 
+                    '') + findTestData(excelPathCustomerPersonal).getValue(GlobalVariable.NumofColm, 2) + ';' + ((GlobalVariable.ReasonFailedFooter + 'NAP2') + ';\n'))
 
             GlobalVariable.FlagWarning = 1
         }

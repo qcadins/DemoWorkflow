@@ -27,28 +27,23 @@ CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFil
 'connect DB LOS'
 Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
-'declare datafileCustomerPersonal'
-datafileCustomerPersonal = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData')
+'declare excelPathCustomerPersonal'
+excelPathCustomerPersonal = 'NAP-'+ GlobalVariable.LOB  +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData'
 
-'declare datafileTabFamily'
-datafileTabFamily = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData')
+'declare excelPathTabFamily'
+excelPathTabFamily = 'NAP-'+ GlobalVariable.LOB  +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData'
 
-'declare datafileTabGuarantorPersonal'
-datafileTabGuarantorPersonal = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal')
+'declare excelPathTabGuarantorPersonal'
+excelPathTabGuarantorPersonal = 'NAP-'+ GlobalVariable.LOB  +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal'
 
-'declare datafileTabGuarantorCompany'
-datafileTabGuarantorCompany = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataCompany')
+'declare excelPathTabGuarantorCompany'
+excelPathTabGuarantorCompany = 'NAP-'+ GlobalVariable.LOB  +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataCompany'
 
-'declare datafileReferantor'
-datafileReferantor = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData')
-
-'declare datafileTabUploadDoc'
-datafileTabUploadDoc = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabUploadDocument')
-
-datafileDupcheck = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking')
+'declare excelPathTabUploadDoc'
+excelPathTabUploadDoc = 'NAP-'+ GlobalVariable.LOB  +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabUploadDocument'
 
 'get appno from excel'
-String appNo = datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 8)
+String appNo = findTestData(excelPathCustomerPersonal).getValue(GlobalVariable.NumofColm, 8)
 
 'get appstep from db'
 String appStep = CustomKeywords.'dbConnection.checkStep.checkAppCurrStep'(sqlconnectionLOS, appNo)
@@ -67,7 +62,7 @@ List<String> NAP1Step = Arrays.asList("CUST", "FAM", "GUAR")
 List<String> NAP2Step = Arrays.asList("REF", "APP", "ASSET", "INS","LFI","FIN","TC","UPL_DOC")
 
 'menampung backward step dari excel'
-String backStep = datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 7)
+String backStep = findTestData(excelPathCustomerPersonal).getValue(GlobalVariable.NumofColm, 7)
 
 'Jika curr app step dan backward step keduanya ada di list step nap1'
 if(NAP1Step.contains(backStep)&&NAP1Step.contains(appStep)){
@@ -121,20 +116,20 @@ if (GlobalVariable.Role == 'Data Entry') {
         inputAppNo(appNo)
 
 		'untuk mendapatkan posisi copy app dari excel'
-		loopingStartIndex(GlobalVariable.NumofFamily, datafileTabFamily)
+		loopingStartIndex(GlobalVariable.NumofFamily, findTestData(excelPathexcelPathTabFamily))
 		
 		'call tc familycopyapp'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/Family/TabFamilyCopyApp'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 
 		'untuk mendapatkan posisi copy app dari excel'
-		loopingStartIndex(GlobalVariable.NumofGuarantorPersonal, datafileTabGuarantorPersonal)
+		loopingStartIndex(GlobalVariable.NumofGuarantorPersonal, findTestData(excelPathexcelPathTabGuarantorPersonal))
 		
 		'call tc guarantorpersonalcopyapp'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/Guarantor/TabGuarantorPersonalCopyApp'), [:], 
             FailureHandling.CONTINUE_ON_FAILURE)
 		
 		'untuk mendapatkan posisi copy app dari excel'
-		loopingStartIndex(GlobalVariable.NumofGuarantorCompany, datafileTabGuarantorCompany)
+		loopingStartIndex(GlobalVariable.NumofGuarantorCompany, findTestData(excelPathexcelPathTabGuarantorCompany))
 		
 		'call tc guarantorCompanycopyapp'
 		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/Guarantor/TabGuarantorCompanyCopyApp'), [:],
@@ -168,14 +163,14 @@ if (GlobalVariable.Role == 'Data Entry') {
         inputAppNo(appNo)
 
 		'untuk mendapatkan posisi copy app dari excel'
-		loopingStartIndex(GlobalVariable.NumofGuarantorPersonal, datafileTabGuarantorPersonal)
+		loopingStartIndex(GlobalVariable.NumofGuarantorPersonal, findTestData(excelPathexcelPathTabGuarantorPersonal))
 		
 		'call tc guarantorpersonalcopyapp'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/Guarantor/TabGuarantorPersonalCopyApp'), [:], 
             FailureHandling.CONTINUE_ON_FAILURE)
 		
 		'untuk mendapatkan posisi copy app dari excel'
-		loopingStartIndex(GlobalVariable.NumofGuarantorCompany, datafileTabGuarantorCompany)
+		loopingStartIndex(GlobalVariable.NumofGuarantorCompany, findTestData(excelPathexcelPathTabGuarantorCompany))
 		
 		'call tc guarantorCompanycopyapp'
 		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/Guarantor/TabGuarantorCompanyCopyApp'), [:],
@@ -249,7 +244,7 @@ if (GlobalVariable.Role == 'Data Entry') {
                 FailureHandling.CONTINUE_ON_FAILURE)
 
 			'untuk mendapatkan posisi copy app dari excel'
-			loopingStartIndex(GlobalVariable.NumofUploadDocument, datafileTabUploadDoc)
+			loopingStartIndex(GlobalVariable.NumofUploadDocument, findTestData(excelPathexcelPathTabUploadDoc))
 			
 			'call tc tab upload doc'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabUploadDocument'), [:], 
@@ -289,7 +284,7 @@ if (GlobalVariable.Role == 'Data Entry') {
                 FailureHandling.CONTINUE_ON_FAILURE)
 
 			'untuk mendapatkan posisi copy app dari excel'
-			loopingStartIndex(GlobalVariable.NumofUploadDocument, datafileTabUploadDoc)
+			loopingStartIndex(GlobalVariable.NumofUploadDocument, findTestData(excelPathexcelPathTabUploadDoc))
 			
 			'call tc tab upload document'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabUploadDocument'), [:], 
@@ -326,7 +321,7 @@ if (GlobalVariable.Role == 'Data Entry') {
                 FailureHandling.CONTINUE_ON_FAILURE)
 
 			'untuk mendapatkan posisi copy app dari excel'
-			loopingStartIndex(GlobalVariable.NumofUploadDocument, datafileTabUploadDoc)
+			loopingStartIndex(GlobalVariable.NumofUploadDocument, findTestData(excelPathexcelPathTabUploadDoc))
 			
 			'call tc tab upload document'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabUploadDocument'), [:], 
@@ -359,7 +354,7 @@ if (GlobalVariable.Role == 'Data Entry') {
                 FailureHandling.CONTINUE_ON_FAILURE)
 
 			'untuk mendapatkan posisi copy app dari excel'
-			loopingStartIndex(GlobalVariable.NumofUploadDocument, datafileTabUploadDoc)
+			loopingStartIndex(GlobalVariable.NumofUploadDocument, findTestData(excelPathexcelPathTabUploadDoc))
 			
 			'call tc tab upload document'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabUploadDocument'), [:], 
@@ -388,7 +383,7 @@ if (GlobalVariable.Role == 'Data Entry') {
                 FailureHandling.CONTINUE_ON_FAILURE)
 
 			'untuk mendapatkan posisi copy app dari excel'
-			loopingStartIndex(GlobalVariable.NumofUploadDocument, datafileTabUploadDoc)
+			loopingStartIndex(GlobalVariable.NumofUploadDocument, findTestData(excelPathexcelPathTabUploadDoc))
 			
 			'call tc tab upload document'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabUploadDocument'), [:], 
@@ -413,7 +408,7 @@ if (GlobalVariable.Role == 'Data Entry') {
                 FailureHandling.CONTINUE_ON_FAILURE)
 
 			'untuk mendapatkan posisi copy app dari excel'
-			loopingStartIndex(GlobalVariable.NumofUploadDocument, datafileTabUploadDoc)
+			loopingStartIndex(GlobalVariable.NumofUploadDocument, findTestData(excelPathexcelPathTabUploadDoc))
 			
 			'call tc tab upload document'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabUploadDocument'), [:], 
@@ -435,7 +430,7 @@ if (GlobalVariable.Role == 'Data Entry') {
         inputAppNo(appNo)
 
 		'untuk mendapatkan posisi copy app dari excel'
-		loopingStartIndex(GlobalVariable.NumofUploadDocument, datafileTabUploadDoc)
+		loopingStartIndex(GlobalVariable.NumofUploadDocument, findTestData(excelPathexcelPathTabUploadDoc))
 		
 		'call tc upload document'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabUploadDocument'), [:], FailureHandling.CONTINUE_ON_FAILURE)
@@ -502,20 +497,20 @@ else if (GlobalVariable.Role == 'Testing') {
         inputAppNo(appNo)
 
 		'untuk mendapatkan posisi copy app dari excel'
-		loopingStartIndex(GlobalVariable.NumofFamily, datafileTabFamily)
+		loopingStartIndex(GlobalVariable.NumofFamily, findTestData(excelPathexcelPathTabFamily))
 		
 		'call tc tabfamilycopyapp'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/Family/TabFamilyCopyApp'), [:], FailureHandling.STOP_ON_FAILURE)
 
 		'untuk mendapatkan posisi copy app dari excel'
-		loopingStartIndex(GlobalVariable.NumofGuarantorPersonal, datafileTabGuarantorPersonal)
+		loopingStartIndex(GlobalVariable.NumofGuarantorPersonal, findTestData(excelPathexcelPathTabGuarantorPersonal))
 		
 		'call tc guarantorpersonalcopyapp'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/Guarantor/TabGuarantorPersonalCopyApp'), [:], 
             FailureHandling.STOP_ON_FAILURE)
 		
 		'untuk mendapatkan posisi copy app dari excel'
-		loopingStartIndex(GlobalVariable.NumofGuarantorCompany, datafileTabGuarantorCompany)
+		loopingStartIndex(GlobalVariable.NumofGuarantorCompany, findTestData(excelPathexcelPathTabGuarantorCompany))
 		
 		'call tc guarantorCompanycopyapp'
 		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/Guarantor/TabGuarantorCompanyCopyApp'), [:],
@@ -560,14 +555,14 @@ else if (GlobalVariable.Role == 'Testing') {
         inputAppNo(appNo)
 
 		'untuk mendapatkan posisi copy app dari excel'
-		loopingStartIndex(GlobalVariable.NumofGuarantorPersonal, datafileTabGuarantorPersonal)
+		loopingStartIndex(GlobalVariable.NumofGuarantorPersonal, findTestData(excelPathexcelPathTabGuarantorPersonal))
 		
 		'call tc guarantorpersonalcopyapp'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/Guarantor/TabGuarantorPersonalCopyApp'), [:], 
             FailureHandling.STOP_ON_FAILURE)
 		
 		'untuk mendapatkan posisi copy app dari excel'
-		loopingStartIndex(GlobalVariable.NumofGuarantorCompany, datafileTabGuarantorCompany)
+		loopingStartIndex(GlobalVariable.NumofGuarantorCompany, findTestData(excelPathexcelPathTabGuarantorCompany))
 		
 		'call tc guarantorCompanycopyapp'
 		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP1 - Customer Data/Guarantor/TabGuarantorCompanyCopyApp'), [:],
@@ -661,7 +656,7 @@ else if (GlobalVariable.Role == 'Testing') {
                 FailureHandling.STOP_ON_FAILURE)
 
 			'untuk mendapatkan posisi copy app dari excel'
-			loopingStartIndex(GlobalVariable.NumofUploadDocument, datafileTabUploadDoc)
+			loopingStartIndex(GlobalVariable.NumofUploadDocument, findTestData(excelPathexcelPathTabUploadDoc))
 			
 			'call tc tab upload document'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabUploadDocument'), [:], 
@@ -703,7 +698,7 @@ else if (GlobalVariable.Role == 'Testing') {
                 FailureHandling.STOP_ON_FAILURE)
 
 			'untuk mendapatkan posisi copy app dari excel'
-			loopingStartIndex(GlobalVariable.NumofUploadDocument, datafileTabUploadDoc)
+			loopingStartIndex(GlobalVariable.NumofUploadDocument, findTestData(excelPathexcelPathTabUploadDoc))
 			
 			'call tc tab upload document'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabUploadDocument'), [:], 
@@ -742,7 +737,7 @@ else if (GlobalVariable.Role == 'Testing') {
                 FailureHandling.STOP_ON_FAILURE)
 
 			'untuk mendapatkan posisi copy app dari excel'
-			loopingStartIndex(GlobalVariable.NumofUploadDocument, datafileTabUploadDoc)
+			loopingStartIndex(GlobalVariable.NumofUploadDocument, findTestData(excelPathexcelPathTabUploadDoc))
 			
 			'call tc tab upload document'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabUploadDocument'), [:], 
@@ -777,7 +772,7 @@ else if (GlobalVariable.Role == 'Testing') {
                 FailureHandling.STOP_ON_FAILURE)
 
 			'untuk mendapatkan posisi copy app dari excel'
-			loopingStartIndex(GlobalVariable.NumofUploadDocument, datafileTabUploadDoc)
+			loopingStartIndex(GlobalVariable.NumofUploadDocument, findTestData(excelPathexcelPathTabUploadDoc))
 			
 			'call tc tab upload document'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabUploadDocument'), [:], 
@@ -808,7 +803,7 @@ else if (GlobalVariable.Role == 'Testing') {
                 FailureHandling.STOP_ON_FAILURE)
 
 			'untuk mendapatkan posisi copy app dari excel'
-			loopingStartIndex(GlobalVariable.NumofUploadDocument, datafileTabUploadDoc)
+			loopingStartIndex(GlobalVariable.NumofUploadDocument, findTestData(excelPathexcelPathTabUploadDoc))
 			
 			'call tc tab upload document'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabUploadDocument'), [:], 
@@ -835,7 +830,7 @@ else if (GlobalVariable.Role == 'Testing') {
                 FailureHandling.STOP_ON_FAILURE)
 
 			'untuk mendapatkan posisi copy app dari excel'
-			loopingStartIndex(GlobalVariable.NumofUploadDocument, datafileTabUploadDoc)
+			loopingStartIndex(GlobalVariable.NumofUploadDocument, findTestData(excelPathexcelPathTabUploadDoc))
 			
 			'call tc tab upload document'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabUploadDocument'), [:], 
@@ -859,7 +854,7 @@ else if (GlobalVariable.Role == 'Testing') {
         inputAppNo(appNo)
 
 		'untuk mendapatkan posisi copy app dari excel'
-		loopingStartIndex(GlobalVariable.NumofUploadDocument, datafileTabUploadDoc)
+		loopingStartIndex(GlobalVariable.NumofUploadDocument, findTestData(excelPathexcelPathTabUploadDoc))
 		
 		'call tc tab upload document'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabUploadDocument'), [:], FailureHandling.STOP_ON_FAILURE)
@@ -982,7 +977,7 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
             GlobalVariable.NumofColm - 1, custname)
 
         'untuk mendapatkan posisi copy app dari excel'
-        loopingStartIndex(GlobalVariable.NumofFamily, datafileTabFamily)
+        loopingStartIndex(GlobalVariable.NumofFamily, findTestData(excelPathexcelPathTabFamily))
 		
         index = 0
         
@@ -1076,7 +1071,7 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
             GlobalVariable.NumofColm - 1, custname)
 
 		'untuk mendapatkan posisi copy app dari excel'
-		loopingStartIndex(GlobalVariable.NumofFamily, datafileTabFamily)
+		loopingStartIndex(GlobalVariable.NumofFamily, findTestData(excelPathexcelPathTabFamily))
 		
 		index = 0
 		
@@ -1119,7 +1114,7 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
 			GlobalVariable.NumofColm - 1, famName)
         
         'untuk mendapatkan posisi copy app dari excel'
-        loopingStartIndex(GlobalVariable.NumofGuarantorPersonal, datafileTabGuarantorPersonal)
+        loopingStartIndex(GlobalVariable.NumofGuarantorPersonal, findTestData(excelPathexcelPathTabGuarantorPersonal))
         
 		index = 0
 		
@@ -1157,7 +1152,7 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
         }
         
         'untuk mendapatkan posisi copy app dari excel'
-        loopingStartIndex(GlobalVariable.NumofGuarantorCompany, datafileTabGuarantorCompany)
+        loopingStartIndex(GlobalVariable.NumofGuarantorCompany, findTestData(excelPathexcelPathTabGuarantorCompany))
         
 		index = 0
 		
@@ -1190,7 +1185,7 @@ def getCustdata(Sql sqlconnectionLOS, String appNo, String appStep) {
 public loopingStartIndex(Integer NumOf, TestData datafile){
 	'untuk mendapatkan posisi copy app dari excel'
 	for (NumOf = 2; NumOf <= datafile.getColumnNumbers() - 1; (NumOf)++) {
-		if (datafile.getValue(NumOf, 12) == datafileCustomerPersonal.getValue(
+		if (datafile.getValue(NumOf, 12) == findTestData(excelPathCustomerPersonal).getValue(
 			GlobalVariable.NumofColm, 13)) {
 			GlobalVariable.StartIndex = NumOf
 
@@ -1201,11 +1196,11 @@ public loopingStartIndex(Integer NumOf, TestData datafile){
 
 'Function untuk Looping hingga return flag pada sheet commission dan reserved fund tidak bernilai "yes" lagi'
 public loopingReturnComresfund(){
-	'declare datafileCommission'
-	datafileCommission = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData')
+	'declare excelPathCommission'
+	excelPathCommission = 'NAP-'+ GlobalVariable.LOB  +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData'
 	
-	'declare datafileReservedFund'
-	datafileReservedFund = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabReservedFundData')
+	'declare excelPathReservedFund'
+	excelPathReservedFund = 'NAP-'+ GlobalVariable.LOB  +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabReservedFundData'
 	
 	'Mengambil nilai row keberapa dimulai data return pada excel'
 	def returnRowCom = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '13.TabCommissionData',
@@ -1216,15 +1211,15 @@ public loopingReturnComresfund(){
 		'Return Commission & Reserved Fund') + 1
 	
 	for(int i = 1; i <= i; i++){
-		if(datafileCommission.getValue(GlobalVariable.NumofColm, returnRowCom + 1).equalsIgnoreCase('Yes') || datafileReservedFund.getValue(
+		if(findTestData(excelPathCommission).getValue(GlobalVariable.NumofColm, returnRowCom + 1).equalsIgnoreCase('Yes') || findTestData(excelPathReservedFund).getValue(
 			GlobalVariable.NumofColm, returnRowRsv + 1).equalsIgnoreCase('Yes')){
 		
-			if(datafileCommission.getValue(GlobalVariable.NumofColm, returnRowCom + 1).equalsIgnoreCase('Yes')){
+			if(findTestData(excelPathCommission).getValue(GlobalVariable.NumofColm, returnRowCom + 1).equalsIgnoreCase('Yes')){
 				'write to excel flag return done'
 				CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '13.TabCommissionData',
 						returnRowCom, GlobalVariable.NumofColm - 1, "Done")
 			}
-			else if(datafileReservedFund.getValue(GlobalVariable.NumofColm, returnRowRsv + 1).equalsIgnoreCase('Yes')){
+			else if(findTestData(excelPathReservedFund).getValue(GlobalVariable.NumofColm, returnRowRsv + 1).equalsIgnoreCase('Yes')){
 				'write to excel flag return done'
 				CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '14.TabReservedFundData',
 						returnRowRsv, GlobalVariable.NumofColm - 1, "Done")

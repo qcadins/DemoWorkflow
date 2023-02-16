@@ -67,10 +67,8 @@ if(GlobalVariable.Role == 'Testing'){
 	if (WebUI.verifyOptionsPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/select_MrMrsMs'),
 		salutation) == false) {
 
-		getDataFile()
-		
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.CustomerDetail', GlobalVariable.ColmNAP4, GlobalVariable.StatusFailed, GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 2) + ';' +GlobalVariable.ReasonFailedDDL + 'Salutation')
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.CustomerDetail', GlobalVariable.ColmNAP4, GlobalVariable.StatusFailed, findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 2) + ';' +GlobalVariable.ReasonFailedDDL + 'Salutation')
 
 		(GlobalVariable.FlagFailed)++
 	}
@@ -78,10 +76,9 @@ if(GlobalVariable.Role == 'Testing'){
 	'verify isi ddl nationality confins = db'
 	if (WebUI.verifyOptionsPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/select_ForeignerLocal'),
 			nationality) == false) {
-		getDataFile()
-		
+
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.CustomerDetail', GlobalVariable.ColmNAP4, GlobalVariable.StatusFailed, GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 2) + ';' +GlobalVariable.ReasonFailedDDL + 'nationality')
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.CustomerDetail', GlobalVariable.ColmNAP4, GlobalVariable.StatusFailed, findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 2) + ';' +GlobalVariable.ReasonFailedDDL + 'nationality')
 		
 		(GlobalVariable.FlagFailed)++
 	}
@@ -89,10 +86,9 @@ if(GlobalVariable.Role == 'Testing'){
 	'verify isi ddl education confins = db'
 	if (WebUI.verifyOptionsPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/select_S1S2S3SDSMASMP'),
 			education) == false) {
-		getDataFile()
-		
+
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.CustomerDetail', GlobalVariable.ColmNAP4, GlobalVariable.StatusFailed, GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 2) + ';' +GlobalVariable.ReasonFailedDDL + 'education')
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.CustomerDetail', GlobalVariable.ColmNAP4, GlobalVariable.StatusFailed, findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 2) + ';' +GlobalVariable.ReasonFailedDDL + 'education')
 		
 		(GlobalVariable.FlagFailed)++
 	}
@@ -100,10 +96,9 @@ if(GlobalVariable.Role == 'Testing'){
 	'verify isi ddl religion confins = db'
 	if (WebUI.verifyOptionsPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/select_AGAMA'),
 			religion) == false) {
-		getDataFile()
-		
+
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.CustomerDetail', GlobalVariable.ColmNAP4, GlobalVariable.StatusFailed, GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 2) + ';' +GlobalVariable.ReasonFailedDDL + 'religion')
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.CustomerDetail', GlobalVariable.ColmNAP4, GlobalVariable.StatusFailed, findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 2) + ';' +GlobalVariable.ReasonFailedDDL + 'religion')
 		
 		(GlobalVariable.FlagFailed)++
 	}
@@ -111,30 +106,30 @@ if(GlobalVariable.Role == 'Testing'){
 
 'input gelar nama depan'
 WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/input_Gelar Depan Nama'),
-	GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 14))
+	findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 14))
 
 'input num of dependents'
 WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/input_Num Of Dependents'),
-	GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 15))
+	findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 15))
 
 'input num of residence'
 WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/input_Num Of Residence (Last 3 Years)'),
-	GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 16))
+	findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 16))
 
 'input family card num'
 WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/input_Family Card No'),
-	GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 17))
+	findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 17))
 
 if (WebUI.verifyElementNotChecked(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/input_Rest In Peace'),
 	GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 	'check RIP'
-	if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 18) == 'Yes') {
+	if (findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 18) == 'Yes') {
 		WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/input_Rest In Peace'))
 	}
 } else if (WebUI.verifyElementChecked(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/input_Rest In Peace'),
 	GlobalVariable.TimeOut)) {
 	'check RIP'
-	if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 18) == 'No') {
+	if (findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 18) == 'No') {
 		WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/input_Rest In Peace'))
 	}
 }
@@ -142,13 +137,13 @@ if (WebUI.verifyElementNotChecked(findTestObject('NAP/NAP4-CustomerDataCompletio
 if (WebUI.verifyElementNotChecked(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/input_VIP_'),
 	GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 	'check VIP'
-	if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 19) == 'Yes') {
+	if (findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 19) == 'Yes') {
 		WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/input_VIP_'))
 	}
 } else if (WebUI.verifyElementChecked(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/input_VIP_'),
 	GlobalVariable.TimeOut)) {
 	'check VIP'
-	if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 19) == 'No') {
+	if (findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 19) == 'No') {
 		WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/input_VIP_'))
 	}
 }
@@ -156,24 +151,24 @@ if (WebUI.verifyElementNotChecked(findTestObject('NAP/NAP4-CustomerDataCompletio
 if (WebUI.verifyElementNotChecked(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/input_Affiliation with multifinance checkbox'),
 	GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 	'Check Affiliation'
-	if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 20) == 'Yes') {
+	if (findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 20) == 'Yes') {
 		WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/input_Affiliation with multifinance checkbox'))
 	}
 } else if (WebUI.verifyElementChecked(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/input_Affiliation with multifinance checkbox'),
 	GlobalVariable.TimeOut)) {
 	'Check Affiliation'
-	if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 20) == 'No') {
+	if (findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 20) == 'No') {
 		WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/input_Affiliation with multifinance checkbox'))
 	}
 }
 
-if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 21).length() > 2) {
+if (findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 21).length() > 2) {
 	'klik lookup customer group'
 	WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/button_Customer Group'))
 
 	'set text custname'
 	WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/input_Customer Name_custNameId'),
-		GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 21))
+		findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 21))
 
 	'klik button search'
 	WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/button_Search'))
@@ -193,28 +188,28 @@ if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 21).length() >
 
 'pilih salutation'
 WebUI.selectOptionByLabel(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/select_MrMrsMs'),
-	GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 22), false)
+	findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 22), false)
 
 'Input Nickname'
 WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/input_Nick Name_'),
-	GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 23))
+	findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 23))
 
 'input gelar nama belakang'
 WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/input_Gelar Belakang Nama'),
-	GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 24))
+	findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 24))
 
 'pilih local/foreigner'
 WebUI.selectOptionByLabel(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/select_ForeignerLocal'),
-	GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 25), false)
+	findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 25), false)
 
 'pilih country jika foreigner'
-if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 25) == 'Foreigner') {
+if (findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 25) == 'Foreigner') {
 	'klik button lookup country'
 	WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/button_Country'))
 
 	'input country code'
 	WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/input_Country Code_countryCodeId'),
-		GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 26))
+		findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 26))
 
 	'klik search'
 	WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/button_SearchCountry'))
@@ -230,11 +225,9 @@ if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 25) == 'Foreig
 
 		'click button back'
 		WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Back'))
-		
-		getDataFile()
-		
+
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusReasonLookup'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.CustomerDetail', GlobalVariable.ColmNAP4, GlobalVariable.StatusFailed, GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 2) + ';' +GlobalVariable.StatusReasonLookup)
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.CustomerDetail', GlobalVariable.ColmNAP4, GlobalVariable.StatusFailed, findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 2) + ';' +GlobalVariable.StatusReasonLookup)
 
 		GlobalVariable.FlagFailed = 1
 	}
@@ -242,22 +235,22 @@ if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 25) == 'Foreig
 
 'pilih pendidikan'
 WebUI.selectOptionByLabel(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/select_S1S2S3SDSMASMP'),
-	GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 28), false)
+	findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 28), false)
 
 'pilih religion'
 WebUI.selectOptionByLabel(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/select_AGAMA'),
-	GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 29), false)
+	findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 29), false)
 
 'input VIP Notes'
-if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 30).length() > 1) {
+if (findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 30).length() > 1) {
 	WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/textarea_VIP Notes'),
-		GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 30))
+		findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 30))
 }
 
 'click save and continue'
 WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/button_Save  Continue'))
 
-Integer iscompleteMandatory = Integer.parseInt(GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 4))
+Integer iscompleteMandatory = Integer.parseInt(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 4))
 
 if (iscompleteMandatory == 0 && GlobalVariable.FlagFailed==0) {
 	'cek alert'
@@ -306,17 +299,17 @@ def getDataFile(){
 		GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileCustomerPersonal)
 		
 		'declare data file Global variable'
-		GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail')
+		GlobalVariable.excelPath = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail'
 	}else if(GlobalVariable.APPSTEP == 'FAMILY'){
 		'get data file path'
 		GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileFamilyPersonal)
 		
 		'declare data file Global variable'
-		GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/FamilyPersonal/CustomerDetail')
+		GlobalVariable.excelPath = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/FamilyPersonal/CustomerDetail'
 	}else if(GlobalVariable.APPSTEP == 'GUARANTOR PERSONAL'){
 		'get data file path'
 		GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorPersonal)
 		
-		GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/CustomerDetail')
+		GlobalVariable.excelPath = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/CustomerDetail'
 	}
 }

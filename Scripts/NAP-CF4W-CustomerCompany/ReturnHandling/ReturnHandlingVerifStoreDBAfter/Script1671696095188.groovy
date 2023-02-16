@@ -22,26 +22,26 @@ import internal.GlobalVariable as GlobalVariable
 'connect DB LOS'
 Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
-'declare datafileCustomerCompany'
-datafileCustomerCompany = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData')
+'declare excelPathCustomerCompany'
+excelPathCustomerCompany = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData'
 
-String SheetExcel, datafile
+String SheetExcel, excelPath
 
 'get data from db'
-String resultHeader = CustomKeywords.'dbConnection.CustomerDataVerif.checkReturnHandlingH'(sqlconnectionLOS, datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 13))
+String resultHeader = CustomKeywords.'dbConnection.CustomerDataVerif.checkReturnHandlingH'(sqlconnectionLOS, findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm, 13))
 
-ArrayList<String> resultDetail = CustomKeywords.'dbConnection.CustomerDataVerif.checkReturnHandlingD'(sqlconnectionLOS, datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 13))
+ArrayList<String> resultDetail = CustomKeywords.'dbConnection.CustomerDataVerif.checkReturnHandlingD'(sqlconnectionLOS, findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm, 13))
 
 String applaststep = CustomKeywords.'dbConnection.checkStep.checkLastStep'(sqlconnectionLOS, datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 13))
 
 if(applaststep == 'COM'){
 	'declare datafileCommission'
-	datafile = findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData')
+	excelPath = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/CommissionReservedFund/TabCommissionData'
 	
 	SheetExcel = '12.TabCommissionData'
 }else if(applaststep == 'RSV'){
 	'declare datafileReservedFund'
-	datafile = findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData')
+	excelPath = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/CommissionReservedFund/TabReservedFundData'
 	
 	SheetExcel = '13.TabReservedFundData'
 }
@@ -63,7 +63,7 @@ arrayindex = 0
 arrayMatch.add(WebUI.verifyMatch('DONE', (resultDetail[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify Status from Detail'
-arrayMatch.add(WebUI.verifyMatch(datafile.getValue(GlobalVariable.NumofColm, returnRow+5), (resultDetail[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPath).getValue(GlobalVariable.NumofColm, returnRow+5), (resultDetail[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'jika nilai di confins tidak sesuai dengan db'
 if(arrayMatch.contains(false)){

@@ -28,8 +28,8 @@ Sql sqlConnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 'koneksi db fou'
 Sql sqlConnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
-'declare datafileTabInsurance'
-datafileTabInsurance = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData')
+'declare excelPathTabInsurance'
+excelPathTabInsurance = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData'
 
 def totalFeeResult
 
@@ -48,12 +48,12 @@ checkDDL(sqlConnectionFOU)
 
 'Select option insco branch name'
 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/select_InscoBranchNameMF'),
-	datafileTabInsurance.getValue(
+	findTestData(excelPathTabInsurance).getValue(
 		GlobalVariable.NumofColm, 26), false)
 
 insuranceNotesCompany = findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/textarea_Insurance Notes MF')
 
-if (datafileTabInsurance.getValue(
+if (findTestData(excelPathTabInsurance).getValue(
 	GlobalVariable.NumofColm, 12) == 'Customer - Multifinance') {
 	'Modify properti untuk insurance notes bagian company insured by customer multifinance'
 	insuranceNotesCompany = WebUI.modifyObjectProperty(insuranceNotesCompany, 'xpath', 'equals', '/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[4]/app-insurance-data/app-uc-insurance/div/div/div/div/div/app-uc-insurance-detail/div/form/div[1]/div/div[3]/div[5]/div/textarea',
@@ -61,11 +61,11 @@ if (datafileTabInsurance.getValue(
 }
 
 'Input insurance notes'
-WebUI.setText(insuranceNotesCompany, datafileTabInsurance.getValue(
+WebUI.setText(insuranceNotesCompany, findTestData(excelPathTabInsurance).getValue(
 		GlobalVariable.NumofColm, 27))
 
 buttonGenerateInsurance = findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/button_Generate Insurance')
-if (datafileTabInsurance.getValue(
+if (findTestData(excelPathTabInsurance).getValue(
 	GlobalVariable.NumofColm, 12) == 'Customer - Multifinance') {
 	'Klik Generate Insurance'
 	buttonGenerateInsurance = WebUI.modifyObjectProperty(buttonGenerateInsurance,'xpath','equals',"//*[@id='insuranceInformation']/div[3]/div[6]/button",true)
@@ -86,13 +86,13 @@ if (WebUI.verifyTextNotPresent('INSURANCE FEE', false, FailureHandling.OPTIONAL)
 	GlobalVariable.IsDataCancel = 1
 	
 	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusReasonGenerateGagal'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('8.TabInsuranceData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.StatusReasonGenerateGagal)
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('8.TabInsuranceData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathTabInsurance).getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.StatusReasonGenerateGagal)
 	
 	GlobalVariable.FlagFailed=1
 }
 
 'Ambil string opsi yang dipilih pada dropdownlist insco branch name excel'
-selectedInscoBranch = datafileTabInsurance.getValue(
+selectedInscoBranch = findTestData(excelPathTabInsurance).getValue(
 		GlobalVariable.NumofColm, 26)
 
 if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckRulePersonal=="Yes" && GlobalVariable.FirstTimeEntry == "Yes"){
@@ -165,16 +165,16 @@ if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckRulePersonal=="Yes" && 
 }
 
 'Verifikasi/memastikan isfeeusedefault pada excel'
-if (datafileTabInsurance.getValue(
+if (findTestData(excelPathTabInsurance).getValue(
 	GlobalVariable.NumofColm, 30) == 'NO') {
 	'Input Admin Fee'
 	WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/input_Admin Fee_adminFee'),
-		datafileTabInsurance.getValue(
+		findTestData(excelPathTabInsurance).getValue(
 			GlobalVariable.NumofColm, 31), FailureHandling.OPTIONAL)
 
 	'Input Customer Stampduty Fee'
 	WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/input_Customer Stampduty Fee_adminFee'),
-		datafileTabInsurance.getValue(
+		findTestData(excelPathTabInsurance).getValue(
 			GlobalVariable.NumofColm, 32), FailureHandling.OPTIONAL)
 }
 
@@ -193,7 +193,7 @@ if(GlobalVariable.Role == 'Testing'){
 					maincvg) == false) {
 				
 				'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('8.TabInsuranceData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedDDL + 'maincvg')
+				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('8.TabInsuranceData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathTabInsurance).getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedDDL + 'maincvg')
 				
 				(GlobalVariable.FlagFailed)++
 			}
@@ -201,7 +201,7 @@ if(GlobalVariable.Role == 'Testing'){
 	
 'Select option dropdownlist main coverage'
 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/select_MainCoverage'),
-	datafileTabInsurance.getValue(
+	findTestData(excelPathTabInsurance).getValue(
 		GlobalVariable.NumofColm, 34), false)
 
 'Mengambil nilai row keberapa dimulai data additional coverage (apply to all) pada excel'
@@ -224,7 +224,7 @@ for (int i = 1; i <= countAddCov; i++) {
 		'xpath', 'equals', ('//*[@id=\'insuranceCoverage\']/div[2]/div/label[' + i) + ']/div/label/input', true)
 
 	'Ambil inputan additional coverage dari excel (apply to all)'
-	String checkboxValue = datafileTabInsurance.getValue(
+	String checkboxValue = findTestData(excelPathTabInsurance).getValue(
 		GlobalVariable.NumofColm, (addCovRow + i) - countEmpty)
 
 	'Verify jika checkbox ada (terlihat di UI)'
@@ -347,7 +347,7 @@ if(capinssetting=="YEARLY"){
 			'xpath', 'equals', ('//*[@id=\'insuranceCoverage\']/div[5]/table/tbody[' + i) + ']/tr[1]/td[1]/div/input', true)
 	
 		'Ambil nilai capitalize dari excel'
-		capitalizeValue = datafileTabInsurance.getValue(
+		capitalizeValue = findTestData(excelPathTabInsurance).getValue(
 			GlobalVariable.NumofColm, editGenTableRow+1)
 	
 		capitalizeValueArray = capitalizeValue.split(';', -1)
@@ -378,7 +378,7 @@ if(capinssetting=="YEARLY"){
 			'xpath', 'equals', ('//*[@id=\'insuranceCoverage\']/div[5]/table/tbody[' + i) + ']/tr[1]/td[2]/div/select', true)
 	
 		'Ambil nilai paid by dari excels'
-		paidByValue = datafileTabInsurance.getValue(
+		paidByValue = findTestData(excelPathTabInsurance).getValue(
 			GlobalVariable.NumofColm, editGenTableRow+2)
 	
 		paidByValueArray = paidByValue.split(';', -1)
@@ -401,7 +401,7 @@ if(capinssetting=="YEARLY"){
 			'xpath', 'equals', ('//*[@id=\'insuranceCoverage\']/div[5]/table/tbody[' + i) + ']/tr[1]/td[5]/div/input', true)
 	
 		'Ambil nilai sum insured percentage dari excel'
-		sumInsuredPercentValue = datafileTabInsurance.getValue(
+		sumInsuredPercentValue = findTestData(excelPathTabInsurance).getValue(
 			GlobalVariable.NumofColm, editGenTableRow+3)
 	
 		sumInsuredPercentValueArray = sumInsuredPercentValue.split(';', -1)
@@ -424,7 +424,7 @@ if(capinssetting=="YEARLY"){
 			true)
 	
 		'Ambil nilai main coverage dari excel'
-		mainCoverageValue = datafileTabInsurance.getValue(
+		mainCoverageValue = findTestData(excelPathTabInsurance).getValue(
 			GlobalVariable.NumofColm, editGenTableRow+4)
 	
 		mainCoverageValueArray = mainCoverageValue.split(';', -1)
@@ -494,7 +494,7 @@ if(capinssetting=="YEARLY"){
 		'Pengecekan road worthiness document pada asset data bernilai off the road'
 		if(rwd=="OFF_THE_ROAD"){
 			'Ambil nilai main premi rate dari excel'
-			mainPremiRateValue = datafileTabInsurance.getValue(
+			mainPremiRateValue = findTestData(excelPathTabInsurance).getValue(
 						GlobalVariable.NumofColm, Rate)
 						
 			mainPremiRateValueArray = mainPremiRateValue.split(';',-1)
@@ -585,7 +585,7 @@ if(capinssetting=="YEARLY"){
 				true)
 			
 			'Ambil nilai dari additional coverage per year num pada excel'
-			addCovYearValue = datafileTabInsurance.getValue(
+			addCovYearValue = findTestData(excelPathTabInsurance).getValue(
 				GlobalVariable.NumofColm, addCovTableRow + j -flagLoading)
 	
 			addCovYearValueArray = addCovYearValue.split(';', -1)
@@ -637,7 +637,7 @@ if(capinssetting=="YEARLY"){
 				'Jika sum insured amount ada dan checkbox additional coverage tercentang'
 				if ((countSumInsuredAmount == 1) && WebUI.verifyElementChecked(addCovYearCheckbox, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 					'Ambil nilai sum insured amount dari excel'
-					SumInsuredValue = datafileTabInsurance.getValue(
+					SumInsuredValue = findTestData(excelPathTabInsurance).getValue(
 						GlobalVariable.NumofColm, sumInsuredAmountRow + j)
 		
 					SumInsuredValueArray = SumInsuredValue.split(';', -1)
@@ -702,7 +702,7 @@ if(capinssetting=="YEARLY"){
 			if(rwd=="OFF_THE_ROAD"){
 							
 				'Ambil nilai additional premi rate dari excel'
-				AddtRateValue = datafileTabInsurance.getValue(
+				AddtRateValue = findTestData(excelPathTabInsurance).getValue(
 								GlobalVariable.NumofColm, AddRate + j)
 				
 				AddtRateValueArray = AddtRateValue.split(';', -1)
@@ -837,7 +837,7 @@ if(capinssetting=="YEARLY"){
 			',', '')
 		
 		'get perhitungan total fee dari excel'
-		totalFeeResult = datafileTabInsurance.getValue(GlobalVariable.NumofColm, 87).replace(',', '')
+		totalFeeResult = findTestData(excelPathTabInsurance).getValue(GlobalVariable.NumofColm, 87).replace(',', '')
 		
 		'Perhitungan total premi to customer'
 		totalPremitoCustResult = (((totalResult[0]) + (totalResult[1])) + Long.parseLong(totalFeeResult.replace(',','')))
@@ -858,7 +858,7 @@ if(capinssetting=="YEARLY"){
 		if(totalResult[2]==0){
 			'Input diskon'
 			WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/input_Discount_TotalCustDiscAmt'),
-				datafileTabInsurance.getValue(
+				findTestData(excelPathTabInsurance).getValue(
 					GlobalVariable.NumofColm, TotalPremium+1))
 		}
 	}
@@ -867,7 +867,7 @@ if(capinssetting=="YEARLY"){
 	if (counterPaidByMF == 0) {
 		'Input diskon'
 		WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/input_Discount_TotalCustDiscAmt'),
-			datafileTabInsurance.getValue(
+			findTestData(excelPathTabInsurance).getValue(
 				GlobalVariable.NumofColm, TotalPremium+1))
 	}
 	'declare textdisocuntamt'
@@ -956,7 +956,7 @@ CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(GlobalVariable.D
 public writeFailedReasonVerifyRule(){
 		
 	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyRule'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('8.TabInsuranceData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedVerifyRule)
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('8.TabInsuranceData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathTabInsurance).getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedVerifyRule)
 	
 	GlobalVariable.FlagFailed = 1
 }
@@ -965,7 +965,7 @@ public checkVerifyEqualOrMatch(Boolean isMatch){
 	if(isMatch==false && GlobalVariable.FlagFailed==0){
 
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('8.TabInsuranceData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('8.TabInsuranceData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathTabInsurance).getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 		
 		GlobalVariable.FlagFailed=1
 	}
@@ -990,7 +990,7 @@ def checkDDL(Sql sqlConnectionFOU){
 			inscoBranchName)==false){
 			
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('8.TabInsuranceData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedDDL)
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('8.TabInsuranceData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathTabInsurance).getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedDDL)
 			
 			GlobalVariable.FlagFailed=1
 		}
@@ -1002,7 +1002,7 @@ def checkDDL(Sql sqlConnectionFOU){
 		if(WebUI.verifyEqual(totalInscoBranch - 1, countInscoBranch)==false){
 			
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('8.TabInsuranceData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedDDL)
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('8.TabInsuranceData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathTabInsurance).getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedDDL)
 			
 			GlobalVariable.FlagFailed=1
 		}
@@ -1021,7 +1021,7 @@ def checkDDL(Sql sqlConnectionFOU){
 			coverperiod) == false) {
 	
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('8.TabInsuranceData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedDDL + 'cover period')
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('8.TabInsuranceData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathTabInsurance).getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedDDL + 'cover period')
 	
 			(GlobalVariable.FlagFailed)++
 		}
@@ -1040,7 +1040,7 @@ def checkDDL(Sql sqlConnectionFOU){
 				paymenttype) == false) {
 					
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('8.TabInsuranceData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedDDL + 'cover period')
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('8.TabInsuranceData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathTabInsurance).getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedDDL + 'cover period')
 					
 			(GlobalVariable.FlagFailed)++
 		}
@@ -1049,8 +1049,9 @@ def checkDDL(Sql sqlConnectionFOU){
 
 public inputInsInfo(Sql sqlConnectionLOS,Sql sqlConnectionFOU, String appNo){
 	
-		datafileTabInsurance = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData')
-		
+		'declare excelPathTabInsurance'
+		excelPathTabInsurance = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData'
+	
 		if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckRulePersonal=="Yes" && GlobalVariable.FirstTimeEntry == "Yes"){
 			'Ambil nilai asset region dari rule excel berdasarkan condition-condition'
 			String defaultAssetReg = CustomKeywords.'insuranceData.verifyAssetRegion.checkAssetRegionBasedOnRule'(sqlConnectionLOS, appNo, sqlConnectionFOU)
@@ -1064,16 +1065,16 @@ public inputInsInfo(Sql sqlConnectionLOS,Sql sqlConnectionFOU, String appNo){
 		
 		'Select option dropdownlist Asset Region'
 		WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/select_AssetRegionMF'),
-			datafileTabInsurance.getValue(
+			findTestData(excelPathTabInsurance).getValue(
 				GlobalVariable.NumofColm, 22), false)
 		
 		'Input Coverage Amount'
 		WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/input_Coverage Amount MF'),
-			datafileTabInsurance.getValue(
+			findTestData(excelPathTabInsurance).getValue(
 				GlobalVariable.NumofColm, 23))
 		
 		'get coverperiod from excel'
-		coverPeriod = datafileTabInsurance.getValue(
+		coverPeriod = findTestData(excelPathTabInsurance).getValue(
 			GlobalVariable.NumofColm, 24)
 		
 		'Select option dropdownlist cover period'
@@ -1084,12 +1085,12 @@ public inputInsInfo(Sql sqlConnectionLOS,Sql sqlConnectionFOU, String appNo){
 		if ((coverPeriod == 'Over Tenor') || (coverPeriod == 'Partial Tenor')) {
 			'Input Insurance Length'
 			WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/input_Insurance Length MF'),
-				datafileTabInsurance.getValue(
+				findTestData(excelPathTabInsurance).getValue(
 					GlobalVariable.NumofColm, 28))
 		}
 		
 		'Select option dropdownlist payment type'
 		WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/select_Payment Type MF'),
-			datafileTabInsurance.getValue(
+			findTestData(excelPathTabInsurance).getValue(
 				GlobalVariable.NumofColm, 25), false)
 }

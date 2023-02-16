@@ -20,8 +20,8 @@ import internal.GlobalVariable as GlobalVariable
 'get data file path'
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathPersonal)
 
-'declare datafileTabInsurance'
-datafileTabInsurance = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData')
+'declare excelPathTabInsurance'
+excelPathTabInsurance = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData'
 
 GlobalVariable.FlagFailed = 0
 
@@ -42,10 +42,10 @@ if (GlobalVariable.Role == 'Testing') {
 
 	if(GlobalVariable.FirstTimeEntry=="Yes"){
 		'Verifikasi perhitungan asset price'
-		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/label_AssetPrice')).replace('.00',''), datafileTabInsurance.getValue(GlobalVariable.NumofColm, 88), false))
+		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/label_AssetPrice')).replace('.00',''), findTestData(excelPathTabInsurance).getValue(GlobalVariable.NumofColm, 88), false))
 	
 		'Verifikasi perhitungan asset price incl accessories'
-		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/label_AssetPriceInclAcc')).replace('.00',''), datafileTabInsurance.getValue(GlobalVariable.NumofColm, 89), false))
+		checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/label_AssetPriceInclAcc')).replace('.00',''), findTestData(excelPathTabInsurance).getValue(GlobalVariable.NumofColm, 89), false))
 	}
 	
 	'koneksi fou'
@@ -65,7 +65,7 @@ if (GlobalVariable.Role == 'Testing') {
 		insuredby) == false) {
 
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('8.TabInsuranceData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedDDL + 'insuredby')
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('8.TabInsuranceData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathTabInsurance).getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedDDL + 'insuredby')
 
 		(GlobalVariable.FlagFailed)++
 	}
@@ -73,7 +73,7 @@ if (GlobalVariable.Role == 'Testing') {
 }
 
 'get insuredby from excel'
-String insuredBy = datafileTabInsurance.getValue(
+String insuredBy = findTestData(excelPathTabInsurance).getValue(
     GlobalVariable.NumofColm, 12)
 
 'Select option dropdownlist insured by'
@@ -106,7 +106,7 @@ WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabIn
 
 WebUI.delay(2)
 
-Integer iscompleteMandatory = Integer.parseInt(datafileTabInsurance.getValue(
+Integer iscompleteMandatory = Integer.parseInt(findTestData(excelPathTabInsurance).getValue(
         GlobalVariable.NumofColm, 4))
 
 if (iscompleteMandatory == 0 && GlobalVariable.FlagFailed == 0) {
@@ -149,7 +149,7 @@ public checkVerifyEqualOrMatch(Boolean isMatch){
 		if(isMatch==false && GlobalVariable.FlagFailed==0){
 	
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('8.TabInsuranceData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('8.TabInsuranceData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathTabInsurance).getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 			
 			GlobalVariable.FlagFailed=1
 		}

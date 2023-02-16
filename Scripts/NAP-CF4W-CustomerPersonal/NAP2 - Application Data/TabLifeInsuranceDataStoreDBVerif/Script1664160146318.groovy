@@ -19,14 +19,14 @@ import internal.GlobalVariable as GlobalVariable
 'connect DB los'
 Sql sqlconnection = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
-'declare datafileCustomerPersonal'
-datafileCustomerPersonal = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData')
+'declare excelPathCustomerPersonal'
+excelPathCustomerPersonal = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData'
 
-'declare datafileTabLifeInsurance'
-datafileTabLifeInsurance = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData')
+'declare excelPathTabLifeInsurance'
+excelPathTabLifeInsurance = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData'
 
 'get life insurance data from db'
-ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2LifeInsuranceStoreDB'(sqlconnection, datafileCustomerPersonal.getValue(
+ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2LifeInsuranceStoreDB'(sqlconnection, findTestData(excelPathCustomerPersonal).getValue(
         GlobalVariable.NumofColm, 13))
 
 'declare arraymatch'
@@ -36,16 +36,16 @@ ArrayList<Boolean> arrayMatch = new ArrayList<>()
 int arrayindex = 0
 
 'verify insco branch name'
-arrayMatch.add(WebUI.verifyMatch(datafileTabLifeInsurance.getValue(
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabLifeInsurance).getValue(
 		GlobalVariable.NumofColm, 13).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify premium payment method'
-arrayMatch.add(WebUI.verifyMatch(datafileTabLifeInsurance.getValue(
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabLifeInsurance).getValue(
 		GlobalVariable.NumofColm, 14).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-if(datafileTabLifeInsurance.getValue(GlobalVariable.NumofColm, 14).equalsIgnoreCase('Paid in Advance & Capitalized Mix')){
+if(findTestData(excelPathTabLifeInsurance).getValue(GlobalVariable.NumofColm, 14).equalsIgnoreCase('Paid in Advance & Capitalized Mix')){
 'verify premium percentage'
-arrayMatch.add(WebUI.verifyMatch(datafileTabLifeInsurance.getValue(
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabLifeInsurance).getValue(
 		GlobalVariable.NumofColm, 15).replace('%',''), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 }else{
 'skip'
@@ -53,29 +53,29 @@ arrayindex++
 }
 
 'verify notes'
-arrayMatch.add(WebUI.verifyMatch(datafileTabLifeInsurance.getValue(
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabLifeInsurance).getValue(
 		GlobalVariable.NumofColm, 16).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify subject customer'
-arrayMatch.add(WebUI.verifyMatch(datafileTabLifeInsurance.getValue(
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabLifeInsurance).getValue(
 		GlobalVariable.NumofColm, 18).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify subject guarantor'
-arrayMatch.add(WebUI.verifyMatch(datafileTabLifeInsurance.getValue(
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabLifeInsurance).getValue(
 		GlobalVariable.NumofColm, 19).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify subject spouse'
-arrayMatch.add(WebUI.verifyMatch(datafileTabLifeInsurance.getValue(
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabLifeInsurance).getValue(
 		GlobalVariable.NumofColm, 20).toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify admin fee'
-arrayMatch.add(WebUI.verifyMatch(datafileTabLifeInsurance.getValue(
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabLifeInsurance).getValue(
 		GlobalVariable.NumofColm, 23).toUpperCase().replace(',', ''), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'Jika nilai di confins ada yang tidak sesuai dengan db'
 if (arrayMatch.contains(false)) {
 
 	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedStoredDB'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('9.TabLifeInsuranceData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedStoredDB)
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('9.TabLifeInsuranceData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathTabLifeInsurance).getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedStoredDB)
 	
 }

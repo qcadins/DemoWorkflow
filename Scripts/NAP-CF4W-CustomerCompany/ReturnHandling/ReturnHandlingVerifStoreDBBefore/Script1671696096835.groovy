@@ -22,26 +22,24 @@ import internal.GlobalVariable as GlobalVariable
 'connect DB LOS'
 Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
-TestData datafile
-
-String SheetExcel
+String SheetExcel, excelPath
 
 int returnRow
 
-'declare datafileCustomerCompany'
-datafileCustomerCompany = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData')
+'declare excelPathCustomerCompany'
+excelPathCustomerCompany = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData'
 
 if(GlobalVariable.APPSTEP == 'COMMISSION'){
 	
 'declare datafileCommission'
-datafile = findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData')
+excelPath = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/CommissionReservedFund/TabCommissionData'
 
 SheetExcel = '12.TabCommissionData'
 
 }else if(GlobalVariable.APPSTEP == 'RESERVED FUND'){
 
 'declare datafileReservedFund'
-datafile = findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData')
+excelPath = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/CommissionReservedFund/TabReservedFundData'
 
 SheetExcel = '13.TabReservedFundData'
 
@@ -52,13 +50,13 @@ returnRow = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.
 	'Return Commission & Reserved Fund') + 1
 
 'get data from db'
-ArrayList<String> resultHeader = CustomKeywords.'dbConnection.CustomerDataVerif.checkReturnHandlingH'(sqlconnectionLOS, datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 13))
+ArrayList<String> resultHeader = CustomKeywords.'dbConnection.CustomerDataVerif.checkReturnHandlingH'(sqlconnectionLOS, findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm, 13))
 
-ArrayList<String> resultDetail = CustomKeywords.'dbConnection.CustomerDataVerif.checkReturnHandlingD'(sqlconnectionLOS, datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 13))
+ArrayList<String> resultDetail = CustomKeywords.'dbConnection.CustomerDataVerif.checkReturnHandlingD'(sqlconnectionLOS, findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm, 13))
 
-String appcurrstep = CustomKeywords.'dbConnection.checkStep.checkAppCurrStep'(sqlconnectionLOS, datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 13))
+String appcurrstep = CustomKeywords.'dbConnection.checkStep.checkAppCurrStep'(sqlconnectionLOS, findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm, 13))
 
-String applaststep = CustomKeywords.'dbConnection.checkStep.checkLastStep'(sqlconnectionLOS, datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 13))
+String applaststep = CustomKeywords.'dbConnection.checkStep.checkLastStep'(sqlconnectionLOS, findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm, 13))
 
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
 
@@ -74,11 +72,11 @@ arrayMatch.add(WebUI.verifyMatch(applaststep.toUpperCase(), (resultHeader[arrayi
 arrayMatch.add(WebUI.verifyMatch('REQUEST', (resultHeader[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify reason from Header'
-arrayMatch.add(WebUI.verifyMatch(datafile.getValue(GlobalVariable.NumofColm, returnRow+3).toUpperCase(), (resultHeader[arrayindex++]).toUpperCase(),
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPath).getValue(GlobalVariable.NumofColm, returnRow+3).toUpperCase(), (resultHeader[arrayindex++]).toUpperCase(),
 		false, FailureHandling.OPTIONAL))
 
 'verify NOTE from Header'
-arrayMatch.add(WebUI.verifyMatch(datafile.getValue(GlobalVariable.NumofColm, returnRow+4).toUpperCase(), (resultHeader[arrayindex++]).toUpperCase(),
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPath).getValue(GlobalVariable.NumofColm, returnRow+4).toUpperCase(), (resultHeader[arrayindex++]).toUpperCase(),
 		false, FailureHandling.OPTIONAL))
 
 arrayindex = 0
@@ -88,7 +86,7 @@ arrayMatch.add(WebUI.verifyMatch('EDIT APPLICATION DATA'.toUpperCase(), (resultD
 		false, FailureHandling.OPTIONAL))
 
 'verify NOTE from Detail'
-arrayMatch.add(WebUI.verifyMatch(datafile.getValue(GlobalVariable.NumofColm, returnRow+4).toUpperCase(), (resultDetail[arrayindex++]).toUpperCase(),
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPath).getValue(GlobalVariable.NumofColm, returnRow+4).toUpperCase(), (resultDetail[arrayindex++]).toUpperCase(),
 		false, FailureHandling.OPTIONAL))
 
 'verify Status from Detail'

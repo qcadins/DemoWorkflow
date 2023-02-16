@@ -20,14 +20,14 @@ import org.openqa.selenium.WebDriver as WebDriver
 import org.openqa.selenium.By as By
 import groovy.sql.Sql as Sql
 
-'declare datafileCustomerCompany'
-datafileCustomerCompany = findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData')
+'declare excelPathCustomerCompany'
+excelPathCustomerCompany = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData'
 
-'declare datafileCommission'
-datafileCommission = findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabCommissionData')
+'declare excelPathCommission'
+excelPathCommission = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/CommissionReservedFund/TabCommissionData'
 
-'declare datafileReservedFund'
-datafileReservedFund = findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData')
+'declare excelPathReservedFund'
+excelPathReservedFund = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/CommissionReservedFund/TabReservedFundData'
 
 'function untuk input application no dan search'
 inputAppNo()
@@ -40,7 +40,7 @@ def returnRowCom = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVa
 def returnRowRsv = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '13.TabReservedFundData',
 	'Return Commission & Reserved Fund') + 1
 
-if (datafileCommission.getValue(GlobalVariable.NumofColm, returnRowCom + 1).equalsIgnoreCase('Yes') || datafileReservedFund.getValue(
+if (findTestData(excelPathCommission).getValue(GlobalVariable.NumofColm, returnRowCom + 1).equalsIgnoreCase('Yes') || findTestData(excelPathReservedFund).getValue(
 	GlobalVariable.NumofColm, returnRowRsv + 1).equalsIgnoreCase('Yes')) {
 	'verify match status request pada paging return handling'
 	WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/NAP/ReturnHandling/TaskStatusPaging')), 'REQUEST', false)
@@ -103,7 +103,7 @@ def inputAppNo() {
 	pagingTesting()
 	
 	'input application no'
-	WebUI.setText(findTestObject('NAP/CommissionReservedFund/TabCommissionData/input_Application No_AppNoId'), datafileCustomerCompany.getValue(
+	WebUI.setText(findTestObject('NAP/CommissionReservedFund/TabCommissionData/input_Application No_AppNoId'), findTestData(excelPathCustomerCompany).getValue(
 			GlobalVariable.NumofColm, 13))
 
 	'klik search'
@@ -380,30 +380,30 @@ public pagingTesting(){
 		checkVerifyFooter.add(WebUI.verifyEqual(CustomKeywords.'paging.verifyPaging.ReturnHandlingCountDataInPage'(),true))
 		
 		'Jika verif reset ada yang tidak sesuai'
-		if(resultReset.contains(false) && GlobalVariable.StatusFailed!=datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 1)){
+		if(resultReset.contains(false) && GlobalVariable.StatusFailed!=findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm, 1)){
 						
 				'Write To Excel GlobalVariable.StatusWarning and reason'
-				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusWarning, ((datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 2).replace(
+				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusWarning, ((findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm, 2).replace(
 						'-', '') + GlobalVariable.ReasonFailedReset) + 'MAINRH') + ';\n')
 				
 				GlobalVariable.FlagWarning=1
 		}
 		
 		'Jika verif sort ada yang tidak sesuai'
-		if(checkVerifySort.contains(false) && GlobalVariable.StatusFailed!=datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 1)){
+		if(checkVerifySort.contains(false) && GlobalVariable.StatusFailed!=findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm, 1)){
 			
 				'Write To Excel GlobalVariable.StatusWarning and reason'
-				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusWarning, datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 2).replace('-',
+				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusWarning, findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm, 2).replace('-',
 						'') + ((GlobalVariable.ReasonFailedSort + 'MAINRH') + ';\n'))
 			
 				GlobalVariable.FlagWarning=1
 		}
 			
 		'Jika verif footer ada yang tidak sesuai'
-		if(checkVerifyFooter.contains(false) && GlobalVariable.StatusFailed!=datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 1)){
+		if(checkVerifyFooter.contains(false) && GlobalVariable.StatusFailed!=findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm, 1)){
 			
 				'Write To Excel GlobalVariable.StatusWarning and reason'
-				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusWarning, datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 2).replace('-',
+				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusWarning, findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm, 2).replace('-',
 						'') + ((GlobalVariable.ReasonFailedFooter + 'MAINRH') + ';\n'))
 			
 				GlobalVariable.FlagWarning=1
@@ -418,7 +418,7 @@ def verifyStatusReturnHandling(){
 	Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 	
 	'get status return handling dari DB table ReturnHandling Header'
-	String resultHeader = CustomKeywords.'dbConnection.CustomerDataVerif.checkReturnHandlingH'(sqlconnectionLOS, datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 13))
+	String resultHeader = CustomKeywords.'dbConnection.CustomerDataVerif.checkReturnHandlingH'(sqlconnectionLOS, findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm, 13))
 	
 	'verify status return handling = FINISHED'
 	WebUI.verifyMatch(resultHeader.toUpperCase(), 'FINISHED', false)

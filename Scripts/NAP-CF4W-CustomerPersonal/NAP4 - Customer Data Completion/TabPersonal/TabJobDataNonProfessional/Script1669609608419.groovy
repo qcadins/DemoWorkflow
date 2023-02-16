@@ -20,7 +20,7 @@ WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/Job
 
 'input profession code'
 WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataNonProfessional/input_Profession Code_professionCodeId'), 
-    GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 38))
+    findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 38))
 
 'click button search'
 WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataNonProfessional/button_Search'))
@@ -37,19 +37,17 @@ if (WebUI.verifyElementPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/C
     'click button back'
     WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataNonProfessional/button_Back'))
 
-	getDataFile()
-	
 	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusReasonLookup'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3.JobData', GlobalVariable.ColmNAP4, GlobalVariable.StatusFailed, GlobalVariable.FindDataFile(GlobalVariable.ColmNAP4, 2) + ';' +GlobalVariable.StatusReasonLookup)
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3.JobData', GlobalVariable.ColmNAP4, GlobalVariable.StatusFailed, findTestData(GlobalVariable.excelPath)(GlobalVariable.ColmNAP4, 2) + ';' +GlobalVariable.StatusReasonLookup)
 	
     GlobalVariable.FlagFailed = 1
 }
 
 'input job title'
 WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataNonProfessional/input_Job Title Name'), 
-    GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 40))
+    findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 40))
 
-if(GlobalVariable.APPSTEP == 'CUSTOMER' && GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 126)=="Yes"){
+if(GlobalVariable.APPSTEP == 'CUSTOMER' && findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 126)=="Yes"){
 'Click check ekyc'
 WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/button_Check eKYC'))
 }
@@ -57,27 +55,6 @@ WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/Job
 'klik button save and continue'
 WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataNonProfessional/button_Save  Continue'))
 
-if(GlobalVariable.APPSTEP == 'CUSTOMER' && GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 126)=="No"){
+if(GlobalVariable.APPSTEP == 'CUSTOMER' && findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 126)=="No"){
 	WebUI.acceptAlert(FailureHandling.OPTIONAL)
-}
-
-def getDataFile(){
-	if(GlobalVariable.APPSTEP == 'CUSTOMER'){
-		'get data file path'
-		GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileCustomerPersonal)
-		
-		'declare data file Global variable'
-		GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/JobData')
-	}else if(GlobalVariable.APPSTEP == 'FAMILY'){
-		'get data file path'
-		GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileFamilyPersonal)
-		
-		'declare data file Global variable'
-		GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/FamilyPersonal/JobData')
-	}else if(GlobalVariable.APPSTEP == 'GUARANTOR PERSONAL'){
-		'get data file path'
-		GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorPersonal)
-		
-		GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/JobData')
-	}
 }

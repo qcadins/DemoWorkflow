@@ -22,12 +22,12 @@ Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 'declare arraymatch'
 ArrayList<String> arrayMatch = new ArrayList<String>()
 
-'declare datafileCustomerPersonal'
-datafileCustomerPersonal = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData')
+'declare excelPathCustomerPersonal'
+excelPathCustomerPersonal = 'NAP-'+ GlobalVariable.LOB  +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData'
 
 'get cust data from db'
 ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.CustomerDataStoreDBPersonalLookUp'(sqlconnectionLOS, 
-    datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 13), datafileCustomerPersonal.getValue(
+    findTestData(excelPathCustomerPersonal).getValue(GlobalVariable.NumofColm, 13), findTestData(excelPathCustomerPersonal).getValue(
         GlobalVariable.NumofColm, 17))
 
 'looping cust data from db'
@@ -40,6 +40,6 @@ for (int i = 0; i < result.size(); i++) {
 if (arrayMatch.contains(false)) {
 
 	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedStoredDB'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(GlobalVariable.NumofColm, 2) + ';' +GlobalVariable.ReasonFailedStoredDB)
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathCustomerPersonal).getValue(GlobalVariable.NumofColm, 2) + ';' +GlobalVariable.ReasonFailedStoredDB)
 }
 

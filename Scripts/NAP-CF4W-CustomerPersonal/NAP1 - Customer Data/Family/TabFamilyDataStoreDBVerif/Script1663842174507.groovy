@@ -16,30 +16,27 @@ import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
 import groovy.sql.Sql as Sql
 
-'declare datafileCustomerPersonal'
-datafileCustomerPersonal = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData')
-
-'declare datafileTabFamily'
-datafileTabFamily = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData')
+'declare excelPathTabFamily'
+excelPathTabFamily = 'NAP-'+ GlobalVariable.LOB  +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData'
 
 'get country value'
-String Country = datafileTabFamily.getValue(GlobalVariable.NumofFamily, 36)
+String Country = findTestData(excelPathTabFamily).getValue(GlobalVariable.NumofFamily, 36)
 
 'get job position value'
-String JobPosition = datafileTabFamily.getValue(GlobalVariable.NumofFamily, 38)
+String JobPosition = findTestData(excelPathTabFamily).getValue(GlobalVariable.NumofFamily, 38)
 
 'get department aml value'
-String DepartmentAML = datafileTabFamily.getValue(GlobalVariable.NumofFamily, 41)
+String DepartmentAML = findTestData(excelPathTabFamily).getValue(GlobalVariable.NumofFamily, 41)
 
 'get authority aml value'
-String AuthorityAML = datafileTabFamily.getValue(GlobalVariable.NumofFamily, 43)
+String AuthorityAML = findTestData(excelPathTabFamily).getValue(GlobalVariable.NumofFamily, 43)
 
 'connect DB LOS'
 Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 'get familydata from db'
-ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.FamilyDataStoreDBPersonal'(sqlconnectionLOS, datafileTabFamily.getValue(
-        GlobalVariable.NumofFamily, 12), datafileTabFamily.getValue(GlobalVariable.NumofFamily, 19))
+ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.FamilyDataStoreDBPersonal'(sqlconnectionLOS, findTestData(excelPathTabFamily).getValue(
+        GlobalVariable.NumofFamily, 12), findTestData(excelPathTabFamily).getValue(GlobalVariable.NumofFamily, 19))
 
 'declare arraymatch'
 ArrayList<String> arrayMatch = new ArrayList<String>()
@@ -48,82 +45,82 @@ ArrayList<String> arrayMatch = new ArrayList<String>()
 int arrayindex = 0
 
 'verify relationship'
-arrayMatch.add(WebUI.verifyMatch(datafileTabFamily.getValue(GlobalVariable.NumofFamily, 18).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabFamily).getValue(GlobalVariable.NumofFamily, 18).toUpperCase(), 
         (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify family name'
-arrayMatch.add(WebUI.verifyMatch(datafileTabFamily.getValue(GlobalVariable.NumofFamily, 19).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabFamily).getValue(GlobalVariable.NumofFamily, 19).toUpperCase(), 
         (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify birth place'
-arrayMatch.add(WebUI.verifyMatch(datafileTabFamily.getValue(GlobalVariable.NumofFamily, 20).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabFamily).getValue(GlobalVariable.NumofFamily, 20).toUpperCase(), 
         (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify id type'
-arrayMatch.add(WebUI.verifyMatch(datafileTabFamily.getValue(GlobalVariable.NumofFamily, 21).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabFamily).getValue(GlobalVariable.NumofFamily, 21).toUpperCase(), 
         (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'jika idtype bukan ektp atau bukan akta atau bukan npwp'
-if ((!(datafileTabFamily.getValue(GlobalVariable.NumofFamily, 22).equalsIgnoreCase('E-KTP')) || !(datafileTabFamily.getValue(
-    GlobalVariable.NumofFamily, 22).equalsIgnoreCase('AKTA'))) || !(datafileTabFamily.getValue(GlobalVariable.NumofFamily, 
+if ((!(findTestData(excelPathTabFamily).getValue(GlobalVariable.NumofFamily, 22).equalsIgnoreCase('E-KTP')) || !(findTestData(excelPathTabFamily).getValue(
+    GlobalVariable.NumofFamily, 22).equalsIgnoreCase('AKTA'))) || !(findTestData(excelPathTabFamily).getValue(GlobalVariable.NumofFamily, 
     22).equalsIgnoreCase('NPWP'))) {
     'verify id expired date'
-    arrayMatch.add(WebUI.verifyMatch(datafileTabFamily.getValue(GlobalVariable.NumofFamily, 22).toUpperCase(), 
+    arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabFamily).getValue(GlobalVariable.NumofFamily, 22).toUpperCase(), 
             (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 } else {
     arrayindex++
 }
 
 'verify marital status'
-arrayMatch.add(WebUI.verifyMatch(datafileTabFamily.getValue(GlobalVariable.NumofFamily, 23).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabFamily).getValue(GlobalVariable.NumofFamily, 23).toUpperCase(), 
         (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify mobile phone'
-arrayMatch.add(WebUI.verifyMatch(datafileTabFamily.getValue(GlobalVariable.NumofFamily, 24).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabFamily).getValue(GlobalVariable.NumofFamily, 24).toUpperCase(), 
         (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify customer model'
-arrayMatch.add(WebUI.verifyMatch(datafileTabFamily.getValue(GlobalVariable.NumofFamily, 25).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabFamily).getValue(GlobalVariable.NumofFamily, 25).toUpperCase(), 
         (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify profession code'
-arrayMatch.add(WebUI.verifyMatch(datafileTabFamily.getValue(GlobalVariable.NumofFamily, 26).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabFamily).getValue(GlobalVariable.NumofFamily, 26).toUpperCase(), 
         (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify employee establishment date'
-arrayMatch.add(WebUI.verifyMatch(datafileTabFamily.getValue(GlobalVariable.NumofFamily, 28).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabFamily).getValue(GlobalVariable.NumofFamily, 28).toUpperCase(), 
         (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify gender'
-arrayMatch.add(WebUI.verifyMatch(datafileTabFamily.getValue(GlobalVariable.NumofFamily, 29).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabFamily).getValue(GlobalVariable.NumofFamily, 29).toUpperCase(), 
         (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify birth date'
-arrayMatch.add(WebUI.verifyMatch(datafileTabFamily.getValue(GlobalVariable.NumofFamily, 30).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabFamily).getValue(GlobalVariable.NumofFamily, 30).toUpperCase(), 
         (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify id no'
-arrayMatch.add(WebUI.verifyMatch(datafileTabFamily.getValue(GlobalVariable.NumofFamily, 31).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabFamily).getValue(GlobalVariable.NumofFamily, 31).toUpperCase(), 
         (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify tax id no'
-arrayMatch.add(WebUI.verifyMatch(datafileTabFamily.getValue(GlobalVariable.NumofFamily, 32).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabFamily).getValue(GlobalVariable.NumofFamily, 32).toUpperCase(), 
         (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify mother maiden name'
-arrayMatch.add(WebUI.verifyMatch(datafileTabFamily.getValue(GlobalVariable.NumofFamily, 33).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabFamily).getValue(GlobalVariable.NumofFamily, 33).toUpperCase(), 
         (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify email'
-arrayMatch.add(WebUI.verifyMatch(datafileTabFamily.getValue(GlobalVariable.NumofFamily, 34).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabFamily).getValue(GlobalVariable.NumofFamily, 34).toUpperCase(), 
         (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify nationality'
-arrayMatch.add(WebUI.verifyMatch(datafileTabFamily.getValue(GlobalVariable.NumofFamily, 35).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabFamily).getValue(GlobalVariable.NumofFamily, 35).toUpperCase(), 
         (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify nationality value'
-if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 35).equalsIgnoreCase('LOCAL')) {
+if (findTestData(excelPathTabFamily).getValue(GlobalVariable.NumofFamily, 35).equalsIgnoreCase('LOCAL')) {
     'set country menjadi string kosong'
     Country = ''
 }
@@ -132,7 +129,7 @@ if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 35).equalsIgnoreCase(
 arrayMatch.add(WebUI.verifyMatch(Country.toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify job position value'
-if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 38) == '#N/A') {
+if (findTestData(excelPathTabFamily).getValue(GlobalVariable.NumofFamily, 38) == '#N/A') {
     'set job position value'
     JobPosition = ''
 }
@@ -141,7 +138,7 @@ if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 38) == '#N/A') {
 arrayMatch.add(WebUI.verifyMatch(JobPosition.toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 //'verify department aml value'
-//if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 
+//if (findTestData(excelPathTabFamily).getValue(GlobalVariable.NumofFamily, 
 //    41) == '#N/A') {
 //    'set department aml menjadi string kosong'
 //    DepartmentAML = ''
@@ -151,7 +148,7 @@ arrayMatch.add(WebUI.verifyMatch(JobPosition.toUpperCase(), (result[arrayindex++
 //WebUI.verifyMatch(DepartmentAML.toUpperCase(), (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 //
 //'verify authority aml value'
-//if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 
+//if (findTestData(excelPathTabFamily).getValue(GlobalVariable.NumofFamily, 
 //    43) == '#N/A') {
 //    'set authority aml menjadi string kosong'
 //    AuthorityAML = ''
@@ -162,7 +159,7 @@ arrayMatch.add(WebUI.verifyMatch(JobPosition.toUpperCase(), (result[arrayindex++
 
 
 'verify copy addres atau tidak'
-if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 46).equalsIgnoreCase('Yes')) {
+if (findTestData(excelPathTabFamily).getValue(GlobalVariable.NumofFamily, 46).equalsIgnoreCase('Yes')) {
 	
 	confinsindex = 0
 	
@@ -199,35 +196,35 @@ if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 46).equalsIgnoreCase(
 			(result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 } else {
     'verify address'
-    arrayMatch.add(WebUI.verifyMatch(datafileTabFamily.getValue(GlobalVariable.NumofFamily, 47).toUpperCase(), 
+    arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabFamily).getValue(GlobalVariable.NumofFamily, 47).toUpperCase(), 
             (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
     'verify rt'
-    arrayMatch.add(WebUI.verifyMatch(datafileTabFamily.getValue(GlobalVariable.NumofFamily, 48).toUpperCase(), 
+    arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabFamily).getValue(GlobalVariable.NumofFamily, 48).toUpperCase(), 
             (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
     'verify rw'
-    arrayMatch.add(WebUI.verifyMatch(datafileTabFamily.getValue(GlobalVariable.NumofFamily, 49).toUpperCase(), 
+    arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabFamily).getValue(GlobalVariable.NumofFamily, 49).toUpperCase(), 
             (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
     'verify zipcode'
-    arrayMatch.add(WebUI.verifyMatch(datafileTabFamily.getValue(GlobalVariable.NumofFamily, 50).toUpperCase(), 
+    arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabFamily).getValue(GlobalVariable.NumofFamily, 50).toUpperCase(), 
             (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
     'verify kecamatan'
-    arrayMatch.add(WebUI.verifyMatch(datafileTabFamily.getValue(GlobalVariable.NumofFamily, 51).toUpperCase(), 
+    arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabFamily).getValue(GlobalVariable.NumofFamily, 51).toUpperCase(), 
             (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
     'verify kelurahan'
-    arrayMatch.add(WebUI.verifyMatch(datafileTabFamily.getValue(GlobalVariable.NumofFamily, 52).toUpperCase(), 
+    arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabFamily).getValue(GlobalVariable.NumofFamily, 52).toUpperCase(), 
             (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
     'verify kota'
-    arrayMatch.add(WebUI.verifyMatch(datafileTabFamily.getValue(GlobalVariable.NumofFamily, 53).toUpperCase(), 
+    arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabFamily).getValue(GlobalVariable.NumofFamily, 53).toUpperCase(), 
             (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
     'verify ownership'
-    arrayMatch.add(WebUI.verifyMatch(datafileTabFamily.getValue(GlobalVariable.NumofFamily, 54).toUpperCase(), 
+    arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabFamily).getValue(GlobalVariable.NumofFamily, 54).toUpperCase(), 
             (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 }
 
@@ -235,5 +232,5 @@ if (datafileTabFamily.getValue(GlobalVariable.NumofFamily, 46).equalsIgnoreCase(
 if (arrayMatch.contains(false)) {
 
 	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedStoredDB'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('2.TabFamilyData', GlobalVariable.NumofFamily, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(GlobalVariable.NumofFamily, 2) + ';' +GlobalVariable.ReasonFailedStoredDB)
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('2.TabFamilyData', GlobalVariable.NumofFamily, GlobalVariable.StatusFailed, findTestData(excelPathTabFamily).getValue(GlobalVariable.NumofFamily, 2) + ';' +GlobalVariable.ReasonFailedStoredDB)
 }

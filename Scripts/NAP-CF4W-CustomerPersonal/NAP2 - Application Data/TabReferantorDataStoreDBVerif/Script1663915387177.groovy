@@ -19,17 +19,17 @@ import internal.GlobalVariable as GlobalVariable
 'connect DB los'
 Sql sqlconnection = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
-'declare datafileReferantor'
-datafileReferantor = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData')
+'declare excelPathReferantor'
+excelPathReferantor = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData'
 
-'declare datafileCustomerPersonal'
-datafileCustomerPersonal = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData')
+'declare excelPathCustomerPersonal'
+excelPathCustomerPersonal = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData'
 
 'get text custname'
 custname = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/label_CustName'))
 
 'get referantor data from db'
-ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2TabReferantorStoreDB'(sqlconnection, datafileCustomerPersonal.getValue(
+ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2TabReferantorStoreDB'(sqlconnection, findTestData(excelPathCustomerPersonal).getValue(
 		GlobalVariable.NumofColm, 13), custname)
 
 'declare arraymatch'
@@ -51,17 +51,17 @@ GlobalVariable.StartIndex); (GlobalVariable.NumofReferantor)++) {
     refcategory = (result[arrayindex++])
 	refname = (result[arrayindex++])
 	
-    for (int excelindex = GlobalVariable.StartIndex; GlobalVariable.NumofReferantor < (datafileReferantor.getColumnNumbers() - 
+    for (int excelindex = GlobalVariable.StartIndex; GlobalVariable.NumofReferantor < (findTestData(excelPathReferantor).getColumnNumbers() - 
     1); excelindex++) {
-        if (datafileReferantor.getValue(excelindex, 12) == datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 13)) {
+        if (findTestData(excelPathReferantor).getValue(excelindex, 12) == findTestData(excelPathCustomerPersonal).getValue(GlobalVariable.NumofColm, 13)) {
 			
-            if (datafileReferantor.getValue(excelindex, 13).equalsIgnoreCase(refcategory) && datafileReferantor.getValue(excelindex, 14).equalsIgnoreCase(refname)) {
+            if (findTestData(excelPathReferantor).getValue(excelindex, 13).equalsIgnoreCase(refcategory) && findTestData(excelPathReferantor).getValue(excelindex, 14).equalsIgnoreCase(refname)) {
                 'verify referantor category'
-                arrayMatch.add(WebUI.verifyMatch(datafileReferantor.getValue(excelindex, 13).toUpperCase(), refcategory.toUpperCase(), 
+                arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathReferantor).getValue(excelindex, 13).toUpperCase(), refcategory.toUpperCase(), 
                         false, FailureHandling.OPTIONAL))
 
                 'verify referantor name'
-                arrayMatch.add(WebUI.verifyMatch(datafileReferantor.getValue(excelindex, 14).toUpperCase(), (refname).toUpperCase(), 
+                arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathReferantor).getValue(excelindex, 14).toUpperCase(), (refname).toUpperCase(), 
                         false, FailureHandling.OPTIONAL))
 
                 'verify referantor bank acc'
@@ -77,7 +77,7 @@ GlobalVariable.StartIndex); (GlobalVariable.NumofReferantor)++) {
                         false, FailureHandling.OPTIONAL))
 
                 'verify referantor tax calculation method'
-                arrayMatch.add(WebUI.verifyMatch(datafileReferantor.getValue(GlobalVariable.NumofReferantor, 17).toUpperCase(), 
+                arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathReferantor).getValue(GlobalVariable.NumofReferantor, 17).toUpperCase(), 
                         (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
                 arrayMatch.add(WebUI.verifyMatch(vat.get(vatindex++).toString(), (result[arrayindex++]).toString(), false, 
@@ -88,7 +88,7 @@ GlobalVariable.StartIndex); (GlobalVariable.NumofReferantor)++) {
                 continue
             }
         } else {
-		if (datafileReferantor.getValue(excelindex+1, 12) != datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 13)) {
+		if (findTestData(excelPathReferantor).getValue(excelindex+1, 12) != findTestData(excelPathCustomerPersonal).getValue(GlobalVariable.NumofColm, 13)) {
 			arrayindex = 0
             break
 		}
@@ -100,6 +100,6 @@ GlobalVariable.StartIndex); (GlobalVariable.NumofReferantor)++) {
 if (arrayMatch.contains(false)) {
 		
 	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedStoredDB'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('5.TabReferantorData', GlobalVariable.StartIndex, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabReferantorData').getValue(GlobalVariable.NumofReferantor, 2) + ';'+GlobalVariable.ReasonFailedStoredDB)
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('5.TabReferantorData', GlobalVariable.StartIndex, GlobalVariable.StatusFailed, findTestData(excelPathReferantor).getValue(GlobalVariable.NumofReferantor, 2) + ';'+GlobalVariable.ReasonFailedStoredDB)
 
 }

@@ -26,8 +26,8 @@ GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPat
 
 GlobalVariable.FlagFailed = 0
 
-'declare datafileTabTC'
-datafileTabTC = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabTermConditionData')
+'declare excelPathTabTC'
+excelPathTabTC = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabTermConditionData'
 
 'Klik tab TC'
 WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/buttonTabTC'))
@@ -165,7 +165,7 @@ for (int i = 1; i <= count; i++) {
 		}
 		
 		'declare checkno'
-		def checkNO = datafileTabTC.getValue(
+		def checkNO = findTestData(excelPathTabTC).getValue(
 			GlobalVariable.NumofColm, 14).split(';', -1)
 
 		'Pengecekan jika perlu dokumen yang required no tercentang'
@@ -190,7 +190,7 @@ for (int i = 1; i <= count; i++) {
 		}
 		
 		'declare uncheckyes'
-		def uncheckYES = datafileTabTC.getValue(
+		def uncheckYES = findTestData(excelPathTabTC).getValue(
 			GlobalVariable.NumofColm, 12).split(';', -1)
 
 		'modify promise date'
@@ -199,7 +199,7 @@ for (int i = 1; i <= count; i++) {
 		i) + ']/td[7]/input'), true)
 
 		'declare promisedate'
-		def PromiseDate = datafileTabTC.getValue(
+		def PromiseDate = findTestData(excelPathTabTC).getValue(
 			GlobalVariable.NumofColm, 13).split(';', -1)
 
 		'Pengecekan jika perlu dokumen required yes uncentang'
@@ -214,7 +214,7 @@ for (int i = 1; i <= count; i++) {
 						WebUI.uncheck(modifyObjectCheckbox)
 					}
 					
-					if (datafileTabTC.getValue(
+					if (findTestData(excelPathTabTC).getValue(
 						GlobalVariable.NumofColm, 13).length() > 0 && PromiseDate[(j-1)]!="") {
 						'Input Promise Date'
 						WebUI.setText(modifyObjectPromiseDate, PromiseDate[(j - 1)])
@@ -229,15 +229,15 @@ for (int i = 1; i <= count; i++) {
 	i) + ']/td[8]/input'), true)
 
 	'declare expiredDateDocument'
-	def expiredDateDocument = datafileTabTC.getValue(
+	def expiredDateDocument = findTestData(excelPathTabTC).getValue(
 		GlobalVariable.NumofColm, 15).split(';', -1)
 
 	'declare expiredDate'
-	def expiredDate = datafileTabTC.getValue(
+	def expiredDate = findTestData(excelPathTabTC).getValue(
 		GlobalVariable.NumofColm, 16).split(';', -1)
 
 	'declare waivedDocument'
-	def waivedDocument = datafileTabTC.getValue(
+	def waivedDocument = findTestData(excelPathTabTC).getValue(
 		GlobalVariable.NumofColm, 17).split(';', -1)
 
 	'Pengecekan jika waive dapat diklik'
@@ -280,7 +280,7 @@ for (int i = 1; i <= count; i++) {
 'Save'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabTermConditionData/button_Save'))
 
-Integer iscompleteMandatory = Integer.parseInt(datafileTabTC.getValue(
+Integer iscompleteMandatory = Integer.parseInt(findTestData(excelPathTabTC).getValue(
 		GlobalVariable.NumofColm, 4))
 
 if (iscompleteMandatory == 0 && GlobalVariable.FlagFailed==0) {
@@ -323,7 +323,7 @@ else{
 public writeToExcelFailedVerifRule(){
 		
 	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyRule'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('11.TabTermConditionData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabTermConditionData').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedVerifyRule)
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('11.TabTermConditionData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathTabTC).getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedVerifyRule)
 	
 }
 
@@ -331,7 +331,7 @@ public checkVerifyEqualOrMatch(Boolean isMatch){
 	if(isMatch==false && GlobalVariable.FlagFailed==0){
 
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('11.TabTermConditionData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabTermConditionData').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('11.TabTermConditionData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathTabTC).getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 		
 		GlobalVariable.FlagFailed=1
 	}

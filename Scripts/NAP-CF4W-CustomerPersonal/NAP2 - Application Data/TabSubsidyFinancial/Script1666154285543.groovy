@@ -28,36 +28,36 @@ GlobalVariable.SubsidyDP = 0
 'declare subsidyfaileddelete'
 ArrayList <String> subsidyfaileddelete = new ArrayList<>()
 
-'declare datafileTabFinancial'
-datafileTabFinancial = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData')
+'declare excelPathTabFinancial'
+excelPathTabFinancial = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData'
 
 'declare subsidytypearray'
-def SubsidyTypeArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 12).split(';',-1)
+def SubsidyTypeArray = findTestData(excelPathTabFinancial).getValue(GlobalVariable.NumofColm, 12).split(';',-1)
 
 'declare SubsidyfromValueArray'
-def SubsidyfromValueArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 13).split(';',-1)
+def SubsidyfromValueArray = findTestData(excelPathTabFinancial).getValue(GlobalVariable.NumofColm, 13).split(';',-1)
 
 'declare AllocationformArray'
-def AllocationformArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 14).split(';',-1)
+def AllocationformArray = findTestData(excelPathTabFinancial).getValue(GlobalVariable.NumofColm, 14).split(';',-1)
 
 'declare SubsidySourceArray'
-def SubsidySourceArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 15).split(';',-1)
+def SubsidySourceArray = findTestData(excelPathTabFinancial).getValue(GlobalVariable.NumofColm, 15).split(';',-1)
 
 'declare SubsidyValueTypeArray'
-def SubsidyValueTypeArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 16).split(';',-1)
+def SubsidyValueTypeArray = findTestData(excelPathTabFinancial).getValue(GlobalVariable.NumofColm, 16).split(';',-1)
 
 'declare SubsidyValueAmountArray'
-def SubsidyValueAmountArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 17).split(';',-1)
+def SubsidyValueAmountArray = findTestData(excelPathTabFinancial).getValue(GlobalVariable.NumofColm, 17).split(';',-1)
 
 'declare SubsidyValuePercentageArray'
-def SubsidyValuePercentageArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 18).split(';',-1)
+def SubsidyValuePercentageArray = findTestData(excelPathTabFinancial).getValue(GlobalVariable.NumofColm, 18).split(';',-1)
 
 'Mengambil nilai row keberapa dimulai data additional premi rate pada excel'
 def TotalPremium = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '8.TabInsuranceData', 'Total Premium') +
 1
 
 //Jika override discount insurance bernilai yes pada datafile (biasanya digunakan jika ada paid by mf di tab insurance), amount akan diinsert di array yang indexnya sesuai discount insurance
-if (datafileTabFinancial.getValue(GlobalVariable.NumofColm, 51).equalsIgnoreCase('Yes')) {
+if (findTestData(excelPathTabFinancial).getValue(GlobalVariable.NumofColm, 51).equalsIgnoreCase('Yes')) {
 	'looping allocationformarray'
 	for (int i = 0; i < AllocationformArray.size(); i++) {
 		if ((AllocationformArray[i]).equalsIgnoreCase('Discount Insurance')) {
@@ -328,7 +328,7 @@ if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal
 if(subsidyfaileddelete.size() > 0){
 	
 	'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedDelete'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('10.TabFinancialData', GlobalVariable.NumofColm, GlobalVariable.StatusWarning, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedDelete + subsidyfaileddelete)
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('10.TabFinancialData', GlobalVariable.NumofColm, GlobalVariable.StatusWarning, findTestData(excelPathTabFinancial).getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedDelete + subsidyfaileddelete)
 	
 	GlobalVariable.FlagWarning++
 }
@@ -375,7 +375,7 @@ for (int s = 1; s <= SubsidyTypeArray.size(); s++) {
 			}
 		} else if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/tablesubsidynodata'),FailureHandling.OPTIONAL),
 			'NO DATA AVAILABLE', false, FailureHandling.OPTIONAL)) {
-			if (datafileTabFinancial.getValue(GlobalVariable.NumofColm, 12) != '') {
+			if (findTestData(excelPathTabFinancial).getValue(GlobalVariable.NumofColm, 12) != '') {
 				if (SubsidyTypeArray.size() > 0) {
 					'add subsidy'
 					addSubsidy(s)
@@ -438,25 +438,25 @@ public modifySubsidy(int i){
 def writeReasonFailedVerifRule() {
 
 	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyRule'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('10.TabFinancialData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedVerifyRule)
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('10.TabFinancialData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathTabFinancial).getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedVerifyRule)
 	
 	GlobalVariable.FlagFailed = 1
 }
 
 public addSubsidy(int s){
-	def SubsidyTypeArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 12).split(';',-1)
+	def SubsidyTypeArray = findTestData(excelPathTabFinancial).getValue(GlobalVariable.NumofColm, 12).split(';',-1)
 	
-	def SubsidyfromValueArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 13).split(';',-1)
+	def SubsidyfromValueArray = findTestData(excelPathTabFinancial).getValue(GlobalVariable.NumofColm, 13).split(';',-1)
 	
-	def AllocationformArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 14).split(';',-1)
+	def AllocationformArray = findTestData(excelPathTabFinancial).getValue(GlobalVariable.NumofColm, 14).split(';',-1)
 	
-	def SubsidySourceArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 15).split(';',-1)
+	def SubsidySourceArray = findTestData(excelPathTabFinancial).getValue(GlobalVariable.NumofColm, 15).split(';',-1)
 	
-	def SubsidyValueTypeArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 16).split(';',-1)
+	def SubsidyValueTypeArray = findTestData(excelPathTabFinancial).getValue(GlobalVariable.NumofColm, 16).split(';',-1)
 	
-	def SubsidyValueAmountArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 17).split(';',-1)
+	def SubsidyValueAmountArray = findTestData(excelPathTabFinancial).getValue(GlobalVariable.NumofColm, 17).split(';',-1)
 	
-	def SubsidyValuePercentageArray = datafileTabFinancial.getValue(GlobalVariable.NumofColm, 18).split(';',-1)
+	def SubsidyValuePercentageArray = findTestData(excelPathTabFinancial).getValue(GlobalVariable.NumofColm, 18).split(';',-1)
 	
 	'click button add subsidy'
 	WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/button_Add Subsidy'))

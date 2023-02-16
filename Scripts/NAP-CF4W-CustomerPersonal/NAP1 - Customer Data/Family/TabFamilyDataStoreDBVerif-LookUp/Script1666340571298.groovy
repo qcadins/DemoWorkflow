@@ -19,13 +19,13 @@ import internal.GlobalVariable as GlobalVariable
 'connect DB LOS'
 Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
-'declare datafileTabFamily'
-datafileTabFamily = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData')
+'declare excelPathTabFamily'
+excelPathTabFamily = 'NAP-'+ GlobalVariable.LOB  +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData'
 
 'get familydata from db'
 ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.FamilyDataStoreDBPersonalLookUp'(sqlconnectionLOS, 
-    datafileTabFamily.getValue(GlobalVariable.NumofFamily, 12), datafileTabFamily.getValue(
-        GlobalVariable.NumofFamily, 16), datafileTabFamily.getValue(GlobalVariable.NumofFamily, 27))
+    findTestData(excelPathTabFamily).getValue(GlobalVariable.NumofFamily, 12), findTestData(excelPathTabFamily).getValue(
+        GlobalVariable.NumofFamily, 16), findTestData(excelPathTabFamily).getValue(GlobalVariable.NumofFamily, 27))
 
 'declare arraymatch'
 ArrayList<String> arrayMatch = new ArrayList<String>()
@@ -49,6 +49,6 @@ for (int i = 0; i < result.size(); i++) {
 if (arrayMatch.contains(false)) {
 
 	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedStoredDB'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('2.TabFamilyData', GlobalVariable.NumofFamily, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData').getValue(GlobalVariable.NumofFamily, 2) + ';' +GlobalVariable.ReasonFailedStoredDB)
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('2.TabFamilyData', GlobalVariable.NumofFamily, GlobalVariable.StatusFailed, findTestData(excelPathTabFamily).getValue(GlobalVariable.NumofFamily, 2) + ';' +GlobalVariable.ReasonFailedStoredDB)
 }
 

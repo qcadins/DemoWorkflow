@@ -21,14 +21,14 @@ import org.openqa.selenium.By as By
 import groovy.sql.Sql as Sql
 
 
-'declare datafileCustomerPersonal'
-datafileCustomerPersonal = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData')
+'declare excelPathCustomerPersonal'
+excelPathCustomerPersonal = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData'
 
-'declare datafileCommission'
-datafileCommission = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData')
+'declare excelPathCommission'
+excelPathCommission = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData'
 
-'declare datafileReservedFund'
-datafileReservedFund = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabReservedFundData')
+'declare excelPathReservedFund'
+excelPathReservedFund = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabReservedFundData'
 
 'function untuk input application no dan search'
 inputAppNo()
@@ -41,7 +41,7 @@ def returnRowCom = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVa
 def returnRowRsv = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '14.TabReservedFundData', 
     'Return Commission & Reserved Fund') + 1
 
-if (datafileCommission.getValue(GlobalVariable.NumofColm, returnRowCom + 1).equalsIgnoreCase('Yes') || datafileReservedFund.getValue(
+if (findTestData(excelPathCommission).getValue(GlobalVariable.NumofColm, returnRowCom + 1).equalsIgnoreCase('Yes') || findTestData(excelPathReservedFund).getValue(
     GlobalVariable.NumofColm, returnRowRsv + 1).equalsIgnoreCase('Yes')) {
 	'verify match status request pada paging return handling'
 	WebUI.verifyMatch(WebUI.getText(findTestObject('Object Repository/NAP/ReturnHandling/TaskStatusPaging')), 'REQUEST', false)
@@ -104,7 +104,7 @@ def inputAppNo() {
 	pagingTesting()
 
     'input application no'
-    WebUI.setText(findTestObject('NAP/CommissionReservedFund/TabCommissionData/input_Application No_AppNoId'), datafileCustomerPersonal.getValue(
+    WebUI.setText(findTestObject('NAP/CommissionReservedFund/TabCommissionData/input_Application No_AppNoId'), findTestData(excelPathCustomerPersonal).getValue(
             GlobalVariable.NumofColm, 13))
 
     'klik search'
@@ -381,7 +381,7 @@ public pagingTesting(){
 		checkVerifyFooter.add(WebUI.verifyEqual(CustomKeywords.'paging.verifyPaging.ReturnHandlingCountDataInPage'(),true))
 		
 		'Jika verif reset ada yang tidak sesuai'
-		if(resultReset.contains(false) && GlobalVariable.StatusFailed!=datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 1)){
+		if(resultReset.contains(false) && GlobalVariable.StatusFailed!=findTestData(excelPathCustomerPersonal).getValue(GlobalVariable.NumofColm, 1)){
 						
 				'Write To Excel GlobalVariable.StatusWarning and reason'
 				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusWarning, ((datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 2).replace(
@@ -391,7 +391,7 @@ public pagingTesting(){
 		}
 		
 		'Jika verif sort ada yang tidak sesuai'
-		if(checkVerifySort.contains(false) && GlobalVariable.StatusFailed!=datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 1)){
+		if(checkVerifySort.contains(false) && GlobalVariable.StatusFailed!=findTestData(excelPathCustomerPersonal).getValue(GlobalVariable.NumofColm, 1)){
 			
 				'Write To Excel GlobalVariable.StatusWarning and reason'
 				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusWarning, datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 2).replace('-',
@@ -401,7 +401,7 @@ public pagingTesting(){
 		}
 			
 		'Jika verif footer ada yang tidak sesuai'
-		if(checkVerifyFooter.contains(false) && GlobalVariable.StatusFailed!=datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 1)){
+		if(checkVerifyFooter.contains(false) && GlobalVariable.StatusFailed!=findTestData(excelPathCustomerPersonal).getValue(GlobalVariable.NumofColm, 1)){
 			
 				'Write To Excel GlobalVariable.StatusWarning and reason'
 				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusWarning, datafileCustomerCompany.getValue(GlobalVariable.NumofColm, 2).replace('-',
@@ -419,7 +419,7 @@ def verifyStatusReturnHandling(){
 	Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 	
 	'get status return handling dari DB table ReturnHandling Header'
-	String resultHeader = CustomKeywords.'dbConnection.CustomerDataVerif.checkReturnHandlingH'(sqlconnectionLOS, datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 13))
+	String resultHeader = CustomKeywords.'dbConnection.CustomerDataVerif.checkReturnHandlingH'(sqlconnectionLOS, findTestData(excelPathCustomerPersonal).getValue(GlobalVariable.NumofColm, 13))
 	
 	'verify status return handling = FINISHED'
 	WebUI.verifyMatch(resultHeader.toUpperCase(), 'FINISHED', false)

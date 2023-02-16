@@ -27,12 +27,12 @@ getDataFile()
 GlobalVariable.StartIndex = 0
 
 'get count colm'
-countcolm = GlobalVariable.FindDataFile.getColumnNumbers()
+countcolm = findTestData(GlobalVariable.excelPath).getColumnNumbers()
 
 'untuk mendapatkan posisi copy app dari excel'
 for (index = 2; index < (countcolm + 1); index++) {
-	if (GlobalVariable.FindDataFile.getValue(index, 9).equalsIgnoreCase(datafilecustdetail.getValue(
-			GlobalVariable.ColmNAP4, 12)) && GlobalVariable.FindDataFile.getValue(index, 10).equalsIgnoreCase(datafilecustdetail.getValue(
+	if (findTestData(GlobalVariable.excelPath).getValue(index, 9).equalsIgnoreCase(findTestData(excelPathCustDetail).getValue(
+			GlobalVariable.ColmNAP4, 12)) && findTestData(GlobalVariable.excelPath).getValue(index, 10).equalsIgnoreCase(findTestData(excelPathCustDetail).getValue(
 			GlobalVariable.ColmNAP4, 13))) {
 		GlobalVariable.StartIndex = index
 
@@ -65,10 +65,10 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 		for (int Address = GlobalVariable.StartIndex; Address < (countcolm + 1); Address++) {
 			 GlobalVariable.FlagFailed = 0
 
-				if (GlobalVariable.FindDataFile.getValue(Address, 9).equalsIgnoreCase(datafilecustdetail.getValue(
-						GlobalVariable.ColmNAP4, 12)) && GlobalVariable.FindDataFile.getValue(Address, 10).equalsIgnoreCase(datafilecustdetail.getValue(
+				if (findTestData(GlobalVariable.excelPath).getValue(Address, 9).equalsIgnoreCase(findTestData(excelPathCustDetail).getValue(
+						GlobalVariable.ColmNAP4, 12)) && findTestData(GlobalVariable.excelPath).getValue(Address, 10).equalsIgnoreCase(findTestData(excelPathCustDetail).getValue(
 						GlobalVariable.ColmNAP4, 13))) {
-					if (WebUI.getText(modifyNewAddressType).equalsIgnoreCase(GlobalVariable.FindDataFile.getValue(
+					if (WebUI.getText(modifyNewAddressType).equalsIgnoreCase(findTestData(GlobalVariable.excelPath).getValue(
 							Address, 12))) {
 						if (WebUI.verifyElementPresent(modifyNewbuttonedit, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 							'click button edit'
@@ -96,8 +96,8 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 	for (int Address = GlobalVariable.StartIndex; Address < (countcolm + 1); Address++) {
 		GlobalVariable.FlagFailed = 0
 		
-		if (GlobalVariable.FindDataFile.getValue(Address, 9).equalsIgnoreCase(datafilecustdetail.getValue(
-			GlobalVariable.ColmNAP4, 12)) && GlobalVariable.FindDataFile.getValue(Address, 10).equalsIgnoreCase(datafilecustdetail.getValue(
+		if (findTestData(GlobalVariable.excelPath).getValue(Address, 9).equalsIgnoreCase(findTestData(excelPathCustDetail).getValue(
+			GlobalVariable.ColmNAP4, 12)) && findTestData(GlobalVariable.excelPath).getValue(Address, 10).equalsIgnoreCase(findTestData(excelPathCustDetail).getValue(
 			GlobalVariable.ColmNAP4, 13))) {
 		
 			for (i = 1; i <= variable.size(); i++) {
@@ -107,7 +107,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 					i) + ']/td[1]', true)
 
 				
-					if (!(WebUI.getText(modifyNewAddressType).equalsIgnoreCase(GlobalVariable.FindDataFile.getValue(
+					if (!(WebUI.getText(modifyNewAddressType).equalsIgnoreCase(findTestData(GlobalVariable.excelPath).getValue(
 							Address, 12)))) {
 						if (i == variable.size()) {
 							'click button add'
@@ -121,7 +121,7 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 
 							break
 						}
-					} else if (WebUI.getText(modifyNewAddressType).equalsIgnoreCase(GlobalVariable.FindDataFile.getValue(
+					} else if (WebUI.getText(modifyNewAddressType).equalsIgnoreCase(findTestData(GlobalVariable.excelPath).getValue(
 							Address, 12))) {
 						break
 					}
@@ -138,8 +138,8 @@ if (copyapp.equalsIgnoreCase('Edit')) {
 	
 	for (int Address = GlobalVariable.StartIndex; Address < (countcolm + 1); Address++) {
 		
-			if (GlobalVariable.FindDataFile.getValue(Address, 9).equalsIgnoreCase(datafilecustdetail.getValue(
-					GlobalVariable.ColmNAP4, 12)) && GlobalVariable.FindDataFile.getValue(Address, 10).equalsIgnoreCase(datafilecustdetail.getValue(
+			if (findTestData(GlobalVariable.excelPath).getValue(Address, 9).equalsIgnoreCase(findTestData(excelPathCustDetail).getValue(
+					GlobalVariable.ColmNAP4, 12)) && findTestData(GlobalVariable.excelPath).getValue(Address, 10).equalsIgnoreCase(findTestData(excelPathCustDetail).getValue(
 					GlobalVariable.ColmNAP4, 13))) {
 				
 				'click button add'
@@ -173,14 +173,14 @@ def inputaddress(int Address) {
 	
     'pilih address type'
     WebUI.selectOptionByLabel(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/select_addressType'), 
-        GlobalVariable.FindDataFile.getValue(Address, 12), false, FailureHandling.OPTIONAL)
+        findTestData(GlobalVariable.excelPath).getValue(Address, 12), false, FailureHandling.OPTIONAL)
 
-    if (GlobalVariable.FindDataFile.getValue(Address, 13).length() > 1) {
+    if (findTestData(GlobalVariable.excelPath).getValue(Address, 13).length() > 1) {
         if (WebUI.verifyElementPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/select_Legal  Residence  Job'), 
             GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
             'pilih address type untuk di copy'
             WebUI.selectOptionByLabel(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/select_Legal  Residence  Job'), 
-                GlobalVariable.FindDataFile.getValue(Address, 13), false, FailureHandling.OPTIONAL)
+                findTestData(GlobalVariable.excelPath).getValue(Address, 13), false, FailureHandling.OPTIONAL)
         }
         
         'click button copy'
@@ -189,34 +189,34 @@ def inputaddress(int Address) {
     } else {
         'input alamat'
         WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/Address text'), 
-            GlobalVariable.FindDataFile.getValue(Address, 14))
+            findTestData(GlobalVariable.excelPath).getValue(Address, 14))
 
         'input RT'
         WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/input_RT'), 
-            GlobalVariable.FindDataFile.getValue(Address, 15))
+            findTestData(GlobalVariable.excelPath).getValue(Address, 15))
 
         'input RW'
         WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/input_RW'), 
-            GlobalVariable.FindDataFile.getValue(Address, 16))
+            findTestData(GlobalVariable.excelPath).getValue(Address, 16))
 
         'click button search zipcode'
         WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/button_Zipcode_btn btn-raised btn-primary'))
 
         'input zipcode'
         WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/input_Zip Code_ZipCode'), 
-            GlobalVariable.FindDataFile.getValue(Address, 17))
+            findTestData(GlobalVariable.excelPath).getValue(Address, 17))
 
 		'input kecamatan'
         WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/input_Kecamatan_kecamatan'), 
-            GlobalVariable.FindDataFile.getValue(Address, 18))
+            findTestData(GlobalVariable.excelPath).getValue(Address, 18))
 
 		'input kelurahan'
         WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/input_Kelurahan_Kelurahan'), 
-            GlobalVariable.FindDataFile.getValue(Address, 19))
+            findTestData(GlobalVariable.excelPath).getValue(Address, 19))
 
 		'input kota'
         WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/input_Kota_kota'), 
-            GlobalVariable.FindDataFile.getValue(Address, 20))
+            findTestData(GlobalVariable.excelPath).getValue(Address, 20))
 
 		'click search'
         WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/button_Search'))
@@ -236,67 +236,67 @@ def inputaddress(int Address) {
         
     }
 	
-	if(GlobalVariable.FindDataFile.getValue(Address, 21).length() > 0){
+	if(findTestData(GlobalVariable.excelPath).getValue(Address, 21).length() > 0){
         'input phone1 area'
         WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/input_Phone 1_area'), 
-            GlobalVariable.FindDataFile.getValue(Address, 21))
+            findTestData(GlobalVariable.excelPath).getValue(Address, 21))
 	}
-	if(GlobalVariable.FindDataFile.getValue(Address, 22).length() > 0){
+	if(findTestData(GlobalVariable.excelPath).getValue(Address, 22).length() > 0){
         'input phone1 number'
         WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/input_Phone 1_Number'), 
-            GlobalVariable.FindDataFile.getValue(Address, 22))
+            findTestData(GlobalVariable.excelPath).getValue(Address, 22))
 	}
-	if(GlobalVariable.FindDataFile.getValue(Address, 23).length() > 0){
+	if(findTestData(GlobalVariable.excelPath).getValue(Address, 23).length() > 0){
         'input phone1 extension'
         WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/input_Phone 1_ext'), 
-            GlobalVariable.FindDataFile.getValue(Address, 23))
+            findTestData(GlobalVariable.excelPath).getValue(Address, 23))
 	}
-	if(GlobalVariable.FindDataFile.getValue(Address, 24).length() > 0){
+	if(findTestData(GlobalVariable.excelPath).getValue(Address, 24).length() > 0){
         'input phone2 area'
         WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/input_Phone 2_Area'), 
-            GlobalVariable.FindDataFile.getValue(Address, 24))
+            findTestData(GlobalVariable.excelPath).getValue(Address, 24))
 	}
-	if(GlobalVariable.FindDataFile.getValue(Address, 25).length() > 0){
+	if(findTestData(GlobalVariable.excelPath).getValue(Address, 25).length() > 0){
         'input phone2 number'
         WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/input_Phone 2_Number'), 
-            GlobalVariable.FindDataFile.getValue(Address, 25))
+            findTestData(GlobalVariable.excelPath).getValue(Address, 25))
 	}
-	if(GlobalVariable.FindDataFile.getValue(Address, 26).length() > 0){
+	if(findTestData(GlobalVariable.excelPath).getValue(Address, 26).length() > 0){
         'input phone2 extension'
         WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/input_Phone 2_Ext'), 
-            GlobalVariable.FindDataFile.getValue(Address, 26))
+            findTestData(GlobalVariable.excelPath).getValue(Address, 26))
 	}
-	if(GlobalVariable.FindDataFile.getValue(Address, 27).length() > 0){
+	if(findTestData(GlobalVariable.excelPath).getValue(Address, 27).length() > 0){
         'input phone3 area'
         WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/input_Phone 3_Area'), 
-            GlobalVariable.FindDataFile.getValue(Address, 27))
+            findTestData(GlobalVariable.excelPath).getValue(Address, 27))
 	}
-	if(GlobalVariable.FindDataFile.getValue(Address, 28).length() > 0){
+	if(findTestData(GlobalVariable.excelPath).getValue(Address, 28).length() > 0){
         'input phone3 number'
         WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/input_Phone 3_Number'), 
-            GlobalVariable.FindDataFile.getValue(Address, 28))
+            findTestData(GlobalVariable.excelPath).getValue(Address, 28))
 	}
-	if(GlobalVariable.FindDataFile.getValue(Address, 29).length() > 0){
+	if(findTestData(GlobalVariable.excelPath).getValue(Address, 29).length() > 0){
         'input phone3 extension'
         WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/input_Phone 3_ext'), 
-            GlobalVariable.FindDataFile.getValue(Address, 29))
+            findTestData(GlobalVariable.excelPath).getValue(Address, 29))
 	}
-	if(GlobalVariable.FindDataFile.getValue(Address, 30).length() > 0){
+	if(findTestData(GlobalVariable.excelPath).getValue(Address, 30).length() > 0){
         'input fax'
         WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/input_Fax_Area'), 
-            GlobalVariable.FindDataFile.getValue(Address, 30))
+            findTestData(GlobalVariable.excelPath).getValue(Address, 30))
 	}
-	if(GlobalVariable.FindDataFile.getValue(Address, 31).length() > 0){
+	if(findTestData(GlobalVariable.excelPath).getValue(Address, 31).length() > 0){
         'input fax'
         WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/input_Fax_Number'), 
-            GlobalVariable.FindDataFile.getValue(Address, 31))
+            findTestData(GlobalVariable.excelPath).getValue(Address, 31))
 	}
         'pilih status rumah'
         WebUI.selectOptionByLabel(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/select_Select One Dinas  Family  KPR  Rented  Self - Owned'), 
-            GlobalVariable.FindDataFile.getValue(Address, 32), false)
+            findTestData(GlobalVariable.excelPath).getValue(Address, 32), false)
     
 	
-	if (GlobalVariable.FindDataFile.getValue(Address, 13).length() > 1) {
+	if (findTestData(GlobalVariable.excelPath).getValue(Address, 13).length() > 1) {
 		'call function get address'
 		getAddress()
 	}
@@ -304,7 +304,7 @@ def inputaddress(int Address) {
     'click save'
     WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/button_Save'))
 
-    Integer iscompleteMandatory = Integer.parseInt(GlobalVariable.FindDataFile.getValue(Address, 4))
+    Integer iscompleteMandatory = Integer.parseInt(findTestData(GlobalVariable.excelPath).getValue(Address, 4))
 
     if (iscompleteMandatory == 0 && GlobalVariable.FlagFailed==0) {
         'cek alert'
@@ -357,10 +357,8 @@ def verifyDDLAddress(int Address){
 		'verify total ddl confins = total ddl db'
 		if(WebUI.verifyEqual(totalddladdresstype - 1, AddressType.size())==false){
 			
-			getDataFile()
-			
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('2.AddressInformation', Address, GlobalVariable.StatusFailed, GlobalVariable.FindDataFile.getValue(Address, 2) + ';' +GlobalVariable.ReasonFailedDDL)
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('2.AddressInformation', Address, GlobalVariable.StatusFailed, findTestData(GlobalVariable.excelPath).getValue(Address, 2) + ';' +GlobalVariable.ReasonFailedDDL)
 			
 			GlobalVariable.FlagFailed=1
 		}
@@ -368,10 +366,9 @@ def verifyDDLAddress(int Address){
 		'verify array dari db == option list confins'
 		if(WebUI.verifyOptionsPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/select_addressType'),
 			AddressType)==false){
-			getDataFile()
-		
+
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('2.AddressInformation', Address, GlobalVariable.StatusFailed, GlobalVariable.FindDataFile.getValue(Address, 2) + ';' +GlobalVariable.ReasonFailedDDL)
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('2.AddressInformation', Address, GlobalVariable.StatusFailed, findTestData(GlobalVariable.excelPath).getValue(Address, 2) + ';' +GlobalVariable.ReasonFailedDDL)
 			
 			GlobalVariable.FlagFailed=1
 		}
@@ -385,10 +382,8 @@ def verifyDDLAddress(int Address){
 		'verify total ddl confins = total ddl db'
 		if(WebUI.verifyEqual(totalownership - 1, Ownership.size())==false){
 			
-			getDataFile()
-			
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('2.AddressInformation', Address, GlobalVariable.StatusFailed, GlobalVariable.FindDataFile.getValue(Address, 2) + ';' +GlobalVariable.ReasonFailedDDL)
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('2.AddressInformation', Address, GlobalVariable.StatusFailed, findTestData(GlobalVariable.excelPath).getValue(Address, 2) + ';' +GlobalVariable.ReasonFailedDDL)
 			
 			GlobalVariable.FlagFailed=1
 		}
@@ -396,10 +391,9 @@ def verifyDDLAddress(int Address){
 		'verify array dari db == option list confins'
 		if(WebUI.verifyOptionsPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation/select_Select One Dinas  Family  KPR  Rented  Self - Owned'),
 			Ownership)==false){
-			getDataFile()
-		
+
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('2.AddressInformation', Address, GlobalVariable.StatusFailed, GlobalVariable.FindDataFile.getValue(Address, 2) + ';' +GlobalVariable.ReasonFailedDDL)
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('2.AddressInformation', Address, GlobalVariable.StatusFailed, findTestData(GlobalVariable.excelPath).getValue(Address, 2) + ';' +GlobalVariable.ReasonFailedDDL)
 			
 			GlobalVariable.FlagFailed=1
 		}
@@ -492,26 +486,26 @@ def getDataFile(){
 		'get data file path'
 		GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileCustomerPersonal)
 	
-		datafilecustdetail = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail')
+		excelPathCustDetail = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail'
 	
 		'declare data file Global variable'
-		GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation')
+		GlobalVariable.excelPath = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/AddressInformation'
 	}
 	else if(GlobalVariable.APPSTEP == 'FAMILY'){
 		'get data file path'
 		GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileFamilyPersonal)
 	
-		datafilecustdetail = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/FamilyPersonal/CustomerDetail')
+		excelPathCustDetail = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/FamilyPersonal/CustomerDetail'
 	
 		'declare data file Global variable'
-		GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/FamilyPersonal/AddressInformation')
+		GlobalVariable.excelPath = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/FamilyPersonal/AddressInformation'
 	}
 	else if(GlobalVariable.APPSTEP == 'GUARANTOR PERSONAL'){
 		'get data file path'
 		GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorPersonal)
 	
-		datafilecustdetail = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/CustomerDetail')
+		excelPathCustDetail = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/CustomerDetail'
 	
-		GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/AddressInformation')
+		GlobalVariable.excelPath = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/AddressInformation'
 	}
 }

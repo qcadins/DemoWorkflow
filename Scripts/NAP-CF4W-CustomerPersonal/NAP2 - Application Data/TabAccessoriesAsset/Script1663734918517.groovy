@@ -29,30 +29,30 @@ int modifyObjectIndex=1
 'get data file path'
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathPersonal)
 
-'declare datafileTabAsset'
-datafileTabAsset = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData')
+'declare excelPathTabAsset'
+excelPathTabAsset = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData'
 
-'declare datafileAccessories'
-datafileAccessories = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories')
+'declare excelPathAccessories'
+excelPathAccessories = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories'
 
-'declare datafileCustomerPersonal'
-datafileCustomerPersonal = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData')
+'declare excelPathCustomerPersonal'
+excelPathCustomerPersonal = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData'
 
-countAccessories = datafileAccessories.getColumnNumbers()
+countAccessories = findTestData(excelPathAccessories).getColumnNumbers()
 
 'declare driver'
 WebDriver driver = DriverFactory.getWebDriver()
 
 'Looping untuk mencari nilai colm yang menunjukkan colm appno'
-for (GlobalVariable.NumofAccessories = 2; GlobalVariable.NumofAccessories <= (datafileAccessories.getColumnNumbers() - 1); (GlobalVariable.NumofAccessories)++) {
-	if (datafileAccessories.getValue(GlobalVariable.NumofAccessories, 12) == datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 13)) {
+for (GlobalVariable.NumofAccessories = 2; GlobalVariable.NumofAccessories <= (findTestData(excelPathAccessories).getColumnNumbers() - 1); (GlobalVariable.NumofAccessories)++) {
+	if (findTestData(excelPathAccessories).getValue(GlobalVariable.NumofAccessories, 12) == findTestData(excelPathCustomerPersonal).getValue(GlobalVariable.NumofColm, 13)) {
 			GlobalVariable.StartIndex = GlobalVariable.NumofAccessories
 			break
 	}
 }
 
 'Jika copy app edit'
-if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase("Edit")){
+if(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase("Edit")){
 
 	'arraylist accessories name yang gagal'
 	ArrayList <String> accessoriesnamefaileddelete = new ArrayList<>()
@@ -118,34 +118,34 @@ if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase("Edi
 			  'Looping excel datafile accessories'
 			  for (GlobalVariable.NumofAccessories = GlobalVariable.StartIndex; GlobalVariable.NumofAccessories <= (countAccessories - 1); (GlobalVariable.NumofAccessories)++) {
 			  
-				  if (datafileAccessories.getValue(GlobalVariable.NumofAccessories, 12).equalsIgnoreCase(datafileCustomerPersonal.getValue(
+				  if (findTestData(excelPathAccessories).getValue(GlobalVariable.NumofAccessories, 12).equalsIgnoreCase(findTestData(excelPathCustomerPersonal).getValue(
 						  GlobalVariable.NumofColm, 13))) {
 					  
-					  if ((WebUI.getAttribute(modifyObjectSupplierName,'value').equalsIgnoreCase(datafileAccessories.getValue(
-						  GlobalVariable.NumofAccessories, 14)) && WebUI.getAttribute(modifyObjectAccName,'value').equalsIgnoreCase(datafileAccessories.getValue(
-						  GlobalVariable.NumofAccessories, 16)) && WebUI.getAttribute(modifyObjectAccessoriesPrice,'value').equalsIgnoreCase(datafileAccessories.getValue(
-						  GlobalVariable.NumofAccessories, 17)) && textDPType.equalsIgnoreCase(datafileAccessories.getValue(
-						  GlobalVariable.NumofAccessories, 18)) && WebUI.getAttribute(modifyObjectInputNoteAccessories,'value').equalsIgnoreCase(datafileAccessories.getValue(
-						  GlobalVariable.NumofAccessories, 21))) && (WebUI.getAttribute(modifyObjectInputPercentage,'value').replace(' %','').equalsIgnoreCase(datafileAccessories.getValue(
-						  GlobalVariable.NumofAccessories, 19)) || WebUI.getAttribute(modifyObjectInputAmount,'value').equalsIgnoreCase(datafileAccessories.getValue(
+					  if ((WebUI.getAttribute(modifyObjectSupplierName,'value').equalsIgnoreCase(findTestData(excelPathAccessories).getValue(
+						  GlobalVariable.NumofAccessories, 14)) && WebUI.getAttribute(modifyObjectAccName,'value').equalsIgnoreCase(findTestData(excelPathAccessories).getValue(
+						  GlobalVariable.NumofAccessories, 16)) && WebUI.getAttribute(modifyObjectAccessoriesPrice,'value').equalsIgnoreCase(findTestData(excelPathAccessories).getValue(
+						  GlobalVariable.NumofAccessories, 17)) && textDPType.equalsIgnoreCase(findTestData(excelPathAccessories).getValue(
+						  GlobalVariable.NumofAccessories, 18)) && WebUI.getAttribute(modifyObjectInputNoteAccessories,'value').equalsIgnoreCase(findTestData(excelPathAccessories).getValue(
+						  GlobalVariable.NumofAccessories, 21))) && (WebUI.getAttribute(modifyObjectInputPercentage,'value').replace(' %','').equalsIgnoreCase(findTestData(excelPathAccessories).getValue(
+						  GlobalVariable.NumofAccessories, 19)) || WebUI.getAttribute(modifyObjectInputAmount,'value').equalsIgnoreCase(findTestData(excelPathAccessories).getValue(
 						  GlobalVariable.NumofAccessories, 20)) )) {
 						  break
 					  }
 						  
 					  'Pengecekan jika supplier name dan accessories name pada confins sesuai dengan excel'
-					  if (WebUI.getAttribute(modifyObjectSupplierName,'value').equalsIgnoreCase(datafileAccessories.getValue(
-						  GlobalVariable.NumofAccessories, 14)) && WebUI.getAttribute(modifyObjectAccName,'value').equalsIgnoreCase(datafileAccessories.getValue(
+					  if (WebUI.getAttribute(modifyObjectSupplierName,'value').equalsIgnoreCase(findTestData(excelPathAccessories).getValue(
+						  GlobalVariable.NumofAccessories, 14)) && WebUI.getAttribute(modifyObjectAccName,'value').equalsIgnoreCase(findTestData(excelPathAccessories).getValue(
 						  GlobalVariable.NumofAccessories, 16))) {
 							  
 						  'input accessories price'
-						  WebUI.setText(modifyObjectAccessoriesPrice, datafileAccessories.getValue(
+						  WebUI.setText(modifyObjectAccessoriesPrice, findTestData(excelPathAccessories).getValue(
 								  GlobalVariable.NumofAccessories, 17), FailureHandling.OPTIONAL)
 				  
 						  'select security deposit type'
-						  WebUI.selectOptionByLabel(modifyObjectDownPaymentType, datafileAccessories.getValue(
+						  WebUI.selectOptionByLabel(modifyObjectDownPaymentType, findTestData(excelPathAccessories).getValue(
 								  GlobalVariable.NumofAccessories, 18), false, FailureHandling.OPTIONAL)
 				  
-						  if (datafileAccessories.getValue(GlobalVariable.NumofAccessories, 18) == 'Percentage') {
+						  if (findTestData(excelPathAccessories).getValue(GlobalVariable.NumofAccessories, 18) == 'Percentage') {
 							  'input security deposit percentage'
 							  WebUI.sendKeys(modifyObjectInputPercentage, Keys.chord(Keys.CONTROL, 'a'), FailureHandling.OPTIONAL)
 				  
@@ -153,17 +153,17 @@ if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase("Edi
 				  
 							  WebUI.sendKeys(modifyObjectInputPercentage, Keys.chord(Keys.HOME), FailureHandling.OPTIONAL)
 				  
-							  WebUI.sendKeys(modifyObjectInputPercentage, Keys.chord(Keys.RIGHT, datafileAccessories.getValue(
+							  WebUI.sendKeys(modifyObjectInputPercentage, Keys.chord(Keys.RIGHT, findTestData(excelPathAccessories).getValue(
 										  GlobalVariable.NumofAccessories, 19)), FailureHandling.OPTIONAL)
 							  
-						  } else if (datafileAccessories.getValue(GlobalVariable.NumofAccessories, 18) == 'Amount') {
+						  } else if (findTestData(excelPathAccessories).getValue(GlobalVariable.NumofAccessories, 18) == 'Amount') {
 							  'input security deposit amount'
-							  WebUI.setText(modifyObjectInputAmount, datafileAccessories.getValue(
+							  WebUI.setText(modifyObjectInputAmount, findTestData(excelPathAccessories).getValue(
 									  GlobalVariable.NumofAccessories, 20), FailureHandling.OPTIONAL)
 						  }
 						  
 						  'input accessories notes'
-						  WebUI.setText(modifyObjectInputNoteAccessories, datafileAccessories.getValue(
+						  WebUI.setText(modifyObjectInputNoteAccessories, findTestData(excelPathAccessories).getValue(
 								  GlobalVariable.NumofAccessories, 21), FailureHandling.OPTIONAL)
 				  
 						  'Jika field mandatory kosong'
@@ -171,7 +171,7 @@ if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase("Edi
 							  'value') == '')) || (WebUI.getAttribute(modifyObjectInputAmount, 'value') == '')) {
 							  
 							  'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.StatusReasonMandatoryEmpty'
-							  CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7a.Accessories', GlobalVariable.NumofAccessories, GlobalVariable.StatusWarning, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 2) + ';'+GlobalVariable.StatusReasonMandatoryEmpty)
+							  CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7a.Accessories', GlobalVariable.NumofAccessories, GlobalVariable.StatusWarning, findTestData(excelPathAccessories).getValue(GlobalVariable.NumofAccessories, 2) + ';'+GlobalVariable.StatusReasonMandatoryEmpty)
 							  
 							 'get accessories name'
 							 accessoriesnamebefore = WebUI.getAttribute(modifyObjectAccName, 'value', FailureHandling.OPTIONAL)
@@ -215,7 +215,7 @@ if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase("Edi
 						  break
 						  }
 						  else{
-							  if(datafileAccessories.getValue(GlobalVariable.NumofAccessories + 1, 12) != datafileCustomerPersonal.getValue(
+							  if(findTestData(excelPathAccessories).getValue(GlobalVariable.NumofAccessories + 1, 12) != findTestData(excelPathCustomerPersonal).getValue(
 								  GlobalVariable.NumofColm, 13)){
 								  'Jika pada confins accessories ada data seblumnya'
 								  if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/TableAccessoriesnodata'),FailureHandling.OPTIONAL),
@@ -252,7 +252,7 @@ if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase("Edi
 									  
 									  i--
 									  
-									  if(i == variable.size() && datafileAccessories.getValue(GlobalVariable.NumofAccessories+1, 12) != datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 13)){
+									  if(i == variable.size() && findTestData(excelPathAccessories).getValue(GlobalVariable.NumofAccessories+1, 12) != findTestData(excelPathCustomerPersonal).getValue(GlobalVariable.NumofColm, 13)){
 										  break
 									  }
 								  }else{
@@ -279,7 +279,7 @@ if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase("Edi
 	if(accessoriesnamefaileddelete.size() > 0){
 			
 			'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.ReasonFailedDelete'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7a.Accessories', GlobalVariable.StartIndex, GlobalVariable.StatusWarning, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 2) + ';'+GlobalVariable.ReasonFailedDelete + accessoriesnamefaileddelete)
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7a.Accessories', GlobalVariable.StartIndex, GlobalVariable.StatusWarning, findTestData(excelPathAccessories).getValue(GlobalVariable.NumofAccessories, 2) + ';'+GlobalVariable.ReasonFailedDelete + accessoriesnamefaileddelete)
 			
 			GlobalVariable.FlagWarning++
 	}
@@ -296,7 +296,7 @@ if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase("Edi
 	'Looping excel accessories'
 	for (GlobalVariable.NumofAccessories = GlobalVariable.StartIndex; GlobalVariable.NumofAccessories <= (countAccessories - 1); (GlobalVariable.NumofAccessories)++) {
 			
-			if (datafileAccessories.getValue(GlobalVariable.NumofAccessories, 12).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+			if (findTestData(excelPathAccessories).getValue(GlobalVariable.NumofAccessories, 12).equalsIgnoreCase(findTestData(excelPathCustomerPersonal).getValue(
 					  GlobalVariable.NumofColm, 13))) {
 				'Looping confins accessories'
 				for(int j = 1;j<=countData;j++){
@@ -347,12 +347,12 @@ if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase("Edi
 					   
 							   'input Supplier Code'
 							   WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_SupplierCodeAccessories'),
-								   datafileAccessories.getValue(
+								   findTestData(excelPathAccessories).getValue(
 									   GlobalVariable.NumofAccessories, 13))
 					   
 							   'input supplier name'
 							   WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_Supplier Name_supplierName'),
-								   datafileAccessories.getValue(
+								   findTestData(excelPathAccessories).getValue(
 									   GlobalVariable.NumofAccessories, 14))
 					   
 							   'click button search'
@@ -368,7 +368,7 @@ if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase("Edi
 								   WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/button_XAccessories'))
 					   
 								   'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.StatusReasonLookup'
-								   CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7a.Accessories', GlobalVariable.NumofAccessories, GlobalVariable.StatusWarning, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 2) + ';'+GlobalVariable.StatusReasonLookup)
+								   CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7a.Accessories', GlobalVariable.NumofAccessories, GlobalVariable.StatusWarning, findTestData(excelPathAccessories).getValue(GlobalVariable.NumofAccessories, 2) + ';'+GlobalVariable.StatusReasonLookup)
 					   
 								   'click delete'
 								   WebUI.click(modifyObjectButtonDelete, FailureHandling.OPTIONAL)
@@ -379,7 +379,7 @@ if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase("Edi
 								   if(WebUI.verifyElementPresent(modifyObjectButtonDelete, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
 									   'Write To Excel GlobalVariable.ReasonFailedDelete'
 									   CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath,
-										   '7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 2) + ';'+GlobalVariable.ReasonFailedDelete)
+										   '7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, findTestData(excelPathAccessories).getValue(GlobalVariable.NumofAccessories, 2) + ';'+GlobalVariable.ReasonFailedDelete)
 								   }
 					   
 								   continue
@@ -390,12 +390,12 @@ if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase("Edi
 					   
 							   'input Accessories Code'
 							   WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_AssetAccessoriesCode'),
-								   datafileAccessories.getValue(
+								   findTestData(excelPathAccessories).getValue(
 									   GlobalVariable.NumofAccessories, 15))
 					   
 							   'input accessories name'
 							   WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_Asset Accessory Name_accessoryName'),
-								   datafileAccessories.getValue(
+								   findTestData(excelPathAccessories).getValue(
 									   GlobalVariable.NumofAccessories, 16))
 					   
 							   'click button search'
@@ -411,7 +411,7 @@ if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase("Edi
 								   WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/button_XAccessories'))
 					   
 								   'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.StatusReasonLookup'
-								   CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7a.Accessories', GlobalVariable.NumofAccessories, GlobalVariable.StatusWarning, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 2) + ';'+GlobalVariable.StatusReasonLookup)
+								   CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7a.Accessories', GlobalVariable.NumofAccessories, GlobalVariable.StatusWarning, findTestData(excelPathAccessories).getValue(GlobalVariable.NumofAccessories, 2) + ';'+GlobalVariable.StatusReasonLookup)
 								   
 								   'click delete'
 								   WebUI.click(modifyObjectButtonDelete, FailureHandling.OPTIONAL)
@@ -422,21 +422,21 @@ if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase("Edi
 								   if(WebUI.verifyElementPresent(modifyObjectButtonDelete, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
 									   'Write To Excel GlobalVariable.ReasonFailedDelete'
 									   CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath,
-										   '7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 2) + ';'+GlobalVariable.ReasonFailedDelete)
+										   '7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, findTestData(excelPathAccessories).getValue(GlobalVariable.NumofAccessories, 2) + ';'+GlobalVariable.ReasonFailedDelete)
 								   }
 					   
 								   continue
 							   }
 							   
 							   'input accessories price'
-							   WebUI.setText(modifyObjectAccessoriesPrice, datafileAccessories.getValue(
+							   WebUI.setText(modifyObjectAccessoriesPrice, findTestData(excelPathAccessories).getValue(
 									   GlobalVariable.NumofAccessories, 17), FailureHandling.OPTIONAL)
 					   
 							   'select security deposit type'
-							   WebUI.selectOptionByLabel(modifyObjectDownPaymentType, datafileAccessories.getValue(
+							   WebUI.selectOptionByLabel(modifyObjectDownPaymentType, findTestData(excelPathAccessories).getValue(
 									   GlobalVariable.NumofAccessories, 18), false, FailureHandling.OPTIONAL)
 					   
-							   if (datafileAccessories.getValue(
+							   if (findTestData(excelPathAccessories).getValue(
 								   GlobalVariable.NumofAccessories, 18) == 'Percentage') {
 								   'input security deposit percentage'
 								   WebUI.sendKeys(modifyObjectInputPercentage, Keys.chord(Keys.CONTROL, 'a'), FailureHandling.OPTIONAL)
@@ -445,17 +445,17 @@ if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase("Edi
 					   
 								   WebUI.sendKeys(modifyObjectInputPercentage, Keys.chord(Keys.HOME), FailureHandling.OPTIONAL)
 					   
-								   WebUI.sendKeys(modifyObjectInputPercentage, Keys.chord(Keys.RIGHT, datafileAccessories.getValue(
+								   WebUI.sendKeys(modifyObjectInputPercentage, Keys.chord(Keys.RIGHT, findTestData(excelPathAccessories).getValue(
 											   GlobalVariable.NumofAccessories, 19)), FailureHandling.OPTIONAL)
-							   } else if (datafileAccessories.getValue(
+							   } else if (findTestData(excelPathAccessories).getValue(
 								   GlobalVariable.NumofAccessories, 18) == 'Amount') {
 								   'input security deposit amount'
-								   WebUI.setText(modifyObjectInputAmount, datafileAccessories.getValue(
+								   WebUI.setText(modifyObjectInputAmount, findTestData(excelPathAccessories).getValue(
 										   GlobalVariable.NumofAccessories, 20), FailureHandling.OPTIONAL)
 							   }
 							   
 							   'input accessories notes'
-							   WebUI.setText(modifyObjectInputNoteAccessories, datafileAccessories.getValue(
+							   WebUI.setText(modifyObjectInputNoteAccessories, findTestData(excelPathAccessories).getValue(
 									   GlobalVariable.NumofAccessories, 21), FailureHandling.OPTIONAL)
 					   
 							   'Jika ada field mandatory yang kosong'
@@ -463,7 +463,7 @@ if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase("Edi
 								   'value') == '')) || (WebUI.getAttribute(modifyObjectInputAmount, 'value') == '')) {
 								   
 								   'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.StatusReasonMandatoryEmpty'
-								   CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7a.Accessories', GlobalVariable.NumofAccessories, GlobalVariable.StatusWarning, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 2) + ';'+GlobalVariable.StatusReasonMandatoryEmpty)
+								   CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7a.Accessories', GlobalVariable.NumofAccessories, GlobalVariable.StatusWarning, findTestData(excelPathAccessories).getValue(GlobalVariable.NumofAccessories, 2) + ';'+GlobalVariable.StatusReasonMandatoryEmpty)
 								   
 								   'click delete'
 								   WebUI.click(modifyObjectButtonDelete, FailureHandling.OPTIONAL)
@@ -474,7 +474,7 @@ if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase("Edi
 								   if(WebUI.verifyElementPresent(modifyObjectButtonDelete, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
 									   'Write To Excel GlobalVariable.ReasonFailedDelete'
 									   CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath,
-										   '7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 2) + ';'+GlobalVariable.ReasonFailedDelete)
+										   '7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, findTestData(excelPathAccessories).getValue(GlobalVariable.NumofAccessories, 2) + ';'+GlobalVariable.ReasonFailedDelete)
 								   }
 					   
 								   continue
@@ -486,8 +486,8 @@ if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase("Edi
 							   add=0
 						   }
 						   
-						   if(!datafileAccessories.getValue(
-							   GlobalVariable.NumofAccessories, 14).equalsIgnoreCase(WebUI.getAttribute(modifyObjectSupplierName,'value')) || !datafileAccessories.getValue(
+						   if(!findTestData(excelPathAccessories).getValue(
+							   GlobalVariable.NumofAccessories, 14).equalsIgnoreCase(WebUI.getAttribute(modifyObjectSupplierName,'value')) || !findTestData(excelPathAccessories).getValue(
 							   GlobalVariable.NumofAccessories, 16).equalsIgnoreCase(WebUI.getAttribute(modifyObjectAccName,'value')) ){
 							   if(countData==j){
 								   'click button add'
@@ -514,12 +514,12 @@ if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase("Edi
 				
 						'input Supplier Code'
 						WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_SupplierCodeAccessories'),
-							datafileAccessories.getValue(
+							findTestData(excelPathAccessories).getValue(
 								GlobalVariable.NumofAccessories, 13))
 				
 						'input supplier name'
 						WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_Supplier Name_supplierName'),
-							datafileAccessories.getValue(
+							findTestData(excelPathAccessories).getValue(
 								GlobalVariable.NumofAccessories, 14))
 				
 						'click button search'
@@ -535,7 +535,7 @@ if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase("Edi
 							WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/button_XAccessories'))
 				
 							'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.StatusReasonLookup'
-							CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7a.Accessories', GlobalVariable.NumofAccessories, GlobalVariable.StatusWarning, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 2) + ';'+GlobalVariable.StatusReasonLookup)
+							CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7a.Accessories', GlobalVariable.NumofAccessories, GlobalVariable.StatusWarning, findTestData(excelPathAccessories).getValue(GlobalVariable.NumofAccessories, 2) + ';'+GlobalVariable.StatusReasonLookup)
 							
 							'click delete'
 							WebUI.click(modifyObjectButtonDelete, FailureHandling.OPTIONAL)
@@ -546,7 +546,7 @@ if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase("Edi
 							if(WebUI.verifyElementPresent(modifyObjectButtonDelete, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
 								'Write To Excel GlobalVariable.ReasonFailedDelete'
 								CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath,
-									'7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 2) + ';'+GlobalVariable.ReasonFailedDelete)
+									'7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, findTestData(excelPathAccessories).getValue(GlobalVariable.NumofAccessories, 2) + ';'+GlobalVariable.ReasonFailedDelete)
 							}
 				
 							continue
@@ -557,12 +557,12 @@ if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase("Edi
 				
 						'input Accessories Code'
 						WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_AssetAccessoriesCode'),
-							datafileAccessories.getValue(
+							findTestData(excelPathAccessories).getValue(
 								GlobalVariable.NumofAccessories, 15))
 				
 						'input accessories name'
 						WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_Asset Accessory Name_accessoryName'),
-							datafileAccessories.getValue(
+							findTestData(excelPathAccessories).getValue(
 								GlobalVariable.NumofAccessories, 16))
 				
 						'click button search'
@@ -578,7 +578,7 @@ if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase("Edi
 							WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/button_XAccessories'))
 				
 							'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.StatusReasonLookup'
-							CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7a.Accessories', GlobalVariable.NumofAccessories, GlobalVariable.StatusWarning, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 2) + ';'+GlobalVariable.StatusReasonLookup)
+							CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7a.Accessories', GlobalVariable.NumofAccessories, GlobalVariable.StatusWarning, findTestData(excelPathAccessories).getValue(GlobalVariable.NumofAccessories, 2) + ';'+GlobalVariable.StatusReasonLookup)
 							
 							'click delete'
 							WebUI.click(modifyObjectButtonDelete, FailureHandling.OPTIONAL)
@@ -589,21 +589,21 @@ if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase("Edi
 							if(WebUI.verifyElementPresent(modifyObjectButtonDelete, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
 								'Write To Excel GlobalVariable.ReasonFailedDelete'
 								CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath,
-									'7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 2) + ';'+GlobalVariable.ReasonFailedDelete)
+									'7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, findTestData(excelPathAccessories).getValue(GlobalVariable.NumofAccessories, 2) + ';'+GlobalVariable.ReasonFailedDelete)
 							}
 				
 							continue
 						}
 						
 						'input accessories price'
-						WebUI.setText(modifyObjectAccessoriesPrice, datafileAccessories.getValue(
+						WebUI.setText(modifyObjectAccessoriesPrice, findTestData(excelPathAccessories).getValue(
 								GlobalVariable.NumofAccessories, 17), FailureHandling.OPTIONAL)
 				
 						'select security deposit type'
-						WebUI.selectOptionByLabel(modifyObjectDownPaymentType, datafileAccessories.getValue(
+						WebUI.selectOptionByLabel(modifyObjectDownPaymentType, findTestData(excelPathAccessories).getValue(
 								GlobalVariable.NumofAccessories, 18), false, FailureHandling.OPTIONAL)
 				
-						if (datafileAccessories.getValue(
+						if (findTestData(excelPathAccessories).getValue(
 							GlobalVariable.NumofAccessories, 18) == 'Percentage') {
 							'input security deposit percentage'
 							WebUI.sendKeys(modifyObjectInputPercentage, Keys.chord(Keys.CONTROL, 'a'), FailureHandling.OPTIONAL)
@@ -612,17 +612,17 @@ if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase("Edi
 				
 							WebUI.sendKeys(modifyObjectInputPercentage, Keys.chord(Keys.HOME), FailureHandling.OPTIONAL)
 				
-							WebUI.sendKeys(modifyObjectInputPercentage, Keys.chord(Keys.RIGHT, datafileAccessories.getValue(
+							WebUI.sendKeys(modifyObjectInputPercentage, Keys.chord(Keys.RIGHT, findTestData(excelPathAccessories).getValue(
 										GlobalVariable.NumofAccessories, 19)), FailureHandling.OPTIONAL)
-						} else if (datafileAccessories.getValue(
+						} else if (findTestData(excelPathAccessories).getValue(
 							GlobalVariable.NumofAccessories, 18) == 'Amount') {
 							'input security deposit amount'
-							WebUI.setText(modifyObjectInputAmount, datafileAccessories.getValue(
+							WebUI.setText(modifyObjectInputAmount, findTestData(excelPathAccessories).getValue(
 									GlobalVariable.NumofAccessories, 20), FailureHandling.OPTIONAL)
 						}
 						
 						'input accessories notes'
-						WebUI.setText(modifyObjectInputNoteAccessories, datafileAccessories.getValue(
+						WebUI.setText(modifyObjectInputNoteAccessories, findTestData(excelPathAccessories).getValue(
 								GlobalVariable.NumofAccessories, 21), FailureHandling.OPTIONAL)
 				
 						'Jika ada field mandatory yang kosong'
@@ -630,7 +630,7 @@ if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase("Edi
 							'value') == '')) || (WebUI.getAttribute(modifyObjectInputAmount, 'value') == '')) {
 							
 							'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.StatusReasonMandatoryEmpty'
-							CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7a.Accessories', GlobalVariable.NumofAccessories, GlobalVariable.StatusWarning, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 2) + ';'+GlobalVariable.StatusReasonMandatoryEmpty)
+							CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7a.Accessories', GlobalVariable.NumofAccessories, GlobalVariable.StatusWarning, findTestData(excelPathAccessories).getValue(GlobalVariable.NumofAccessories, 2) + ';'+GlobalVariable.StatusReasonMandatoryEmpty)
 							
 							'click delete'
 							WebUI.click(modifyObjectButtonDelete, FailureHandling.OPTIONAL)
@@ -641,7 +641,7 @@ if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase("Edi
 							if(WebUI.verifyElementPresent(modifyObjectButtonDelete, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
 								'Write To Excel GlobalVariable.ReasonFailedDelete'
 								CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath,
-									'7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 2) + ';'+GlobalVariable.ReasonFailedDelete)
+									'7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, findTestData(excelPathAccessories).getValue(GlobalVariable.NumofAccessories, 2) + ';'+GlobalVariable.ReasonFailedDelete)
 							}
 				
 							continue
@@ -662,10 +662,10 @@ if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase("Edi
 }
 	
 //Jika copy app no
-else if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase("No")){
+else if(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase("No")){
 	for (GlobalVariable.NumofAccessories = GlobalVariable.StartIndex; GlobalVariable.NumofAccessories <= (countAccessories - 1); (GlobalVariable.NumofAccessories)++) {
-		if (datafileAccessories.getValue(
-			GlobalVariable.NumofAccessories, 12).equalsIgnoreCase(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+		if (findTestData(excelPathAccessories).getValue(
+			GlobalVariable.NumofAccessories, 12).equalsIgnoreCase(findTestData(excelPathCustomerPersonal).getValue(
 				GlobalVariable.NumofColm, 13))) {
 			'click button add'
 			WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/button_Add'))
@@ -707,12 +707,12 @@ else if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase
 	
 			'input Supplier Code'
 			WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_SupplierCodeAccessories'),
-				datafileAccessories.getValue(
+				findTestData(excelPathAccessories).getValue(
 					GlobalVariable.NumofAccessories, 13))
 	
 			'input supplier name'
 			WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_Supplier Name_supplierName'),
-				datafileAccessories.getValue(
+				findTestData(excelPathAccessories).getValue(
 					GlobalVariable.NumofAccessories, 14))
 	
 			'click button search'
@@ -728,7 +728,7 @@ else if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase
 				WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/button_XAccessories'))
 	
 				'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.StatusReasonLookup'
-				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7a.Accessories', GlobalVariable.NumofAccessories, GlobalVariable.StatusWarning, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 2) + ';'+GlobalVariable.StatusReasonLookup)
+				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7a.Accessories', GlobalVariable.NumofAccessories, GlobalVariable.StatusWarning, findTestData(excelPathAccessories).getValue(GlobalVariable.NumofAccessories, 2) + ';'+GlobalVariable.StatusReasonLookup)
 				
 				'click delete'
 				WebUI.click(modifyObjectButtonDelete, FailureHandling.OPTIONAL)
@@ -739,7 +739,7 @@ else if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase
 				if(WebUI.verifyElementPresent(modifyObjectButtonDelete, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
 					'Write To Excel GlobalVariable.ReasonFailedDelete'
 					CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath,
-							'7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 2) + ';'+GlobalVariable.ReasonFailedDelete)
+							'7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, findTestData(excelPathAccessories).getValue(GlobalVariable.NumofAccessories, 2) + ';'+GlobalVariable.ReasonFailedDelete)
 				}
 				continue
 			}
@@ -749,12 +749,12 @@ else if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase
 	
 			'input Accessories Code'
 			WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_AssetAccessoriesCode'),
-				datafileAccessories.getValue(
+				findTestData(excelPathAccessories).getValue(
 					GlobalVariable.NumofAccessories, 15))
 	
 			'input accessories name'
 			WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_Asset Accessory Name_accessoryName'),
-				datafileAccessories.getValue(
+				findTestData(excelPathAccessories).getValue(
 					GlobalVariable.NumofAccessories, 16))
 	
 			'click button search'
@@ -770,7 +770,7 @@ else if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase
 				WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/button_XAccessories'))
 	
 				'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.StatusReasonLookup'
-				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7a.Accessories', GlobalVariable.NumofAccessories, GlobalVariable.StatusWarning, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 2) + ';'+GlobalVariable.StatusReasonLookup)
+				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7a.Accessories', GlobalVariable.NumofAccessories, GlobalVariable.StatusWarning, findTestData(excelPathAccessories).getValue(GlobalVariable.NumofAccessories, 2) + ';'+GlobalVariable.StatusReasonLookup)
 				
 				'click delete'
 				WebUI.click(modifyObjectButtonDelete, FailureHandling.OPTIONAL)
@@ -781,21 +781,21 @@ else if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase
 				if(WebUI.verifyElementPresent(modifyObjectButtonDelete, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
 					'Write To Excel GlobalVariable.ReasonFailedDelete'
 					CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath,
-							'7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 2) + ';'+GlobalVariable.ReasonFailedDelete)
+							'7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, findTestData(excelPathAccessories).getValue(GlobalVariable.NumofAccessories, 2) + ';'+GlobalVariable.ReasonFailedDelete)
 				}
 
 				continue
 			}
 			
 			'input accessories price'
-			WebUI.setText(modifyObjectAccessoriesPrice, datafileAccessories.getValue(
+			WebUI.setText(modifyObjectAccessoriesPrice, findTestData(excelPathAccessories).getValue(
 					GlobalVariable.NumofAccessories, 17), FailureHandling.OPTIONAL)
 	
 			'select security deposit type'
-			WebUI.selectOptionByLabel(modifyObjectDownPaymentType, datafileAccessories.getValue(
+			WebUI.selectOptionByLabel(modifyObjectDownPaymentType, findTestData(excelPathAccessories).getValue(
 					GlobalVariable.NumofAccessories, 18), false, FailureHandling.OPTIONAL)
 	
-			if (datafileAccessories.getValue(
+			if (findTestData(excelPathAccessories).getValue(
 				GlobalVariable.NumofAccessories, 18) == 'Percentage') {
 				'input security deposit percentage'
 				WebUI.sendKeys(modifyObjectInputPercentage, Keys.chord(Keys.CONTROL, 'a'), FailureHandling.OPTIONAL)
@@ -804,24 +804,24 @@ else if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase
 	
 				WebUI.sendKeys(modifyObjectInputPercentage, Keys.chord(Keys.HOME), FailureHandling.OPTIONAL)
 	
-				WebUI.sendKeys(modifyObjectInputPercentage, Keys.chord(Keys.RIGHT, datafileAccessories.getValue(
+				WebUI.sendKeys(modifyObjectInputPercentage, Keys.chord(Keys.RIGHT, findTestData(excelPathAccessories).getValue(
 							GlobalVariable.NumofAccessories, 19)), FailureHandling.OPTIONAL)
-			} else if (datafileAccessories.getValue(
+			} else if (findTestData(excelPathAccessories).getValue(
 				GlobalVariable.NumofAccessories, 18) == 'Amount') {
 				'input security deposit amount'
-				WebUI.setText(modifyObjectInputAmount, datafileAccessories.getValue(
+				WebUI.setText(modifyObjectInputAmount, findTestData(excelPathAccessories).getValue(
 						GlobalVariable.NumofAccessories, 20), FailureHandling.OPTIONAL)
 			}
 			
 			'input accessories notes'
-			WebUI.setText(modifyObjectInputNoteAccessories, datafileAccessories.getValue(
+			WebUI.setText(modifyObjectInputNoteAccessories, findTestData(excelPathAccessories).getValue(
 					GlobalVariable.NumofAccessories, 21), FailureHandling.OPTIONAL)
 	
 			if (((WebUI.getAttribute(modifyObjectAccessoriesPrice, 'value') == '') || (WebUI.getAttribute(modifyObjectInputPercentage,
 				'value') == '')) || (WebUI.getAttribute(modifyObjectInputAmount, 'value') == '')) {
 								
 				'Write To Excel GlobalVariable.StatusWarning and GlobalVariable.StatusReasonMandatoryEmpty'
-				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7a.Accessories', GlobalVariable.NumofAccessories, GlobalVariable.StatusWarning, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 2) + ';'+GlobalVariable.StatusReasonMandatoryEmpty)
+				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7a.Accessories', GlobalVariable.NumofAccessories, GlobalVariable.StatusWarning, findTestData(excelPathAccessories).getValue(GlobalVariable.NumofAccessories, 2) + ';'+GlobalVariable.StatusReasonMandatoryEmpty)
 				
 				'click delete'
 				WebUI.click(modifyObjectButtonDelete, FailureHandling.OPTIONAL)
@@ -832,7 +832,7 @@ else if(datafileTabAsset.getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase
 				if(WebUI.verifyElementPresent(modifyObjectButtonDelete, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)){
 					'Write To Excel GlobalVariable.ReasonFailedDelete'
 					CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath,
-							'7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 2) + ';'+GlobalVariable.ReasonFailedDelete)
+							'7a.Accessories', 1, GlobalVariable.NumofAccessories - 1, findTestData(excelPathAccessories).getValue(GlobalVariable.NumofAccessories, 2) + ';'+GlobalVariable.ReasonFailedDelete)
 				}
 
 				continue
@@ -857,7 +857,7 @@ public checkVerifyEqualOrMatch(Boolean isMatch){
 	if(isMatch==false && GlobalVariable.FlagFailed==0){
 	
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7a.Accessories', GlobalVariable.NumofAccessories, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 2) + ';'+GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7a.Accessories', GlobalVariable.NumofAccessories, GlobalVariable.StatusFailed, findTestData(excelPathAccessories).getValue(GlobalVariable.NumofAccessories, 2) + ';'+GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 			
 			GlobalVariable.FlagFailed=1
 	}
@@ -871,24 +871,24 @@ def countAccessoriesDP(){
 		'convert accessories price > integer'
 		BigDecimal BDAccessoriesPrice = Integer.parseInt(AccessoriesPrice)
 								  
-		if (datafileAccessories.getValue(GlobalVariable.NumofAccessories, 18) == 'Percentage') {
+		if (findTestData(excelPathAccessories).getValue(GlobalVariable.NumofAccessories, 18) == 'Percentage') {
 				  
 			'get attribute accessories input amount dari confins'
 			AccessoriesInputAmt = WebUI.getAttribute(modifyObjectInputAmount, 'value')
 							  
 			'get value accessories dari excel'
-			AccessoriesAmountExcel = datafileAccessories.getValue(GlobalVariable.NumofAccessories, 24)
+			AccessoriesAmountExcel = findTestData(excelPathAccessories).getValue(GlobalVariable.NumofAccessories, 24)
 							  
 			'verify securitydeposit value equal'
 			checkVerifyEqualOrMatch(WebUI.verifyMatch(AccessoriesInputAmt, AccessoriesAmountExcel, false))
 							  
-		} else if (datafileAccessories.getValue(GlobalVariable.NumofAccessories, 18) == 'Amount') {
+		} else if (findTestData(excelPathAccessories).getValue(GlobalVariable.NumofAccessories, 18) == 'Amount') {
 				  
 			'get attribute accessories input percentage dari confins'
 			AccessoriesInputPrctg = WebUI.getAttribute(modifyObjectInputPercentage, 'value').replace(' %', '')
 
 			'get value accessories value dari excel'
-			AccessoriesPrctgExcel = datafileAccessories.getValue(GlobalVariable.NumofAccessories, 23)
+			AccessoriesPrctgExcel = findTestData(excelPathAccessories).getValue(GlobalVariable.NumofAccessories, 23)
 							  
 			'verify securitydeposit value equal'
 			checkVerifyEqualOrMatch(WebUI.verifyEqual(Math.round(Double.parseDouble(AccessoriesInputPrctg)), Math.round(Double.parseDouble(AccessoriesPrctgExcel))))

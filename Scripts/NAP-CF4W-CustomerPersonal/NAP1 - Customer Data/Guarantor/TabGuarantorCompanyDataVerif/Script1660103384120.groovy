@@ -19,6 +19,9 @@ import internal.GlobalVariable as GlobalVariable
 'connect DB FOU'
 Sql sqlconnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
+'declare excelPathGuarantorCompany'
+excelPathGuarantorCompany = 'NAP-'+ GlobalVariable.LOB  +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataCompany'
+
 'get guarcompany data from db'
 ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.CustomerDataCompany'(sqlconnectionFOU, WebUI.getAttribute(
         findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataCompany/input_Guarantor Legal Name'), 
@@ -35,7 +38,7 @@ def checkVerifyEqualOrMatch(Boolean isMatch) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
 
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3b.TabGuarantorDataCompany', GlobalVariable.NumofGuarantorCompany, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataCompany').getValue(GlobalVariable.NumofGuarantorCompany, 2) + ';' +GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3b.TabGuarantorDataCompany', GlobalVariable.NumofGuarantorCompany, GlobalVariable.StatusFailed, findTestData(excelPathGuarantorCompany).getValue(GlobalVariable.NumofGuarantorCompany, 2) + ';' +GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 		
         GlobalVariable.FlagFailed = 1
     }

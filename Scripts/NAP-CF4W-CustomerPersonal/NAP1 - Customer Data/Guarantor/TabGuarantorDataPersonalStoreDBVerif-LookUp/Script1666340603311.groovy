@@ -19,15 +19,15 @@ import groovy.sql.Sql as Sql
 'connect DB LOS'
 Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
-'declare datafileTabGuarantorPersonal'
-datafileTabGuarantorPersonal = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal')
+'declare excelPathGuarantorPersonal'
+excelPathGuarantorPersonal = 'NAP-'+ GlobalVariable.LOB  +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal'
 
 'declare arraymatch'
 ArrayList<String> arrayMatch = new ArrayList<String>()
 
 'get guarantordatapersonal from db'
 ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.GuarantorDataStoreDBPersonalLookUp'(sqlconnectionLOS, 
-    datafileTabGuarantorPersonal.getValue(GlobalVariable.NumofGuarantorPersonal, 12), datafileTabGuarantorPersonal.getValue(
+    findTestData(excelPathGuarantorPersonal).getValue(GlobalVariable.NumofGuarantorPersonal, 12), findTestData(excelPathGuarantorPersonal).getValue(
         GlobalVariable.NumofGuarantorPersonal, 16))
 
 'looping guarantordatapersonal from db'
@@ -40,6 +40,6 @@ for (int i = 0; i < result.size(); i++) {
 if (arrayMatch.contains(false)) {
 
 	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedStoredDB'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3a.TabGuarantorDataPersonal', GlobalVariable.NumofGuarantorPersonal, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal').getValue(GlobalVariable.NumofGuarantorPersonal, 2) + ';' +GlobalVariable.ReasonFailedStoredDB)
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3a.TabGuarantorDataPersonal', GlobalVariable.NumofGuarantorPersonal, GlobalVariable.StatusFailed, findTestData(excelPathGuarantorPersonal).getValue(GlobalVariable.NumofGuarantorPersonal, 2) + ';' +GlobalVariable.ReasonFailedStoredDB)
 }
 

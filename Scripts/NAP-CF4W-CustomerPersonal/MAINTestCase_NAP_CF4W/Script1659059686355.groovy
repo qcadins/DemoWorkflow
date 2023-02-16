@@ -22,28 +22,28 @@ WebUI.callTestCase(findTestCase('Login/LoginR3BranchManagerSuperuser - NEW'), [:
 'get data file path'
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathPersonal)
 
-'declare datafileCustomerPersonal'
-datafileCustomerPersonal = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData')
+'declare excelPathCustomerPersonal'
+excelPathCustomerPersonal = 'NAP-'+ GlobalVariable.LOB  +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData'
 
-countCustomerPersonal = datafileCustomerPersonal.getColumnNumbers()
+countCustomerPersonal = findTestData(excelPathCustomerPersonal).getColumnNumbers()
 
 'Jika role == data entry'
 if (GlobalVariable.Role == 'Data Entry') {
     'looping countnumofcust'
     for (GlobalVariable.NumofColm; GlobalVariable.NumofColm <= (countCustomerPersonal - 1); (GlobalVariable.NumofColm)++) {
-        if (CustomKeywords.'customizeKeyword.function.checkNAPExist'(datafileCustomerPersonal) == true) {
+        if (CustomKeywords.'customizeKeyword.function.checkNAPExist'(findTestData(excelPathCustomerPersonal)) == true) {
             break
         }
         
         'Jika status pada excel bukan unexecuted'
-        if (!(datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 1).equalsIgnoreCase('Unexecuted')) || (datafileCustomerPersonal.getValue(
+        if (!(findTestData(excelPathCustomerPersonal).getValue(GlobalVariable.NumofColm, 1).equalsIgnoreCase('Unexecuted')) || (findTestData(excelPathCustomerPersonal).getValue(
             GlobalVariable.NumofColm, 12).length() == 0)) {
             'skip ke appno selanjutnya'
             continue
         }
         
         'jika edit appno tidak kosong'
-        if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 8) != '') {
+        if (findTestData(excelPathCustomerPersonal).getValue(GlobalVariable.NumofColm, 8) != '') {
             'call tc edit nap'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/EditNAP'), [:], FailureHandling.CONTINUE_ON_FAILURE //Jika edit appno kosong
                 ) //jika role == testing
@@ -78,19 +78,19 @@ if (GlobalVariable.Role == 'Data Entry') {
     for (GlobalVariable.NumofColm; GlobalVariable.NumofColm <= (countCustomerPersonal - 1); (GlobalVariable.NumofColm)++) {
 		GlobalVariable.IsDataCancel = 0
 		
-        if (CustomKeywords.'customizeKeyword.function.checkNAPExist'(datafileCustomerPersonal) == true) {
+        if (CustomKeywords.'customizeKeyword.function.checkNAPExist'(findTestData(excelPathCustomerPersonal)) == true) {
             break
         }
         
         'Jika status pada excel bukan unexecuted'
-        if (!(datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 1).equalsIgnoreCase('Unexecuted')) || (datafileCustomerPersonal.getValue(
+        if (!(findTestData(excelPathCustomerPersonal).getValue(GlobalVariable.NumofColm, 1).equalsIgnoreCase('Unexecuted')) || (findTestData(excelPathCustomerPersonal).getValue(
             GlobalVariable.NumofColm, 12).length() == 0)) {
             'skip ke appno selanjutnya'
             continue
         }
         
         'Jika edit appno pada excel tidak kosong'
-        if (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 8) != '') {
+        if (findTestData(excelPathCustomerPersonal).getValue(GlobalVariable.NumofColm, 8) != '') {
 			
 				'call tc edit nap'
 				WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/EditNAP'), [:], FailureHandling.CONTINUE_ON_FAILURE)

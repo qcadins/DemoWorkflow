@@ -25,8 +25,8 @@ import groovy.sql.Sql as Sql
 'get data file path'
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathPersonal)
 
-'declare datafileTabLifeInsurance'
-datafileTabLifeInsurance = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData')
+'declare excelPathTabLifeInsurance'
+excelPathTabLifeInsurance = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData'
 
 'Klik tab life insurance'
 WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/buttonTabLifeInsurance'))
@@ -59,7 +59,7 @@ def jsCode = 'return document.querySelector("input.mat-checkbox-input.cdk-visual
 CustomKeywords.'JsExecutor.jsExecutionFunction'(jsCode)
 
 'Cek IsCoverLifeInsurance Tercentang atau tidak pada Excel'
-if (datafileTabLifeInsurance.getValue(GlobalVariable.NumofColm, 12) == 'YES') {
+if (findTestData(excelPathTabLifeInsurance).getValue(GlobalVariable.NumofColm, 12) == 'YES') {
     'Memastikan Kondisi Awal Checkbox tidak tercentang'
     if (WebUI.verifyElementNotChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabLifeInsuranceData/checkbox_coverlifeinsurance'), 
         GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
@@ -89,7 +89,7 @@ if (datafileTabLifeInsurance.getValue(GlobalVariable.NumofColm, 12) == 'YES') {
 			lifeInscoBranchName)==false){
 					
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyRule'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('9.TabLifeInsuranceData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedVerifyRule)
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('9.TabLifeInsuranceData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathTabLifeInsurance).getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedVerifyRule)
 		
 			GlobalVariable.FlagFailed=1
 		}
@@ -101,7 +101,7 @@ if (datafileTabLifeInsurance.getValue(GlobalVariable.NumofColm, 12) == 'YES') {
 		if(WebUI.verifyEqual(totalLifeInscoBranch - 1, countLifeInscoBranch)==false){
 		
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyRule'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('9.TabLifeInsuranceData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedVerifyRule)
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('9.TabLifeInsuranceData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathTabLifeInsurance).getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedVerifyRule)
 		
 			GlobalVariable.FlagFailed=1
 		}
@@ -120,7 +120,7 @@ if (datafileTabLifeInsurance.getValue(GlobalVariable.NumofColm, 12) == 'YES') {
 			paymentmethod) == false) {
 	
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('9.TabLifeInsuranceData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedDDL + 'cover period')
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('9.TabLifeInsuranceData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathTabLifeInsurance).getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedDDL + 'cover period')
 	
 			(GlobalVariable.FlagFailed)++
 		}
@@ -128,26 +128,26 @@ if (datafileTabLifeInsurance.getValue(GlobalVariable.NumofColm, 12) == 'YES') {
     
     'Select DropDownList Life Insco Branch Name'
     WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabLifeInsuranceData/select_LifeInscoBranchName'), 
-        datafileTabLifeInsurance.getValue(
+        findTestData(excelPathTabLifeInsurance).getValue(
             GlobalVariable.NumofColm, 13), false, FailureHandling.OPTIONAL)
 
     'Select DropDownList Premium Payment Method'
     WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabLifeInsuranceData/select_PremiumPaymentMethod'), 
-        datafileTabLifeInsurance.getValue(
+        findTestData(excelPathTabLifeInsurance).getValue(
             GlobalVariable.NumofColm, 14), false)
 
     'Cek dan Memastikan Jika Premium Payment Method = Paid in Advance & Capitalized Mix'
-    if (datafileTabLifeInsurance.getValue(
+    if (findTestData(excelPathTabLifeInsurance).getValue(
         GlobalVariable.NumofColm, 14) == 'Paid in Advance & Capitalized Mix') {
         'Set Nilai Persentasi Capitalized Premium'
         WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabLifeInsuranceData/input_Capitalized Premium Percentage_paidInAdvPrcnt'), 
-            datafileTabLifeInsurance.getValue(
+            findTestData(excelPathTabLifeInsurance).getValue(
                 GlobalVariable.NumofColm, 15))
     }
     
     'Set Notes'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabLifeInsuranceData/textarea_Notes'), 
-        datafileTabLifeInsurance.getValue(
+        findTestData(excelPathTabLifeInsurance).getValue(
             GlobalVariable.NumofColm, 16))
 
     'Inisialisasi Driver'
@@ -175,15 +175,15 @@ if (datafileTabLifeInsurance.getValue(GlobalVariable.NumofColm, 12) == 'YES') {
         String textSubject = WebUI.getText(modifyObjectSubject)
 
         'Ambil nilai dari excel untuk menentukan Subject Type Customer tercentang atau tidak'
-        String isCustomer = datafileTabLifeInsurance.getValue(
+        String isCustomer = findTestData(excelPathTabLifeInsurance).getValue(
             GlobalVariable.NumofColm, 18)
 
         'Ambil nilai dari excel untuk menentukan Subject Type Guarantor tercentang atau tidak'
-        String isGuarantor = datafileTabLifeInsurance.getValue(
+        String isGuarantor = findTestData(excelPathTabLifeInsurance).getValue(
             GlobalVariable.NumofColm, 19)
 
         'Ambil nilai dari excel untuk menentukan Subject Type Spouse tercentang atau tidak'
-        String isSpouse = datafileTabLifeInsurance.getValue(
+        String isSpouse = findTestData(excelPathTabLifeInsurance).getValue(
             GlobalVariable.NumofColm, 20)
 
         if (textSubject == 'CUSTOMER') {
@@ -214,7 +214,7 @@ if (datafileTabLifeInsurance.getValue(GlobalVariable.NumofColm, 12) == 'YES') {
                     WebUI.uncheck(modifyObjectCheckbox)
                 }
                 
-                def checkGuarantor = datafileTabLifeInsurance.getValue(
+                def checkGuarantor = findTestData(excelPathTabLifeInsurance).getValue(
                     GlobalVariable.NumofColm, 21).split(';')
 
                 modifyObjectSubjectName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabLifeInsuranceData/td_SubjectName'), 
@@ -257,7 +257,7 @@ if (datafileTabLifeInsurance.getValue(GlobalVariable.NumofColm, 12) == 'YES') {
     
     'Set Admin Fee Amount'
     WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabLifeInsuranceData/input_Admin Fee Amount_CustAdminFeeAmt'), 
-        datafileTabLifeInsurance.getValue(
+        findTestData(excelPathTabLifeInsurance).getValue(
             GlobalVariable.NumofColm, 23))
 
     NumberFormat decimalFormat = NumberFormat.getPercentInstance()
@@ -268,7 +268,7 @@ if (datafileTabLifeInsurance.getValue(GlobalVariable.NumofColm, 12) == 'YES') {
 
 	'parsing capitalizepremiumpercentage ke desimal'
     GlobalVariable.CapitalizePremiumPercentage = decimalFormat.parse(CapitalizePremiumPercentageValue).floatValue()
-} else if(datafileTabLifeInsurance.getValue(
+} else if(findTestData(excelPathTabLifeInsurance).getValue(
     GlobalVariable.NumofColm, 12) == 'NO') {
     if (WebUI.verifyElementChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabLifeInsuranceData/checkbox_coverlifeinsurance'), 
         GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
@@ -284,7 +284,7 @@ WebUI.delay(5)
 'click Save'
 WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabLifeInsuranceData/button_Save'))
 
-Integer iscompleteMandatory = Integer.parseInt(datafileTabLifeInsurance.getValue(GlobalVariable.NumofColm, 4))
+Integer iscompleteMandatory = Integer.parseInt(findTestData(excelPathTabLifeInsurance).getValue(GlobalVariable.NumofColm, 4))
 
 if(iscompleteMandatory==0 && GlobalVariable.FlagFailed==0){
 	'cek alert'
@@ -311,7 +311,7 @@ if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NA
 	GlobalVariable.IsDataCancel = 1
 } 
 else{
-	if(GlobalVariable.Role == 'Testing' && GlobalVariable.CheckVerifStoreDBPersonal=="Yes" && datafileTabLifeInsurance.getValue(GlobalVariable.NumofColm, 12) == 'YES'){
+	if(GlobalVariable.Role == 'Testing' && GlobalVariable.CheckVerifStoreDBPersonal=="Yes" && findTestData(excelPathTabLifeInsurance).getValue(GlobalVariable.NumofColm, 12) == 'YES'){
 		'call test case store db life insurance data'
 		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/TabLifeInsuranceDataStoreDBVerif'),
 				[:], FailureHandling.CONTINUE_ON_FAILURE)
@@ -322,7 +322,7 @@ public checkVerifyEqualOrMatch(Boolean isMatch){
 		if(isMatch==false && GlobalVariable.FlagFailed==0){
 	
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('9.TabLifeInsuranceData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabLifeInsuranceData').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('9.TabLifeInsuranceData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathTabLifeInsurance).getValue(GlobalVariable.NumofColm, 2) + ';'+ GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 			
 			GlobalVariable.FlagFailed=1
 		}

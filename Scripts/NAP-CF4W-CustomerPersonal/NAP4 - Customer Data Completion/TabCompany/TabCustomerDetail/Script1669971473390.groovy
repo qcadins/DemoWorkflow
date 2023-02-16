@@ -41,11 +41,8 @@ if(GlobalVariable.RoleCompany == 'Testing'){
 	if (WebUI.verifyOptionsPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/CustomerDetail/select_Select One Corporate  Non Corporate'),
 		custmodel) == false) {
 
-		'call function get data file'
-		getDataFile()
-	
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.CustomerDetail', GlobalVariable.ColmNAP4, GlobalVariable.StatusFailed, GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 2) + ';' +GlobalVariable.ReasonFailedDDL + 'custmodel')
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.CustomerDetail', GlobalVariable.ColmNAP4, GlobalVariable.StatusFailed, findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 2) + ';' +GlobalVariable.ReasonFailedDDL + 'custmodel')
 
 		(GlobalVariable.FlagFailed)++
 	}
@@ -53,23 +50,23 @@ if(GlobalVariable.RoleCompany == 'Testing'){
 
 'input establishment date'
 WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/CustomerDetail/input_Establishment Date'),
-	GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 14))
+	findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 14))
 
 'input no of employee'
 WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/CustomerDetail/input_No Of Employee'),
-	GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 15))
+	findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 15))
 
-if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 16).length() > 2) {
+if (findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 16).length() > 2) {
 	'click button customer group'
 	WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/CustomerDetail/button_Customer Group_'))
 
 	'input customer no'
 	WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/CustomerDetail/input_Customer No_custNoId'),
-		GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 16))
+		findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 16))
 
 	'input customer name'
 	WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/CustomerDetail/input_Customer Name_custNameId'),
-		GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 17))
+		findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 17))
 
 	'click button search'
 	WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/CustomerDetail/button_Search'))
@@ -90,13 +87,13 @@ if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 16).length() >
 
 if (WebUI.verifyElementNotChecked(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/CustomerDetail/input_VIP_border'),
 	GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
-	if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 18) == 'Yes') {
+	if (findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 18) == 'Yes') {
 		'Click VIP checklist'
 		WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/CustomerDetail/input_VIP_border'))
 	}
 } else if (WebUI.verifyElementChecked(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/CustomerDetail/input_VIP_border'),
 	GlobalVariable.TimeOut)) {
-	if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 18) == 'No') {
+	if (findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 18) == 'No') {
 		'Click VIP checklist'
 		WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/CustomerDetail/input_VIP_border'))
 	}
@@ -104,13 +101,13 @@ if (WebUI.verifyElementNotChecked(findTestObject('NAP/NAP4-CustomerDataCompletio
 
 if (WebUI.verifyElementNotChecked(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/CustomerDetail/input_Affiliation with Multifinance'),
 	GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
-	if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 19) == 'Yes') {
+	if (findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 19) == 'Yes') {
 		'click affiliation and multifinance'
 		WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/CustomerDetail/input_Affiliation with Multifinance'))
 	}
 } else if (WebUI.verifyElementChecked(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/CustomerDetail/input_Affiliation with Multifinance'),
 	GlobalVariable.TimeOut)) {
-	if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 19) == 'No') {
+	if (findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 19) == 'No') {
 		'click affiliation and multifinance'
 		WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/CustomerDetail/input_Affiliation with Multifinance'))
 	}
@@ -121,7 +118,7 @@ WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/Cust
 
 'input industry code'
 WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/CustomerDetail/input_Industry Type Code_industryTypeCodeId'),
-	GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 20))
+	findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 20))
 
 'click button search'
 WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/CustomerDetail/button_Search'))
@@ -138,11 +135,8 @@ if (WebUI.verifyElementPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/C
 	'click button back'
 	WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Back'))
 
-	'call function get data file'
-	getDataFile()
-	
 	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusReasonLookup'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.CustomerDetail', GlobalVariable.ColmNAP4, GlobalVariable.StatusFailed, GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 2) + ';' +GlobalVariable.StatusReasonLookup)
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.CustomerDetail', GlobalVariable.ColmNAP4, GlobalVariable.StatusFailed, findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 2) + ';' +GlobalVariable.StatusReasonLookup)
 
 	'Flagfailed +1 karena gagal melakukan lookup'
 	(GlobalVariable.FlagFailed)++
@@ -150,18 +144,18 @@ if (WebUI.verifyElementPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/C
 
 'select customer model'
 WebUI.selectOptionByLabel(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/CustomerDetail/select_Select One Corporate  Non Corporate'),
-	GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 22), false)
+	findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 22), false)
 
-if (GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 18) == 'Yes') {
+if (findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 18) == 'Yes') {
 	'input VIP note'
 	WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/CustomerDetail/textarea_VIP Notes'),
-		GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 23))
+		findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 23))
 }
 
 'click button save and continue'
 WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/CustomerDetail/button_Save  Continue'))
 
-Integer iscompleteMandatory = Integer.parseInt(GlobalVariable.FindDataFile.getValue(GlobalVariable.ColmNAP4, 4))
+Integer iscompleteMandatory = Integer.parseInt(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 4))
 
 if (iscompleteMandatory == 0 && (GlobalVariable.FlagFailed == 0)) {
 	'Check alert'
@@ -172,7 +166,7 @@ if (iscompleteMandatory == 0 && (GlobalVariable.FlagFailed == 0)) {
 'check if flagfailed = 0'
 if (GlobalVariable.FlagFailed == 0) {
 	'Check save Process write to excel'
-	CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(GlobalVariable.FindDataFile.getValue(
+	CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(findTestData(GlobalVariable.excelPath).getValue(
 				GlobalVariable.ColmNAP4, 4)), findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/AddressInformation/button_Add'),
 		GlobalVariable.ColmNAP4, '1.CustomerDetail')
 
@@ -215,5 +209,5 @@ def getDataFile(){
 	GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorCompany)
 		
 	'declare data file Global variable'
-	GlobalVariable.FindDataFile = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorCompany/CustomerDetail')
+	GlobalVariable.excelPath = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorCompany/CustomerDetail'
 }

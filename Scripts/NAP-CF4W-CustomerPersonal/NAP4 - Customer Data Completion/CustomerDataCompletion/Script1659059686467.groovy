@@ -22,11 +22,11 @@ import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 //'klik menu new consumer finance'
 //WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompletion/a_New Consumer Finance'))
 
-'declare datafileCustomerPersonal'
-datafileCustomerPersonal = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData')
+'declare excelPathCustomerPersonal'
+excelPathCustomerPersonal = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData'
 
-'declare datafileCDC'
-datafileCDC = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerDataCompletion')
+'declare excelPathCDC'
+excelPathCDC = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerDataCompletion'
 
 if(WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'), FailureHandling.OPTIONAL)){
 	'click menu consumer finance'
@@ -51,7 +51,7 @@ pagingTesting()
 
 'input Appno'
 WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompletion/input_Application No_AppNoId'), 
-    datafileCDC.getValue(GlobalVariable.NumofColm, 12))
+    findTestData(excelPathCDC).getValue(GlobalVariable.NumofColm, 12))
 
 'click search'
 WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Search'))
@@ -71,7 +71,7 @@ int count = variable.size()
 GlobalVariable.FlagFailed = 0
 
 'Jika role testing dan edit appno tidak ada isinya pada excel'
-if ((GlobalVariable.Role == 'Testing') && (datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 8).length() ==
+if ((GlobalVariable.Role == 'Testing') && (findTestData(excelPathCustomerPersonal).getValue(GlobalVariable.NumofColm, 8).length() ==
 0)) {
 	'verify equal number of customer'
 	checkVerifyEqualOrMatch(WebUI.verifyEqual(GlobalVariable.CountNumofCustomer, count, FailureHandling.OPTIONAL))
@@ -106,20 +106,20 @@ for (int i = 1; i <= count; i++) {
     String CustomerType = WebUI.getText(modifynewCustomerType)
 
     'tampung customer array excel'
-    def CustomerArray = datafileCDC.getValue(GlobalVariable.NumofColm, 13).split(';')
+    def CustomerArray = findTestData(excelPathCDC).getValue(GlobalVariable.NumofColm, 13).split(';')
 
     'tampung family array excel'
-    def FamilyArray = datafileCDC.getValue(GlobalVariable.NumofColm, 15).split(';')
+    def FamilyArray = findTestData(excelPathCDC).getValue(GlobalVariable.NumofColm, 15).split(';')
 
     'tampung guarantor array excel'
-    def GuarantorArray = datafileCDC.getValue(GlobalVariable.NumofColm, 17).split(';')
+    def GuarantorArray = findTestData(excelPathCDC).getValue(GlobalVariable.NumofColm, 17).split(';')
 
     'verify customerarray > 0'
     if (CustomerArray.size() > 0) {
         'looping customer array'
         for (c = 1; c <= CustomerArray.size(); c++) {
             	'verify if action == YES'            
-                if ((GlobalVariable.Role == 'Testing' && datafileCDC.getValue(GlobalVariable.NumofColm, 14) == 'YES') || 
+                if ((GlobalVariable.Role == 'Testing' && findTestData(excelPathCDC).getValue(GlobalVariable.NumofColm, 14) == 'YES') || 
 				(GlobalVariable.Role == 'Data Entry' && isComplete.equalsIgnoreCase('NO'))) {
                     'verify if customerarray == customer name'
                     if (CustomerName.equalsIgnoreCase(CustomerArray[(c - 1)])) {
@@ -144,7 +144,7 @@ for (int i = 1; i <= count; i++) {
         'looping family array'
         for (f = 1; f <= FamilyArray.size(); f++) {
             	'verify action == YES'
-                if (datafileCDC.getValue(GlobalVariable.NumofColm, 16) == 'YES') {
+                if (findTestData(excelPathCDC).getValue(GlobalVariable.NumofColm, 16) == 'YES') {
                     'verify customername == family array'
                     if (CustomerName.equalsIgnoreCase(FamilyArray[(f - 1)])) {
                         'click button action'
@@ -168,7 +168,7 @@ for (int i = 1; i <= count; i++) {
         'looping guarantor array'
         for (g = 1; g <= GuarantorArray.size(); g++) {
             	'verify action == YES'
-                if (datafileCDC.getValue(GlobalVariable.NumofColm, 18) == 'YES') {
+                if (findTestData(excelPathCDC).getValue(GlobalVariable.NumofColm, 18) == 'YES') {
                     'verify customername == guarantorarray'
                     if (CustomerName.equalsIgnoreCase(GuarantorArray[(g - 1)]) && (CustomerType == 'PERSONAL')) {
 						'klik button action'
@@ -207,7 +207,7 @@ WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompleti
 'get data file path'
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathPersonal)
 
-//Integer iscompleteMandatory = Integer.parseInt(datafileCDC.getValue(GlobalVariable.NumofColm, 4))
+Integer iscompleteMandatory = Integer.parseInt(findTestData(excelPathCDC).getValue(GlobalVariable.NumofColm, 4))
 
 if (GlobalVariable.FlagFailed == 0) {
     'cek alert'
@@ -521,33 +521,33 @@ def pagingTesting(){
 		checkVerifyFooter.add(WebUI.verifyEqual(CustomKeywords.'paging.verifyPaging.NAP4CountDataInPage'(), true))
 	
 		'jika verif reset tidak sesuai'
-		if (resultReset.contains(false) && (GlobalVariable.StatusFailed != datafileCustomerPersonal.getValue(GlobalVariable.NumofColm,
+		if (resultReset.contains(false) && (GlobalVariable.StatusFailed != findTestData(excelPathCustomerPersonal).getValue(GlobalVariable.NumofColm,
 			1))) {
 	
 			'Write To Excel GlobalVariable.StatusWarning and reason'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusWarning, ((datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 2).replace('-',
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusWarning, ((findTestData(excelPathCustomerPersonal).getValue(GlobalVariable.NumofColm, 2).replace('-',
 					'') + GlobalVariable.ReasonFailedReset) + 'NAP4') + ';\n')
 	
 			GlobalVariable.FlagWarning = 1
 		}
 		
 		'jika verif sort tidak sesuai'
-		if (checkVerifySort.contains(false) && (GlobalVariable.StatusFailed != datafileCustomerPersonal.getValue(GlobalVariable.NumofColm,
+		if (checkVerifySort.contains(false) && (GlobalVariable.StatusFailed != findTestData(excelPathCustomerPersonal).getValue(GlobalVariable.NumofColm,
 			1))) {
 	
 			'Write To Excel GlobalVariable.StatusWarning and reason'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusWarning, ((datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 2).replace('-',
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusWarning, ((findTestData(excelPathCustomerPersonal).getValue(GlobalVariable.NumofColm, 2).replace('-',
 					'') + GlobalVariable.ReasonFailedSort) + 'NAP4') + ';\n')
 			
 			GlobalVariable.FlagWarning = 1
 		}
 		
 		'jika verif footer tidak sesuai'
-		if (checkVerifyFooter.contains(false) && (GlobalVariable.StatusFailed != datafileCustomerPersonal.getValue(GlobalVariable.NumofColm,
+		if (checkVerifyFooter.contains(false) && (GlobalVariable.StatusFailed != findTestData(excelPathCustomerPersonal).getValue(GlobalVariable.NumofColm,
 			1))) {
 	
 			'Write To Excel GlobalVariable.StatusWarning and reason'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusWarning, ((datafileCustomerPersonal.getValue(GlobalVariable.NumofColm, 2).replace('-',
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('1.TabCustomerMainData', GlobalVariable.NumofColm, GlobalVariable.StatusWarning, ((findTestData(excelPathCustomerPersonal).getValue(GlobalVariable.NumofColm, 2).replace('-',
 					'') + GlobalVariable.ReasonFailedFooter) + 'NAP4') + ';\n')
 			
 			GlobalVariable.FlagWarning = 1

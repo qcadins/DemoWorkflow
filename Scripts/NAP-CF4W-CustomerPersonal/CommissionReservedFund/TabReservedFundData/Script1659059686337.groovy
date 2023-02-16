@@ -32,8 +32,8 @@ GlobalVariable.FlagFailed = 0
 'Arraylist untuk menampung total amount dari allocate rsv (upping rate, admin fee, dsb)'
 ArrayList<Double> TotalAllocateRsvAmt = new ArrayList<Double>()
 
-'declare datafileReservedFund'
-datafileReservedFund = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabReservedFundData')
+'declare excelPathReservedFund'
+excelPathReservedFund = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabReservedFundData'
 
 'Inisialisasi driver'
 WebDriver driver = DriverFactory.getWebDriver()
@@ -130,7 +130,7 @@ for(int i = 0;i<allocFrom.size();i++){
 		if(WebUI.verifyMatch(textAllocFromSection, ".*"+allocFrom[i].replace("_"," ")+".*",true)==false){
 						
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyRule'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('14.TabReservedFundData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabReservedFundData').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedVerifyRule)
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('14.TabReservedFundData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathReservedFund).getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedVerifyRule)
 			
 			GlobalVariable.FlagFailed=1
 		}
@@ -177,7 +177,7 @@ for(int i = 0;i<allocFrom.size();i++){
 			if(WebUI.verifyMatch(inputAllocAmt.replace(",",""),defAllocAmt[i],false)==false){
 				
 				'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyRule'
-				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('14.TabReservedFundData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabReservedFundData').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedVerifyRule)
+				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('14.TabReservedFundData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathReservedFund).getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedVerifyRule)
 				
 				GlobalVariable.FlagFailed=1
 			}
@@ -190,14 +190,14 @@ for(int i = 0;i<allocFrom.size();i++){
 				if(WebUI.verifyElementNotHasAttribute(inputAlloc,'readonly', GlobalVariable.TimeOut)==false){
 					
 					'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyRule'
-					CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('14.TabReservedFundData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabReservedFundData').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedVerifyRule)
+					CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('14.TabReservedFundData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathReservedFund).getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedVerifyRule)
 					
 					GlobalVariable.FlagFailed=1
 				}
 			}
 			
 			'Input Alloc Reserved Fund Amount'
-			WebUI.setText(inputAlloc, datafileReservedFund.getValue(
+			WebUI.setText(inputAlloc, findTestData(excelPathReservedFund).getValue(
 				GlobalVariable.NumofColm, rsvAmtRow+i), FailureHandling.OPTIONAL)
 		}
 		else if(allocBhv[i].equalsIgnoreCase("lock")){
@@ -207,7 +207,7 @@ for(int i = 0;i<allocFrom.size();i++){
 				if(WebUI.verifyElementHasAttribute(inputAlloc,'readonly', GlobalVariable.TimeOut)==false){
 					
 					'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyRule'
-					CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('14.TabReservedFundData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabReservedFundData').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedVerifyRule)
+					CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('14.TabReservedFundData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathReservedFund).getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedVerifyRule)
 					
 					GlobalVariable.FlagFailed=1
 				}	
@@ -255,7 +255,7 @@ else if(alert==null){
 if(alert.toLowerCase().contains("Must Be Less Than".toLowerCase())||WebUI.verifyElementPresent(findTestObject('NAP/CommissionReservedFund/TabReservedFundData/error_maxnumber'), GlobalVariable.TimeOut,FailureHandling.OPTIONAL)){
 	
 	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusReasonCalculateGagal'
-	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('14.TabReservedFundData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabReservedFundData').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.StatusReasonCalculateGagal)
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('14.TabReservedFundData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathReservedFund).getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.StatusReasonCalculateGagal)
 
 	'Klik cancel'
     WebUI.click(findTestObject('NAP/CommissionReservedFund/TabReservedFundData/button_Cancel'))
@@ -267,7 +267,7 @@ if(alert.toLowerCase().contains("Must Be Less Than".toLowerCase())||WebUI.verify
 
 if(GlobalVariable.Role=="Testing"){
 	'get nilai total reserved fund amount from excel'
-	BigDecimal totalAmt = Long.parseLong(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabReservedFundData').getValue(GlobalVariable.NumofColm, rsvAmtRow+allocFrom.size()).replace(",",""))
+	BigDecimal totalAmt = Long.parseLong(findTestData(excelPathReservedFund).getValue(GlobalVariable.NumofColm, rsvAmtRow+allocFrom.size()).replace(",",""))
 	
 	'Menyimpan nilai Total Reserved Fund Amount dari Web CONFINS'
 	String totalReservedFundAmt = WebUI.getText(findTestObject('NAP/CommissionReservedFund/TabReservedFundData/label_TotalReservedFundAmt')).replace(
@@ -332,7 +332,7 @@ WebUI.delay(5)
 WebUI.click(findTestObject('NAP/CommissionReservedFund/TabReservedFundData/button_Save'))
 
 'get nilai iscompletemandatory dari excel'
-Integer iscompleteMandatory = Integer.parseInt(datafileReservedFund.getValue(GlobalVariable.NumofColm, 4))
+Integer iscompleteMandatory = Integer.parseInt(findTestData(excelPathReservedFund).getValue(GlobalVariable.NumofColm, 4))
 
 if(iscompleteMandatory==0 && GlobalVariable.FlagFailed==0){
 	'cek alert'
@@ -378,7 +378,7 @@ public checkVerifyEqualOrMatch(Boolean isMatch, String sheetname, int numofcolm)
 	if(isMatch==false && GlobalVariable.FlagFailed==0){
 	
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'(sheetname, numofcolm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabReservedFundData').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'(sheetname, numofcolm, GlobalVariable.StatusFailed, findTestData(excelPathReservedFund).getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 		
 		GlobalVariable.FlagFailed=1
 	}
