@@ -348,15 +348,15 @@ public class dupCheckVerif {
 	@Keyword
 	public checkDupCheckStatus (Sql instance, String appno){
 		String Result
-		Boolean DupCheckStatus
+		int DupCheckStatus
 		instance.eachRow(("SELECT CUST_CHECKING_STEP FROM APP WITH(NOLOCK) WHERE APP_NO = '"+ appno + "'"), { row ->
 
 			Result = (row[0])
 
 			if (Result.equalsIgnoreCase('NULL') || Result.equalsIgnoreCase('CDC_AUTO') || Result.equalsIgnoreCase('CDC')){
-				DupCheckStatus = true
+				DupCheckStatus = 1
 			}else{
-				DupCheckStatus = false
+				DupCheckStatus = 0
 			}
 		})
 		return DupCheckStatus

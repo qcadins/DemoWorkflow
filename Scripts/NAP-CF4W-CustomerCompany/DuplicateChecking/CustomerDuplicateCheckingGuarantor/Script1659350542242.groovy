@@ -21,20 +21,17 @@ import org.openqa.selenium.WebDriver as WebDriver
 import org.openqa.selenium.WebElement as WebElement
 import org.openqa.selenium.By as By
 
-'declare datafileDupcheck'
-datafileDupcheck = findTestData('NAP-CF4W-CustomerCompany/DuplicateChecking')
+'declare excelPathDupcheck'
+excelPathDupcheck = 'NAP-' + GlobalVariable.LOB + '-CustomerCompany/DuplicateChecking'
 
 'declare guarantor array'
-def GuarantorArray = datafileDupcheck.getValue(GlobalVariable.NumofColm, 19).split(';', -1)
+def GuarantorArray = findTestData(excelPathDupcheck).getValue(GlobalVariable.NumofColm, 19).split(';', -1)
 
 'declare guarantor action array'
-def GuarantorActionArray = datafileDupcheck.getValue(GlobalVariable.NumofColm, 20).split(';', -1)
-
-'declare guarantor negative action array'
-def GuarantorNegativeArray = datafileDupcheck.getValue(GlobalVariable.NumofColm, 21).split(';', -1)
+def GuarantorActionArray = findTestData(excelPathDupcheck).getValue(GlobalVariable.NumofColm, 20).split(';', -1)
 
 'get app no from data file dupcheck'
-String DupcheckAppNo = datafileDupcheck.getValue(GlobalVariable.NumofColm, 12)
+String DupcheckAppNo = findTestData(excelPathDupcheck).getValue(GlobalVariable.NumofColm, 12)
 
 'declare web driver'
 WebDriver driver = DriverFactory.getWebDriver()
@@ -111,50 +108,6 @@ if (GuarantorArray.size() > 0) {
 
 				'declare variable counttd'
 				int counttd = variabletd.size()
-				
-                'if role == testing'
-                if (GlobalVariable.RoleCompany == 'Testing') {
-                    'if dupcheck verif == review dan negative check == negative'
-                    if (GlobalVariable.NegativeverifResult[GlobalVariable.NegativeCustCount] == 'NEGATIVE') {
-					
-						ArrayList<String> variablenegcustno = DriverFactory.getWebDriver().findElements(By.cssSelector('#subSecNegList > table > tbody tr'))
-
-						'Jika negative check pada dupcheck guarantor bernilai yes'
-                        if ((GuarantorNegativeArray[(g - 1)]).equalsIgnoreCase('Yes')) {
-                            def modifycheckbox
-							
-							'looping negative list untuk mencari negative cust no karena hanya yang memiliki negative cust no yang bisa di select'
-							for (int id = 1; id <= variablenegcustno.size(); id++) {
-								'modify negative cust no'
-								modifyNegativeCustNo = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/IDNoCustomerMatchSimilarData'),
-									'xpath', 'equals', "//*[@id='subSecNegList']/table/tbody/tr["+id+"]/td[1]", true)
-								
-								if(WebUI.getText(modifyNegativeCustNo)!=""){
-								if (counttd == 10) {
-									modifycheckbox = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/checkbox_NegativePersonal'),
-										'xpath', 'equals', "//*[@id='subSecNegList']/table/tbody/tr["+id+"]/td[11]/mat-checkbox/label/span[1]", true)
-								}else if (counttd == 5){
-									modifycheckbox = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/checkbox_NegativeCompany'),
-										'xpath', 'equals', "//*[@id='subSecNegList']/table/tbody/tr["+id+"]/td[6]/mat-checkbox/label/span[1]", true)
-								}
-									break
-								}
-
-							}
-							if(modifycheckbox!=null){
-								'click negative checkbox index 1 yang ada negative cust no'
-								WebUI.click(modifycheckbox)
-							}
-                            else{
-								if (counttd == 10) {									
-								WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/checkbox_NegativePersonal'))
-								}else if (counttd == 5) {
-								WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/checkbox_NegativeCompany'))
-								}
-							}
-                        }
-                    }
-                }
 
 				'verif if table is no data'
                 if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/label_NoDataFoundSimilardata'), 
@@ -606,10 +559,7 @@ if (GuarantorArray.size() > 0) {
                 }
             }
         }
-        
-        '+ index negative customer count'
-        (GlobalVariable.NegativeCustCount)++
-
+		        
         if (g == GuarantorArray.size()) {
             break
         }

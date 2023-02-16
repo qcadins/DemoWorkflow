@@ -106,8 +106,8 @@ if (GlobalVariable.Role == 'Data Entry') {
         
     } //Jika appstep ==fam
 	else if (appStep == 'FAM') {
-		'getcustdata untuk proses dupcheck'
-		getCustdata(sqlconnectionLOS, appNo, appStep)
+//		'getcustdata untuk proses dupcheck'
+//		getCustdata(sqlconnectionLOS, appNo, appStep)
 		
         'click Menu customer main data'
         WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
@@ -153,8 +153,8 @@ if (GlobalVariable.Role == 'Data Entry') {
             [:], FailureHandling.CONTINUE_ON_FAILURE)
     } //jika appstep == GUAR
 	else if (appStep == 'GUAR') {
-		'getcustdata untuk proses dupcheck'
-		getCustdata(sqlconnectionLOS, appNo, appStep)
+//		'getcustdata untuk proses dupcheck'
+//		getCustdata(sqlconnectionLOS, appNo, appStep)
 		
         'click Menu customer main data'
         WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
@@ -194,8 +194,8 @@ if (GlobalVariable.Role == 'Data Entry') {
             [:], FailureHandling.CONTINUE_ON_FAILURE)
     } //Jika appstep = napd atau ref atau app atau asset atau ins atau lfi atau fin atau tc 
 	else if (CustomKeywords.'dbConnection.checkStep.checkNAP2Step'(appStep) == true) {
-		'getcustdata untuk proses dupcheck'
-		getCustdata(sqlconnectionLOS, appNo, appStep)
+//		'getcustdata untuk proses dupcheck'
+//		getCustdata(sqlconnectionLOS, appNo, appStep)
 
 		'call tc cust dupcheck'
 		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/DuplicateChecking/CustomerDuplicateChecking'), [:], FailureHandling.CONTINUE_ON_FAILURE)
@@ -487,8 +487,8 @@ else if (GlobalVariable.Role == 'Testing') {
             [:], FailureHandling.STOP_ON_FAILURE)
     }//Jika appstep == fam 
 	else if (appStep == 'FAM') {
-		'getcustdata untuk proses dupcheck'
-		getCustdata(sqlconnectionLOS, appNo, appStep)
+//		'getcustdata untuk proses dupcheck'
+//		getCustdata(sqlconnectionLOS, appNo, appStep)
 		
         'click Menu customer main data'
         WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
@@ -545,8 +545,8 @@ else if (GlobalVariable.Role == 'Testing') {
     } //Jika appstep == guar
 	else if (appStep == 'GUAR') {
 		
-		'getcustdata untuk proses dupcheck'
-		getCustdata(sqlconnectionLOS, appNo, appStep)
+//		'getcustdata untuk proses dupcheck'
+//		getCustdata(sqlconnectionLOS, appNo, appStep)
 		
         'click Menu customer main data'
         WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
@@ -596,8 +596,8 @@ else if (GlobalVariable.Role == 'Testing') {
             [:], FailureHandling.STOP_ON_FAILURE)
     } //Jika appstep == napd atau ref atau app atau asset atau ins atau lfi atau fin atau tc
 	else if (CustomKeywords.'dbConnection.checkStep.checkNAP2Step'(appStep) == true) {
-        'getcustdata untuk proses dupcheck'
-		getCustdata(sqlconnectionLOS, appNo, appStep)
+//        'getcustdata untuk proses dupcheck'
+//		getCustdata(sqlconnectionLOS, appNo, appStep)
 
 		'call tc custdupcheckverif'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/DuplicateChecking/CustomerDuplicateCheckingVerif'), [:], 

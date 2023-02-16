@@ -28,6 +28,9 @@ def FamilyArray = findTestData(excelPathDupcheck).getValue(GlobalVariable.NumofC
 'declare familyactionarray'
 def FamilyActionArray = findTestData(excelPathDupcheck).getValue(GlobalVariable.NumofColm, 17).split(';', -1)
 
+'declare familynegativearray'
+def FamilyNegativeArray = findTestData(excelPathDupcheck).getValue(GlobalVariable.NumofColm, 18).split(';', -1)
+
 'array customer name data inputan'
 def CustomerNameArray = GlobalVariable.CustomerName.split(';')
 
@@ -96,6 +99,41 @@ if ((FamilyArray.size() > 0) && (findTestData(excelPathDupcheck).getValue(Global
             if (WebUI.verifyElementPresent(modifyButtonEdit, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
                 'click button edit'
                 WebUI.click(modifyButtonEdit, FailureHandling.OPTIONAL)
+				
+                'if role == testing'
+                if (GlobalVariable.Role == 'Testing') {
+                    'if dupcheck verif == review dan negative check == negative atau dupcheck verif == lock dan negative check == negative dan ada button select appinprocess'
+                    if (GlobalVariable.NegativeverifResult[GlobalVariable.NegativeCustCount] == 'NEGATIVE') {
+					
+						ArrayList<String> variablenegcustno = DriverFactory.getWebDriver().findElements(By.cssSelector('#subSecNegList > table > tbody tr'))
+					
+						'Jika negative check pada excel bernilai yes'
+                        if ((FamilyNegativeArray[(f - 1)]).equalsIgnoreCase('Yes')) {
+                            def modifycheckbox
+							
+							'looping negative list untuk mencari negative cust no karena hanya yang memiliki negative cust no yang bisa di select'
+							for (int id = 1; id <= variablenegcustno.size(); id++) {
+								'modify negative cust no'
+								modifyNegativeCustNo = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/IDNoCustomerMatchSimilarData'),
+									'xpath', 'equals', "//*[@id='subSecNegList']/table/tbody/tr["+id+"]/td[1]", true)
+								
+								if(WebUI.getText(modifyNegativeCustNo)!=""){
+									modifycheckbox = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/IDNoCustomerMatchSimilarData'),
+										'xpath', 'equals', "//*[@id='subSecNegList']/table/tbody/tr["+id+"]/td[11]/mat-checkbox/label/span[1]", true)
+									break
+								}
+
+							}
+							if(modifycheckbox!=null){
+								'click negative checkbox index 1 yang ada negative cust no'
+								WebUI.click(modifycheckbox)
+							}
+                            else{
+								WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/checkbox_NegativePersonal'))
+							}
+                        }
+                    }
+                }
                 
 				'Jika ada data confins pada match similar data'
                 if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/label_NoDataFoundSimilardata'), 
@@ -231,7 +269,7 @@ if ((FamilyArray.size() > 0) && (findTestData(excelPathDupcheck).getValue(Global
                             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/button_Cancel'))
 
 							'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDupcheck'
-							CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('4.DuplicateChecking', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedDupcheck)
+							CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('4.DuplicateChecking', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathDupcheck).getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedDupcheck)
                             
 							KeywordUtil.markFailedAndStop('gagal dupcheck')
                         } //Jika button select application in process ada pada confins
@@ -294,7 +332,7 @@ if ((FamilyArray.size() > 0) && (findTestData(excelPathDupcheck).getValue(Global
                             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/button_Cancel'))
 
 							'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDupcheck'
-							CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('4.DuplicateChecking', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedDupcheck)
+							CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('4.DuplicateChecking', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathDupcheck).getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedDupcheck)
                             
 							KeywordUtil.markFailedAndStop('gagal dupcheck')
 							
@@ -352,7 +390,7 @@ if ((FamilyArray.size() > 0) && (findTestData(excelPathDupcheck).getValue(Global
                             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/button_Cancel'))
 
 							'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDupcheck'
-							CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('4.DuplicateChecking', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedDupcheck)
+							CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('4.DuplicateChecking', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathDupcheck).getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedDupcheck)
 							
 							KeywordUtil.markFailedAndStop('gagal dupcheck')
                         } //Jika ada button new pada confins
@@ -388,7 +426,10 @@ if ((FamilyArray.size() > 0) && (findTestData(excelPathDupcheck).getValue(Global
                 }
             }
         }
-
+        
+        '+ index negative customer count'
+        (GlobalVariable.NegativeCustCount)++
+		
         if (f == FamilyArray.size()) {
             break
         }
@@ -467,7 +508,7 @@ def checkVerifyEqualOrMatch(Boolean isMatch) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
 
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('4.DuplicateChecking', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('4.DuplicateChecking', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathDupcheck).getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 		
         GlobalVariable.FlagFailed = 1
     }

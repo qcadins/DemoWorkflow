@@ -66,13 +66,6 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
                 [:], FailureHandling.CONTINUE_ON_FAILURE)
         }
     }
-    //            try {
-    //            }
-    //            catch (Exception e) {
-    //                KeywordUtil.markFailed(e.printStackTrace())
-    //
-    //                continue
-    //            } 
 } else if (GlobalVariable.RoleCompany == 'Testing') {
     for (GlobalVariable.NumofColm; GlobalVariable.NumofColm <= (countCustomerCompany - 1); (GlobalVariable.NumofColm)++) {
         GlobalVariable.IsDataCancel = 0
@@ -100,17 +93,10 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
             if (GlobalVariable.IsDataCancel == 1) {
                 continue
             }
-            
-            'call test case Ducheck verif'
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateCheckingVerif'), 
-                [:], FailureHandling.CONTINUE_ON_FAILURE)
 
-            'check if dupcheck == yes'
-            if (GlobalVariable.DupcheckVerif == 'Yes') {
-                'call test case Duplicate checking'
-                WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateChecking'), 
-                    [:], FailureHandling.CONTINUE_ON_FAILURE)
-            }
+            'call test case Duplicate checking'
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateChecking'), 
+            		[:], FailureHandling.CONTINUE_ON_FAILURE)
             
             if (GlobalVariable.IsDataCancel == 1) {
                 continue

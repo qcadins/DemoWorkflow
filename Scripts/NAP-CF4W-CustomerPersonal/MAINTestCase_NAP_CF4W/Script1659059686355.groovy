@@ -22,6 +22,8 @@ WebUI.callTestCase(findTestCase('Login/LoginR3BranchManagerSuperuser - NEW'), [:
 'get data file path'
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathPersonal)
 
+GlobalVariable.LOB = 'CF4W'
+
 'declare excelPathCustomerPersonal'
 excelPathCustomerPersonal = 'NAP-'+ GlobalVariable.LOB  +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData'
 
@@ -68,7 +70,9 @@ if (GlobalVariable.Role == 'Data Entry') {
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
                 [:], FailureHandling.CONTINUE_ON_FAILURE)
         }
-    } //                'Jika flag checkappviewpersonal bernilai yes'
+    } 
+	
+	//                'Jika flag checkappviewpersonal bernilai yes'
     //                if (GlobalVariable.CheckAppViewPersonal == 'Yes') {
     //                    'call test case verify app view'
     //                    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/AppView/ApplicationInquiry'), [:], FailureHandling.CONTINUE_ON_FAILURE)
@@ -109,16 +113,9 @@ if (GlobalVariable.Role == 'Data Entry') {
 					continue
 				}
 
-                'call tc custdupcheckverif'
-                WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/DuplicateChecking/CustomerDuplicateCheckingVerif'), 
-                    [:], FailureHandling.CONTINUE_ON_FAILURE)
-
-                'jika dupcheckverif bernilai yes'
-                if (GlobalVariable.DupcheckVerif == 'Yes') {
-                    'call tc custdupcheck'
-                    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/DuplicateChecking/CustomerDuplicateChecking'), 
-                        [:], FailureHandling.CONTINUE_ON_FAILURE)
-                }
+                'call tc custdupcheck'
+                WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/DuplicateChecking/CustomerDuplicateChecking'), 
+                		[:], FailureHandling.CONTINUE_ON_FAILURE)                
 				
 				if (GlobalVariable.IsDataCancel == 1) {
 					continue

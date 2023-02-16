@@ -101,8 +101,8 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
             [:], FailureHandling.CONTINUE_ON_FAILURE)
     } else if (appStep == 'SHR') {
-        'call function get cust data'
-        getCustdata(sqlconnectionLOS, appNo, appStep)
+//        'call function get cust data'
+//        getCustdata(sqlconnectionLOS, appNo, appStep)
 
         'click Menu customer main data'
         WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
@@ -144,8 +144,8 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
             [:], FailureHandling.CONTINUE_ON_FAILURE)
     } else if (appStep == 'GUAR') {
-        'call function get cust data'
-        getCustdata(sqlconnectionLOS, appNo, appStep)
+//        'call function get cust data'
+//        getCustdata(sqlconnectionLOS, appNo, appStep)
 
         'click Menu customer main data'
         WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
@@ -181,8 +181,8 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
             [:], FailureHandling.CONTINUE_ON_FAILURE)
     } else if (CustomKeywords.'dbConnection.checkStep.checkNAP2Step'(appStep) == true) {
-        'call funtion get cust data'
-        getCustdata(sqlconnectionLOS, appNo, appStep)
+//        'call funtion get cust data'
+//        getCustdata(sqlconnectionLOS, appNo, appStep)
 
         'call test case dupchcek'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateChecking'), [:], FailureHandling.CONTINUE_ON_FAILURE)
@@ -370,8 +370,8 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
             [:], FailureHandling.CONTINUE_ON_FAILURE)
     } else if (appStep == 'SHR') {
-        'call function get cust data'
-        getCustdata(sqlconnectionLOS, appNo, appStep)
+//        'call function get cust data'
+//        getCustdata(sqlconnectionLOS, appNo, appStep)
 
         'click Menu customer main data'
         WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
@@ -422,8 +422,8 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
             [:], FailureHandling.CONTINUE_ON_FAILURE)
     } else if (appStep == 'GUAR') {
-        'call function get cust data'
-        getCustdata(sqlconnectionLOS, appNo, appStep)
+//        'call function get cust data'
+//        getCustdata(sqlconnectionLOS, appNo, appStep)
 
         'click Menu customer main data'
         WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
@@ -468,8 +468,8 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/CustomerDataCompletion'), 
             [:], FailureHandling.CONTINUE_ON_FAILURE)
     } else if (CustomKeywords.'dbConnection.checkStep.checkNAP2Step'(appStep) == true) {
-        'call funtion get cust data'
-        getCustdata(sqlconnectionLOS, appNo, appStep)
+//        'call funtion get cust data'
+//        getCustdata(sqlconnectionLOS, appNo, appStep)
 
         'call test case dupcheck verif'
         WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/DuplicateChecking/CustomerDuplicateCheckingVerif'), [:], 

@@ -30,6 +30,9 @@ def ManagementShareholderArray = findTestData(excelPathDupcheck).getValue(Global
 'get MS Action array'
 def ManagementShareholderActionArray = findTestData(excelPathDupcheck).getValue(GlobalVariable.NumofColm, 17).split(';', -1)
 
+'get MS Negative Action Array'
+def ManagementShareholderNegativeArray = findTestData(excelPathDupcheck).getValue(GlobalVariable.NumofColm, 18).split(';', -1)
+
 'get appno dari datafile dupcheck'
 String DupcheckAppNo = findTestData(excelPathDupcheck).getValue(GlobalVariable.NumofColm, 12)
 
@@ -106,6 +109,49 @@ if (ManagementShareholderArray.size() > 0) {
 				ArrayList<WebElement> variabletd = driver.findElements(By.cssSelector('#subSecAppProcess > table > thead th'))
 
 				int counttd = variabletd.size()
+				
+                'if role == testing'
+                if (GlobalVariable.RoleCompany == 'Testing') {
+                    'if dupcheck verif == review dan negative check == negative'
+                    if (GlobalVariable.NegativeverifResult[GlobalVariable.NegativeCustCount] == 'NEGATIVE') {
+					
+						ArrayList<String> variablenegcustno = DriverFactory.getWebDriver().findElements(By.cssSelector('#subSecNegList > table > tbody tr'))
+					
+                        if ((ManagementShareholderNegativeArray[(m - 1)]).equalsIgnoreCase('Yes')) {
+							def modifycheckbox
+							
+							'looping negative list untuk mencari negative cust no karena hanya yang memiliki negative cust no yang bisa di select'
+							for (int id = 1; id <= variablenegcustno.size(); id++) {
+								'modify negative cust no'
+								modifyNegativeCustNo = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/IDNoCustomerMatchSimilarData'),
+									'xpath', 'equals', "//*[@id='subSecNegList']/table/tbody/tr["+id+"]/td[1]", true)
+								
+								if(WebUI.getText(modifyNegativeCustNo)!=""){
+								if (counttd == 10) {
+									modifycheckbox = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/checkbox_NegativePersonal'),
+										'xpath', 'equals', "//*[@id='subSecNegList']/table/tbody/tr["+id+"]/td[11]/mat-checkbox/label/span[1]", true)
+								}else if (counttd == 5){
+									modifycheckbox = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/checkbox_NegativeCompany'),
+										'xpath', 'equals', "//*[@id='subSecNegList']/table/tbody/tr["+id+"]/td[6]/mat-checkbox/label/span[1]", true)
+								}
+									break
+								}
+
+							}
+							if(modifycheckbox!=null){
+								'click negative checkbox index 1 yang ada negative cust no'
+								WebUI.click(modifycheckbox)
+							}
+                            else{
+								if (counttd == 10) {									
+								WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/checkbox_NegativePersonal'))
+								}else if (counttd == 5) {
+								WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/checkbox_NegativeCompany'))
+								}
+							}
+                        }
+                    }
+                }
 
                 if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/label_NoDataFoundSimilardata'), 
                         FailureHandling.OPTIONAL), 'NO DATA FOUND', false, FailureHandling.OPTIONAL)) {
@@ -337,7 +383,7 @@ if (ManagementShareholderArray.size() > 0) {
                             WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/DuplicateChecking/button_Cancel'))
 
 							'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDupcheck'
-							CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('4.DuplicateChecking', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/DuplicateChecking').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDupcheck)
+							CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('4.DuplicateChecking', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathDupcheck).getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDupcheck)
 							
 							KeywordUtil.markFailedAndStop('gagal dupcheck')
                         } else if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_SelectMatchSimilarDataCompany'), 
@@ -435,7 +481,7 @@ if (ManagementShareholderArray.size() > 0) {
                             WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/DuplicateChecking/button_Cancel'))
 
 							'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDupcheck'
-							CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('4.DuplicateChecking', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/DuplicateChecking').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDupcheck)
+							CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('4.DuplicateChecking', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathDupcheck).getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDupcheck)
 							
 							KeywordUtil.markFailedAndStop('gagal dupcheck')
                         } else if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_New Customer'), 
@@ -513,7 +559,7 @@ if (ManagementShareholderArray.size() > 0) {
                             WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/DuplicateChecking/button_Cancel'))
 
 							'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDupcheck'
-							CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('4.DuplicateChecking', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/DuplicateChecking').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDupcheck)
+							CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('4.DuplicateChecking', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathDupcheck).getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDupcheck)
 							
 							KeywordUtil.markFailedAndStop('gagal dupcheck')
                         } else if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_New Customer'), 
@@ -559,6 +605,8 @@ if (ManagementShareholderArray.size() > 0) {
                 }
             }
         }
+        
+        (GlobalVariable.NegativeCustCount)++
 
         if (m == ManagementShareholderArray.size()) {
             break
@@ -630,9 +678,8 @@ def checkVerifyEqualOrMatch(Boolean isMatch) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
 		
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('4.DuplicateChecking', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/DuplicateChecking').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('4.DuplicateChecking', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathDupcheck).getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
         GlobalVariable.FlagFailed = 1
     }
 }
-

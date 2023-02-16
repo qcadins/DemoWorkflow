@@ -551,7 +551,7 @@ def getDataGuarPersonal() {
 	    'add ownership to array'
 	    confinsdata.add(WebUI.getAttribute(findTestObject('NAP/NAP1-CustomerData/TabGuarantorData/GuarantorDataPersonal/select_Ownership'), 
 	            'value'))
-	}else if(findTestData(excelPathGuarantorPersonal).getValue(GlobalVariable.NumofGuarantorCompany, 13) == 'Input Data'){
+	}else if(findTestData(excelPathGuarantorPersonal).getValue(GlobalVariable.NumofGuarantorPersonal, 13) == 'Input Data'){
 		Select select = new Select(DriverFactory.getWebDriver().findElement(By.xpath("//div[@id='Address']/div/div[2]/div[2]/div/div/div/div/select")))
 		String optionLabel = select.getFirstSelectedOption().getText()
 		

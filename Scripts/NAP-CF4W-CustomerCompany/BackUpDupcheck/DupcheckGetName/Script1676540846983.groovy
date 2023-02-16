@@ -19,12 +19,6 @@ import internal.GlobalVariable as GlobalVariable
 'get data file path company'
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
 
-'declare excelPathDupcheck'
-excelPathDupcheck = 'NAP-' + GlobalVariable.LOB + '-CustomerCompany/DuplicateChecking'
-
-'get app no from data file'
-String DupcheckAppNo = findTestData(excelPathDupcheck).getValue(GlobalVariable.NumofColm, 12)
-
 'get data file path CDC customer company'
 String CDCCustomerCompany = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileCustomerCompany)
 
@@ -57,6 +51,15 @@ Sql sqlconnectionCamundaSIT = CustomKeywords.'dbConnection.connectDB.connectCAMU
 
 'connect DB LOS'
 Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
+
+'declare excelPathDupcheck'
+excelPathDupcheck = 'NAP-' + GlobalVariable.LOB + '-CustomerCompany/DuplicateChecking'
+
+'get appno from datafile dupcheck'
+String DupcheckAppNo = findTestData(excelPathDupcheck).getValue(GlobalVariable.NumofColm, 12)
+
+'count DupcheckAppNo'
+String DupCheckCount = CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheck'(sqlconnectionCamundaSIT, DupcheckAppNo)
 
 'declare variable untuk Store nama customer'
 def StoreCDCCustomerName = '', StoreCDCManagementShareholderPersonalName = '', StoreCDCManagementShareholderCompanyName = '', StoreCDCGuarantorPersonalName = '', StoreCDCGuarantorCompanyName = ''

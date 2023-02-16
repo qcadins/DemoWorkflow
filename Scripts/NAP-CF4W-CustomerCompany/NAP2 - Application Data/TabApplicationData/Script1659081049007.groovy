@@ -57,7 +57,7 @@ if (appLastStep.equalsIgnoreCase("REFERANTOR")||appLastStep.equalsIgnoreCase("AP
 	WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'))
 }
 
-if(!appLastStep.equalsIgnoreCase("REFERANTOR") && GlobalVariable.FirstTimeEntry=="Yes"){
+if((!appLastStep.equalsIgnoreCase("REFERANTOR") && !appLastStep.equalsIgnoreCase("APPLICATION DATA")) && GlobalVariable.FirstTimeEntry=="Yes"){
 	GlobalVariable.FirstTimeEntry = "No"
 }
 

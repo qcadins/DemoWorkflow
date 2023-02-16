@@ -19,20 +19,14 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 
-'declare datafileDupcheck'
-datafileDupcheck = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking')
-
-'declare datafileCustomerPersonal'
-datafileCustomerPersonal = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData')
+'declare excelPathDupcheck'
+excelPathDupcheck = 'NAP-'+ GlobalVariable.LOB  +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking'
 
 'get guarantor array dupcheck dari excel'
-def GuarantorArray = datafileDupcheck.getValue(GlobalVariable.NumofColm, 19).split(';', -1)
+def GuarantorArray = findTestData(excelPathDupcheck).getValue(GlobalVariable.NumofColm, 19).split(';', -1)
 
 'get guarantor array action dupcheck dari excel'
-def GuarantorActionArray = datafileDupcheck.getValue(GlobalVariable.NumofColm, 20).split(';', -1)
-
-'get guarantor array negative action dari excel'
-def GuarantorNegativeArray = datafileDupcheck.getValue(GlobalVariable.NumofColm, 21).split(';', -1)
+def GuarantorActionArray = findTestData(excelPathDupcheck).getValue(GlobalVariable.NumofColm, 20).split(';', -1)
 
 'array customer name data inputan'
 def CustomerNameArray = GlobalVariable.CustomerName.split(';')
@@ -44,7 +38,7 @@ def modifyButtonEdit, modifyCustomerNo, modifyApplicantNo, modifySubjectType
 String subjectName, newCustomerNoValue, newApplicantNoValue, newGuarNameAppInProcess, newGuarName
 
 'Pengecekan jika guarantor name pada dupcheck excel tidak kosong'
-if (datafileDupcheck.getValue(GlobalVariable.NumofColm, 19).length() > 0) {
+if (findTestData(excelPathDupcheck).getValue(GlobalVariable.NumofColm, 19).length() > 0) {
 	'looping guarantor array dupcheck excel'
     for (int g = 1; g <= GuarantorArray.size(); g++) {
 		'Pengecekan jika ada pada confins subjecttypeheader'
@@ -108,50 +102,6 @@ if (datafileDupcheck.getValue(GlobalVariable.NumofColm, 19).length() > 0) {
 				
 				'declare counttd'
 				int counttd = variabletd.size()
-				
-                'if role == testing'
-                if (GlobalVariable.Role == 'Testing') {
-                    'if dupcheck verif == review dan negative check == negative atau dupcheck verif == lock dan negative check == negative dan ada button select appinprocess'
-                    if (GlobalVariable.NegativeverifResult[GlobalVariable.NegativeCustCount] == 'NEGATIVE') {
-					
-						ArrayList<String> variablenegcustno = DriverFactory.getWebDriver().findElements(By.cssSelector('#subSecNegList > table > tbody tr'))
-
-						'Jika negative check pada dupcheck guarantor bernilai yes'
-                        if ((GuarantorNegativeArray[(g - 1)]).equalsIgnoreCase('Yes')) {
-                            def modifycheckbox
-							
-							'looping negative list untuk mencari negative cust no karena hanya yang memiliki negative cust no yang bisa di select'
-							for (int id = 1; id <= variablenegcustno.size(); id++) {
-								'modify negative cust no'
-								modifyNegativeCustNo = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/IDNoCustomerMatchSimilarData'),
-									'xpath', 'equals', "//*[@id='subSecNegList']/table/tbody/tr["+id+"]/td[1]", true)
-								
-								if(WebUI.getText(modifyNegativeCustNo)!=""){
-								if (counttd == 10) {
-									modifycheckbox = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/checkbox_NegativePersonal'),
-										'xpath', 'equals', "//*[@id='subSecNegList']/table/tbody/tr["+id+"]/td[11]/mat-checkbox/label/span[1]", true)
-								}else if (counttd == 5){
-									modifycheckbox = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/DuplicateChecking/checkbox_NegativeCompany'),
-										'xpath', 'equals', "//*[@id='subSecNegList']/table/tbody/tr["+id+"]/td[6]/mat-checkbox/label/span[1]", true)
-								}
-									break
-								}
-
-							}
-							if(modifycheckbox!=null){
-								'click negative checkbox index 1 yang ada negative cust no'
-								WebUI.click(modifycheckbox)
-							}
-                            else{
-								if (counttd == 10) {									
-								WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/checkbox_NegativePersonal'))
-								}else if (counttd == 5) {
-								WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/DuplicateChecking/checkbox_NegativeCompany'))
-								}
-							}
-                        }
-                    }
-                }
 
 				'Jika pada confins ada data match similar data'
                 if (WebUI.verifyNotMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/label_NoDataFoundSimilardata'), 
@@ -613,10 +563,6 @@ if (datafileDupcheck.getValue(GlobalVariable.NumofColm, 19).length() > 0) {
                 }
             }
         }
-        
-        '+ index negative customer count'
-        (GlobalVariable.NegativeCustCount)++
-
         if (g == GuarantorArray.size()) {
             break
         }
