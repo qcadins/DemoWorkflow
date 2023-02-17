@@ -51,10 +51,10 @@ excelPathTabTC = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP-CF4W-Custome
 excelPathTabUploadDoc = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabUploadDocument'
 
 'click menu application data'
-WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/a_APPLICATION DATA'))
+WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/a_APPLICATION DATA CF4W'))
 
 'click menu application data'
-WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/a_APPLICATION DATA'))
+WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/a_APPLICATION DATA CF4W'))
 
 //Verify sort & paging
 pagingTesting()

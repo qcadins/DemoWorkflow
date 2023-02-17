@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataFileEntity>
+   <description></description>
+   <name>MainInformation</name>
+   <tag></tag>
+   <containsHeaders>false</containsHeaders>
+   <csvSeperator></csvSeperator>
+   <dataFileGUID>2632ce5d-14d1-4962-afde-db57701a873c</dataFileGUID>
+   <dataSourceUrl>Excel/FL4W/4.2 ApplicationInquiryCompany.xlsx</dataSourceUrl>
+   <driver>ExcelFile</driver>
+   <isInternalPath>true</isInternalPath>
+   <query></query>
+   <secureUserAccount>false</secureUserAccount>
+   <sheetName>1. MainInformation</sheetName>
+   <usingGlobalDBSetting>false</usingGlobalDBSetting>
+</DataFileEntity>

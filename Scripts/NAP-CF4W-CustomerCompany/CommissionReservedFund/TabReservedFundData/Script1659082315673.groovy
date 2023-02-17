@@ -22,7 +22,7 @@ import groovy.sql.Sql as Sql
 import org.codehaus.groovy.ast.stmt.ContinueStatement as ContinueStatement
 
 'get data file path'
-GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'("\\Excel\\"+ GlobalVariable.LOB +"\\2.2 DataFile_NAP_"+ GlobalVariable.LOB +"_Company.xlsx")
 
 'Koneksi database'
 Sql sqlConnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
@@ -126,7 +126,7 @@ for(int i = 0;i<allocFrom.size();i++){
 		if(WebUI.verifyMatch(textAllocFromSection, ".*"+allocFrom[i].replace("_"," ")+".*",true)==false){
 						
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyRule'
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('13.TabReservedFundData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedVerifyRule)
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('13.TabReservedFundData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathReservedFund).getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedVerifyRule)
 			
 			GlobalVariable.FlagFailed=1
 		}
@@ -167,7 +167,7 @@ for(int i = 0;i<allocFrom.size();i++){
 			if(WebUI.verifyMatch(inputAllocAmt.replace(",",""),defAllocAmt[i],false)==false){
 								
 				'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyRule'
-				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('13.TabReservedFundData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedVerifyRule)
+				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('13.TabReservedFundData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathReservedFund).getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedVerifyRule)
 				
 				GlobalVariable.FlagFailed=1
 			}
@@ -180,7 +180,7 @@ for(int i = 0;i<allocFrom.size();i++){
 				if(WebUI.verifyElementNotHasAttribute(inputAlloc,'readonly', GlobalVariable.TimeOut)==false){
 					
 					'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyRule'
-					CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('13.TabReservedFundData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedVerifyRule)
+					CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('13.TabReservedFundData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathReservedFund).getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedVerifyRule)
 					
 					GlobalVariable.FlagFailed=1
 				}
@@ -197,7 +197,7 @@ for(int i = 0;i<allocFrom.size();i++){
 				if(WebUI.verifyElementHasAttribute(inputAlloc,'readonly', GlobalVariable.TimeOut)==false){
 					
 					'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyRule'
-					CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('13.TabReservedFundData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData').getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedVerifyRule)
+					CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('13.TabReservedFundData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathReservedFund).getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedVerifyRule)
 					
 					GlobalVariable.FlagFailed=1
 				}
@@ -255,7 +255,7 @@ if(alert.toLowerCase().contains("Must Be Less Than".toLowerCase())||WebUI.verify
 
 if(GlobalVariable.RoleCompany=="Testing"){
 	'get nilai total reserved fund amount from excel'
-	BigDecimal totalAmt = Long.parseLong(findTestData('NAP-CF4W-CustomerCompany/CommissionReservedFund/TabReservedFundData').getValue(GlobalVariable.NumofColm, rsvAmtRow+allocFrom.size()).replace(",",""))
+	BigDecimal totalAmt = Long.parseLong(findTestData(excelPathReservedFund).getValue(GlobalVariable.NumofColm, rsvAmtRow+allocFrom.size()).replace(",",""))
 	
 	'Menyimpan nilai Total Reserved Fund Amount dari Web CONFINS'
 	String totalReservedFundAmt = WebUI.getText(findTestObject('NAP/CommissionReservedFund/TabReservedFundData/label_TotalReservedFundAmt')).replace(
@@ -346,7 +346,7 @@ if (WebUI.verifyElementPresent(findTestObject('NAP/CommissionReservedFund/TabRes
 	GlobalVariable.IsDataCancel = 1
 	
 	'Pengecekan jika new consumer finance belum diexpand'
-	if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
+	if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA CF4W'), FailureHandling.OPTIONAL)) {
 		'Klik new consumer finance'
 		WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Finance Leasing'))
 	}

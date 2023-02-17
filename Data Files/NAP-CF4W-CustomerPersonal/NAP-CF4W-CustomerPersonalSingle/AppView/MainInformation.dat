@@ -6,7 +6,7 @@
    <containsHeaders>false</containsHeaders>
    <csvSeperator></csvSeperator>
    <dataFileGUID>0c107b49-64d8-4dfc-a4c1-697aec48845a</dataFileGUID>
-   <dataSourceUrl>Excel/4.1 ApplicationInquiryPersonal.xlsx</dataSourceUrl>
+   <dataSourceUrl>Excel/CF4W/4.1 ApplicationInquiryPersonal.xlsx</dataSourceUrl>
    <driver>ExcelFile</driver>
    <isInternalPath>true</isInternalPath>
    <query></query>

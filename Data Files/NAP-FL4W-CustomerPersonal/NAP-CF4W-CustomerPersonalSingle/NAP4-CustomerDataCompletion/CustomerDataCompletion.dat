@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataFileEntity>
+   <description></description>
+   <name>CustomerDataCompletion</name>
+   <tag></tag>
+   <containsHeaders>false</containsHeaders>
+   <csvSeperator></csvSeperator>
+   <dataFileGUID>3c5f02ee-74b3-443b-913c-710c55b29935</dataFileGUID>
+   <dataSourceUrl>Excel/FL4W/2.1 DataFile_NAP_FL4W.xlsx</dataSourceUrl>
+   <driver>ExcelFile</driver>
+   <isInternalPath>true</isInternalPath>
+   <query></query>
+   <secureUserAccount>false</secureUserAccount>
+   <sheetName>15.CustomerDataCompletion</sheetName>
+   <usingGlobalDBSetting>false</usingGlobalDBSetting>
+</DataFileEntity>

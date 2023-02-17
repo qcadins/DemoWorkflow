@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataFileEntity>
+   <description></description>
+   <name>TabCustomerData</name>
+   <tag></tag>
+   <containsHeaders>false</containsHeaders>
+   <csvSeperator></csvSeperator>
+   <dataFileGUID>239104a9-c553-4aa2-ae2e-277ea147b661</dataFileGUID>
+   <dataSourceUrl>Excel/FL4W/2.2 DataFile_NAP_FL4W_Company.xlsx</dataSourceUrl>
+   <driver>ExcelFile</driver>
+   <isInternalPath>true</isInternalPath>
+   <query></query>
+   <secureUserAccount>false</secureUserAccount>
+   <sheetName>1.TabCustomerMainData</sheetName>
+   <usingGlobalDBSetting>false</usingGlobalDBSetting>
+</DataFileEntity>

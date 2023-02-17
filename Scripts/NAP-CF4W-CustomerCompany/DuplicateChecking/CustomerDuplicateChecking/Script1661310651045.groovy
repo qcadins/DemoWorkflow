@@ -22,7 +22,7 @@ import groovy.sql.Sql as Sql
 import internal.GlobalVariable as GlobalVariable
 
 'get data file path'
-GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'("\\Excel\\"+ GlobalVariable.LOB +"\\2.2 DataFile_NAP_"+ GlobalVariable.LOB +"_Company.xlsx")
 
 'connect DB LOS'
 Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
@@ -52,8 +52,40 @@ def modifySubjectType
 int DupCheckStatus = CustomKeywords.'dupCheck.dupCheckVerif.checkDupCheckStatus'(sqlconnectionLOS, DupcheckAppNo)
 
 if (DupCheckStatus == Integer.parseInt(findTestData(excelPathDupcheck).getValue(GlobalVariable.NumofColm, 10))) {
-    'click menu duplicate Checking'
-    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/a_Customer Duplicate Checking'))
+	
+	if(GlobalVariable.LOB == 'CF4W'){
+		
+		'Pengecekan jika consumer finance belum diexpand'
+		if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'), FailureHandling.OPTIONAL)) {
+			'Klik new consumer finance'
+			WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_Consumer Finance'))
+		}
+		
+		'Pengecekan jika new consumer finance belum diexpand'
+		if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA CF4W'), FailureHandling.OPTIONAL)) {
+			'Klik new consumer finance'
+			WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'))
+		}
+		
+	    'click menu duplicate Checking'
+		WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/a_Customer Duplicate Checking CF4W'))
+	}else if(GlobalVariable.LOB == 'FL4W'){
+	
+		'Pengecekan jika finance leasing belum diexpand'
+		if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_New Finance Leasing'), FailureHandling.OPTIONAL)) {
+			'Klik new finance leasing'
+			WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_FinanceLeasing4W'))
+		}
+		
+		'Pengecekan jika new consumer finance belum diexpand'
+		if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA FL4W'), FailureHandling.OPTIONAL)) {
+			'Klik new finance leasing'
+			WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Finance Leasing'))
+		}
+		
+		'click menu duplicate Checking'
+		WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/a_Customer Duplicate Checking FL4W'))
+	}
 
 	WebUI.delay(3)
 	

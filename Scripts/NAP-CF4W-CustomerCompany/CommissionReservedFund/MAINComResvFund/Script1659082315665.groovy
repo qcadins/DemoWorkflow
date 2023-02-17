@@ -22,7 +22,7 @@ import org.openqa.selenium.WebDriver as WebDriver
 import org.openqa.selenium.By as By
 
 'get data file path'
-GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'("\\Excel\\"+ GlobalVariable.LOB +"\\2.2 DataFile_NAP_"+ GlobalVariable.LOB +"_Company.xlsx")
 
 'declare excelPathCustomerCompany'
 excelPathCustomerCompany = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData'
@@ -33,14 +33,27 @@ excelPathCommission = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/CommissionRe
 'declare excelPathReservedFund'
 excelPathReservedFund = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/CommissionReservedFund/TabReservedFundData'
 
-if (WebUI.verifyElementNotVisible(findTestObject('NAP/CommissionReservedFund/TabCommissionData/a_Commission Reserved Fund'), 
-    FailureHandling.OPTIONAL)) {
-    'click menu Consumer finance 4w'
-    WebUI.click(findTestObject('Object Repository/LoginR3BranchManagerSuperuser/a_Consumer Finance'))
-}
+if(GlobalVariable.LOB == 'CF4W'){	
+	
+	'Pengecekan jika consumer finance belum diexpand'
+	if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'), FailureHandling.OPTIONAL)) {
+		'Klik new consumer finance'
+		WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_Consumer Finance'))
+	}
+	
+	'Klik Commission Reserved Fund'
+	WebUI.click(findTestObject('NAP/CommissionReservedFund/TabCommissionData/a_Commission Reserved Fund CF4W'))
+}else if(GlobalVariable.LOB == 'FL4W'){
 
-'Klik Commission Reserved Fund'
-WebUI.click(findTestObject('NAP/CommissionReservedFund/TabCommissionData/a_Commission Reserved Fund'))
+	'Pengecekan jika finance leasing belum diexpand'
+	if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_New Finance Leasing'), FailureHandling.OPTIONAL)) {
+		'Klik new finance leasing'
+		WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_FinanceLeasing4W'))
+	}
+	
+	'Klik Commission Reserved Fund'
+	WebUI.click(findTestObject('NAP/CommissionReservedFund/TabCommissionData/a_Commission Reserved Fund FL4W'))
+}
 
 WebUI.delay(5)
 
@@ -481,7 +494,7 @@ public copyAppYesCommission(){
 		WebUI.click(findTestObject('NAP/CommissionReservedFund/TabCommissionData/button_Cancel'))
 
 		'Pengecekan jika new consumer finance belum diexpand'
-		if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
+		if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA CF4W'), FailureHandling.OPTIONAL)) {
 			'Klik new consumer finance'
 			WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_Consumer Finance'))
 		}
@@ -510,7 +523,7 @@ public copyAppYesReservedFund(){
 		WebUI.click(findTestObject('NAP/CommissionReservedFund/TabReservedFundData/button_Cancel'))
 
 		'Pengecekan jika new consumer finance belum diexpand'
-		if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
+		if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA CF4W'), FailureHandling.OPTIONAL)) {
 			'Klik new consumer finance'
 			WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_Consumer Finance'))
 		}

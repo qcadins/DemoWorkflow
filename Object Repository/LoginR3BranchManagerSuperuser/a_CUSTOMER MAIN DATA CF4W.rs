@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>a_APPLICATION DATA</name>
+   <name>a_CUSTOMER MAIN DATA CF4W</name>
    <tag></tag>
-   <elementGuidId>3204e432-eb6a-44db-8be3-3fcfcd49ce1b</elementGuidId>
+   <elementGuidId>5d144ffb-5109-4cdd-a31a-2fd6751e5d5a</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>
-         <value>(.//*[normalize-space(text()) and normalize-space(.)='CUSTOMER MAIN DATA'])[1]/following::a[1]</value>
+         <value>/html/body/app-root/app-full-layout/div/div[1]/app-sidebar/div[2]/div[1]/ul/li[3]/ul/li[1]/ul/li[1]/a/span</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>
@@ -31,7 +31,7 @@
       <matchCondition>equals</matchCondition>
       <name>text</name>
       <type>Main</type>
-      <value>APPLICATION DATA</value>
+      <value>CUSTOMER MAIN DATA</value>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -45,27 +45,27 @@
       <matchCondition>equals</matchCondition>
       <name>xpath:neighbor</name>
       <type>Main</type>
-      <value>(.//*[normalize-space(text()) and normalize-space(.)='CUSTOMER MAIN DATA'])[1]/following::a[1]</value>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='New Consumer Finance'])[1]/following::a[1]</value>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath:neighbor</name>
       <type>Main</type>
-      <value>(.//*[normalize-space(text()) and normalize-space(.)='New Consumer Finance'])[1]/following::a[2]</value>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Consumer Finance'])[1]/following::a[2]</value>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath:neighbor</name>
       <type>Main</type>
-      <value>(.//*[normalize-space(text()) and normalize-space(.)='Customer Duplicate Checking'])[1]/preceding::a[1]</value>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='APPLICATION DATA'])[1]/preceding::a[1]</value>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath:position</name>
       <type>Main</type>
-      <value>//li[3]/ul/li/ul/li[2]/a</value>
+      <value>//li[3]/ul/li/ul/li/a</value>
    </webElementXpaths>
 </WebElementEntity>

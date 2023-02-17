@@ -55,11 +55,22 @@ def datafilepathSimTax = CustomKeywords.'dbConnection.connectDB.getExcelPath'(Gl
 
 Double vatAmount, whtAmount, disburseAmount, expenseAmount
 Integer sizeSupp = variableSupp.size()
+def modifyObjectOffice
+
+if(GlobalVariable.LOB == 'CF4W'){
+'modify office label'
+modifyObjectOffice = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/label_OriginalOffice'),
+	'xpath', 'equals', ('//*[@id="NewApplication"]/div/div[3]/span/div/div[2]/span/label'), true)
+}else if(GlobalVariable.LOB == 'FL4W'){
+'modify office label'
+modifyObjectOffice = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/label_OriginalOffice'),
+	'xpath', 'equals', ('//*[@id="NewApplication"]/div/div[2]/span/div/div[2]/span/label'), true)
+}
 
 'Ambil text original office dari confins'
-String office = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/label_OriginalOffice'))
+String office = WebUI.getText(modifyObjectOffice)
 
-checkSupplier(sqlConnectionTAX, sqlConnectionFOU, sizeSupp, vatAmount, whtAmount, disburseAmount, expenseAmount)
+checkSupplier(sqlConnectionTAX, sqlConnectionFOU, sizeSupp, vatAmount, whtAmount, disburseAmount, expenseAmount, modifyObjectOffice)
 
 'Looping data supplier employee'
 for (int j = 1; j <= variableSuppEmp.size(); j++) {
@@ -589,7 +600,7 @@ public checkVerifyEqualOrMatch(Boolean isMatch, String sheetname, int numofcolm)
 	}
 }
 
-public checkSupplier(Sql sqlConnectionTAX, Sql sqlConnectionFOU, Integer sizeSupp, Double vatAmount, Double whtAmount, Double disburseAmount, Double expenseAmount){
+public checkSupplier(Sql sqlConnectionTAX, Sql sqlConnectionFOU, Integer sizeSupp, Double vatAmount, Double whtAmount, Double disburseAmount, Double expenseAmount, Object modifyObjectOffice){
 	def datafilepathSimTax = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathSimulasiPajak)
 	
 	'Looping data Supplier'
@@ -740,7 +751,7 @@ public checkSupplier(Sql sqlConnectionTAX, Sql sqlConnectionFOU, Integer sizeSup
 	
 			}
 		}
-		String officeName = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/label_OriginalOffice'))
+		String officeName = WebUI.getText(modifyObjectOffice)
 		Double whtThisYear = CustomKeywords.'commissionReserveFundData.taxCalculation.checkWHTthisYear'(sqlConnectionTAX,sqlConnectionFOU,"Supplier",officeName, supplierName)
 	
 		if(whtThisYear>=whTax){

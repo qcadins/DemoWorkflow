@@ -151,47 +151,47 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>'\\Excel\\2.2.1 CustomerDataCompletion-Company - Customer.xlsm'</initValue>
+      <initValue>'\\Excel\\CF4W\\2.2.1 CustomerDataCompletion-Company - Customer.xlsm'</initValue>
       <name>DataFileCustomerCompany</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>'\\Excel\\2.1.1 CustomerDataCompletion-Personal - Customer.xlsm'</initValue>
+      <initValue>'\\Excel\\CF4W\\2.1.1 CustomerDataCompletion-Personal - Customer.xlsm'</initValue>
       <name>DataFileCustomerPersonal</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>'\\Excel\\2.1.2 CustomerDataCompletion-Personal - Family.xlsm'</initValue>
+      <initValue>'\\Excel\\CF4W\\2.1.2 CustomerDataCompletion-Personal - Family.xlsm'</initValue>
       <name>DataFileFamilyPersonal</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>'\\Excel\\2.1.4 CustomerDataCompletion-Personal - GuarantorCompany.xlsm'</initValue>
+      <initValue>'\\Excel\\CF4W\\2.1.4 CustomerDataCompletion-Personal - GuarantorCompany.xlsm'</initValue>
       <name>DataFileGuarantorCompany</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>'\\Excel\\2.2.5 CustomerDataCompletion-Company - GuarantorCompany.xlsm'</initValue>
+      <initValue>'\\Excel\\CF4W\\2.2.5 CustomerDataCompletion-Company - GuarantorCompany.xlsm'</initValue>
       <name>DataFileGuarantorCompanyCompany</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>'\\Excel\\2.1.3 CustomerDataCompletion-Personal - GuarantorPersonal.xlsm'</initValue>
+      <initValue>'\\Excel\\CF4W\\2.1.3 CustomerDataCompletion-Personal - GuarantorPersonal.xlsm'</initValue>
       <name>DataFileGuarantorPersonal</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>'\\Excel\\2.2.4 CustomerDataCompletion-Company - GuarantorPersonal.xlsm'</initValue>
+      <initValue>'\\Excel\\CF4W\\2.2.4 CustomerDataCompletion-Company - GuarantorPersonal.xlsm'</initValue>
       <name>DataFileGuarantorPersonalCompany</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>'\\Excel\\2.2.3 CustomerDataCompletion-Company - ManagementShareholderCompany.xlsm'</initValue>
+      <initValue>'\\Excel\\CF4W\\2.2.3 CustomerDataCompletion-Company - ManagementShareholderCompany.xlsm'</initValue>
       <name>DataFileManagementShareholderCompany</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>'\\Excel\\2.2.2 CustomerDataCompletion-Company - ManagementShareholderPersonal.xlsm'</initValue>
+      <initValue>'\\Excel\\CF4W\\2.2.2 CustomerDataCompletion-Company - ManagementShareholderPersonal.xlsm'</initValue>
       <name>DataFileManagementShareholderPersonal</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
@@ -356,22 +356,22 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>'\\Excel\\4.2 ApplicationInquiryCompany.xlsx'</initValue>
+      <initValue>'\\Excel\\CF4W\\4.2 ApplicationInquiryCompany.xlsx'</initValue>
       <name>PathAppInquiryCompany</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>'\\Excel\\4.1 ApplicationInquiryPersonal.xlsx'</initValue>
+      <initValue>'\\Excel\\CF4W\\4.1 ApplicationInquiryPersonal.xlsx'</initValue>
       <name>PathAppInquiryPersonal</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>'\\Excel\\2.2 DataFile_NAP_CF4W_Company.xlsx'</initValue>
+      <initValue>'\\Excel\\CF4W\\2.2 DataFile_NAP_CF4W_Company.xlsx'</initValue>
       <name>PathCompany</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>'\\Excel\\2.1 DataFile_NAP_CF4W.xlsx'</initValue>
+      <initValue>'\\Excel\\CF4W\\2.1 DataFile_NAP_CF4W.xlsx'</initValue>
       <name>PathPersonal</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>

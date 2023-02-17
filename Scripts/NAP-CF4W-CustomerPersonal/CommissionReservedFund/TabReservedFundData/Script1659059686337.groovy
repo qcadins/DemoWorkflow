@@ -22,7 +22,7 @@ import groovy.sql.Sql as Sql
 import org.codehaus.groovy.ast.stmt.ContinueStatement as ContinueStatement
 
 'get data file path'
-GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathPersonal)
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'("\\Excel\\"+ GlobalVariable.LOB +"\\2.1 DataFile_NAP_"+ GlobalVariable.LOB +".xlsx")
 
 'Koneksi database'
 Sql sqlConnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
@@ -360,7 +360,7 @@ if (WebUI.verifyElementPresent(findTestObject('NAP/CommissionReservedFund/TabRes
 	GlobalVariable.IsDataCancel = 1
 	
     'Pengecekan jika new consumer finance belum diexpand'
-    if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
+    if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA CF4W'), FailureHandling.OPTIONAL)) {
         'Klik new consumer finance'
         WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Finance Leasing'))
     }

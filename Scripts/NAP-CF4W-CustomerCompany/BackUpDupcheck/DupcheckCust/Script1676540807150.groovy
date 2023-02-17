@@ -53,7 +53,7 @@ Boolean DupCheckStatus = CustomKeywords.'dupCheck.dupCheckVerif.checkDupCheckSta
 
 if (DupCheckStatus == true) {
     'click menu duplicate Checking'
-    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/a_Customer Duplicate Checking'))
+    WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/a_Customer Duplicate Checking CF4W'))
 
 	WebUI.delay(3)
 	

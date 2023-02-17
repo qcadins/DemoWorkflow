@@ -176,7 +176,7 @@ public class verifyIncomeInfo {
 
 		Matcher m = Pattern.compile("-?\\d+(\\.\\d+)?").matcher(maxrefundAmt[0])
 		while(m.find()){
-//			println(Double.valueOf(m.group())+"abc")
+						println(Double.valueOf(m.group())+"abc")
 			numbers.add(Double.valueOf(m.group()))
 		}
 
@@ -208,8 +208,12 @@ public class verifyIncomeInfo {
 		})
 		totalMaxAllocated+=value
 		println(totalMaxAllocated)
-		totalMaxAllocated-=(numbers[0])
-		totalMaxAllocated*=numbers[1]
+		if(GlobalVariable.LOB == 'CF4W'){
+			totalMaxAllocated-=(numbers[0])
+			totalMaxAllocated*=numbers[1]
+		}else if(GlobalVariable.LOB == 'FL4W'){
+			totalMaxAllocated*=numbers[0]
+		}
 		println(totalMaxAllocated)
 		return totalMaxAllocated
 	}

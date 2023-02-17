@@ -19,10 +19,11 @@ import internal.GlobalVariable as GlobalVariable
 'call tc login'
 WebUI.callTestCase(findTestCase('Login/LoginR3BranchManagerSuperuser - NEW'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 
+'declare LOB'
+GlobalVariable.LOB = 'FL4W'
+ 
 'get data file path'
-GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathPersonal)
-
-GlobalVariable.LOB = 'CF4W'
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'("\\Excel\\"+ GlobalVariable.LOB +"\\2.1 DataFile_NAP_"+ GlobalVariable.LOB +".xlsx")
 
 'declare excelPathCustomerPersonal'
 excelPathCustomerPersonal = 'NAP-'+ GlobalVariable.LOB  +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData'

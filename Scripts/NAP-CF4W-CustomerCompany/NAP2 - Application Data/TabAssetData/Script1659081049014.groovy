@@ -105,7 +105,7 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-App
     GlobalVariable.FlagFailed = 1
 
     'Pengecekan jika new consumer finance belum diexpand'
-    if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
+    if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA CF4W'), FailureHandling.OPTIONAL)) {
         'Klik new consumer finance'
         WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'))
     }

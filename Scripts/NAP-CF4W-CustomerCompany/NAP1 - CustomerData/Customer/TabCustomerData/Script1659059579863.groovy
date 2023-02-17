@@ -25,7 +25,7 @@ GlobalVariable.FlagWarning = 0
 GlobalVariable.FlagFailed = 0
 
 'get data file path'
-GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'("\\Excel\\"+ GlobalVariable.LOB +"\\2.2 DataFile_NAP_"+ GlobalVariable.LOB +"_Company.xlsx")
 
 'declare findTestData(excelPathCustomerCompany)'
 excelPathCustomerCompany = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData'
@@ -262,13 +262,13 @@ if (GlobalVariable.FlagFailed == 0) {
 if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP1-CustomerData/ApplicationCurrentStep')), 
     'CUSTOMER', false, FailureHandling.OPTIONAL)) {
     'click menu Customer main'
-    WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
+    WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA CF4W'))
 
     'customer added -1'
     (GlobalVariable.CountNumofCustomer)--
 
     'Pengecekan jika new consumer finance belum diexpand'
-    if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
+    if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA CF4W'), FailureHandling.OPTIONAL)) {
         'Klik new consumer finance'
         WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'))
     }

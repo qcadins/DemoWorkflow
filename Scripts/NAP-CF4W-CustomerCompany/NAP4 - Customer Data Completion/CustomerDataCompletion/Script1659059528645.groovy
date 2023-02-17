@@ -22,7 +22,7 @@ import org.openqa.selenium.WebElement as WebElement
 import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 
 'Pengecekan jika new consumer finance belum diexpand'
-if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
+if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA CF4W'), FailureHandling.OPTIONAL)) {
     'Klik new consumer finance'
     WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'))
 }

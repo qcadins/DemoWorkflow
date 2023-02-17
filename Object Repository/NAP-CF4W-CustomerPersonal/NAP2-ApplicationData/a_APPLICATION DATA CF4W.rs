@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>a_Customer Duplicate Checking</name>
+   <name>a_APPLICATION DATA CF4W</name>
    <tag></tag>
-   <elementGuidId>0bfb2eb9-a305-4543-aa88-6ab0467e1725</elementGuidId>
+   <elementGuidId>56789808-bf0c-45c5-a373-8bb9d9e70e90</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>BASIC</key>
-         <value>//*[(text() = 'Customer Duplicate Checking' or . = 'Customer Duplicate Checking')]</value>
-      </entry>
-      <entry>
          <key>XPATH</key>
-         <value>(.//*[normalize-space(text()) and normalize-space(.)='APPLICATION DATA'])[1]/following::a[1]</value>
+         <value>(.//*[normalize-space(text()) and normalize-space(.)='CUSTOMER MAIN DATA'])[1]/following::a[1]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>
@@ -35,7 +31,7 @@
       <matchCondition>equals</matchCondition>
       <name>text</name>
       <type>Main</type>
-      <value>Customer Duplicate Checking</value>
+      <value>APPLICATION DATA</value>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -49,27 +45,27 @@
       <matchCondition>equals</matchCondition>
       <name>xpath:neighbor</name>
       <type>Main</type>
-      <value>(.//*[normalize-space(text()) and normalize-space(.)='APPLICATION DATA'])[1]/following::a[1]</value>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='CUSTOMER MAIN DATA'])[1]/following::a[1]</value>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath:neighbor</name>
       <type>Main</type>
-      <value>(.//*[normalize-space(text()) and normalize-space(.)='CUSTOMER MAIN DATA'])[1]/following::a[2]</value>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='New Consumer Finance'])[1]/following::a[2]</value>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath:neighbor</name>
       <type>Main</type>
-      <value>(.//*[normalize-space(text()) and normalize-space(.)='CUSTOMER DATA COMPLETION'])[1]/preceding::a[1]</value>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Customer Duplicate Checking'])[1]/preceding::a[1]</value>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath:position</name>
       <type>Main</type>
-      <value>//li[3]/ul/li/ul/li[3]/a</value>
+      <value>//li[3]/ul/li/ul/li[2]/a</value>
    </webElementXpaths>
 </WebElementEntity>

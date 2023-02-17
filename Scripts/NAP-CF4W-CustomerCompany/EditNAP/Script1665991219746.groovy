@@ -20,7 +20,7 @@ import internal.GlobalVariable as GlobalVariable
 import groovy.sql.Sql as Sql
 
 'get data file path'
-GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'("\\Excel\\"+ GlobalVariable.LOB +"\\2.2 DataFile_NAP_"+ GlobalVariable.LOB +"_Company.xlsx")
 
 'Write to dupcheck cust name'
 CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.TabCustomerMainData', 0,
@@ -105,7 +105,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
 //        getCustdata(sqlconnectionLOS, appNo, appStep)
 
         'click Menu customer main data'
-        WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
+        WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA CF4W'))
 
         'call function input appno'
         inputAppNo()
@@ -148,7 +148,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
 //        getCustdata(sqlconnectionLOS, appNo, appStep)
 
         'click Menu customer main data'
-        WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
+        WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA CF4W'))
 
         'call function input appno'
         inputAppNo()
@@ -200,7 +200,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
                 [:], FailureHandling.CONTINUE_ON_FAILURE)
         } else if (appStep == 'APP') {
             'click menu application data'
-            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/a_APPLICATION DATA'))
+            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/a_APPLICATION DATA CF4W'))
 
             'call function input appno'
             inputAppNo()
@@ -234,7 +234,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
                 [:], FailureHandling.CONTINUE_ON_FAILURE)
         } else if (appStep == 'ASSET') {
             'click menu application data'
-            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/a_APPLICATION DATA'))
+            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/a_APPLICATION DATA CF4W'))
 
             'call function input appno'
             inputAppNo()
@@ -264,7 +264,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
                 [:], FailureHandling.CONTINUE_ON_FAILURE)
         } else if (appStep == 'INS') {
             'click menu application data'
-            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/a_APPLICATION DATA'))
+            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/a_APPLICATION DATA CF4W'))
 
             'call function input appno'
             inputAppNo()
@@ -291,7 +291,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
                 [:], FailureHandling.CONTINUE_ON_FAILURE)
         } else if (appStep == 'TC') {
             'click menu application data'
-            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/a_APPLICATION DATA'))
+            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/a_APPLICATION DATA CF4W'))
 
             'call function input app no'
             inputAppNo()
@@ -313,7 +313,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
         }
     } else if (appStep == 'UPL_DOC') {
         'click menu application data'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/a_APPLICATION DATA'))
+        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/a_APPLICATION DATA CF4W'))
 
         'call function input appno'
         inputAppNo()
@@ -374,7 +374,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
 //        getCustdata(sqlconnectionLOS, appNo, appStep)
 
         'click Menu customer main data'
-        WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
+        WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA CF4W'))
 
         'call function input appno'
         inputAppNo()
@@ -426,7 +426,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
 //        getCustdata(sqlconnectionLOS, appNo, appStep)
 
         'click Menu customer main data'
-        WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
+        WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA CF4W'))
 
         'call function input appno'
         inputAppNo()
@@ -496,7 +496,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
                 [:], FailureHandling.CONTINUE_ON_FAILURE)
         } else if (appStep == 'APP') {
             'click menu application data'
-            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/a_APPLICATION DATA'))
+            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/a_APPLICATION DATA CF4W'))
 
             'call function input appno'
             inputAppNo()
@@ -532,7 +532,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
                 [:], FailureHandling.CONTINUE_ON_FAILURE)
         } else if (appStep == 'ASSET') {
             'click menu application data'
-            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/a_APPLICATION DATA'))
+            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/a_APPLICATION DATA CF4W'))
 
             'call function input appno'
             inputAppNo()
@@ -564,7 +564,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
                 [:], FailureHandling.CONTINUE_ON_FAILURE)
         } else if (appStep == 'INS') {
             'click menu application data'
-            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/a_APPLICATION DATA'))
+            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/a_APPLICATION DATA CF4W'))
 
             'call function input appno'
             inputAppNo()
@@ -593,7 +593,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
                 [:], FailureHandling.CONTINUE_ON_FAILURE)
         } else if (appStep == 'TC') {
             'click menu application data'
-            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/a_APPLICATION DATA'))
+            WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/a_APPLICATION DATA CF4W'))
 
             'call function input app no'
             inputAppNo()
@@ -617,7 +617,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
         }
     } else if (appStep == 'UPL_DOC') {
         'click menu application data'
-        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/a_APPLICATION DATA'))
+        WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/a_APPLICATION DATA CF4W'))
 
         'call function input appno'
         inputAppNo()

@@ -21,11 +21,8 @@ import internal.GlobalVariable as GlobalVariable
 'call test case login R3'
 WebUI.callTestCase(findTestCase('Login/LoginR3BranchManagerSuperuser - NEW'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 
-'declare LOB'
-GlobalVariable.LOB = 'CF4W'
-
 'get data file path'
-GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'("\\Excel\\"+ GlobalVariable.LOB +"\\2.2 DataFile_NAP_"+ GlobalVariable.LOB +"_Company.xlsx")
 
 'declare findTestData(excelPathCustomerCompany)'
 excelPathCustomerCompany = 'NAP-' + GlobalVariable.LOB + '-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData'

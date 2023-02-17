@@ -17,7 +17,7 @@ import groovy.sql.Sql as Sql
 import internal.GlobalVariable as GlobalVariable
 
 'get data file path company'
-GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'("\\Excel\\"+ GlobalVariable.LOB +"\\2.2 DataFile_NAP_"+ GlobalVariable.LOB +"_Company.xlsx")
 
 'declare excelPathDupcheck'
 excelPathDupcheck = 'NAP-' + GlobalVariable.LOB + '-CustomerCompany/DuplicateChecking'

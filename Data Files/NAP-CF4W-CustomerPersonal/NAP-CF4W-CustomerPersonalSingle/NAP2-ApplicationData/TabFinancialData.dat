@@ -6,7 +6,7 @@
    <containsHeaders>false</containsHeaders>
    <csvSeperator></csvSeperator>
    <dataFileGUID>ebf4d140-56e1-4076-b274-a06224b5bffa</dataFileGUID>
-   <dataSourceUrl>Excel/2.1 DataFile_NAP_CF4W.xlsx</dataSourceUrl>
+   <dataSourceUrl>Excel/CF4W/2.1 DataFile_NAP_CF4W.xlsx</dataSourceUrl>
    <driver>ExcelFile</driver>
    <isInternalPath>true</isInternalPath>
    <query></query>

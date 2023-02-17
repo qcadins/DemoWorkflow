@@ -22,7 +22,7 @@ import groovy.sql.Sql as Sql
 import org.codehaus.groovy.ast.stmt.ContinueStatement as ContinueStatement
 
 'get data file path'
-GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathPersonal)
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'("\\Excel\\"+ GlobalVariable.LOB +"\\2.1 DataFile_NAP_"+ GlobalVariable.LOB +".xlsx")
 
 GlobalVariable.FlagFailed = 0
 
@@ -975,10 +975,10 @@ if(!appLastStep.equalsIgnoreCase("UPL_DOC") && GlobalVariable.FirstTimeEntry=="Y
 		
 	}
 	
-//	'Klik save'
-//	WebUI.click(findTestObject('NAP/CommissionReservedFund/TabCommissionData/button_Save'))
-//	
-//	WebUI.delay(2)
+	'Klik save'
+	WebUI.click(findTestObject('NAP/CommissionReservedFund/TabCommissionData/button_Save'))
+	
+	WebUI.delay(2)
 	
 	'Get nilai iscompletemandatory dari excel dan parsing ke integer'
 	Integer iscompleteMandatory = Integer.parseInt(findTestData(excelPathCommission).getValue(GlobalVariable.NumofColm, 4))
@@ -1010,7 +1010,7 @@ if(!appLastStep.equalsIgnoreCase("UPL_DOC") && GlobalVariable.FirstTimeEntry=="Y
 		GlobalVariable.IsDataCancel = 1
 		
 		'Pengecekan jika new consumer finance belum diexpand'
-		if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
+		if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA CF4W'), FailureHandling.OPTIONAL)) {
 			'Klik new consumer finance'
 			WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_Consumer Finance'))
 		}

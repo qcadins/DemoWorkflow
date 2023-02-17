@@ -15,12 +15,24 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 
-'click menu customer application data'
-WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/Applicant/a_APPLICATION DATA'))
+if(GlobalVariable.LOB == 'CF4W'){
+		
+	'click menu customer application data'
+	WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/Applicant/a_APPLICATION DATA CF4W'))
+	
+}else if(GlobalVariable.LOB == 'FL4W'){
+
+	'click menu customer application data'
+	WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/Applicant/a_APPLICATION DATA FL4W'))
+	
+}
+
+'declare excelPathCustomerPersonal'
+excelPathCustomerPersonal = 'NAP-'+ GlobalVariable.LOB  +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData'
 
 'input appNo'
 WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/Applicant/input_Application No_AppNoId'), 
-    findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+    findTestData(excelPathCustomerPersonal).getValue(
         GlobalVariable.NumofColm, 13))
 
 'Looping delay untuk handling copy app selama +- 2 menit'
@@ -41,7 +53,7 @@ for(int i = 1;i<=8;i++){
 }
 'verify data'
 WebUI.verifyElementText(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/Applicant/td_0002APP20211200947'), 
-    findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+    findTestData(excelPathCustomerPersonal).getValue(
         GlobalVariable.NumofColm, 13), FailureHandling.CONTINUE_ON_FAILURE)
 
 WebUI.delay(5)

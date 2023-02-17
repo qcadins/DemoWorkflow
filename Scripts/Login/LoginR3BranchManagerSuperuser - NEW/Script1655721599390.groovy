@@ -75,5 +75,5 @@ WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_Consumer Finance'))
 WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'))
 
 'click menu customer main data'
-WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
+WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA CF4W'))
 

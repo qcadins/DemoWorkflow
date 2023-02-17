@@ -23,8 +23,10 @@ import com.kms.katalon.core.util.KeywordUtil
 
 GlobalVariable.StartIndex = 1
 
+GlobalVariable.LOB = 'FL4W'
+
 'get data file path'
-GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathPersonal)
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'("\\Excel\\"+ GlobalVariable.LOB +"\\2.1 DataFile_NAP_"+ GlobalVariable.LOB +".xlsx")
 
 'connect DB LOS'
 Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
@@ -47,21 +49,38 @@ String POStat
 'Inisialisasi driver'
 WebDriver driver = DriverFactory.getWebDriver()
 
-if(WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'), FailureHandling.OPTIONAL)){
-	'click menu consumer finance'
-	WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_Consumer Finance'))
+if(GlobalVariable.LOB == 'CF4W'){
+	'Pengecekan jika consumer finance belum diexpand'
+	if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'), FailureHandling.OPTIONAL)) {
+		'Klik new consumer finance'
+		WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_Consumer Finance'))
+	}
+	
+	'Pengecekan jika new consumer finance belum diexpand'
+	if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA CF4W'), FailureHandling.OPTIONAL)) {
+		'Klik new consumer finance'
+		WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'))
+	}
+	
+	'click Menu customer main data'
+	WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA CF4W'))
+}else if(GlobalVariable.LOB == 'FL4W'){
+
+	'Pengecekan jika finance leasing belum diexpand'
+	if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_New Finance Leasing'), FailureHandling.OPTIONAL)) {
+		'Klik new consumer finance'
+		WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_FinanceLeasing4W'))
+	}
+	
+	'Pengecekan jika new finance leasing belum diexpand'
+	if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA FL4W'), FailureHandling.OPTIONAL)) {
+		'Klik new finance leasing'
+		WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Finance Leasing'))
+	}
+	
+	'click Menu customer main data'
+	WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA FL4W'))
 }
-
-if(WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)){
-	'click menu new consumer finance'
-	WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'))
-}
-
-'click Menu customer main data'
-WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
-
-'click Menu customer main data'
-WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
 
 //Verify sort & paging
 pagingTesting()
@@ -228,10 +247,10 @@ if (GlobalVariable.Role == 'Data Entry') {
             (GlobalVariable.CountNumofCustomer)--
 
             'click menu Customer main'
-            WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
+            WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA CF4W'))
 
             'Pengecekan jika new consumer finance belum diexpand'
-            if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
+            if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA CF4W'), FailureHandling.OPTIONAL)) {
                 'Klik new consumer finance'
                 WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'))
             }
@@ -277,10 +296,10 @@ if (GlobalVariable.Role == 'Data Entry') {
             (GlobalVariable.CountNumofCustomer)--
 
             'click menu Customer main'
-            WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
+            WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA CF4W'))
 
             'Pengecekan jika new consumer finance belum diexpand'
-            if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
+            if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA CF4W'), FailureHandling.OPTIONAL)) {
                 'Klik new consumer finance'
                 WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'))
             }
@@ -334,10 +353,10 @@ if (GlobalVariable.Role == 'Data Entry') {
             (GlobalVariable.CountNumofCustomer)--
 
             'click menu Customer main'
-            WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
+            WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA CF4W'))
 
             'Pengecekan jika new consumer finance belum diexpand'
-            if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
+            if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA CF4W'), FailureHandling.OPTIONAL)) {
                 'Klik new consumer finance'
                 WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'))
             }
@@ -410,10 +429,10 @@ if (GlobalVariable.Role == 'Data Entry') {
             (GlobalVariable.CountNumofCustomer)--
 
             'click menu Customer main'
-            WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
+            WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA CF4W'))
 
             'Pengecekan jika new consumer finance belum diexpand'
-            if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
+            if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA CF4W'), FailureHandling.OPTIONAL)) {
                 'Klik new consumer finance'
                 WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'))
             }
@@ -462,10 +481,10 @@ if (GlobalVariable.Role == 'Data Entry') {
             (GlobalVariable.CountNumofCustomer)--
 			
             'click menu Customer main'
-            WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
+            WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA CF4W'))
 
             'Pengecekan jika new consumer finance belum diexpand'
-            if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
+            if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA CF4W'), FailureHandling.OPTIONAL)) {
                 'Klik new consumer finance'
                 WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'))
             }
@@ -522,10 +541,10 @@ if (GlobalVariable.Role == 'Data Entry') {
 			(GlobalVariable.CountNumofCustomer)--
 
             'click menu Customer main'
-            WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'))
+            WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA CF4W'))
 
             'Pengecekan jika new consumer finance belum diexpand'
-            if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA'), FailureHandling.OPTIONAL)) {
+            if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA CF4W'), FailureHandling.OPTIONAL)) {
                 'Klik new consumer finance'
                 WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'))
             }
