@@ -27,7 +27,7 @@ ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2Su
 int arrayindexdb = 0
 
 'declare excelPathTabFinancial'
-excelPathTabFinancial = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData'
+excelPathTabFinancial = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP2-ApplicationData/TabFinancialData'
 
 'declare SubsidyTypeArray'
 def SubsidyTypeArray = findTestData(excelPathTabFinancial).getValue(GlobalVariable.NumofColm, 12).split(';', -1)

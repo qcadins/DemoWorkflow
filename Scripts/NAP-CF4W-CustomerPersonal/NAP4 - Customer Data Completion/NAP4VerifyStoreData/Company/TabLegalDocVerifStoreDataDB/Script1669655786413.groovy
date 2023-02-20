@@ -32,19 +32,19 @@ ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4Le
 
 int arrayindex = 0
 
-def legaldoctypearray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 12).split(';', -1)
+def legaldoctypearray = findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 12).split(';', -1)
 
-def docnoarray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 13).split(';', -1)
+def docnoarray = findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 13).split(';', -1)
 
-def dateissuedarray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 14).split(';', -1)
+def dateissuedarray = findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 14).split(';', -1)
 
-def expireddatearray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 15).split(';', -1)
+def expireddatearray = findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 15).split(';', -1)
 
-def notarynamearray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 16).split(';', -1)
+def notarynamearray = findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 16).split(';', -1)
 
-def notarylocationarray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 17).split(';', -1)
+def notarylocationarray = findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 17).split(';', -1)
 
-def notesarray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 18).split(';', -1)
+def notesarray = findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 18).split(';', -1)
 
 for(legaldocarrayexcel = 0 ; legaldocarrayexcel < result.size()/7 ; legaldocarrayexcel++){
 	

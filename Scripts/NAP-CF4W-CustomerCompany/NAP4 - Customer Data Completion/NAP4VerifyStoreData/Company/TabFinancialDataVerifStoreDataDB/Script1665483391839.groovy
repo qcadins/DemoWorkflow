@@ -20,21 +20,24 @@ import internal.GlobalVariable as GlobalVariable
 Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 if (GlobalVariable.APPSTEP == 'CUSTOMER') {
-	'get data file customer'
-	datafilecustdetail = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail')
+		
+	'get data excelPathCustDetail'
+	excelPathCustDetail = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail'
 
 } else if (GlobalVariable.APPSTEP == 'SHAREHOLDER COMPANY') {
 
-	'get data file customer'
-	datafilecustdetail = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/CustomerDetail')
+	'get data excelPathCustDetail'
+	excelPathCustDetail = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/CustomerDetail'
 
 } else if (GlobalVariable.APPSTEP == 'GUARANTOR COMPANY') {
-	'get data file customer'
-	datafilecustdetail = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/CustomerDetail')
+	
+	'get data excelPathCustDetail'
+	excelPathCustDetail = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/CustomerDetail'
+	
 }
 
 'get count colm'
-countcolm = GlobalVariable.FindDataFile.getColumnNumbers()
+countcolm = findTestData(GlobalVariable.excelPath).getColumnNumbers()
 
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
 
@@ -45,13 +48,13 @@ String appno = WebUI.getText(findTestObject('NAP/NAP4-CustomerDataCompletion/Cus
 String custname = WebUI.getText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/CustomerNameDetail'))
 
 for (index = GlobalVariable.NumofVerifStore; index <= (countcolm); index++) {
-	if (GlobalVariable.FindDataFile.getValue(index, 9).equalsIgnoreCase(datafilecustdetail.getValue(GlobalVariable.NumofVerifStore,
-		12)) && GlobalVariable.FindDataFile.getValue(index, 10).equalsIgnoreCase(datafilecustdetail.getValue(GlobalVariable.NumofVerifStore,
+	if (findTestData(GlobalVariable.excelPath).getValue(index, 9).equalsIgnoreCase(findTestData(excelPathCustDetail).getValue(GlobalVariable.NumofVerifStore,
+		12)) && findTestData(GlobalVariable.excelPath).getValue(index, 10).equalsIgnoreCase(findTestData(excelPathCustDetail).getValue(GlobalVariable.NumofVerifStore,
 		13))) {
-	if (GlobalVariable.FindDataFile.getValue(index, 9).length() != 0 && GlobalVariable.FindDataFile.getValue(index, 35).length() != 0) {
+	if (findTestData(GlobalVariable.excelPath).getValue(index, 9).length() != 0 && findTestData(GlobalVariable.excelPath).getValue(index, 35).length() != 0) {
 		
 	'get financial data from db'
-	ArrayList<String> resultfinancialdata = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4FinancialDataCompanyStoreData'(sqlconnectionLOS, appno, custname, GlobalVariable.FindDataFile.getValue(index, 35))
+	ArrayList<String> resultfinancialdata = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4FinancialDataCompanyStoreData'(sqlconnectionLOS, appno, custname, findTestData(GlobalVariable.excelPath).getValue(index, 35))
 	
 	'get financialattr from db'
 	ArrayList<String> resultfinancialattr = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4FinancialAttrCompanyStoreData'(sqlconnectionLOS, appno, custname)
@@ -59,99 +62,99 @@ for (index = GlobalVariable.NumofVerifStore; index <= (countcolm); index++) {
 	int financialdataindex = 0, financialattr = 0
 	
 	'verify monthly income'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 12).split(',').join(), resultfinancialdata[financialdataindex++].split(',').join(),
+	arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(index, 12).split(',').join(), resultfinancialdata[financialdataindex++].split(',').join(),
 		false, FailureHandling.OPTIONAL))
 
 	'verify monthly expense'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 13).split(',').join(), resultfinancialdata[financialdataindex++].split(',').join(),
+	arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(index, 13).split(',').join(), resultfinancialdata[financialdataindex++].split(',').join(),
 		false, FailureHandling.OPTIONAL))
 
 	'verify return of investment %'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 14).split(',').join(), resultfinancialdata[financialdataindex++].split(',').join(),
+	arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(index, 14).split(',').join(), resultfinancialdata[financialdataindex++].split(',').join(),
 		false, FailureHandling.OPTIONAL))
 
 	'verify return of equity %'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 15).split(',').join(), resultfinancialdata[financialdataindex++].split(',').join(),
+	arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(index, 15).split(',').join(), resultfinancialdata[financialdataindex++].split(',').join(),
 		false, FailureHandling.OPTIONAL))
 
 	'verify return of asset %'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 16).split(',').join(), resultfinancialdata[financialdataindex++].split(',').join(),
+	arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(index, 16).split(',').join(), resultfinancialdata[financialdataindex++].split(',').join(),
 		false, FailureHandling.OPTIONAL))
 	
 	'verify profit margin %'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 17).split(',').join(), resultfinancialdata[financialdataindex++].split(',').join(),
+	arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(index, 17).split(',').join(), resultfinancialdata[financialdataindex++].split(',').join(),
 		false, FailureHandling.OPTIONAL))
 	
 	'verify current ratio %'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 18).split(',').join(), resultfinancialdata[financialdataindex++].split(',').join(),
+	arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(index, 18).split(',').join(), resultfinancialdata[financialdataindex++].split(',').join(),
 		false, FailureHandling.OPTIONAL))
 	
 	'verify debt equity ratio %'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 19).split(',').join(), resultfinancialdata[financialdataindex++].split(',').join(),
+	arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(index, 19).split(',').join(), resultfinancialdata[financialdataindex++].split(',').join(),
 		false, FailureHandling.OPTIONAL))
 	
 	'verify inventory turn over %'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 20).split(',').join(), resultfinancialdata[financialdataindex++].split(',').join(),
+	arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(index, 20).split(',').join(), resultfinancialdata[financialdataindex++].split(',').join(),
 		false, FailureHandling.OPTIONAL))
 	
 	'verify Account receiveable turn over %'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 21).split(',').join(), resultfinancialdata[financialdataindex++].split(',').join(),
+	arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(index, 21).split(',').join(), resultfinancialdata[financialdataindex++].split(',').join(),
 		false, FailureHandling.OPTIONAL))
 	
 	'verify growth %'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 22).split(',').join(), resultfinancialdata[financialdataindex++].split(',').join(),
+	arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(index, 22).split(',').join(), resultfinancialdata[financialdataindex++].split(',').join(),
 		false, FailureHandling.OPTIONAL))
 	
 	'verify working capital amount'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 23).split(',').join(), resultfinancialdata[financialdataindex++].split(',').join(),
+	arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(index, 23).split(',').join(), resultfinancialdata[financialdataindex++].split(',').join(),
 		false, FailureHandling.OPTIONAL))
 	
 	'verify other monthly installment amount'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 24).split(',').join(), resultfinancialdata[financialdataindex++].split(',').join(),
+	arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(index, 24).split(',').join(), resultfinancialdata[financialdataindex++].split(',').join(),
 		false, FailureHandling.OPTIONAL))
 	
 	'verify revenue'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 25).split(',').join(), resultfinancialdata[financialdataindex++].split(',').join(),
+	arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(index, 25).split(',').join(), resultfinancialdata[financialdataindex++].split(',').join(),
 		false, FailureHandling.OPTIONAL))
 	
 	'verify operational cost'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 26).split(',').join(), resultfinancialdata[financialdataindex++].split(',').join(),
+	arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(index, 26).split(',').join(), resultfinancialdata[financialdataindex++].split(',').join(),
 		false, FailureHandling.OPTIONAL))
 	
 	'verify profit before tax'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 27).split(',').join(), resultfinancialdata[financialdataindex++].split(',').join(),
+	arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(index, 27).split(',').join(), resultfinancialdata[financialdataindex++].split(',').join(),
 		false, FailureHandling.OPTIONAL))
 	
 	'verify current asset'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 28).split(',').join(), resultfinancialdata[financialdataindex++].split(',').join(),
+	arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(index, 28).split(',').join(), resultfinancialdata[financialdataindex++].split(',').join(),
 		false, FailureHandling.OPTIONAL))
 	
 	'verify nett fix asset'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 29).split(',').join(), resultfinancialdata[financialdataindex++].split(',').join(),
+	arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(index, 29).split(',').join(), resultfinancialdata[financialdataindex++].split(',').join(),
 		false, FailureHandling.OPTIONAL))
 	
 	'verify total asset'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 30).split(',').join(), resultfinancialdata[financialdataindex++].split(',').join(),
+	arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(index, 30).split(',').join(), resultfinancialdata[financialdataindex++].split(',').join(),
 		false, FailureHandling.OPTIONAL))
 	
 	'verify current liabilities'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 31).split(',').join(), resultfinancialdata[financialdataindex++].split(',').join(),
+	arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(index, 31).split(',').join(), resultfinancialdata[financialdataindex++].split(',').join(),
 		false, FailureHandling.OPTIONAL))
 	
 	'verify long term liabilities'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 32).split(',').join(), resultfinancialdata[financialdataindex++].split(',').join(),
+	arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(index, 32).split(',').join(), resultfinancialdata[financialdataindex++].split(',').join(),
 		false, FailureHandling.OPTIONAL))
 	
 	'verify shareholder equity'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 33).split(',').join(), resultfinancialdata[financialdataindex++].split(',').join(),
+	arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(index, 33).split(',').join(), resultfinancialdata[financialdataindex++].split(',').join(),
 		false, FailureHandling.OPTIONAL))
 	
 	'verify current ratio'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 34).split(',').join(), resultfinancialdata[financialdataindex++].split(',').join(),
+	arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(index, 34).split(',').join(), resultfinancialdata[financialdataindex++].split(',').join(),
 		false, FailureHandling.OPTIONAL))
 
 	'verify date as of'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 35).toUpperCase(), (resultfinancialdata[financialdataindex++]),
+	arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(index, 35).toUpperCase(), (resultfinancialdata[financialdataindex++]),
 		false, FailureHandling.OPTIONAL))
 	
 	if(index == GlobalVariable.NumofVerifStore){
@@ -160,7 +163,7 @@ for (index = GlobalVariable.NumofVerifStore; index <= (countcolm); index++) {
 	for(finattr = 0; finattr < resultfinancialattr.size(); finattr++){
 		
 	'verify financial attr'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, row++).split(',').join(), resultfinancialattr[finattr],
+	arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(index, row++).split(',').join(), resultfinancialattr[finattr],
 		false, FailureHandling.OPTIONAL))
 	}
 	
@@ -173,65 +176,65 @@ for (index = GlobalVariable.NumofVerifStore; index <= (countcolm); index++) {
 }
 
 for (index = GlobalVariable.NumofVerifStore; index <= (countcolm); index++) {
-	if (GlobalVariable.FindDataFile.getValue(index, 9).equalsIgnoreCase(datafilecustdetail.getValue(GlobalVariable.NumofVerifStore,
-		12)) && GlobalVariable.FindDataFile.getValue(index, 10).equalsIgnoreCase(datafilecustdetail.getValue(GlobalVariable.NumofVerifStore,
+	if (findTestData(GlobalVariable.excelPath).getValue(index, 9).equalsIgnoreCase(findTestData(excelPathCustDetail).getValue(GlobalVariable.NumofVerifStore,
+		12)) && findTestData(GlobalVariable.excelPath).getValue(index, 10).equalsIgnoreCase(findTestData(excelPathCustDetail).getValue(GlobalVariable.NumofVerifStore,
 		13))) {
-	if (GlobalVariable.FindDataFile.getValue(index, 10).length() != 0 && GlobalVariable.FindDataFile.getValue(index, 70).length() != 0) {
+	if (findTestData(GlobalVariable.excelPath).getValue(index, 10).length() != 0 && findTestData(GlobalVariable.excelPath).getValue(index, 70).length() != 0) {
 	'get bankacc from db'
-	ArrayList<String> resultbankacc = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4FinDataBankAccCompanyStoreData'(sqlconnectionLOS, appno, custname, GlobalVariable.FindDataFile.getValue(index, 70))
+	ArrayList<String> resultbankacc = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4FinDataBankAccCompanyStoreData'(sqlconnectionLOS, appno, custname, findTestData(GlobalVariable.excelPath).getValue(index, 70))
 	
 	int bankacc = 0
 	
 	'verify bank code'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 66).toUpperCase(), (resultbankacc[bankacc++]).toUpperCase(),
+	arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(index, 66).toUpperCase(), (resultbankacc[bankacc++]).toUpperCase(),
 		false, FailureHandling.OPTIONAL))
 
 	'verify bank branch'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 68).toUpperCase(), (resultbankacc[bankacc++]).toUpperCase(),
+	arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(index, 68).toUpperCase(), (resultbankacc[bankacc++]).toUpperCase(),
 		false, FailureHandling.OPTIONAL))
 
 	'verify bank name'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 69).toUpperCase(), (resultbankacc[bankacc++]).toUpperCase(),
+	arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(index, 69).toUpperCase(), (resultbankacc[bankacc++]).toUpperCase(),
 		false, FailureHandling.OPTIONAL))
 
 	'verify bank acc no'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 70).toUpperCase(), (resultbankacc[bankacc++]).toUpperCase(),
+	arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(index, 70).toUpperCase(), (resultbankacc[bankacc++]).toUpperCase(),
 		false, FailureHandling.OPTIONAL))
 
 	'verify is default'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 71).toUpperCase(), (resultbankacc[bankacc++]).toUpperCase(),
+	arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(index, 71).toUpperCase(), (resultbankacc[bankacc++]).toUpperCase(),
 		false, FailureHandling.OPTIONAL))
 
 	'verify is active'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 72).toUpperCase(), (resultbankacc[bankacc++]).toUpperCase(),
+	arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(index, 72).toUpperCase(), (resultbankacc[bankacc++]).toUpperCase(),
 		false, FailureHandling.OPTIONAL))
 	
 	'verify begining balance'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(index, 73).split(',').join(), (resultbankacc[bankacc++].split(',').join()).toUpperCase(),
+	arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(index, 73).split(',').join(), (resultbankacc[bankacc++].split(',').join()).toUpperCase(),
 		false, FailureHandling.OPTIONAL))
 	
 	'get bankstat from db'
-	String bankstat = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4FinancialCheckBankStatCompanyStoreData'(sqlconnectionLOS, appno, custname, GlobalVariable.FindDataFile.getValue(index, 27))
+	String bankstat = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4FinancialCheckBankStatCompanyStoreData'(sqlconnectionLOS, appno, custname, findTestData(GlobalVariable.excelPath).getValue(index, 27))
 	
 	'verify bank statement yes/no'
 	if(bankstat == null){
 		continue
 	}else if(bankstat.equalsIgnoreCase('true')){
 		
-		def montharray = GlobalVariable.FindDataFile.getValue(index, 74).split(';',-1)
+		def montharray = findTestData(GlobalVariable.excelPath).getValue(index, 74).split(';',-1)
 		
-		def yeararray = GlobalVariable.FindDataFile.getValue(index, 75).split(';',-1)
+		def yeararray = findTestData(GlobalVariable.excelPath).getValue(index, 75).split(';',-1)
 		
-		def debittrscarray = GlobalVariable.FindDataFile.getValue(index, 76).split(';',-1)
+		def debittrscarray = findTestData(GlobalVariable.excelPath).getValue(index, 76).split(';',-1)
 		
-		def debitarray = GlobalVariable.FindDataFile.getValue(index, 77).split(';',-1)
+		def debitarray = findTestData(GlobalVariable.excelPath).getValue(index, 77).split(';',-1)
 		
-		def credittrscarray = GlobalVariable.FindDataFile.getValue(index, 78).split(';',-1)
+		def credittrscarray = findTestData(GlobalVariable.excelPath).getValue(index, 78).split(';',-1)
 		
-		def creditarray = GlobalVariable.FindDataFile.getValue(index, 79).split(';',-1)
+		def creditarray = findTestData(GlobalVariable.excelPath).getValue(index, 79).split(';',-1)
 		
 		'get bankstatdata from db'
-		ArrayList<String> resultbankstatdata = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4BankStatDataCompanyStoreData'(sqlconnectionLOS, appno, custname, GlobalVariable.FindDataFile.getValue(index, 27))
+		ArrayList<String> resultbankstatdata = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4BankStatDataCompanyStoreData'(sqlconnectionLOS, appno, custname, findTestData(GlobalVariable.excelPath).getValue(index, 27))
 		
 		'ganti value null > "" (String kosong)'
 		for (i = 0; i <= (resultbankstatdata.size() - 1); i++) {

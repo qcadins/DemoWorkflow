@@ -31,7 +31,7 @@ ArrayList<Integer> posAddCross = new ArrayList<>()
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathPersonal)
 
 'declare excelPathTabApplication'
-excelPathTabApplication = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData'
+excelPathTabApplication = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP2-ApplicationData/TabApplicationData'
 
 'Klik tab application'
 WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/buttonTabApplication'))
@@ -45,11 +45,19 @@ if (appLastStep.equalsIgnoreCase("REFERANTOR")||appLastStep.equalsIgnoreCase("AP
 	
 	WebUI.delay(3)
 	
-	'click menu consumer finance'
-	WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_Consumer Finance'))
-	
-	'click menu new consumer finance'
-	WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'))
+	if(GlobalVariable.LOB == 'CF4W'){
+		'click menu consumer finance'
+		WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_Consumer Finance'))
+		
+		'click menu new consumer finance'
+		WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'))
+	}else if(GlobalVariable.LOB == 'FL4W'){
+		'Klik new finance leasing'
+		WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Finance Leasing'))
+
+		'click menu customer application data'
+		WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP1-CustomerData/Applicant/a_APPLICATION DATA FL4W'))
+	}
 }
 
 datafileLogin = findTestData('Login/Login')

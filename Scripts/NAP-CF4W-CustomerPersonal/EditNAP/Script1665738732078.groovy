@@ -28,19 +28,19 @@ CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFil
 Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 'declare excelPathCustomerPersonal'
-excelPathCustomerPersonal = 'NAP-'+ GlobalVariable.LOB  +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData'
+excelPathCustomerPersonal = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP1-CustomerData/TabCustomerData'
 
 'declare excelPathTabFamily'
-excelPathTabFamily = 'NAP-'+ GlobalVariable.LOB  +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData'
+excelPathTabFamily = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP1-CustomerData/TabFamilyData'
 
 'declare excelPathTabGuarantorPersonal'
-excelPathTabGuarantorPersonal = 'NAP-'+ GlobalVariable.LOB  +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal'
+excelPathTabGuarantorPersonal = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP1-CustomerData/TabGuarantorDataPersonal'
 
 'declare excelPathTabGuarantorCompany'
-excelPathTabGuarantorCompany = 'NAP-'+ GlobalVariable.LOB  +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataCompany'
+excelPathTabGuarantorCompany = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP1-CustomerData/TabGuarantorDataCompany'
 
 'declare excelPathTabUploadDoc'
-excelPathTabUploadDoc = 'NAP-'+ GlobalVariable.LOB  +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabUploadDocument'
+excelPathTabUploadDoc = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP2-ApplicationData/TabUploadDocument'
 
 'get appno from excel'
 String appNo = findTestData(excelPathCustomerPersonal).getValue(GlobalVariable.NumofColm, 8)
@@ -1197,10 +1197,10 @@ public loopingStartIndex(Integer NumOf, TestData datafile){
 'Function untuk Looping hingga return flag pada sheet commission dan reserved fund tidak bernilai "yes" lagi'
 public loopingReturnComresfund(){
 	'declare excelPathCommission'
-	excelPathCommission = 'NAP-'+ GlobalVariable.LOB  +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData'
+	excelPathCommission = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/CommissionReservedFund/TabCommissionData'
 	
 	'declare excelPathReservedFund'
-	excelPathReservedFund = 'NAP-'+ GlobalVariable.LOB  +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabReservedFundData'
+	excelPathReservedFund = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/CommissionReservedFund/TabReservedFundData'
 	
 	'Mengambil nilai row keberapa dimulai data return pada excel'
 	def returnRowCom = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '13.TabCommissionData',

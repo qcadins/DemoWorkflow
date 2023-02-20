@@ -19,32 +19,46 @@ import org.openqa.selenium.By as By
 import org.openqa.selenium.WebElement as WebElement
 import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 
-//'klik menu new consumer finance'
-//WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompletion/a_New Consumer Finance'))
+GlobalVariable.LOB = 'FL4W'
+
+if(GlobalVariable.LOB == 'CF4W'){
+	if(WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'), FailureHandling.OPTIONAL)){
+		'click menu consumer finance'
+		WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_Consumer Finance'))
+	}
+	
+	if(WebUI.verifyElementNotVisible(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompletion/a_CUSTOMER DATA COMPLETION CF4W'), FailureHandling.OPTIONAL)){
+		'click menu new consumer finance'
+		WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'))
+	}
+	
+	'click menu Customer Data Completion'
+	WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompletion/a_CUSTOMER DATA COMPLETION CF4W'))
+}else if(GlobalVariable.LOB == 'FL4W'){
+	'Pengecekan jika finance leasing belum diexpand'
+	if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_New Finance Leasing'), FailureHandling.OPTIONAL)) {
+		'Klik new finance leasing'
+		WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_FinanceLeasing4W'))
+	}
+	
+	'Pengecekan jika new finance leasing belum diexpand'
+	if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA FL4W'), FailureHandling.OPTIONAL)) {
+		'Klik new finance leasing'
+		WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Finance Leasing'))
+	}
+	
+	'click menu Customer Data Completion'
+	WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompletion/a_CUSTOMER DATA COMPLETION FL4W'))
+}
 
 'declare excelPathCustomerPersonal'
-excelPathCustomerPersonal = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData'
+excelPathCustomerPersonal = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP1-CustomerData/TabCustomerData'
 
 'declare excelPathCDC'
-excelPathCDC = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerDataCompletion'
+excelPathCDC = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP4-CustomerDataCompletion/CustomerDataCompletion'
 
-if(WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'), FailureHandling.OPTIONAL)){
-	'click menu consumer finance'
-	WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_Consumer Finance'))
-}
-
-if(WebUI.verifyElementNotVisible(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompletion/a_CUSTOMER DATA COMPLETION'), FailureHandling.OPTIONAL)){
-	'click menu new consumer finance'
-	WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'))
-}
-
-'click menu Customer Data Completion'
-WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompletion/a_CUSTOMER DATA COMPLETION'))
 
 WebUI.delay(10)
-
-'click menu Customer Data Completion'
-WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompletion/a_CUSTOMER DATA COMPLETION'))
 
 'call function paging testing'
 pagingTesting()

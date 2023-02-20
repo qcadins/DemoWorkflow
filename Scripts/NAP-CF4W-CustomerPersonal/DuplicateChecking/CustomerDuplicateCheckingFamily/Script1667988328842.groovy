@@ -20,7 +20,7 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 
 'declare excelPathDupcheck'
-excelPathDupcheck = 'NAP-'+ GlobalVariable.LOB  +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking'
+excelPathDupcheck = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/DuplicateChecking'
 
 'declare familyarray'
 def FamilyArray = findTestData(excelPathDupcheck).getValue(GlobalVariable.NumofColm, 16).split(';', -1)

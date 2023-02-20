@@ -20,15 +20,39 @@ import org.openqa.selenium.WebDriver as WebDriver
 import org.openqa.selenium.By as By
 import org.openqa.selenium.WebElement as WebElement
 import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
-
-'Pengecekan jika new consumer finance belum diexpand'
-if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA CF4W'), FailureHandling.OPTIONAL)) {
-    'Klik new consumer finance'
-    WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'))
+ 
+if(GlobalVariable.LOB == 'CF4W'){
+	if(WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'), FailureHandling.OPTIONAL)){
+		'click menu consumer finance'
+		WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_Consumer Finance'))
+	}
+	
+	if(WebUI.verifyElementNotVisible(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompletion/a_CUSTOMER DATA COMPLETION CF4W'), FailureHandling.OPTIONAL)){
+		'click menu new consumer finance'
+		WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'))
+	}
+	
+	'click menu Customer Data Completion'
+	WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompletion/a_CUSTOMER DATA COMPLETION CF4W'))
+}else if(GlobalVariable.LOB == 'FL4W'){
+	'Pengecekan jika finance leasing belum diexpand'
+	if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_New Finance Leasing'), FailureHandling.OPTIONAL)) {
+		'Klik new finance leasing'
+		WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_FinanceLeasing4W'))
+	}
+	
+	'Pengecekan jika new finance leasing belum diexpand'
+	if (WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_CUSTOMER MAIN DATA FL4W'), FailureHandling.OPTIONAL)) {
+		'Klik new finance leasing'
+		WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Finance Leasing'))
+	}
+	
+	'click menu Customer Data Completion'
+	WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompletion/a_CUSTOMER DATA COMPLETION FL4W'))
 }
 
 'get data file path'
-GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'("\\Excel\\"+ GlobalVariable.LOB +"\\2.2 DataFile_NAP_"+ GlobalVariable.LOB +"_Company.xlsx")
 
 //'connect DB FOU'
 //Sql sqlConnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
@@ -41,9 +65,6 @@ excelPathCustomerCompany = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP1-Cu
 
 'declare excelPathCDC'
 excelPathCDC = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion'
-
-'click menu Customer Data Completion'
-WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompletion/a_CUSTOMER DATA COMPLETION'))
 
 'call funtion paging testing'
 pagingTesting()
@@ -219,7 +240,7 @@ WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompleti
 'get data file path'
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
 
-//Integer iscompleteMandatory = Integer.parseInt(findTestData(excelPathCDC).getValue(GlobalVariable.NumofColm, 4))
+Integer iscompleteMandatory = Integer.parseInt(findTestData(excelPathCDC).getValue(GlobalVariable.NumofColm, 4))
 
 if (GlobalVariable.FlagFailed == 0) {
     'cek alert'

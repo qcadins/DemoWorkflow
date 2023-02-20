@@ -36,72 +36,72 @@ ArrayList<Boolean> arrayMatch = new ArrayList<Boolean>()
 int arrayindex = 0
 
 'verify contact person name'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 15).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 15).toUpperCase(), 
         (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify ID Type'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 16).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 16).toUpperCase(), 
         (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify ID No'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 17).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 17).toUpperCase(), 
         (result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-if(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 16).equalsIgnoreCase('E-KTP') || GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 16).equalsIgnoreCase('AKTA') || GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 16).equals('NPWP')){
+if(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 16).equalsIgnoreCase('E-KTP') || findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 16).equalsIgnoreCase('AKTA') || findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 16).equals('NPWP')){
 	'skip expired date'
 	arrayindex++
 }else{
 	'verify ID expired date'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 18).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
+	arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 18).toUpperCase(), (result[arrayindex++]).toUpperCase(), 
 			false, FailureHandling.OPTIONAL))
 }
 
 'verify relationship'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 19).toUpperCase(),
+arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 19).toUpperCase(),
 		(result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-if(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 20).length() > 0){
+if(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 20).length() > 0){
 	'verify email'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 20).toUpperCase(), 
+	arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 20).toUpperCase(), 
 			(result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 }else{
 	arrayindex++
 }
 
 'verify gender'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 21).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 21).toUpperCase(), 
 		(result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-if(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 22).length() > 0){
+if(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 22).length() > 0){
 	'verify birth place'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 22).toUpperCase(), 
+	arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 22).toUpperCase(), 
 			(result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 }else{
 	arrayindex++
 }
 
-if(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 23).length() > 0){
+if(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 23).length() > 0){
 	'verify birth date'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 23).toUpperCase(), 
+	arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 23).toUpperCase(), 
 			(result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 }else{
 	arrayindex++
 }
 
 'verify mobile 1'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 24).toUpperCase(), 
+arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 24).toUpperCase(), 
 		(result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-if(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 25).length() > 0){
+if(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 25).length() > 0){
 	'verify mobile 2'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 25).toUpperCase(), 
+	arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 25).toUpperCase(), 
 			(result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 }else{
 	arrayindex++
 }
 
 
-if(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 26).length() > 0){
+if(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 26).length() > 0){
 	
 	address = 0
 	
@@ -170,129 +170,129 @@ if(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 26).leng
 			(result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 }else{
 
-	if(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 27).length() > 0){
+	if(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 27).length() > 0){
 		'verify Address'
-		arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 27).toUpperCase(), 
+		arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 27).toUpperCase(), 
 				(result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	}else{
 		arrayindex++
 	}
 	
-	if(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 28).length() > 0){
+	if(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 28).length() > 0){
 		'verify RT'
-		arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 28).toUpperCase(), 
+		arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 28).toUpperCase(), 
 				(result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	}else{
 		arrayindex++
 	}
 	
-	if(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 29).length() > 0){
+	if(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 29).length() > 0){
 		'verify RW'
-		arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 29).toUpperCase(), 
+		arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 29).toUpperCase(), 
 				(result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	}else{
 		arrayindex++
 	}
 	
-	if(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 30).length() > 0){
+	if(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 30).length() > 0){
 		'verify zipcode'
-		arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 30).toUpperCase(), 
+		arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 30).toUpperCase(), 
 				(result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	}else{
 		arrayindex++
 	}
 	
-	if(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 31).length() > 0){
+	if(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 31).length() > 0){
 		'verify kecamatan'
-		arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 31).toUpperCase(), 
+		arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 31).toUpperCase(), 
 				(result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	}else{
 		arrayindex++
 	}
 	
-	if(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 32).length() > 0){
+	if(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 32).length() > 0){
 		'verify kelurahan'
-		arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 32).toUpperCase(), 
+		arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 32).toUpperCase(), 
 				(result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	}else{
 		arrayindex++
 	}
 	
-	if(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 33).length() > 0){
+	if(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 33).length() > 0){
 		'verify kota'
-		arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 33).toUpperCase(), 
+		arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 33).toUpperCase(), 
 				(result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	}else{
 		arrayindex++
 	}
 	
-	if(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 34).length() > 0){
+	if(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 34).length() > 0){
 		'verify phone 1 area'
-		arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 34).toUpperCase(), 
+		arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 34).toUpperCase(), 
 				(result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	}else{
 		arrayindex++
 	}
 	
-	if(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 35).length() > 0){
+	if(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 35).length() > 0){
 		'verify phone 1'
-		arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 35).toUpperCase(), 
+		arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 35).toUpperCase(), 
 				(result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	}else{
 		arrayindex++
 	}
 	
-	if(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 36).length() > 0){
+	if(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 36).length() > 0){
 		'verify phone 1 ext'
-		arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 36).toUpperCase(), 
+		arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 36).toUpperCase(), 
 				(result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	}else{
 		arrayindex++
 	}
 	
-	if(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 37).length() > 0){
+	if(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 37).length() > 0){
 		'verify phone 2 area'
-		arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 37).toUpperCase(), 
+		arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 37).toUpperCase(), 
 				(result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	}else{
 		arrayindex++
 	}
 	
-	if(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 38).length() > 0){
+	if(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 38).length() > 0){
 		'verify phone 2'
-		arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 38).toUpperCase(), 
+		arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 38).toUpperCase(), 
 				(result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	}else{
 		arrayindex++
 	}
 	
-	if(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 39).length() > 0){
+	if(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 39).length() > 0){
 		'verify phone 2 ext'
-		arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 39).toUpperCase(), 
+		arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 39).toUpperCase(), 
 				(result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	}else{
 		arrayindex++
 	}
 	
-	if(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 40).length() > 0){
+	if(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 40).length() > 0){
 		'verify phone 3 area'
-		arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 40).toUpperCase(), 
+		arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 40).toUpperCase(), 
 				(result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	}else{
 		arrayindex++
 	}
 	
-	if(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 41).length() > 0){
+	if(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 41).length() > 0){
 		'verify phone 3'
-		arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 41).toUpperCase(), 
+		arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 41).toUpperCase(), 
 				(result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	}else{
 		arrayindex++
 	}
 	
-	if(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 42).length() > 0){
+	if(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 42).length() > 0){
 		'verify phone 3 ext'
-		arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 42).toUpperCase(), 
+		arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 42).toUpperCase(), 
 				(result[arrayindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	}else{
 		arrayindex++

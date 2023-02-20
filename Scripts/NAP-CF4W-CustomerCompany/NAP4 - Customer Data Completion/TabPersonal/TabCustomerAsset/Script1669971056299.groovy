@@ -45,7 +45,7 @@ def assetvaluearray = findTestData(GlobalVariable.excelPath).getValue(GlobalVari
 def assetquantityarray = findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 16).split(';', -1)
 
 'copyapp'
-copyapp = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion').getValue(
+copyapp = findTestData('NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion').getValue(
 	GlobalVariable.NumofColm, 10)
 
 if (copyapp.equalsIgnoreCase('Edit')) {
@@ -352,13 +352,13 @@ def countAssetValue(int confinssize){
 def getDatafile(){
 	if(GlobalVariable.APPSTEP == 'SHAREHOLDER PERSONAL'){
 		'get data file path'
-		GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileManagementShareholderPersonal)
+		GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'("\\Excel\\"+ GlobalVariable.LOB +"\\2.2.2 CustomerDataCompletion-Company - ManagementShareholderPersonal.xlsm")
 		
 		'declare data file Global variable'
 		GlobalVariable.excelPath = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementshareholderPersonal/CustomerAsset'
 	}else if(GlobalVariable.APPSTEP == 'GUARANTOR PERSONAL'){
 		'get data file path'
-		GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorPersonalCompany)
+		GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'("\\Excel\\"+ GlobalVariable.LOB +"\\2.2.4 CustomerDataCompletion-Company - GuarantorPersonal.xlsm")
 		
 		GlobalVariable.excelPath = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/CustomerAsset'
 	}

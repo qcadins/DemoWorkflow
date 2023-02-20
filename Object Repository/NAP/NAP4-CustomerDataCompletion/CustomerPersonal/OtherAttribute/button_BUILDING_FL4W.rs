@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>button_BUILDING_</name>
+   <name>button_BUILDING_FL4W</name>
    <tag></tag>
    <elementGuidId>475b7a54-963b-4c38-abe1-2c3150b93258</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>
-         <value>//div[@id='AttributeList']/div/div[15]/div/div/lib-uclookupgeneric/div/div/div/span/button</value>
+         <value>//*[@id=&quot;AttributeList&quot;]/div/div[14]/div/div/lib-uclookupgeneric/div/div/div[1]/span/button</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

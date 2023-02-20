@@ -36,24 +36,24 @@ ArrayList<Boolean> arrayMatch = new ArrayList<>()
 int arrayindexinfo = 0, arrayindexlist = 0
 
 'verify debtor group'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 13).toUpperCase(), (resultotherattrinfo[
+arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 13).toUpperCase(), (resultotherattrinfo[
     arrayindexinfo++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify debtor business scale'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 15).toUpperCase(), (resultotherattrinfo[
+arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 15).toUpperCase(), (resultotherattrinfo[
     arrayindexinfo++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify counterpart scale'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 17).toUpperCase(), (resultotherattrinfo[
+arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 17).toUpperCase(), (resultotherattrinfo[
     arrayindexinfo++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify sustainable financial business'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 19).toUpperCase(), (resultotherattrinfo[
+arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 19).toUpperCase(), (resultotherattrinfo[
     arrayindexinfo++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-if(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 21).length() > 0){
+if(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 21).length() > 0){
 	'verify is split treasure'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 21).toUpperCase(), (resultotherattrlist[
+	arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 21).toUpperCase(), (resultotherattrlist[
 	                                                                                                                                              arrayindexlist++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 }else{
 	arrayindexlist++
@@ -61,46 +61,46 @@ if(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 21).leng
 
 
 'verify is debtor group slik'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 22).toUpperCase(), (resultotherattrlist[
+arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 22).toUpperCase(), (resultotherattrlist[
     arrayindexlist++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-if(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 24).length() > 0){
+if(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 24).length() > 0){
 	'verify is violate BMPK'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 24).toUpperCase(), (resultotherattrlist[
+	arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 24).toUpperCase(), (resultotherattrlist[
 	                                                                                                                                              arrayindexlist++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 }else{
 	arrayindexlist++
 }
 
-if(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 25).length() > 0){
+if(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 25).length() > 0){
 	'verify is exceed BMPK'
-	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 25).toUpperCase(), (resultotherattrlist[
+	arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 25).toUpperCase(), (resultotherattrlist[
 	                                                                                                                                              arrayindexlist++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 }else{
 	arrayindexlist++
 }
 
 'verify AFF with MF slik'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 26).toUpperCase(), (resultotherattrlist[
+arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 26).toUpperCase(), (resultotherattrlist[
     arrayindexlist++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify Department AML'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 28).toUpperCase(), (resultotherattrlist[
+arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 28).toUpperCase(), (resultotherattrlist[
     arrayindexlist++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify CSP/USL Source AML'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 30).toUpperCase(), (resultotherattrlist[
+arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 30).toUpperCase(), (resultotherattrlist[
     arrayindexlist++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify Payment Type'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 32).toUpperCase(), (resultotherattrlist[
+arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 32).toUpperCase(), (resultotherattrlist[
     arrayindexlist++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify KYC report AML'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 34).toUpperCase(), (resultotherattrlist[
+arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 34).toUpperCase(), (resultotherattrlist[
     arrayindexlist++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-String authorityaml = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 35)
+String authorityaml = findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 35)
 
 if (!(authorityaml.equalsIgnoreCase('#N/A'))) {
 	'verify Authorithy AML'
@@ -113,7 +113,7 @@ SimpleDateFormat sdf = new SimpleDateFormat('MM/dd/yyyy')
 
 Date parsedDate = null
 
-String sentDate = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 37)
+String sentDate = findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 37)
 
 parsedDate = sdf.parse(sentDate)
 
@@ -125,14 +125,14 @@ String sDate = sdf.format(parsedDate)
 arrayMatch.add(WebUI.verifyMatch(sDate, (resultotherattrlist[arrayindexlist++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify Business source AML'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 38).toUpperCase(), (resultotherattrlist[
+arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 38).toUpperCase(), (resultotherattrlist[
     arrayindexlist++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 sdf = new SimpleDateFormat('MM/dd/yyyy')
 
 parsedDate = null
 
-sentDate = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 40)
+sentDate = findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 40)
 
 parsedDate = sdf.parse(sentDate)
 
@@ -144,7 +144,7 @@ sDate = sdf.format(parsedDate)
 arrayMatch.add(WebUI.verifyMatch(sDate, (resultotherattrlist[arrayindexlist++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify Building'
-arrayMatch.add(WebUI.verifyMatch(GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 41).toUpperCase(), (resultotherattrlist[
+arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 41).toUpperCase(), (resultotherattrlist[
     arrayindexlist++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'Jika nilai di confins ada yang tidak sesuai dengan db'

@@ -23,10 +23,6 @@ GlobalVariable.FlagWarning = 0
 
 GlobalVariable.FlagFailed = 0
 
-GlobalVariable.APPSTEP = 'SHAREHOLDER PERSONAL'
-
-GlobalVariable.ColmNAP4 = 2
-
 'call function getDataFile'
 getDataFile()
 
@@ -198,7 +194,7 @@ if (GlobalVariable.RoleCompany == 'Testing') {
     WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/OtherAttribute/Button_X'))
 
     'click authority AML lookup'
-    WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/OtherAttribute/button_Authority AML'))
+    WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/OtherAttribute/button_Authority AML FL4W'))
 
     'click search'
     WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/OtherAttribute/button_Search'))
@@ -215,7 +211,7 @@ if (GlobalVariable.RoleCompany == 'Testing') {
     WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/OtherAttribute/Button_X'))
 
     'click business source AML Lookup'
-    WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/OtherAttribute/button_BUSINESS SOURCE AML_btn btn-raised btn-primary'))
+    WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/OtherAttribute/button_BUSINESS SOURCE AML_FL4w'))
 
     'click search'
     WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/OtherAttribute/button_Search'))
@@ -232,7 +228,7 @@ if (GlobalVariable.RoleCompany == 'Testing') {
     WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/OtherAttribute/Button_X'))
 
     'click building lookup'
-    WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/OtherAttribute/button_BUILDING_'))
+    WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/OtherAttribute/button_BUILDING_FL4W'))
 
     'click search'
     WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/OtherAttribute/button_Search'))
@@ -419,7 +415,7 @@ if (findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 34)
 
 if (findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 36).length() > 1) {
     'click authority AML lookup'
-    WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/OtherAttribute/button_Authority AML'))
+    WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/OtherAttribute/button_Authority AML FL4W'))
 
     'input code'
     WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/OtherAttribute/input_Code_MasterCodeId'), 
@@ -443,13 +439,13 @@ if (findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 36)
 
 if (findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 37).length() > 1) {
     'input attend date'
-    WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/OtherAttribute/input_ATTEND_'), 
+    WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/OtherAttribute/input_ATTEND_CF4W'), 
         findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 37))
 }
 
 if (findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 39).length() > 1) {
     'click business source AML Lookup'
-    WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/OtherAttribute/button_BUSINESS SOURCE AML_btn btn-raised btn-primary'))
+    WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/OtherAttribute/button_BUSINESS SOURCE AML_FL4w'))
 
     'input code'
     WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/OtherAttribute/input_Code_MasterCodeId'), 
@@ -464,13 +460,13 @@ if (findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 39)
 
 if (findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 40).length() > 1) {
     'input Business Period AML'
-    WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/OtherAttribute/input_BUSINESS PERIOD AML'), 
+    WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/OtherAttribute/input_BUSINESS PERIOD AML CF4W'), 
         findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 40))
 }
 
 if (findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 42).length()) {
     'click building lookup'
-    WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/OtherAttribute/button_BUILDING_'))
+    WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/OtherAttribute/button_BUILDING_FL4W'))
 
     'input code'
     WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/OtherAttribute/input_Code_MasterCodeId'), 
@@ -570,13 +566,13 @@ def verifyInputError(){
 def getDataFile(){
 	if(GlobalVariable.APPSTEP == 'SHAREHOLDER PERSONAL'){
 		'get data file path'
-		GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileManagementShareholderPersonal)
+		GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'("\\Excel\\"+ GlobalVariable.LOB +"\\2.2.2 CustomerDataCompletion-Company - ManagementShareholderPersonal.xlsm")
 		
 		'declare data file Global variable'
 		GlobalVariable.excelPath = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/OtherAttribute'
 	}else if(GlobalVariable.APPSTEP == 'GUARANTOR PERSONAL'){
 		'get data file path'
-		GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorPersonalCompany)
+		GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'("\\Excel\\"+ GlobalVariable.LOB +"\\2.2.4 CustomerDataCompletion-Company - GuarantorPersonal.xlsm")
 		
 		GlobalVariable.excelPath = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/OtherAttribute'
 	}

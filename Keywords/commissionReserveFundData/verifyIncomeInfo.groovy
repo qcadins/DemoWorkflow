@@ -176,7 +176,7 @@ public class verifyIncomeInfo {
 
 		Matcher m = Pattern.compile("-?\\d+(\\.\\d+)?").matcher(maxrefundAmt[0])
 		while(m.find()){
-						println(Double.valueOf(m.group())+"abc")
+			println(Double.valueOf(m.group())+"abc")
 			numbers.add(Double.valueOf(m.group()))
 		}
 
@@ -206,6 +206,7 @@ public class verifyIncomeInfo {
 		instanceLOS.eachRow(("select CONVERT(INT,total_interest_amt) from app_fin_data afd join app a on afd.app_id = a.app_id where APP_NO='"+appNo+"'"), { def row ->
 			value = row[0]
 		})
+		
 		totalMaxAllocated+=value
 		println(totalMaxAllocated)
 		if(GlobalVariable.LOB == 'CF4W'){

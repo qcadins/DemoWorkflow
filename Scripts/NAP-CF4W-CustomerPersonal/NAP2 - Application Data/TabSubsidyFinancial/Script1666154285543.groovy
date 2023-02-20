@@ -29,7 +29,7 @@ GlobalVariable.SubsidyDP = 0
 ArrayList <String> subsidyfaileddelete = new ArrayList<>()
 
 'declare excelPathTabFinancial'
-excelPathTabFinancial = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData'
+excelPathTabFinancial = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP2-ApplicationData/TabFinancialData'
 
 'declare subsidytypearray'
 def SubsidyTypeArray = findTestData(excelPathTabFinancial).getValue(GlobalVariable.NumofColm, 12).split(';',-1)

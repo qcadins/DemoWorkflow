@@ -67,7 +67,7 @@ if (GlobalVariable.Role == 'Testing') {
 }
 
 'declare excelPathTabFinancial'
-excelPathTabFinancial = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData'
+excelPathTabFinancial = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP2-ApplicationData/TabFinancialData'
 
 //Verif fee based on rule
 if ((GlobalVariable.Role == 'Testing') && GlobalVariable.FirstTimeEntry=="Yes") {

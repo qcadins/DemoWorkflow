@@ -21,10 +21,10 @@ import org.openqa.selenium.WebElement as WebElement
 Sql sqlconnection = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 'declare excelPathAccessories'
-excelPathAccessories = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/Accessories'
+excelPathAccessories = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP2-ApplicationData/Accessories'
 
 'declare excelPathCustomerPersonal'
-excelPathCustomerPersonal = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData'
+excelPathCustomerPersonal = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP1-CustomerData/TabCustomerData'
 
 'get accessories data from db'
 ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2AccessoriesStoreDB'(sqlconnection, findTestData(excelPathAccessories).getValue(GlobalVariable.StartIndex,

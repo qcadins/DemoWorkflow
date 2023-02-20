@@ -33,11 +33,11 @@ String appNo = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-Appl
 'koneksi db los'
 Sql sqlConnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
-'declare datafileTabFinancial'
-datafileTabFinancial = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData')
+'declare excelPathTabFinancial'
+excelPathTabFinancial = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP2-ApplicationData/TabFinancialData'
 
-'declare datafileTabApplication'
-datafileTabApplication = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData')
+'declare excelPathTabApplication'
+excelPathTabApplication = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData'
 
 'get data file path simulasi'
 def datafilepathsim = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathSimulasiFinancial)
@@ -158,10 +158,10 @@ BigDecimal BDInstallmentAmount = new BigDecimal(strInstallmentAmount)
 //BigDecimal NTFValueFinal = Math.round(NTFValueADDCapEXCProvCap.multiply(ProvisionPercentage / 100))
 
 //'check if calculate based is OTR-DP'
-//if (datafileTabFinancial.getValue(
+//if (findTestData(excelPathTabFinancial).getValue(
 //    GlobalVariable.NumofColm, 37).equalsIgnoreCase('OTR-DP')) {
 //    'check if provision fee type Percentage'
-//    if (datafileTabFinancial.getValue(
+//    if (findTestData(excelPathTabFinancial).getValue(
 //        GlobalVariable.NumofColm, 36) == 'Percentage') {
 //        'calculate NTFProvisionCalc multiply percentage'
 //        BigDecimal NTFValuexPercentage = NTFforProvisionCalc.multiply(ProvisionPercentage / 100)
@@ -171,7 +171,7 @@ BigDecimal BDInstallmentAmount = new BigDecimal(strInstallmentAmount)
 //
 //        'verify match strNTFValueXPercentage and strProvisionAmount'
 //        checkVerifyEqualOrMatch(WebUI.verifyMatch(strNTFValuexPercentage.replace('.000000', ''), strProvisionFeeAmount, false, FailureHandling.OPTIONAL))
-//    } else if(datafileTabFinancial.getValue(
+//    } else if(findTestData(excelPathTabFinancial).getValue(
 //        GlobalVariable.NumofColm, 36) == 'Amount'){
 //        'calculate Provisionfeeamount divide NTFforprovisioncalc'
 //        BigDecimal ProvisionFeeAmountDivideNTFValue = ProvisionFeeAmount.divide(NTFforProvisionCalc, 8, RoundingMode.HALF_EVEN)
@@ -179,17 +179,17 @@ BigDecimal BDInstallmentAmount = new BigDecimal(strInstallmentAmount)
 //        'verify equal provisionfeeamountdiveNTFProvision and provision percentage'
 //        checkVerifyEqualOrMatch(WebUI.verifyEqual(ProvisionFeeAmountDivideNTFValue, ProvisionPercentage / 100, FailureHandling.OPTIONAL))
 //    }
-//} else if(datafileTabFinancial.getValue(
+//} else if(findTestData(excelPathTabFinancial).getValue(
 //    GlobalVariable.NumofColm, 37).equalsIgnoreCase('OTR-DP + Ins Cptlz + Fee Cptlz(Excl. Provision)')) {
 //    'check if provision fee type Percentage'
-//    if (datafileTabFinancial.getValue(
+//    if (findTestData(excelPathTabFinancial).getValue(
 //        GlobalVariable.NumofColm, 36) == 'Percentage') {
 //        'convert NTFValueFinal to string'
 //        String strNTFValueFinal = NTFValueFinal.toString()
 //
 //        'verify matvh NTFValueFinal and provision amount'
 //        checkVerifyEqualOrMatch(WebUI.verifyMatch(strNTFValueFinal.replace('.000000', ''), strProvisionFeeAmount, false, FailureHandling.OPTIONAL))
-//    } else if(datafileTabFinancial.getValue(
+//    } else if(findTestData(excelPathTabFinancial).getValue(
 //        GlobalVariable.NumofColm, 36) == 'Amount'){
 //        'calculate provisionfeeamount divide NTFValueexcludeprovisionfeecap'
 //        ProvisionFeeAmountDivideNTFValueExcProv = ProvisionFeeAmount.divide(NTFValueADDCapEXCProvCap, 8, RoundingMode.HALF_EVEN)
@@ -201,12 +201,12 @@ BigDecimal BDInstallmentAmount = new BigDecimal(strInstallmentAmount)
 //}
 
 'check if provision fee type Percentage/amount'
-if (datafileTabFinancial.getValue(
+if (findTestData(excelPathTabFinancial).getValue(
         GlobalVariable.NumofColm, 36) == 'Percentage') {
 
         'verify match provision amount'
         checkVerifyEqualOrMatch(WebUI.verifyMatch(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData').getValue(GlobalVariable.NumofColm,64).replace(".00",""), strProvisionFeeAmount, false, FailureHandling.OPTIONAL))
-} else if(datafileTabFinancial.getValue(
+} else if(findTestData(excelPathTabFinancial).getValue(
         GlobalVariable.NumofColm, 36) == 'Amount'){
 
         'verify match provision percentage'
@@ -611,10 +611,10 @@ CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(datafilepathsim,
 CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',7,1, Double.parseDouble(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabFinancialData').getValue(GlobalVariable.NumofColm, 44))/100)
 
 'write tenor'
-CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',8,1, Double.parseDouble(datafileTabApplication.getValue(GlobalVariable.NumofColm, 20).replace(",","")))
+CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathsim,'Gross Yield (CF)',8,1, Double.parseDouble(findTestData(excelPathTabApplication).getValue(GlobalVariable.NumofColm, 20).replace(",","")))
 
 'get payment frequency from excel datafile'
-String payFreq = datafileTabApplication.getValue(GlobalVariable.NumofColm, 19)
+String payFreq = findTestData(excelPathTabApplication).getValue(GlobalVariable.NumofColm, 19)
 
 def num
 

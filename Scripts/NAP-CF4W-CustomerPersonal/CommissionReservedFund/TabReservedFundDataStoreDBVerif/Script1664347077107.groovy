@@ -23,10 +23,10 @@ GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPat
 Sql sqlconnection = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 'declare excelPathCustomerPersonal'
-excelPathCustomerPersonal = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData'
+excelPathCustomerPersonal = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP1-CustomerData/TabCustomerData'
 
 'declare excelPathReservedFund'
-excelPathReservedFund = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabReservedFundData'
+excelPathReservedFund = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/CommissionReservedFund/TabReservedFundData'
 
 'Row yang menandakan dimulainya data section reserve fund amount pada excel'
 def rsvAmtRow = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '14.TabReservedFundData', 'Reserve Fund Amt')+2

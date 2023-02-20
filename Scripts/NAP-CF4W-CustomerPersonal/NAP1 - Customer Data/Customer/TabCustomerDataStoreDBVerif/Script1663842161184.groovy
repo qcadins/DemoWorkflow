@@ -17,7 +17,7 @@ import groovy.sql.Sql as Sql
 import internal.GlobalVariable as GlobalVariable
 
 'declare excelPathCustomerPersonal'
-excelPathCustomerPersonal = 'NAP-'+ GlobalVariable.LOB  +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData'
+excelPathCustomerPersonal = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP1-CustomerData/TabCustomerData'
 
 'get department aml value'
 String DepartmentAML = findTestData(excelPathCustomerPersonal).getValue(GlobalVariable.NumofColm, 33)

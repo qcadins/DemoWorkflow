@@ -20,7 +20,7 @@ import groovy.sql.Sql as Sql
 Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 'declare excelPathGuarantorPersonal'
-excelPathGuarantorPersonal = 'NAP-'+ GlobalVariable.LOB  +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal'
+excelPathGuarantorPersonal = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP1-CustomerData/TabGuarantorDataPersonal'
 
 'declare arraymatch'
 ArrayList<String> arrayMatch = new ArrayList<String>()

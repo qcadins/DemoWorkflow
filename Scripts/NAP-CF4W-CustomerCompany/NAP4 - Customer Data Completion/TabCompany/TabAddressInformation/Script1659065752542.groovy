@@ -42,7 +42,7 @@ for (index = 2; index < (countcolm + 1); index++) {
 }
 
 'copyapp'
-copyapp = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion').getValue(GlobalVariable.NumofColm, 10)
+copyapp = findTestData('NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion').getValue(GlobalVariable.NumofColm, 10)
 
 'check if copy app = edit'
 if (copyapp.equalsIgnoreCase('Edit')) {
@@ -473,7 +473,7 @@ def getAddress(){
 def getDataFile(){
 	if(GlobalVariable.APPSTEP == 'CUSTOMER'){
 		'get data file path'
-		GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileCustomerCompany)
+		GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'("\\Excel\\"+ GlobalVariable.LOB +"\\2.2.1 CustomerDataCompletion-Company - Customer.xlsm")
 		
 		'get data excelPathCustDetail'
 		excelPathCustDetail = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerDetail'
@@ -482,7 +482,7 @@ def getDataFile(){
 		GlobalVariable.excelPath = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/AddressInformation'
 	}else if(GlobalVariable.APPSTEP == 'SHAREHOLDER COMPANY'){
 		'get data file path'
-		GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileManagementShareholderCompany)
+		GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'("\\Excel\\"+ GlobalVariable.LOB +"\\2.2.3 CustomerDataCompletion-Company - ManagementShareholderCompany.xlsm")
 	
 		'get data excelPathCustDetail'
 		excelPathCustDetail = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/CustomerDetail'
@@ -491,7 +491,7 @@ def getDataFile(){
 		GlobalVariable.excelPath = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderCompany/AddressInformation'
 	}else if(GlobalVariable.APPSTEP == 'GUARANTOR COMPANY'){
 		'get data file path'
-		GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorCompanyCompany)
+		GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'("\\Excel\\"+ GlobalVariable.LOB +"\\2.2.5 CustomerDataCompletion-Company - GuarantorCompany.xlsm")
 		
 		'get data excelPathCustDetail'
 		excelPathCustDetail = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/CustomerDetail'

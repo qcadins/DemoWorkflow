@@ -49,7 +49,7 @@ def NotaryLocationArray = findTestData(GlobalVariable.excelPath).getValue(Global
 def NotesArray = findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 18).split(';')
 
 'copyapp'
-copyapp = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion').getValue(GlobalVariable.NumofColm,
+copyapp = findTestData('NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion').getValue(GlobalVariable.NumofColm,
 	10)
 
 ArrayList<WebElement> variable
@@ -433,19 +433,19 @@ public convertDateFormat(String sentDate){
 def getDataFile(){
 	if(GlobalVariable.APPSTEP == 'CUSTOMER'){
 		'get data file path'
-		GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileCustomerCompany)
+		GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'("\\Excel\\"+ GlobalVariable.LOB +"\\2.2.1 CustomerDataCompletion-Company - Customer.xlsm")
 		
 		'declare data file Global variable'
 		GlobalVariable.excelPath = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/LegalDocument'
 	}else if(GlobalVariable.APPSTEP == 'SHAREHOLDER COMPANY'){
 		'get data file path'
-		GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileManagementShareholderCompany)
+		GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'("\\Excel\\"+ GlobalVariable.LOB +"\\2.2.3 CustomerDataCompletion-Company - ManagementShareholderCompany.xlsm")
 				
 		'declare data file Global variable'
 		GlobalVariable.excelPath ='NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementshareholderCompany/LegalDocument'
 	}else if(GlobalVariable.APPSTEP == 'GUARANTOR COMPANY'){
 		'get data file path'
-		GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorCompanyCompany)
+		GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'("\\Excel\\"+ GlobalVariable.LOB +"\\2.2.5 CustomerDataCompletion-Company - GuarantorCompany.xlsm")
 		
 		'declare data file Global variable'
 		GlobalVariable.excelPath = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/LegalDocument'

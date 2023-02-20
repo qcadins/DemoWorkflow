@@ -48,40 +48,52 @@ if (GlobalVariable.Role == 'Data Entry') {
     WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/TabPersonal/TabCustomerAsset'), 
         [:], FailureHandling.CONTINUE_ON_FAILURE)
 
-    'call tc OtherAttribute'
-    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/TabPersonal/TabOtherAttribute'), 
+	if(GlobalVariable.LOB == 'CF4W'){
+	'call tc OtherAttribute'
+    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/TabPersonal/TabOtherAttributeCF4W'), 
         [:], FailureHandling.CONTINUE_ON_FAILURE)
+	}else if(GlobalVariable.LOB == 'FL4W'){
+	'call tc OtherAttribute'
+	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/TabPersonal/TabOtherAttributeFL4W'),
+		[:], FailureHandling.CONTINUE_ON_FAILURE)
+	}
 } else {
     'call tc customerdetail'
     WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/TabPersonal/TabCustomerDetail'), 
-        [:], FailureHandling.STOP_ON_FAILURE)
+        [:], FailureHandling.CONTINUE_ON_FAILURE)
 
     'call tc AddressInformation'
     WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/TabPersonal/TabAddressInformation'), 
-        [:], FailureHandling.STOP_ON_FAILURE)
+        [:], FailureHandling.CONTINUE_ON_FAILURE)
 
     'call tc Family'
     WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/TabPersonal/TabFamily'), 
-        [:], FailureHandling.STOP_ON_FAILURE)
+        [:], FailureHandling.CONTINUE_ON_FAILURE)
 
     'call tc JobData'
     WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/TabPersonal/TabJobData'), 
-        [:], FailureHandling.STOP_ON_FAILURE)
+        [:], FailureHandling.CONTINUE_ON_FAILURE)
 
     'call tc EmergencyContact'
     WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/TabPersonal/TabEmergencyContact'), 
-        [:], FailureHandling.STOP_ON_FAILURE)
+        [:], FailureHandling.CONTINUE_ON_FAILURE)
 
     'call tc FinancialData'
     WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/TabPersonal/TabFinancialData'), 
-        [:], FailureHandling.STOP_ON_FAILURE)
+        [:], FailureHandling.CONTINUE_ON_FAILURE)
 
     'call tc CustomerAsset'
     WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/TabPersonal/TabCustomerAsset'), 
-        [:], FailureHandling.STOP_ON_FAILURE)
+        [:], FailureHandling.CONTINUE_ON_FAILURE)
 
-    'call tc OtherAttribute'
-    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/TabPersonal/TabOtherAttribute'), 
-        [:], FailureHandling.STOP_ON_FAILURE)
+    if(GlobalVariable.LOB == 'CF4W'){
+	'call tc OtherAttribute'
+    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/TabPersonal/TabOtherAttributeCF4W'), 
+        [:], FailureHandling.CONTINUE_ON_FAILURE)
+	}else if(GlobalVariable.LOB == 'FL4W'){
+	'call tc OtherAttribute'
+	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/TabPersonal/TabOtherAttributeFL4W'),
+		[:], FailureHandling.CONTINUE_ON_FAILURE)
+	}
 }
 

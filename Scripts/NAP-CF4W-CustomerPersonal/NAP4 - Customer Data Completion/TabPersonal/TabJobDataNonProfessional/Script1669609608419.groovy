@@ -55,6 +55,11 @@ WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/Job
 'klik button save and continue'
 WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataNonProfessional/button_Save  Continue'))
 
+if(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 126)=="No"){
+'accept save without intergrator'
+WebUI.acceptAlert()	
+}
+
 if(GlobalVariable.APPSTEP == 'CUSTOMER' && findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 126)=="No"){
 	WebUI.acceptAlert(FailureHandling.OPTIONAL)
 }

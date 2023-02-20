@@ -41,7 +41,7 @@ ArrayList<String> assetvaluearray = findTestData(GlobalVariable.excelPath).getVa
 ArrayList<String> assetquantityarray = findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 16).split(';', -1)
 
 'copyapp'
-copyapp = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion').getValue(GlobalVariable.NumofColm, 
+copyapp = findTestData('NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion').getValue(GlobalVariable.NumofColm, 
     10)
 
 if (copyapp.equalsIgnoreCase('Edit')) {
@@ -346,19 +346,19 @@ def countAssetValue(int confinssize){
 def getDataFile(){
 	if(GlobalVariable.APPSTEP == 'CUSTOMER'){
 		'get data file path'
-		GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileCustomerCompany)
+		GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'("\\Excel\\"+ GlobalVariable.LOB +"\\2.2.1 CustomerDataCompletion-Company - Customer.xlsm")
 		
 		'declare data file Global variable'
 		GlobalVariable.excelPath = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/CustomerAsset'
 	}else if(GlobalVariable.APPSTEP == 'SHAREHOLDER COMPANY'){
 		'get data file path'
-		GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileManagementShareholderCompany)
+		GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'("\\Excel\\"+ GlobalVariable.LOB +"\\2.2.3 CustomerDataCompletion-Company - ManagementShareholderCompany.xlsm")
 				
 		'declare data file Global variable'
 		GlobalVariable.excelPath = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementshareholderCompany/CustomerAsset'
 	}else if(GlobalVariable.APPSTEP == 'GUARANTOR COMPANY'){
 		'get data file path'
-		GlobalVariable.excelPath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorCompanyCompany)
+		GlobalVariable.excelPath = CustomKeywords.'dbConnection.connectDB.getExcelPath'("\\Excel\\"+ GlobalVariable.LOB +"\\2.2.5 CustomerDataCompletion-Company - GuarantorCompany.xlsm")
 		
 		'declare data file Global variable'
 		GlobalVariable.excelPath = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/CustomerAsset'

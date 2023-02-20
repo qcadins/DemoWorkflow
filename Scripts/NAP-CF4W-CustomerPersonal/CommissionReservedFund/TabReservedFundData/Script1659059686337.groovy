@@ -33,7 +33,7 @@ GlobalVariable.FlagFailed = 0
 ArrayList<Double> TotalAllocateRsvAmt = new ArrayList<Double>()
 
 'declare excelPathReservedFund'
-excelPathReservedFund = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabReservedFundData'
+excelPathReservedFund = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/CommissionReservedFund/TabReservedFundData'
 
 'Inisialisasi driver'
 WebDriver driver = DriverFactory.getWebDriver()

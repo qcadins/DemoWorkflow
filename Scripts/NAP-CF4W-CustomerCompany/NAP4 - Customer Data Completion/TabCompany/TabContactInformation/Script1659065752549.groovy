@@ -28,99 +28,99 @@ checkDDL()
 
 'input name'
 WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/ContactInformation/input_Name_'), 
-    findTestData(excelPathCustDetail).getValue(GlobalVariable.ColmNAP4, 12))
+    findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 12))
 
 'input job title'
 WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/ContactInformation/input_Job Title_'), 
-    findTestData(excelPathCustDetail).getValue(GlobalVariable.ColmNAP4, 13))
+    findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 13))
 
-if (findTestData(excelPathCustDetail).getValue(GlobalVariable.ColmNAP4, 14).length() > 2) {
+if (findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 14).length() > 2) {
     'select id type'
     WebUI.selectOptionByLabel(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/ContactInformation/select_Id Type'), 
-        findTestData(excelPathCustDetail).getValue(GlobalVariable.ColmNAP4, 14), false)
+        findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 14), false)
 
     'input id no'
     WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/ContactInformation/input_Id No_'), 
-        findTestData(excelPathCustDetail).getValue(GlobalVariable.ColmNAP4, 15))
+        findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 15))
 }
 
-if (((findTestData(excelPathCustDetail).getValue(GlobalVariable.ColmNAP4, 14) != 'E-KTP') && (findTestData(excelPathCustDetail).getValue(
-    GlobalVariable.ColmNAP4, 14) != 'AKTA')) && (findTestData(excelPathCustDetail).getValue(GlobalVariable.ColmNAP4, 14) != 
+if (((findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 14) != 'E-KTP') && (findTestData(GlobalVariable.excelPath).getValue(
+    GlobalVariable.ColmNAP4, 14) != 'AKTA')) && (findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 14) != 
 'NPWP')) {
     'input idexpired date'
     WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/ContactInformation/input_Id Expired Date'), 
-        findTestData(excelPathCustDetail).getValue(GlobalVariable.ColmNAP4, 16))
+        findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 16))
 }
 
 'input mobile phone 1'
 WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/ContactInformation/input_Mobile Phone 1_'), 
-    findTestData(excelPathCustDetail).getValue(GlobalVariable.ColmNAP4, 17))
+    findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 17))
 
 'input email1'
 WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/ContactInformation/input_Email 1_'), 
-    findTestData(excelPathCustDetail).getValue(GlobalVariable.ColmNAP4, 18))
+    findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 18))
 
 'select gender'
 WebUI.selectOptionByLabel(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/ContactInformation/select_Select One Female  Male'), 
-    findTestData(excelPathCustDetail).getValue(GlobalVariable.ColmNAP4, 19), false)
+    findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 19), false)
 
 'select job position'
 WebUI.selectOptionByLabel(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/ContactInformation/select_Select Job Position'), 
-    findTestData(excelPathCustDetail).getValue(GlobalVariable.ColmNAP4, 20).toUpperCase(), false)
+    findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 20).toUpperCase(), false)
 
 'input birth place'
 WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/ContactInformation/input_Birth Place_'), 
-    findTestData(excelPathCustDetail).getValue(GlobalVariable.ColmNAP4, 21))
+    findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 21))
 
 'input birth date'
 WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/ContactInformation/input_Birth Date_'), 
-    findTestData(excelPathCustDetail).getValue(GlobalVariable.ColmNAP4, 22))
+    findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 22))
 
-if (findTestData(excelPathCustDetail).getValue(GlobalVariable.ColmNAP4, 23).length() > 2) {
+if (findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 23).length() > 2) {
     'select relation'
     WebUI.selectOptionByLabel(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/ContactInformation/select_Relation'), 
-        findTestData(excelPathCustDetail).getValue(GlobalVariable.ColmNAP4, 23), false)
+        findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 23), false)
 }
 
 'input mobile 2'
 WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/ContactInformation/input_Mobile Phone 2'), 
-    findTestData(excelPathCustDetail).getValue(GlobalVariable.ColmNAP4, 24))
+    findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 24))
 
 'input email 2'
 WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/ContactInformation/input_Email 2_'), 
-    findTestData(excelPathCustDetail).getValue(GlobalVariable.ColmNAP4, 25))
+    findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 25))
 
 'input address'
 WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/ContactInformation/textarea_Address_'), 
-    findTestData(excelPathCustDetail).getValue(GlobalVariable.ColmNAP4, 27))
+    findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 27))
 
 'input RT'
 WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/ContactInformation/input_RT'), 
-    findTestData(excelPathCustDetail).getValue(GlobalVariable.ColmNAP4, 28))
+    findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 28))
 
 'input RW'
 WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/ContactInformation/input_RW'), 
-    findTestData(excelPathCustDetail).getValue(GlobalVariable.ColmNAP4, 29))
+    findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 29))
 
-if (findTestData(excelPathCustDetail).getValue(GlobalVariable.ColmNAP4, 30).length() > 2) {
+if (findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 30).length() > 2) {
     'click button zipcode'
     WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/ContactInformation/button_Zipcode_btn btn-raised btn-primary'))
 
     'input Zipcode'
     WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/ContactInformation/input_Zip Code_ZipCode'), 
-        findTestData(excelPathCustDetail).getValue(GlobalVariable.ColmNAP4, 30))
+        findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 30))
 
     'input kecamatan'
     WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/ContactInformation/input_Kecamatan_kecamatan'), 
-        findTestData(excelPathCustDetail).getValue(GlobalVariable.ColmNAP4, 31))
+        findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 31))
 
     'input kelurahan'
     WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/ContactInformation/input_Kelurahan_Kelurahan'), 
-        findTestData(excelPathCustDetail).getValue(GlobalVariable.ColmNAP4, 32))
+        findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 32))
 
     'input kota'
     WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/ContactInformation/input_Kota_kota'), 
-        findTestData(excelPathCustDetail).getValue(GlobalVariable.ColmNAP4, 33))
+        findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 33))
 
     'click search'
     WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/ContactInformation/button_Search'))
@@ -138,40 +138,40 @@ if (findTestData(excelPathCustDetail).getValue(GlobalVariable.ColmNAP4, 30).leng
 
 'input phone 1 area'
 WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/ContactInformation/input_Phone 1_Area'), 
-    findTestData(excelPathCustDetail).getValue(GlobalVariable.ColmNAP4, 34))
+    findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 34))
 
 'input phone 1 number'
 WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/ContactInformation/input_Phone 1_Number'), 
-    findTestData(excelPathCustDetail).getValue(GlobalVariable.ColmNAP4, 35))
+    findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 35))
 
 'input phone 1 extension'
 WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/ContactInformation/input_Phone 1_Ext'), 
-    findTestData(excelPathCustDetail).getValue(GlobalVariable.ColmNAP4, 36))
+    findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 36))
 
 'input phone 2 area'
 WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/ContactInformation/input_Phone 2_Area'), 
-    findTestData(excelPathCustDetail).getValue(GlobalVariable.ColmNAP4, 37))
+    findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 37))
 
 'input phone 2 number'
 WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/ContactInformation/input_Phone 2_Number'), 
-    findTestData(excelPathCustDetail).getValue(GlobalVariable.ColmNAP4, 38))
+    findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 38))
 
 'input phone 2 extension'
 WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/ContactInformation/input_Phone 2_Ext'), 
-    findTestData(excelPathCustDetail).getValue(GlobalVariable.ColmNAP4, 39))
+    findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 39))
 
 'input fax'
 WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/ContactInformation/input_Fax_Area'), 
-    findTestData(excelPathCustDetail).getValue(GlobalVariable.ColmNAP4, 40))
+    findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 40))
 
 'input fax number'
 WebUI.setText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/ContactInformation/input_Fax_Number'), 
-    findTestData(excelPathCustDetail).getValue(GlobalVariable.ColmNAP4, 41))
+    findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 41))
 
 'click button save and continue'
 WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/ContactInformation/button_Save  Continue'))
 
-if ((Integer.parseInt(findTestData(excelPathCustDetail).getValue(GlobalVariable.ColmNAP4, 4)) == 0) && (GlobalVariable.FlagFailed == 
+if ((Integer.parseInt(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 4)) == 0) && (GlobalVariable.FlagFailed == 
 0)) {
     'Check alert'
     GlobalVariable.FlagFailed = CustomKeywords.'checkSaveProcess.checkSaveProcess.checkAlert'(GlobalVariable.ColmNAP4, 
@@ -180,11 +180,11 @@ if ((Integer.parseInt(findTestData(excelPathCustDetail).getValue(GlobalVariable.
 
 if (GlobalVariable.FlagFailed == 0) {
     'Check save Process write to excel'
-    CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(findTestData(excelPathCustDetail).getValue(
+    CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(Integer.parseInt(findTestData(GlobalVariable.excelPath).getValue(
                 GlobalVariable.ColmNAP4, 4)), findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerCompany/FinancialData/button_Add'), 
         GlobalVariable.ColmNAP4, '3.ContactInformation')
 
-    if (Integer.parseInt(findTestData(excelPathCustDetail).getValue(GlobalVariable.ColmNAP4, 4)) == 0) {
+    if (Integer.parseInt(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.ColmNAP4, 4)) == 0) {
         'Check error validasi'
         CustomKeywords.'checkSaveProcess.checkSaveProcess.checkValidasi'(findTestObject('NAP/NAP4-CustomerDataCompletion/errorvalidasi'), 
             GlobalVariable.ColmNAP4, '3.ContactInformation')
@@ -225,7 +225,7 @@ def checkDDL() {
 			
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
 			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3.ContactInformation', GlobalVariable.NumofColm,
-				GlobalVariable.StatusFailed, findTestData(excelPathCustDetail).getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'ID Type')
+				GlobalVariable.StatusFailed, findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'ID Type')
 
 			(GlobalVariable.FlagFailed)++
 		}
@@ -245,7 +245,7 @@ def checkDDL() {
 
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
 			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3.ContactInformation', GlobalVariable.NumofColm,
-				GlobalVariable.StatusFailed, findTestData(excelPathCustDetail).getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'Gender')
+				GlobalVariable.StatusFailed, findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'Gender')
 
 			(GlobalVariable.FlagFailed)++
 		}
@@ -265,7 +265,7 @@ def checkDDL() {
 		
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
 			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3.ContactInformation', GlobalVariable.NumofColm,
-				GlobalVariable.StatusFailed, findTestData(excelPathCustDetail).getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'jobposition')
+				GlobalVariable.StatusFailed, findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'jobposition')
 
 			(GlobalVariable.FlagFailed)++
 		}
@@ -285,7 +285,7 @@ def checkDDL() {
 		
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
 			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('3.ContactInformation', GlobalVariable.NumofColm,
-				GlobalVariable.StatusFailed, findTestData(excelPathCustDetail).getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'relationship')
+				GlobalVariable.StatusFailed, findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofColm, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'relationship')
 
 			(GlobalVariable.FlagFailed)++
 		}
@@ -295,19 +295,19 @@ def checkDDL() {
 def getDataFile(){
 	if(GlobalVariable.APPSTEP == 'CUSTOMER'){
 		'get data file path'
-		GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileCustomerCompany)
+		GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'("\\Excel\\"+ GlobalVariable.LOB +"\\2.2.1 CustomerDataCompletion-Company - Customer.xlsm")
 		
 		'declare data file Global variable'
 		GlobalVariable.excelPath = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerCompany/ContactInformation'
 	}else if(GlobalVariable.APPSTEP == 'SHAREHOLDER COMPANY'){
 		'get data file path'
-		GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileManagementShareholderCompany)
+		GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'("\\Excel\\"+ GlobalVariable.LOB +"\\2.2.3 CustomerDataCompletion-Company - ManagementShareholderCompany.xlsm")
 		
 		'declare data file Global variable'
 		GlobalVariable.excelPath = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementshareholderCompany/ContactInformation'
 	}else if(GlobalVariable.APPSTEP == 'GUARANTOR COMPANY'){
 		'get data file path'
-		GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorCompanyCompany)
+		GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'("\\Excel\\"+ GlobalVariable.LOB +"\\2.2.5 CustomerDataCompletion-Company - GuarantorCompany.xlsm")
 	
 		'declare data file Global variable'
 		GlobalVariable.excelPath = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorCompany/ContactInformation'

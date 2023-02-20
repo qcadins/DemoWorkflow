@@ -17,7 +17,7 @@ import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
 import groovy.sql.Sql as Sql
 
 'declare excelPathGuarantorPersonal'
-excelPathGuarantorPersonal = 'NAP-'+ GlobalVariable.LOB  +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataPersonal'
+excelPathGuarantorPersonal = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP1-CustomerData/TabGuarantorDataPersonal'
 
 'get department aml from excel'
 String DepartmentAML = findTestData(excelPathGuarantorPersonal).getValue(GlobalVariable.NumofGuarantorPersonal, 33)

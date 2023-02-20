@@ -20,10 +20,10 @@ import internal.GlobalVariable as GlobalVariable
 Sql sqlconnection = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 'declare excelPathCustomerPersonal'
-excelPathCustomerPersonal = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData'
+excelPathCustomerPersonal = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP1-CustomerData/TabCustomerData'
 
 'declare excelPathTabAsset'
-excelPathTabAsset = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData'
+excelPathTabAsset = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP2-ApplicationData/TabAssetData'
 
 'get supplier data from db'
 ArrayList<String> resultsupplierinformation = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2TabAssetSupplierInfoStoreDB'(

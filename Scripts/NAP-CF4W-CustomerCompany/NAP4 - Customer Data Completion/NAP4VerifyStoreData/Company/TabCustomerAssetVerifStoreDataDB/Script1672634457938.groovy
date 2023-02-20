@@ -29,13 +29,13 @@ ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4Cu
 
 int arrayindex = 0
 
-def assettypearray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 13).split(';', -1)
+def assettypearray = findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 13).split(';', -1)
 
-def assetdescriptionarray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 14).split(';', -1)
+def assetdescriptionarray = findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 14).split(';', -1)
 
-def assetvaluearray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 15).split(';', -1)
+def assetvaluearray = findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 15).split(';', -1)
 
-def assetqtyarray = GlobalVariable.FindDataFile.getValue(GlobalVariable.NumofVerifStore, 16).split(';', -1)
+def assetqtyarray = findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 16).split(';', -1)
 
 for(assetarrayexcel = 0 ; assetarrayexcel < result.size()/4 ; assetarrayexcel++){
 	

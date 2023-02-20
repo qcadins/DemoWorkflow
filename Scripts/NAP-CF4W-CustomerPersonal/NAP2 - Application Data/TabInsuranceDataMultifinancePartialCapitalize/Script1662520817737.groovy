@@ -34,7 +34,7 @@ Sql sqlConnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 def textCapitalizeAmount, totalFeeResult
 
 'declare excelPathTabInsurance'
-excelPathTabInsurance = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData'
+excelPathTabInsurance = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData'
 
 'Inisialisasi Variabel'
 ArrayList<WebElement> variable = driver.findElements(By.cssSelector('#insuranceCoverage > div[formarrayname=AppInsMainCvgs] > table tbody'))

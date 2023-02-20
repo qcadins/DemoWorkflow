@@ -20,7 +20,7 @@ import internal.GlobalVariable as GlobalVariable
 Sql sqlconnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
 
 'declare excelPathGuarantorCompany'
-excelPathGuarantorCompany = 'NAP-'+ GlobalVariable.LOB  +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabGuarantorDataCompany'
+excelPathGuarantorCompany = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP1-CustomerData/TabGuarantorDataCompany'
 
 'get guarcompany data from db'
 ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.CustomerDataCompany'(sqlconnectionFOU, WebUI.getAttribute(

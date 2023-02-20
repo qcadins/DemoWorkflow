@@ -50,11 +50,19 @@ if (appLastStep.equalsIgnoreCase("REFERANTOR")||appLastStep.equalsIgnoreCase("AP
 	
 	WebUI.delay(3)
 	
-	'click menu consumer finance'
-	WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_Consumer Finance'))
-	
-	'click menu new consumer finance'
-	WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'))
+	if(GlobalVariable.LOB == 'Cf4W'){
+		'click menu consumer finance'
+		WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_Consumer Finance'))
+		
+		'click menu new consumer finance'
+		WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'))
+	}else if(GlobalVariable.LOB == 'FL4W'){
+		'Klik new finance leasing'
+		WebUI.click(findTestObject('LoginR3BranchManagerSuperuser/a_New Finance Leasing'))
+
+		'click menu customer application data'
+		WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/a_APPLICATION DATA FL4W'))
+	}
 }
 
 if((!appLastStep.equalsIgnoreCase("REFERANTOR") && !appLastStep.equalsIgnoreCase("APPLICATION DATA")) && GlobalVariable.FirstTimeEntry=="Yes"){

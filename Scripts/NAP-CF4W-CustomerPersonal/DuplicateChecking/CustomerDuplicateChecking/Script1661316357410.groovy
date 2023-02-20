@@ -28,10 +28,10 @@ GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPat
 Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 'declare excelPathDupcheck'
-excelPathDupcheck = 'NAP-'+ GlobalVariable.LOB  +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking'
+excelPathDupcheck = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/DuplicateChecking'
 
 'declare excelPathCustomerPersonal'
-excelPathCustomerPersonal = 'NAP-'+ GlobalVariable.LOB  +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData'
+excelPathCustomerPersonal = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP1-CustomerData/TabCustomerData'
 
 'get app no from data file dupcheck'
 String DupcheckAppNo = findTestData(excelPathDupcheck).getValue(GlobalVariable.NumofColm, 12)

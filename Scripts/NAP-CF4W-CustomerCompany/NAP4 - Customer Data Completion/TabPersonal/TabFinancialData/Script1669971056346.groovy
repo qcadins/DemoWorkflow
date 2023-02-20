@@ -50,7 +50,7 @@ for (int index = 2; index < (countcolm + 1); index++) {
 }
 
 'copyapp'
-copyapp = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion').getValue(
+copyapp = findTestData('NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP4-CustomerDataCompletion-Company/CustomerDataCompletion').getValue(
 	GlobalVariable.NumofColm, 10)
 
 String maritalStatus = WebUI.getText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/FinancialData/label_MaritalStatus'))
@@ -947,7 +947,7 @@ def inputBankStatementFromEmpty() {
 def getDataFile(){
 	if(GlobalVariable.APPSTEP == 'SHAREHOLDER PERSONAL'){
 		'get data file path'
-		GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileManagementShareholderPersonal)
+		GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'("\\Excel\\"+ GlobalVariable.LOB +"\\2.2.2 CustomerDataCompletion-Company - ManagementShareholderPersonal.xlsm")
 		
 		'declare excelPathCustDetail'
 		excelPathCustDetail = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/CustomerDetail'

@@ -27,7 +27,7 @@ GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPat
 GlobalVariable.FlagFailed = 0
 
 'declare excelPathCommission'
-excelPathCommission = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData'
+excelPathCommission = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/CommissionReservedFund/TabCommissionData'
 
 'Koneksi database fou'
 Sql sqlConnection = CustomKeywords.'dbConnection.connectDB.connectFOU'()

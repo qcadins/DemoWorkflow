@@ -16,21 +16,21 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 
 'get data file path'
-GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileManagementShareholderPersonal)
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'("\\Excel\\"+ GlobalVariable.LOB +"\\2.2.2 CustomerDataCompletion-Company - ManagementShareholderPersonal.xlsm")
 
 'call keyword openclosefile'
 CustomKeywords.'customizeKeyword.openCloseExcel.openCloseFile'(GlobalVariable.DataFilePath)
 
-def CountofFamily = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/CustomerDetail').getColumnNumbers()
+def CountofFamily = findTestData('NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/CustomerDetail').getColumnNumbers()
 
 GlobalVariable.APPSTEP = 'SHAREHOLDER PERSONAL'
 
 WebUI.delay(10)
 
 for (GlobalVariable.NumofMS = 2; GlobalVariable.NumofMS <= CountofFamily; (GlobalVariable.NumofMS)++) {
-    if ((findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/CustomerDetail').getValue(
-        GlobalVariable.NumofMS, 12) == findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
-        GlobalVariable.NumofColm, 13)) && findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/CustomerDetail').getValue(
+    if ((findTestData('NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/CustomerDetail').getValue(
+        GlobalVariable.NumofMS, 12) == findTestData('NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
+        GlobalVariable.NumofColm, 13)) && findTestData('NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP4-CustomerDataCompletion-Company/ManagementShareholderPersonal/CustomerDetail').getValue(
         GlobalVariable.NumofMS, 13).equalsIgnoreCase(WebUI.getText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/CustomerNameDetail')))) {
         GlobalVariable.ColmNAP4 = GlobalVariable.NumofMS
 
@@ -59,37 +59,49 @@ for (GlobalVariable.NumofMS = 2; GlobalVariable.NumofMS <= CountofFamily; (Globa
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/TabPersonal/TabCustomerAsset'), 
                 [:], FailureHandling.CONTINUE_ON_FAILURE)
 
+			if(GlobalVariable.LOB == 'CF4W'){
             'call test case other attribute'
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/TabPersonal/TabOtherAttribute'), 
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/TabPersonal/TabOtherAttributeCF4W'), 
                 [:], FailureHandling.CONTINUE_ON_FAILURE)
+			}else if(GlobalVariable.LOB == 'FL4W'){
+			'call test case other attribute'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/TabPersonal/TabOtherAttributeFL4W'),
+				[:], FailureHandling.CONTINUE_ON_FAILURE)
+			}
         } else if (GlobalVariable.RoleCompany == 'Testing') {
             'call test case customer detail'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/TabPersonal/TabCustomerDetail'), 
-                [:], FailureHandling.STOP_ON_FAILURE)
+                [:], FailureHandling.CONTINUE_ON_FAILURE)
 
             'call test case address information'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/TabPersonal/TabAddressInformation'), 
-                [:], FailureHandling.STOP_ON_FAILURE)
+                [:], FailureHandling.CONTINUE_ON_FAILURE)
 
             'call test case tab job data'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/TabPersonal/TabJobData'), 
-                [:], FailureHandling.STOP_ON_FAILURE)
+                [:], FailureHandling.CONTINUE_ON_FAILURE)
 
             'call test case emergency contact'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/TabPersonal/TabEmergencyContact'), 
-                [:], FailureHandling.STOP_ON_FAILURE)
+                [:], FailureHandling.CONTINUE_ON_FAILURE)
 
             'call test case tab financial data'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/TabPersonal/TabFinancialData'), 
-                [:], FailureHandling.STOP_ON_FAILURE)
+                [:], FailureHandling.CONTINUE_ON_FAILURE)
 
             'call test case tab customer asset'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/TabPersonal/TabCustomerAsset'), 
-                [:], FailureHandling.STOP_ON_FAILURE)
+                [:], FailureHandling.CONTINUE_ON_FAILURE)
 
+            if(GlobalVariable.LOB == 'CF4W'){
             'call test case other attribute'
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/TabPersonal/TabOtherAttribute'), 
-                [:], FailureHandling.STOP_ON_FAILURE)
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/TabPersonal/TabOtherAttributeCF4W'), 
+                [:], FailureHandling.CONTINUE_ON_FAILURE)
+			}else if(GlobalVariable.LOB == 'FL4W'){
+			'call test case other attribute'
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/TabPersonal/TabOtherAttributeFL4W'),
+				[:], FailureHandling.CONTINUE_ON_FAILURE)
+			}
         }
     }
 }

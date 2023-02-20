@@ -17,7 +17,7 @@ import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
 import groovy.sql.Sql as Sql
 
 'declare excelPathTabFamily'
-excelPathTabFamily = 'NAP-'+ GlobalVariable.LOB  +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabFamilyData'
+excelPathTabFamily = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP1-CustomerData/TabFamilyData'
 
 'get country value'
 String Country = findTestData(excelPathTabFamily).getValue(GlobalVariable.NumofFamily, 36)

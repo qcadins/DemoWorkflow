@@ -227,7 +227,7 @@
    <GlobalVariableEntity>
       <description></description>
       <initValue>''</initValue>
-      <name>FindDataFile</name>
+      <name>excelPath</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
@@ -613,10 +613,5 @@
       <description></description>
       <initValue>''</initValue>
       <name>LOB</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>''</initValue>
-      <name>excelPath</name>
    </GlobalVariableEntity>
 </GlobalVariableEntities>

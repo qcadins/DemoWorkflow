@@ -20,7 +20,7 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 
 'declare excelPathDupcheck'
-excelPathDupcheck = 'NAP-'+ GlobalVariable.LOB  +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking'
+excelPathDupcheck = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/DuplicateChecking'
 
 'get guarantor array dupcheck dari excel'
 def GuarantorArray = findTestData(excelPathDupcheck).getValue(GlobalVariable.NumofColm, 19).split(';', -1)

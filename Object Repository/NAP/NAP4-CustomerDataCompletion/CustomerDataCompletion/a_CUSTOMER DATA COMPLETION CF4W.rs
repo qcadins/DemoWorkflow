@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>a_CUSTOMER DATA COMPLETION</name>
+   <name>a_CUSTOMER DATA COMPLETION CF4W</name>
    <tag></tag>
    <elementGuidId>9f9e99bc-7874-415e-89c8-06e5101a98f7</elementGuidId>
    <selectorCollection>

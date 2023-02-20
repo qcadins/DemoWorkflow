@@ -16,20 +16,20 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 
 'get data file path'
-GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.DataFileGuarantorPersonalCompany)
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'("\\Excel\\"+ GlobalVariable.LOB +"\\2.2.4 CustomerDataCompletion-Company - GuarantorPersonal.xlsm")
 
 CustomKeywords.'customizeKeyword.openCloseExcel.openCloseFile'(GlobalVariable.DataFilePath)
 
-def CountofGuarantor = findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/CustomerDetail').getColumnNumbers()
+def CountofGuarantor = findTestData('NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/CustomerDetail').getColumnNumbers()
 
 GlobalVariable.APPSTEP = 'GUARANTOR PERSONAL'
 
 WebUI.delay(10)
 
 for (GlobalVariable.NumofGuarantor = 2; GlobalVariable.NumofGuarantor <= CountofGuarantor; (GlobalVariable.NumofGuarantor)++) {
-    if ((findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/CustomerDetail').getValue(
-        GlobalVariable.NumofGuarantor, 12) == findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData').getValue(
-        GlobalVariable.NumofColm, 13)) && findTestData('NAP-CF4W-CustomerCompany/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/CustomerDetail').getValue(
+    if ((findTestData('NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/CustomerDetail').getValue(
+        GlobalVariable.NumofGuarantor, 12) == findTestData('NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP1-CustomerData-Company/TabCustomerData').getValue(
+        GlobalVariable.NumofColm, 13)) && findTestData('NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP4-CustomerDataCompletion-Company/GuarantorPersonal/CustomerDetail').getValue(
         GlobalVariable.NumofGuarantor, 13).equalsIgnoreCase(WebUI.getText(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail/CustomerNameDetail')))) {
         GlobalVariable.ColmNAP4 = GlobalVariable.NumofGuarantor
 
@@ -59,7 +59,7 @@ for (GlobalVariable.NumofGuarantor = 2; GlobalVariable.NumofGuarantor <= Countof
                 [:], FailureHandling.CONTINUE_ON_FAILURE)
 
             'call test case tab other attribute'
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/TabPersonal/TabOtherAttribute'), 
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/TabPersonal/TabOtherAttributeCF4W'), 
                 [:], FailureHandling.CONTINUE_ON_FAILURE)
         } else if (GlobalVariable.RoleCompany == 'Testing') {
             'call test case tab customer detail'
@@ -87,7 +87,7 @@ for (GlobalVariable.NumofGuarantor = 2; GlobalVariable.NumofGuarantor <= Countof
                 [:], FailureHandling.STOP_ON_FAILURE)
 
             'call test case tab other attribute'
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/TabPersonal/TabOtherAttribute'), 
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/TabPersonal/TabOtherAttributeCF4W'), 
                 [:], FailureHandling.STOP_ON_FAILURE)
         }
     }
