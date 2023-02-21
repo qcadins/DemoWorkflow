@@ -22,17 +22,17 @@ Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 if(GlobalVariable.APPSTEP == 'CUSTOMER'){
 	
 	'declare excelPathCustDetail'
-	excelPathCustDetail = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail'
+	excelPathCustDetail = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP4-CustomerDataCompletion/CustomerPersonal/CustomerDetail'
 	
 }else if(GlobalVariable.APPSTEP == 'FAMILY'){
 	
 	'declare excelPathCustDetail'
-	excelPathCustDetail = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/FamilyPersonal/CustomerDetail'
+	excelPathCustDetail = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP4-CustomerDataCompletion/FamilyPersonal/CustomerDetail'
 	
 }else if(GlobalVariable.APPSTEP == 'GUARANTOR PERSONAL'){
 
 	'declare excelPathCustDetail'
-	excelPathCustDetail = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/CustomerDetail'
+	excelPathCustDetail = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP4-CustomerDataCompletion/GuarantorPersonal/CustomerDetail'
 }
 
 'get appno from confins'
@@ -100,7 +100,7 @@ for (index = GlobalVariable.NumofVerifStore; index <= (countcolm); index++) {
 	if (findTestData(GlobalVariable.excelPath).getValue(index, 9).equalsIgnoreCase(findTestData(excelPathCustDetail).getValue(
 		GlobalVariable.NumofVerifStore, 12)) && findTestData(GlobalVariable.excelPath).getValue(index, 10).equalsIgnoreCase(
 	findTestData(excelPathCustDetail).getValue(GlobalVariable.NumofVerifStore, 13))) {
-    if (findTestData(GlobalVariable.excelPath).getValue(index, 10).length() != 0 && findTestData(GlobalVariable.excelPath).getValue(index, 27) != 0) {
+    if (findTestData(GlobalVariable.excelPath).getValue(index, 10).length() > 0 && findTestData(GlobalVariable.excelPath).getValue(index, 27).length() > 0) {
         'get resultbankacc from db'
 		ArrayList<String> resultbankacc = CustomKeywords.'dbConnection.CustomerDataVerif.NAP4FinDataBankAccStoreData'(sqlconnectionLOS, 
             appno, custname, findTestData(GlobalVariable.excelPath).getValue(index, 27))

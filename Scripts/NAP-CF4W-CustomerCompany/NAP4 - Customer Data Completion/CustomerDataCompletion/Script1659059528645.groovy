@@ -238,7 +238,7 @@ for (int i = 1; i <= count; i++) {
 WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Submit'))
 
 'get data file path'
-GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'("\\Excel\\"+ GlobalVariable.LOB +"\\2.2 DataFile_NAP_CF4W_Company.xlsx")
 
 Integer iscompleteMandatory = Integer.parseInt(findTestData(excelPathCDC).getValue(GlobalVariable.NumofColm, 4))
 

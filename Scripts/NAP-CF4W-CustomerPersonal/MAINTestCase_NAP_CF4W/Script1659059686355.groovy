@@ -19,9 +19,6 @@ import internal.GlobalVariable as GlobalVariable
 'call tc login'
 WebUI.callTestCase(findTestCase('Login/LoginR3BranchManagerSuperuser - NEW'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 
-'declare LOB'
-GlobalVariable.LOB = 'FL4W'
- 
 'get data file path'
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'("\\Excel\\"+ GlobalVariable.LOB +"\\2.1 DataFile_NAP_"+ GlobalVariable.LOB +".xlsx")
 
@@ -135,10 +132,10 @@ if (GlobalVariable.Role == 'Data Entry') {
                     FailureHandling.CONTINUE_ON_FAILURE)
 
                 'declare datafileCommission'
-                datafileCommission = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabCommissionData')
+                datafileCommission = findTestData('NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/CommissionReservedFund/TabCommissionData')
 
                 'declare datafileReservedFund'
-                datafileReservedFund = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/CommissionReservedFund/TabReservedFundData')
+                datafileReservedFund = findTestData('NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/CommissionReservedFund/TabReservedFundData')
 
                 'Mengambil nilai row keberapa dimulai data return pada excel'
                 def returnRowCom = CustomKeywords.'customizeKeyword.getRow.getExcelRow'(GlobalVariable.DataFilePath, '13.TabCommissionData', 

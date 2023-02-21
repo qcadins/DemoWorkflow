@@ -28,7 +28,7 @@ ArrayList<String> crossfaileddelete = new ArrayList<>()
 ArrayList<Integer> posAddCross = new ArrayList<>()
 
 'get data file path'
-GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'(GlobalVariable.PathCompany)
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'("\\Excel\\"+ GlobalVariable.LOB +"\\2.2 DataFile_NAP_CF4W_Company.xlsx")
 
 'declare excelPathTabApplication'
 excelPathTabApplication = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP2-ApplicationData/TabApplicationData'

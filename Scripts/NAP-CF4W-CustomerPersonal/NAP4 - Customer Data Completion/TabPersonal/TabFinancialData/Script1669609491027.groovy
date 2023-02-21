@@ -971,5 +971,3 @@ def getDataFile(){
 		
 	}
 }
-
-findTestData('NAP-FL4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/FamilyPersonal/CustomerDetail')

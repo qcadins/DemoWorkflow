@@ -282,16 +282,17 @@ if (WebUI.verifyElementPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/C
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '1.CustomerDetail',
 			0, GlobalVariable.ColmNAP4 - 1, GlobalVariable.StatusWarning)
 	}
+	
+	if (GlobalVariable.Role == 'Testing' && GlobalVariable.CheckVerifStoreDBPersonal=="Yes") {
+		'declare numofverif = numof colm'
+		GlobalVariable.NumofVerifStore = GlobalVariable.ColmNAP4
+				
+		'call test case store data verif customer detail'
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Personal/TabCustomerDetailVerifStoreDataDB'), 
+				[:], FailureHandling.CONTINUE_ON_FAILURE)
+	}
 }
 
-if (GlobalVariable.Role == 'Testing' && GlobalVariable.CheckVerifStoreDBPersonal=="Yes") {
-	'declare numofverif = numof colm'
-	GlobalVariable.NumofVerifStore = GlobalVariable.ColmNAP4
-	
-    'call test case store data verif customer detail'
-    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Personal/TabCustomerDetailVerifStoreDataDB'), 
-        [:], FailureHandling.CONTINUE_ON_FAILURE)
-}
 
 def getDataFile(){
 	if(GlobalVariable.APPSTEP == 'CUSTOMER'){

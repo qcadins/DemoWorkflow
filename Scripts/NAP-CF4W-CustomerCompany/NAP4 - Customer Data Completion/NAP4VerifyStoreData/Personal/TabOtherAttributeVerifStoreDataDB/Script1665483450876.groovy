@@ -145,6 +145,12 @@ arrayMatch.add(WebUI.verifyMatch(sDate, (resultotherattrlist[arrayindexlist++]).
 arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 41).toUpperCase(), (resultotherattrlist[
     arrayindexlist++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
+if(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 43).length() > 0){
+	'verify cust attr'
+	arrayMatch.add(WebUI.verifyMatch(findTestData(GlobalVariable.excelPath).getValue(GlobalVariable.NumofVerifStore, 43).toUpperCase(), (resultotherattrlist[
+		arrayindexlist++]).toUpperCase(), false, FailureHandling.OPTIONAL))
+}
+
 'Jika nilai di confins ada yang tidak sesuai dengan db'
 if (arrayMatch.contains(false)) {
 	
