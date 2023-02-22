@@ -121,16 +121,6 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/CountNumofCust').getValue(1, 1)</initValue>
-      <name>CountNumofCust</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
-      <initValue>findTestData('NAP-CF4W-CustomerCompany/NAP1-CustomerData-Company/Setting').getValue(1, 1)</initValue>
-      <name>CountNumofCustCompany</name>
-   </GlobalVariableEntity>
-   <GlobalVariableEntity>
-      <description></description>
       <initValue>0</initValue>
       <name>CountNumofCustomer</name>
    </GlobalVariableEntity>
@@ -556,7 +546,7 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>''</initValue>
+      <initValue>findTestData('Login/Login').getValue(2, 12)</initValue>
       <name>LOB</name>
    </GlobalVariableEntity>
 </GlobalVariableEntities>

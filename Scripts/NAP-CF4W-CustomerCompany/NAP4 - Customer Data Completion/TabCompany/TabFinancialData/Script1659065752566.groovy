@@ -24,10 +24,6 @@ import internal.GlobalVariable as GlobalVariable
 'declare copyappcolm = 0'
 GlobalVariable.StartIndex = 0
 
-GlobalVariable.APPSTEP = 'CUSTOMER'
-
-GlobalVariable.ColmNAP4 = 2
-
 'call function get data file'
 getDataFile()
 

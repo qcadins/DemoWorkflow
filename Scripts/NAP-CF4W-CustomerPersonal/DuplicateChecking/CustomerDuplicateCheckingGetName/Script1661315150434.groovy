@@ -16,8 +16,8 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import groovy.sql.Sql as Sql
 import internal.GlobalVariable as GlobalVariable
 
-'declare datafileDupcheck'
-datafileDupcheck = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking')
+'declare excelPathDupcheck'
+excelPathDupcheck = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/DuplicateChecking'
 
 'declare datafilepath'
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'("\\Excel\\"+ GlobalVariable.LOB +"\\2.1 DataFile_NAP_CF4W.xlsx")
@@ -51,7 +51,7 @@ Sql sqlconnectionCamundaSIT = CustomKeywords.'dbConnection.connectDB.connectCAMU
 Sql sqlconnectionLOS = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 'get dupcheckappno dari excel dupcheck'
-String DupcheckAppNo = datafileDupcheck.getValue(GlobalVariable.NumofColm, 12)
+String DupcheckAppNo = findTestData(excelPathDupcheck).getValue(GlobalVariable.NumofColm, 12)
 
 'count DupcheckAppNo'
 String DupCheckCount = CustomKeywords.'dupCheck.dupCheckVerif.checkDupcheck'(sqlconnectionCamundaSIT, DupcheckAppNo)
@@ -155,7 +155,7 @@ CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(CDCCustomerPersonal, '
     1, StoreCDCCustomerName)
 
 'looping untuk mencari colm appno dimulai pada excel CDC'
-loopingStartIndex(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/FamilyPersonal/CustomerDetail'))
+loopingStartIndex(findTestData('NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP4-CustomerDataCompletion/FamilyPersonal/CustomerDetail'))
 
 'reset index untuk array'
 index = 0 
@@ -167,7 +167,7 @@ for (FamilyName = GlobalVariable.StartIndex; FamilyName < StoreCDCFamilyNameArra
 }
 
 'looping untuk mencari colm appno dimulai pada excel CDC'
-loopingStartIndex(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorPersonal/CustomerDetail'))
+loopingStartIndex(findTestData('NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP4-CustomerDataCompletion/GuarantorPersonal/CustomerDetail'))
 
 'reset index untuk array'
 index = 0
@@ -179,7 +179,7 @@ for (GuarantorName = GlobalVariable.StartIndex; GuarantorName < StoreCDCGuaranto
 }
 
 'looping untuk mencari colm appno dimulai pada excel CDC'
-loopingStartIndex(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP4-CustomerDataCompletion/GuarantorCompany/CustomerDetail'))
+loopingStartIndex(findTestData('NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP4-CustomerDataCompletion/GuarantorCompany/CustomerDetail'))
 
 'reset index untuk array'
 index = 0
@@ -193,7 +193,7 @@ for (GuarantorName = GlobalVariable.StartIndex; GuarantorName < StoreCDCGuaranto
 public loopingStartIndex(TestData datafile){
 	'untuk mendapatkan posisi copy app dari excel'
 	for (int NumOf = 2; NumOf <= datafile.getColumnNumbers() - 1; (NumOf)++) {
-		if (datafile.getValue(NumOf, 12) == findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+		if (datafile.getValue(NumOf, 12) == findTestData('NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP1-CustomerData/TabCustomerData').getValue(
 			GlobalVariable.NumofColm, 13)) {
 			GlobalVariable.StartIndex = NumOf - 1
 

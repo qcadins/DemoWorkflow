@@ -80,7 +80,7 @@ public class checkAssetData {
 	@Keyword
 	public checkSelfOwnerPersonal(){
 		Boolean ismatch = false
-		if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
+		if(findTestData('NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP2-ApplicationData/TabAssetData').getValue(
 		GlobalVariable.NumofColm, 41) == 'Yes' && WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_Self Owner Checkbox'),'aria-checked')=="false"){
 			ismatch = true
 		}
@@ -92,7 +92,7 @@ public class checkAssetData {
 	@Keyword
 	public checkSelfUsagePersonal(){
 		Boolean ismatch = false
-		if(findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabAssetData').getValue(
+		if(findTestData('NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP2-ApplicationData/TabAssetData').getValue(
 		GlobalVariable.NumofColm, 37) == 'Yes' && WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_Self Usage Checkbox'),'aria-checked')=="false"){
 			ismatch = true
 		}
@@ -104,7 +104,7 @@ public class checkAssetData {
 	@Keyword
 	public checkSelfOwnerCompany(){
 		Boolean ismatch = false
-		if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(
+		if(findTestData('NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(
 		GlobalVariable.NumofColm, 41) == 'Yes' && WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/div_Self Owner CheckBox (1)'),'aria-checked')=="false"){
 			ismatch = true
 		}
@@ -116,7 +116,7 @@ public class checkAssetData {
 	@Keyword
 	public checkSelfUsageCompany(){
 		Boolean ismatch = false
-		if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(
+		if(findTestData('NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(
 		GlobalVariable.NumofColm, 37) == 'Yes' && WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/div_Self Usage Checkbox (1)'),'aria-checked')=="false"){
 			ismatch = true
 		}

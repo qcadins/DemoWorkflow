@@ -63,6 +63,9 @@ ArrayList<WebElement> variable
 'Ambil text original office dari confins'
 String officeName = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/label_OriginalOffice'))
 
+'ambil cuswt no'
+String custno = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/customerno'))
+
 //pengecekan pada excel data referantor ada lebih dari atau sama dengan 1
 'Looping untuk mencari nilai colm yang menunjukkan colm appno'
 for (GlobalVariable.NumofReferantor = GlobalVariable.StartIndex; GlobalVariable.NumofReferantor <= (countReferantor - 1); (GlobalVariable.NumofReferantor)++) {
@@ -412,7 +415,7 @@ if (findTestData(excelPathReferantor).getValue(GlobalVariable.StartIndex, 10).eq
 									   WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabReferantorData/Button_SearchReferantor'))
 									   
 									   'Cek total data referantor pada db'
-									   Integer countReferantor = CustomKeywords.'referantorData.checkReferantor.countReferantorLookup'(sqlConnectionFOU, refCategory, officeName)
+									   Integer countReferantor = CustomKeywords.'referantorData.checkReferantor.countReferantorLookup'(sqlConnectionFOU, refCategory, officeName, custno)
 									   
 									   'Ambil nilai total data referantor pada lookup confins'
 									   String[] textTotalDataReferantor = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/label_TotalDataOfficer')).replace(
@@ -590,7 +593,7 @@ if (findTestData(excelPathReferantor).getValue(GlobalVariable.StartIndex, 10).eq
 								WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabReferantorData/Button_SearchReferantor'))
 								
 								'Cek total data referantor pada db'
-								Integer countReferantor = CustomKeywords.'referantorData.checkReferantor.countReferantorLookup'(sqlConnectionFOU, refCategory, officeName)
+								Integer countReferantor = CustomKeywords.'referantorData.checkReferantor.countReferantorLookup'(sqlConnectionFOU, refCategory, officeName, custno)
 								
 								'Ambil nilai total data referantor pada lookup confins'
 								String[] textTotalDataReferantor = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/label_TotalDataOfficer')).replace(
@@ -783,7 +786,7 @@ if(findTestData(excelPathReferantor).getValue(GlobalVariable.StartIndex, 10).equ
 						WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabReferantorData/Button_SearchReferantor'))
 						
 						'Cek total data referantor pada db'
-						Integer countReferantor = CustomKeywords.'referantorData.checkReferantor.countReferantorLookup'(sqlConnectionFOU, refCategory, officeName)
+						Integer countReferantor = CustomKeywords.'referantorData.checkReferantor.countReferantorLookup'(sqlConnectionFOU, refCategory, officeName, custno)
 						
 						'Ambil nilai total data referantor pada lookup confins'
 						String[] textTotalDataReferantor = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/label_TotalDataOfficer')).replace(

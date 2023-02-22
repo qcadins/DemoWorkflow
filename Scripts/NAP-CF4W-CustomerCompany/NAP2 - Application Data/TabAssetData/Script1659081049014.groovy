@@ -51,7 +51,7 @@ WebUI.delay(5)
 
 String appLastStep = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/label_AppLastStep'))
 
-if (!(appLastStep.equalsIgnoreCase('APPLICATION DATA')) && (GlobalVariable.FirstTimeEntry == 'Yes')) {
+if (!(appLastStep.equalsIgnoreCase('APPLICATION DATA')) && !appLastStep.equalsIgnoreCase("ASSET & COLLATERAL DATA") && (GlobalVariable.FirstTimeEntry == 'Yes')) {
     GlobalVariable.FirstTimeEntry = 'No'
 }
 

@@ -357,7 +357,7 @@ if ((GlobalVariable.Role == 'Testing') && GlobalVariable.FirstTimeEntry=="Yes") 
 	
 	if(GlobalVariable.FirstTimeEntry=="Yes"){
 		'get default rounding value dari db'
-		Integer defaultRounding = CustomKeywords.'financialData.verifyFee.checkDefaultRounding'(sqlConnectionLOS, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(GlobalVariable.NumofColm, 12))
+		Integer defaultRounding = CustomKeywords.'financialData.verifyFee.checkDefaultRounding'(sqlConnectionLOS, findTestData('NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP1-CustomerData/TabCustomerData').getValue(GlobalVariable.NumofColm, 12))
 		
 		'verify default rounding value'
 		checkVerifyEqualOrMatch(WebUI.verifyEqual(defaultRounding, Integer.parseInt(WebUI.getAttribute(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Rounding'), 'value').replace(",",""))))
@@ -654,7 +654,7 @@ if(WebUI.verifyElementNotHasAttribute(findTestObject('NAP-CF4W-CustomerPersonal/
 	WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabFinancialData/input_Supplier Rate'),findTestData(excelPathTabFinancial).getValue(GlobalVariable.NumofColm, 50))
 }
 
-if (findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabApplicationData').getValue(
+if (findTestData('NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP2-ApplicationData/TabApplicationData').getValue(
     GlobalVariable.NumofColm, 18) == 'Arrear') {
     if (findTestData(excelPathTabFinancial).getValue(GlobalVariable.NumofColm, 46) == 'Yes') {
         'input grace period'

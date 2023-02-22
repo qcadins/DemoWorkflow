@@ -20,7 +20,7 @@ import internal.GlobalVariable as GlobalVariable
 Sql sqlconnection = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
 'get subsidy data from db'
-ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2SubsidyStoreDB'(sqlconnection, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP1-CustomerData/TabCustomerData').getValue(
+ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2SubsidyStoreDB'(sqlconnection, findTestData('NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP1-CustomerData/TabCustomerData').getValue(
         GlobalVariable.NumofColm, 13))
 
 'declare arrayindexdb'

@@ -23,10 +23,10 @@ import internal.GlobalVariable
 public class checkReferantor {
 
 	@Keyword
-	public countReferantorLookup(Sql instance, String refCategory, String originOfficeName){
+	public countReferantorLookup(Sql instance, String refCategory, String originOfficeName, String custno){
 		Integer countData
 		if(refCategory.equalsIgnoreCase("Customer")){
-			instance.eachRow("select count(*) from cust c WITH(NOLOCK) join cust_addr ca WITH(NOLOCK) on c.cust_id = ca.cust_id where mr_cust_addr_type_code = 'legal'", { def row ->
+			instance.eachRow("select count(*) from cust c WITH(NOLOCK) join cust_addr ca WITH(NOLOCK) on c.cust_id = ca.cust_id where mr_cust_addr_type_code = 'legal' AND NOT c.CUST_NO = '"+ custno +"'", { def row ->
 				countData = row[0]
 			})
 		}

@@ -13,6 +13,8 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
+
+import groovy.sql.Sql
 import internal.GlobalVariable as GlobalVariable
 
 'call function get data file'
@@ -191,14 +193,16 @@ if (WebUI.verifyElementPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/C
     GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
     'click button back'
     WebUI.click(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerDataCompletion/button_Back'))
-}
+}else{
 
-if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckVerifStoreDBPersonal == 'Yes')) {
-    GlobalVariable.NumofVerifStore = GlobalVariable.ColmNAP4
+	if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckVerifStoreDBPersonal == 'Yes')) {
+	    GlobalVariable.NumofVerifStore = GlobalVariable.ColmNAP4
+	
+	    'call test case verify contact info store data'
+	    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Company/TabContactInfoVerifStoreDataDB'), 
+	        [:], FailureHandling.CONTINUE_ON_FAILURE)
+	}
 
-    'call test case verify contact info store data'
-    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/NAP4VerifyStoreData/Company/TabContactInfoVerifStoreDataDB'), 
-        [:], FailureHandling.CONTINUE_ON_FAILURE)
 }
 
 def checkDDL() {
@@ -290,7 +294,7 @@ def checkDDL() {
 
 def getDataFile(){
 	'get data file path'
-	GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'("\\Excel\\"+ GlobalVariable.LOB +"\\2.2.4 CustomerDataCompletion-Company - GuarantorPersonal.xlsm")
+	GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'("\\Excel\\"+ GlobalVariable.LOB +"\\2.1.4 CustomerDataCompletion-Personal - GuarantorCompany.xlsm")
 	
 	'declare data file Global variable'
 	GlobalVariable.excelPath = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP4-CustomerDataCompletion/GuarantorCompany/ContactInformation'

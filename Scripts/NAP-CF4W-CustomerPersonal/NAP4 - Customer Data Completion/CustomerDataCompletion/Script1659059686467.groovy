@@ -19,8 +19,6 @@ import org.openqa.selenium.By as By
 import org.openqa.selenium.WebElement as WebElement
 import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 
-GlobalVariable.LOB = 'FL4W'
-
 if(GlobalVariable.LOB == 'CF4W'){
 	if(WebUI.verifyElementNotVisible(findTestObject('LoginR3BranchManagerSuperuser/a_New Consumer Finance'), FailureHandling.OPTIONAL)){
 		'click menu consumer finance'

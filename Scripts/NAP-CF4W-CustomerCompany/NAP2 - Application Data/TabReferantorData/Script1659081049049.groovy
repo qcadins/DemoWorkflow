@@ -30,6 +30,9 @@ WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-Appl
 'get applaststep dari confins'
 String appLastStep = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/label_AppLastStep'))
 
+'ambil cuswt no'
+String custno = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/customerno'))
+
 if ((!(appLastStep.equalsIgnoreCase('GUARANTOR')) && !(appLastStep.equalsIgnoreCase('NAP DETAIL')) && !(appLastStep.equalsIgnoreCase('REFERANTOR'))) && (GlobalVariable.FirstTimeEntry == 
 'Yes')) {
     GlobalVariable.FirstTimeEntry = 'No'
@@ -356,7 +359,7 @@ if (findTestData(excelPathReferantor).getValue(GlobalVariable.StartIndex, 10).eq
 
                                 'Cek total data referantor pada db'
                                 Integer countReferantor = CustomKeywords.'referantorData.checkReferantor.countReferantorLookup'(
-                                    sqlConnectionFOU, refCategory, officeName)
+                                    sqlConnectionFOU, refCategory, officeName, custno)
 
                                 'Ambil nilai total data referantor pada lookup confins'
                                 String[] textTotalDataReferantor = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/label_TotalDataOfficer')).replace(
@@ -530,7 +533,7 @@ if (findTestData(excelPathReferantor).getValue(GlobalVariable.StartIndex, 10).eq
 
                             'Cek total data referantor pada db'
                             Integer countReferantor = CustomKeywords.'referantorData.checkReferantor.countReferantorLookup'(
-                                sqlConnectionFOU, refCategory, officeName)
+                                sqlConnectionFOU, refCategory, officeName, custno)
 
                             'Ambil nilai total data referantor pada lookup confins'
                             String[] textTotalDataReferantor = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/label_TotalDataOfficer')).replace(
@@ -722,7 +725,7 @@ if (findTestData(excelPathReferantor).getValue(GlobalVariable.StartIndex, 10).eq
 
                     'Cek total data referantor pada db'
                     Integer countReferantor = CustomKeywords.'referantorData.checkReferantor.countReferantorLookup'(sqlConnectionFOU, 
-                        refCategory, officeName)
+                        refCategory, officeName, custno)
 
                     'Ambil nilai total data referantor pada lookup confins'
                     String[] textTotalDataReferantor = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/label_TotalDataOfficer')).replace(

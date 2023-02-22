@@ -93,7 +93,7 @@ public class checkDDL {
 	public checkDDLPaymentType(Sql instance){
 		String value
 		ArrayList<String> listValue = new ArrayList<>()
-		instance.eachRow(("SELECT UPPER(DESCR) FROM REF_MASTER WHERE REF_MASTER_TYPE_CODE = 'CSP_USL_AML' and IS_ACTIVE = 1"), { def row ->
+		instance.eachRow(("SELECT TRIM(UPPER(DESCR)) FROM REF_MASTER WHERE REF_MASTER_TYPE_CODE = 'CSP_USL_AML' and IS_ACTIVE = 1"), { def row ->
 			value = (row[0])
 			listValue.add(value)
 		})

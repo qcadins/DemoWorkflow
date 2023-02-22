@@ -13,6 +13,8 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
+
+import groovy.sql.Sql
 import internal.GlobalVariable as GlobalVariable
 
 GlobalVariable.FlagWarning = 0
@@ -494,13 +496,13 @@ def checkDDL(){
         ArrayList<String> jobposition = CustomKeywords.'nap4Data.checkNAP4.checkjobPosition'(sqlConnectionFOU)
 
         'get total label from ddl jobposition'
-        int totalddljobposition = WebUI.getNumberOfTotalOption(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/input_Other Job Position_'))
+        int totalddljobposition = WebUI.getNumberOfTotalOption(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/select_JobPosition'))
 
         'verify total ddl jobposition confins = total ddl db'
         WebUI.verifyEqual(totalddljobposition - 1, jobposition.size())
 
         'verify isi ddl jobposition confins = db'
-        if (WebUI.verifyOptionsPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/input_Other Job Position_'), 
+        if (WebUI.verifyOptionsPresent(findTestObject('NAP/NAP4-CustomerDataCompletion/CustomerPersonal/JobDataEmployee/select_JobPosition'), 
             jobposition) == false) {
 
             'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'

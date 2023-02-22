@@ -23,8 +23,6 @@ import com.kms.katalon.core.util.KeywordUtil
 
 GlobalVariable.StartIndex = 1
 
-GlobalVariable.LOB = 'FL4W'
-
 'get data file path'
 GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'("\\Excel\\"+ GlobalVariable.LOB +"\\2.1 DataFile_NAP_"+ GlobalVariable.LOB +".xlsx")
 

@@ -61,7 +61,7 @@ if (findTestData(excelPathTabFinancial).getValue(GlobalVariable.NumofColm, 51).e
 	'looping allocationformarray'
 	for (int i = 0; i < AllocationformArray.size(); i++) {
 		if ((AllocationformArray[i]).equalsIgnoreCase('Discount Insurance')) {
-			(SubsidyValueAmountArray[i]) = findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/NAP2-ApplicationData/TabInsuranceData').getValue(
+			(SubsidyValueAmountArray[i]) = findTestData('NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData').getValue(
 				GlobalVariable.NumofColm, TotalPremium + 2)
 		}
 		

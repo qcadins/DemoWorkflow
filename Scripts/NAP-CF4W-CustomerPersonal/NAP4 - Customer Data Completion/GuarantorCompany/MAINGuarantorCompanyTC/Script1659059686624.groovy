@@ -64,31 +64,31 @@ for (GlobalVariable.NumofGuarantor = 2; GlobalVariable.NumofGuarantor <= Countof
         } else {
 			'call tc customerdetail'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/TabCompany/TabCustomerDetail'), 
-                [:], FailureHandling.STOP_ON_FAILURE)
+                [:], FailureHandling.CONTINUE_ON_FAILURE)
 
 			'call tc AddressInformation'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/TabCompany/TabAddressInformation'), 
-                [:], FailureHandling.STOP_ON_FAILURE)
+                [:], FailureHandling.CONTINUE_ON_FAILURE)
 
 			'call tc contactinformation'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/TabCompany/TabContactInformation'), 
-                [:], FailureHandling.STOP_ON_FAILURE)
+                [:], FailureHandling.CONTINUE_ON_FAILURE)
 
 			'call tc financialdata'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/TabCompany/TabFinancialData'), 
-                [:], FailureHandling.STOP_ON_FAILURE)
+                [:], FailureHandling.CONTINUE_ON_FAILURE)
 
 			'call tc customerasset'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/TabCompany/TabCustomerAsset'), 
-                [:], FailureHandling.STOP_ON_FAILURE)
+                [:], FailureHandling.CONTINUE_ON_FAILURE)
 
 			'call tc legaldocument'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/TabCompany/TabLegalDocument'), 
-                [:], FailureHandling.STOP_ON_FAILURE)
+                [:], FailureHandling.CONTINUE_ON_FAILURE)
 
 			'call tc otherattribute'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP4 - Customer Data Completion/TabCompany/TabOtherAttribute'), 
-                [:], FailureHandling.STOP_ON_FAILURE)
+                [:], FailureHandling.CONTINUE_ON_FAILURE)
         }
     }
 }

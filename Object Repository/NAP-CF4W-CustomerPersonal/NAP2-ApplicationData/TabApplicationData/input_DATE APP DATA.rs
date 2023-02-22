@@ -6,11 +6,15 @@
    <elementGuidId>45da0365-5116-45ed-b7b3-a62838b23229</elementGuidId>
    <selectorCollection>
       <entry>
+         <key>BASIC</key>
+         <value>//*[@formcontrolname = 'AttrValue' and @type = 'date']</value>
+      </entry>
+      <entry>
          <key>XPATH</key>
          <value>//div[@id='RefAttrContent']/div[2]/div/div[3]/div/div/input</value>
       </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -27,7 +31,7 @@
       <value>form-control adInsInput ng-pristine ng-valid ng-star-inserted ng-touched</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>false</isSelected>
+      <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>formcontrolname</name>
       <type>Main</type>

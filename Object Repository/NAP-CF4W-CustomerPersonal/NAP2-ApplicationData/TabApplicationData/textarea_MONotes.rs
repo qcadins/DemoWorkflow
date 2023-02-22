@@ -6,11 +6,15 @@
    <elementGuidId>595a065f-eb66-4321-a753-6c4e239e5f86</elementGuidId>
    <selectorCollection>
       <entry>
+         <key>BASIC</key>
+         <value>//*[@formcontrolname = 'SalesNotes' and @id = 'basicTextarea']</value>
+      </entry>
+      <entry>
          <key>XPATH</key>
          <value>//div[@id='salesInfomation']/div[2]/div/textarea</value>
       </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -27,7 +31,7 @@
       <value>form-control adInsInput width-100-per ng-pristine ng-valid ng-touched</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>false</isSelected>
+      <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>formcontrolname</name>
       <type>Main</type>

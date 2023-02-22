@@ -535,15 +535,16 @@ if(capinssetting=="YEARLY"){
 		'declare countaddcov'
 		countAddCov = variableAddCov.size()
 		
+		'Hashmap untuk ambil nilai additional premi rate, sum insured amount, dan main coverage typenya dari rule excel berdasarkan condition'
+		result = CustomKeywords.'insuranceData.verifyAddtCvg.verifyAddtPremiRate'(sqlConnectionLOS, sqlConnectionFOU,appNo,selectedInscoBranch,selectedRegion,cvgAmt.toString(),WebUI.getAttribute(mainCoverageObject,'value'),WebUI.getText(yearNumObject))
+		
+		addtCvgType = result.get("AddtCvg")
+		addtpremitype = result.get("PremiType")
+		
 		if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckRulePersonal=="Yes" && GlobalVariable.FirstTimeEntry == "Yes"){
-			'Hashmap untuk ambil nilai additional premi rate, sum insured amount, dan main coverage typenya dari rule excel berdasarkan condition'
-			result = CustomKeywords.'insuranceData.verifyAddtCvg.verifyAddtPremiRate'(sqlConnectionLOS, sqlConnectionFOU,appNo,selectedInscoBranch,selectedRegion,cvgAmt.toString(),WebUI.getAttribute(mainCoverageObject,'value'),WebUI.getText(yearNumObject))
-			
-			addtCvgType = result.get("AddtCvg")
 			addtPremiRate = result.get("AddtRate")
 			sumInsuredAmt = result.get("SumInsuredAmt")
 			addtCvg = result.get("AddCvgList")
-			addtpremitype = result.get("PremiType")
 			
 			'looping additional coverage'
 			for(int addCovIndex = 1 ; addCovIndex <= countAddCov ; addCovIndex++){

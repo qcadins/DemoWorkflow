@@ -292,7 +292,7 @@ if (DupCheckStatus == Integer.parseInt(findTestData(excelPathDupcheck).getValue(
                             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/button_Cancel'))
 							
 							'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDupcheck'
-							CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('4.DuplicateChecking', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedDupcheck)
+							CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('4.DuplicateChecking', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathDupcheck).getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedDupcheck)
 							
 							KeywordUtil.markFailedAndStop('gagal dupcheck')
 						//pengecekan jika ada match similar data
@@ -349,7 +349,7 @@ if (DupCheckStatus == Integer.parseInt(findTestData(excelPathDupcheck).getValue(
                             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/button_Cancel'))
                         
 							'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDupcheck'
-							CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('4.DuplicateChecking', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedDupcheck)
+							CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('4.DuplicateChecking', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathDupcheck).getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedDupcheck)
 							
 							KeywordUtil.markFailedAndStop('gagal dupcheck')
 						} //jika ada button new
@@ -402,7 +402,7 @@ if (DupCheckStatus == Integer.parseInt(findTestData(excelPathDupcheck).getValue(
                             WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/button_Cancel'))
 							
 							'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDupcheck'
-							CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('4.DuplicateChecking', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedDupcheck)
+							CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('4.DuplicateChecking', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathDupcheck).getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedDupcheck)
 							
 							KeywordUtil.markFailedAndStop('gagal dupcheck')
                         } //jika button new ada pada confins
@@ -486,7 +486,7 @@ def checkVerifyEqualOrMatch(Boolean isMatch) {
     if ((isMatch == false) && (GlobalVariable.FlagFailed == 0)) {
 
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedVerifyEqualOrMatch'
-		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('4.DuplicateChecking', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData('NAP-CF4W-CustomerPersonal/NAP-CF4W-CustomerPersonalSingle/DuplicateChecking').getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedVerifyEqualOrMatch)
+		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('4.DuplicateChecking', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, findTestData(excelPathDupcheck).getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedVerifyEqualOrMatch)
 
         GlobalVariable.FlagFailed = 1
     }

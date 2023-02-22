@@ -489,7 +489,7 @@ def verifyInputError() {
 
 def getDataFile(){
 	'get data file path'
-	GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'("\\Excel\\"+ GlobalVariable.LOB +"\\2.2.4 CustomerDataCompletion-Company - GuarantorPersonal.xlsm")
+	GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'("\\Excel\\"+ GlobalVariable.LOB +"\\2.1.4 CustomerDataCompletion-Personal - GuarantorCompany.xlsm")
 		
 	'declare data file Global variable'
 	GlobalVariable.excelPath = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP4-CustomerDataCompletion/GuarantorCompany/OtherAttribute'

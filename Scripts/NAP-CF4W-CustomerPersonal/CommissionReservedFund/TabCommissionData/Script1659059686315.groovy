@@ -87,6 +87,7 @@ if(!appLastStep.equalsIgnoreCase("UPL_DOC") && GlobalVariable.FirstTimeEntry=="Y
 //				'cek max allocated amount = remaining allocated amount before calculate'
 //				checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(modifyObjectMaxAllocatedAmount),WebUI.getText(modifyObjectRemainingAllocatedAmount),false),'13.TabCommissionData',
 //					GlobalVariable.NumofColm)
+				
 				if(totalRefundComponent<resultMA){
 					checkVerifyEqualOrMatch(WebUI.verifyMatch(Math.round(Double.parseDouble(WebUI.getText(modifyObjectMaxAllocatedAmount).replace(",",""))).toString(),Math.round(totalRefundComponent).toString(),false),'13.TabCommissionData',
 						GlobalVariable.NumofColm)

@@ -64,31 +64,31 @@ for (GlobalVariable.NumofGuarantor = 2; GlobalVariable.NumofGuarantor <= Countof
         } else if (GlobalVariable.RoleCompany == 'Testing') {
             'call test case tab customer detail'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/TabPersonal/TabCustomerDetail'), 
-                [:], FailureHandling.STOP_ON_FAILURE)
+                [:], FailureHandling.CONTINUE_ON_FAILURE)
 
             'call test case tab address information'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/TabPersonal/TabAddressInformation'), 
-                [:], FailureHandling.STOP_ON_FAILURE)
+                [:], FailureHandling.CONTINUE_ON_FAILURE)
 
             'call test case tab job data'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/TabPersonal/TabJobData'), 
-                [:], FailureHandling.STOP_ON_FAILURE)
+                [:], FailureHandling.CONTINUE_ON_FAILURE)
 
             'call test case tab emergency contact'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/TabPersonal/TabEmergencyContact'), 
-                [:], FailureHandling.STOP_ON_FAILURE)
+                [:], FailureHandling.CONTINUE_ON_FAILURE)
 
             'call test case tab financial data'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/TabPersonal/TabFinancialData'), 
-                [:], FailureHandling.STOP_ON_FAILURE)
+                [:], FailureHandling.CONTINUE_ON_FAILURE)
 
             'call test case tab customer asset'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/TabPersonal/TabCustomerAsset'), 
-                [:], FailureHandling.STOP_ON_FAILURE)
+                [:], FailureHandling.CONTINUE_ON_FAILURE)
 
             'call test case tab other attribute'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/TabPersonal/TabOtherAttributeCF4W'), 
-                [:], FailureHandling.STOP_ON_FAILURE)
+                [:], FailureHandling.CONTINUE_ON_FAILURE)
         }
     }
 }

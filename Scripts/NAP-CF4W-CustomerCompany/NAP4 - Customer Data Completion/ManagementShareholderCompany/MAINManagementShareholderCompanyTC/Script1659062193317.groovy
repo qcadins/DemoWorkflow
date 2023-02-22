@@ -65,31 +65,31 @@ for (GlobalVariable.NumofMS = 2; GlobalVariable.NumofMS <= CountofManagementShar
         } else if (GlobalVariable.RoleCompany == 'Testing') {
             'call test case customer detail'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/TabCompany/TabCustomerDetail'), 
-                [:], FailureHandling.STOP_ON_FAILURE)
+                [:], FailureHandling.CONTINUE_ON_FAILURE)
 
             'call test case address information'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/TabCompany/TabAddressInformation'), 
-                [:], FailureHandling.STOP_ON_FAILURE)
+                [:], FailureHandling.CONTINUE_ON_FAILURE)
 
             'call test case contact information'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/TabCompany/TabContactInformation'), 
-                [:], FailureHandling.STOP_ON_FAILURE)
+                [:], FailureHandling.CONTINUE_ON_FAILURE)
 
             'call test case financial data'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/TabCompany/TabFinancialData'), 
-                [:], FailureHandling.STOP_ON_FAILURE)
+                [:], FailureHandling.CONTINUE_ON_FAILURE)
 
             'call test case customer asset'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/TabCompany/TabCustomerAsset'), 
-                [:], FailureHandling.STOP_ON_FAILURE)
+                [:], FailureHandling.CONTINUE_ON_FAILURE)
 
             'call test case legal doc'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/TabCompany/TabLegalDocument'), 
-                [:], FailureHandling.STOP_ON_FAILURE)
+                [:], FailureHandling.CONTINUE_ON_FAILURE)
 
             'call test case other attribute'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP4 - Customer Data Completion/TabCompany/TabOtherAttribute'), 
-                [:], FailureHandling.STOP_ON_FAILURE)
+                [:], FailureHandling.CONTINUE_ON_FAILURE)
         }
     }
 }

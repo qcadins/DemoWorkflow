@@ -167,15 +167,15 @@ for (int j = 1; j <= variableSuppEmp.size(); j++) {
 //                    whtRate[3]), commAmt, Double.parseDouble(whtRate[5]), Double.parseDouble(whtRate[1]), Double.parseDouble(
 //                    vatRate[1]), taxpayerInfo[2])
 
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathSimTax,'SIMULASI TAX COMPANY NEW',1,2, commAmt)
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(datafilepathSimTax,'SIMULASI TAX COMPANY NEW',2,2, taxpayerInfo[1])
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathSimTax,'SIMULASI TAX PERSONAL NEW',1,2, commAmt)
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(datafilepathSimTax,'SIMULASI TAX PERSONAL NEW',2,2, taxpayerInfo[1])
 			println(taxpayerInfo[1])
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(datafilepathSimTax,'SIMULASI TAX COMPANY NEW',3,2, taxpayerInfo[2])
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(datafilepathSimTax,'SIMULASI TAX PERSONAL NEW',3,2, taxpayerInfo[2])
 			
-			vatAmount = Double.parseDouble(findTestData('Simulasi/Simulasi Pajak Company').getValue(3, 12))
-			whtAmount = Double.parseDouble(findTestData('Simulasi/Simulasi Pajak Company').getValue(3, 8))
-			disburseAmount = Double.parseDouble(findTestData('Simulasi/Simulasi Pajak Company').getValue(3, 13))
-			expenseAmount = Double.parseDouble(findTestData('Simulasi/Simulasi Pajak Company').getValue(3, 14))
+			vatAmount = Double.parseDouble(findTestData('Simulasi/Simulasi Pajak Personal').getValue(3, 12))
+			whtAmount = Double.parseDouble(findTestData('Simulasi/Simulasi Pajak Personal').getValue(3, 8))
+			disburseAmount = Double.parseDouble(findTestData('Simulasi/Simulasi Pajak Personal').getValue(3, 13))
+			expenseAmount = Double.parseDouble(findTestData('Simulasi/Simulasi Pajak Personal').getValue(3, 14))
         }
 		else if((taxpayerInfo[0]) == 'P'){
 			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathSimTax,'SIMULASI TAX PERSONAL NEW',1,2, commAmt)
@@ -200,14 +200,14 @@ for (int j = 1; j <= variableSuppEmp.size(); j++) {
 //                    whtRate[3]), commAmt, Double.parseDouble(whtRate[5]), Double.parseDouble(whtRate[1]), Double.parseDouble(
 //                    vatRate[1]), Double.parseDouble(whtRate[2]), taxpayerInfo[2], taxpayerInfo[1])
 
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathSimTax,'SIMULASI TAX COMPANY NEW',1,2, commAmt)
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(datafilepathSimTax,'SIMULASI TAX COMPANY NEW',2,2, taxpayerInfo[1])
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(datafilepathSimTax,'SIMULASI TAX COMPANY NEW',3,2, taxpayerInfo[2])
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathSimTax,'SIMULASI TAX PERSONAL NEW',1,2, commAmt)
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(datafilepathSimTax,'SIMULASI TAX PERSONAL NEW',2,2, taxpayerInfo[1])
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(datafilepathSimTax,'SIMULASI TAX PERSONAL NEW',3,2, taxpayerInfo[2])
 			
-			vatAmount = Double.parseDouble(findTestData('Simulasi/Simulasi Pajak Company').getValue(5, 12))
-			whtAmount = Double.parseDouble(findTestData('Simulasi/Simulasi Pajak Company').getValue(5, 8))
-			disburseAmount = Double.parseDouble(findTestData('Simulasi/Simulasi Pajak Company').getValue(5, 13))
-			expenseAmount = Double.parseDouble(findTestData('Simulasi/Simulasi Pajak Company').getValue(5, 14))
+			vatAmount = Double.parseDouble(findTestData('Simulasi/Simulasi Pajak Personal').getValue(5, 12))
+			whtAmount = Double.parseDouble(findTestData('Simulasi/Simulasi Pajak Personal').getValue(5, 8))
+			disburseAmount = Double.parseDouble(findTestData('Simulasi/Simulasi Pajak Personal').getValue(5, 13))
+			expenseAmount = Double.parseDouble(findTestData('Simulasi/Simulasi Pajak Personal').getValue(5, 14))
 
         }
 		else if((taxpayerInfo[0]) == "P"){
@@ -236,15 +236,15 @@ for (int j = 1; j <= variableSuppEmp.size(); j++) {
 	WebUI.verifyLessThanOrEqual(Math.abs(vaTax - vatAmount), 10)
 	
 	if(whtThisYear>=whTax){
-		'Verify expense pada confins sesuai dengan penghitungan dengan batas toleransi +-5'
+		'Verify expense pada confins sesuai dengan penghitungan dengan batas toleransi +-10'
 		WebUI.verifyLessThanOrEqual(Math.abs(expenseAmt - (expenseAmount-whtAmount)), 10)
 	}
 	else{
-		'Verify expense pada confins sesuai dengan penghitungan dengan batas toleransi +-5'
+		'Verify expense pada confins sesuai dengan penghitungan dengan batas toleransi +-10'
 		WebUI.verifyLessThanOrEqual(Math.abs(expenseAmt - expenseAmount), 10)
 	}
 	
-	'Verify disburse pada confins sesuai dengan penghitungan dengan batas toleransi +-5'
+	'Verify disburse pada confins sesuai dengan penghitungan dengan batas toleransi +-10'
 	WebUI.verifyLessThanOrEqual(Math.abs(disburseAmt - disburseAmount), 10)
 	
     'Pengecekan disburse amount pada confins sesuai perhitungan'
@@ -352,14 +352,14 @@ for (int k = 1; k <= variableRef.size(); k++) {
 //            ArrayList<WebElement> taxAmount = CustomKeywords.'commissionReserveFundData.taxCalculation.calculateNettTaxCompany'(Double.parseDouble(
 //                    whtRate[3]), commAmt, Double.parseDouble(whtRate[5]), Double.parseDouble(whtRate[1]), Double.parseDouble(
 //                    vatRate[1]), taxpayerInfo[2])
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathSimTax,'SIMULASI TAX COMPANY NEW',1,2, commAmt)
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(datafilepathSimTax,'SIMULASI TAX COMPANY NEW',2,2, taxpayerInfo[1])
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(datafilepathSimTax,'SIMULASI TAX COMPANY NEW',3,2, taxpayerInfo[2])
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathSimTax,'SIMULASI TAX PERSONAL NEW',1,2, commAmt)
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(datafilepathSimTax,'SIMULASI TAX PERSONAL NEW',2,2, taxpayerInfo[1])
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(datafilepathSimTax,'SIMULASI TAX PERSONAL NEW',3,2, taxpayerInfo[2])
 			
-			vatAmount = Double.parseDouble(findTestData('Simulasi/Simulasi Pajak Company').getValue(3, 12))
-			whtAmount = Double.parseDouble(findTestData('Simulasi/Simulasi Pajak Company').getValue(3, 8))
-			disburseAmount = Double.parseDouble(findTestData('Simulasi/Simulasi Pajak Company').getValue(3, 13))
-			expenseAmount = Double.parseDouble(findTestData('Simulasi/Simulasi Pajak Company').getValue(3, 14))
+			vatAmount = Double.parseDouble(findTestData('Simulasi/Simulasi Pajak Personal').getValue(3, 12))
+			whtAmount = Double.parseDouble(findTestData('Simulasi/Simulasi Pajak Personal').getValue(3, 8))
+			disburseAmount = Double.parseDouble(findTestData('Simulasi/Simulasi Pajak Personal').getValue(3, 13))
+			expenseAmount = Double.parseDouble(findTestData('Simulasi/Simulasi Pajak Personal').getValue(3, 14))
 
            
         }
@@ -391,14 +391,14 @@ for (int k = 1; k <= variableRef.size(); k++) {
 //                    whtRate[3]), commAmt, Double.parseDouble(whtRate[5]), Double.parseDouble(whtRate[1]), Double.parseDouble(
 //                    vatRate[1]), Double.parseDouble(whtRate[2]), taxpayerInfo[2], taxpayerInfo[1])
 
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathSimTax,'SIMULASI TAX COMPANY NEW',1,2, commAmt)
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(datafilepathSimTax,'SIMULASI TAX COMPANY NEW',2,2, taxpayerInfo[1])
-			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(datafilepathSimTax,'SIMULASI TAX COMPANY NEW',3,2, taxpayerInfo[2])
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathSimTax,'SIMULASI TAX PERSONAL NEW',1,2, commAmt)
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(datafilepathSimTax,'SIMULASI TAX PERSONAL NEW',2,2, taxpayerInfo[1])
+			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(datafilepathSimTax,'SIMULASI TAX PERSONAL NEW',3,2, taxpayerInfo[2])
 			
-			vatAmount = Double.parseDouble(findTestData('Simulasi/Simulasi Pajak Company').getValue(5, 12))
-			whtAmount = Double.parseDouble(findTestData('Simulasi/Simulasi Pajak Company').getValue(5, 8))
-			disburseAmount = Double.parseDouble(findTestData('Simulasi/Simulasi Pajak Company').getValue(5, 13))
-			expenseAmount = Double.parseDouble(findTestData('Simulasi/Simulasi Pajak Company').getValue(5, 14))
+			vatAmount = Double.parseDouble(findTestData('Simulasi/Simulasi Pajak Personal').getValue(5, 12))
+			whtAmount = Double.parseDouble(findTestData('Simulasi/Simulasi Pajak Personal').getValue(5, 8))
+			disburseAmount = Double.parseDouble(findTestData('Simulasi/Simulasi Pajak Personal').getValue(5, 13))
+			expenseAmount = Double.parseDouble(findTestData('Simulasi/Simulasi Pajak Personal').getValue(5, 14))
 
         }
 		else if((taxpayerInfo[0]) == 'P'){
@@ -697,14 +697,14 @@ public checkSupplier(Sql sqlConnectionTAX, Sql sqlConnectionFOU, Integer sizeSup
 	//            ArrayList<WebElement> taxAmount = CustomKeywords.'commissionReserveFundData.taxCalculation.calculateNettTaxCompany'(Double.parseDouble(
 	//                    whtRate[3]), commAmt, Double.parseDouble(whtRate[5]), Double.parseDouble(whtRate[1]), Double.parseDouble(
 	//                    vatRate[1]), taxpayerInfo[2])
-				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathSimTax,'SIMULASI TAX COMPANY NEW',1,2, commAmt)
-				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(datafilepathSimTax,'SIMULASI TAX COMPANY NEW',2,2, taxpayerInfo[1])
-				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(datafilepathSimTax,'SIMULASI TAX COMPANY NEW',3,2, taxpayerInfo[2])
+				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathSimTax,'SIMULASI TAX PERSONAL NEW',1,2, commAmt)
+				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(datafilepathSimTax,'SIMULASI TAX PERSONAL NEW',2,2, taxpayerInfo[1])
+				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(datafilepathSimTax,'SIMULASI TAX PERSONAL NEW',3,2, taxpayerInfo[2])
 				
-				vatAmount = Double.parseDouble(findTestData('Simulasi/Simulasi Pajak Company').getValue(3, 12))
-				whtAmount = Double.parseDouble(findTestData('Simulasi/Simulasi Pajak Company').getValue(3, 8))
-				disburseAmount = Double.parseDouble(findTestData('Simulasi/Simulasi Pajak Company').getValue(3, 13))
-				expenseAmount = Double.parseDouble(findTestData('Simulasi/Simulasi Pajak Company').getValue(3, 14))
+				vatAmount = Double.parseDouble(findTestData('Simulasi/Simulasi Pajak Personal').getValue(3, 12))
+				whtAmount = Double.parseDouble(findTestData('Simulasi/Simulasi Pajak Personal').getValue(3, 8))
+				disburseAmount = Double.parseDouble(findTestData('Simulasi/Simulasi Pajak Personal').getValue(3, 13))
+				expenseAmount = Double.parseDouble(findTestData('Simulasi/Simulasi Pajak Personal').getValue(3, 14))
 				
 			}
 			else if((taxpayerInfo[0]) == 'P'){
@@ -730,14 +730,14 @@ public checkSupplier(Sql sqlConnectionTAX, Sql sqlConnectionFOU, Integer sizeSup
 	//                    whtRate[3]), commAmt, Double.parseDouble(whtRate[5]), Double.parseDouble(whtRate[1]), Double.parseDouble(
 	//                    vatRate[1]), Double.parseDouble(whtRate[2]), taxpayerInfo[2], taxpayerInfo[1])
 	
-				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathSimTax,'SIMULASI TAX COMPANY NEW',1,2, commAmt)
-				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(datafilepathSimTax,'SIMULASI TAX COMPANY NEW',2,2, taxpayerInfo[1])
-				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(datafilepathSimTax,'SIMULASI TAX COMPANY NEW',3,2, taxpayerInfo[2])
+				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelDecimal'(datafilepathSimTax,'SIMULASI TAX PERSONAL NEW',1,2, commAmt)
+				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(datafilepathSimTax,'SIMULASI TAX PERSONAL NEW',2,2, taxpayerInfo[1])
+				CustomKeywords.'customizeKeyword.writeExcel.writeToExcelNumber'(datafilepathSimTax,'SIMULASI TAX PERSONAL NEW',3,2, taxpayerInfo[2])
 				
-				vatAmount = Double.parseDouble(findTestData('Simulasi/Simulasi Pajak Company').getValue(5, 12))
-				whtAmount = Double.parseDouble(findTestData('Simulasi/Simulasi Pajak Company').getValue(5, 8))
-				disburseAmount = Double.parseDouble(findTestData('Simulasi/Simulasi Pajak Company').getValue(5, 13))
-				expenseAmount = Double.parseDouble(findTestData('Simulasi/Simulasi Pajak Company').getValue(5, 14))
+				vatAmount = Double.parseDouble(findTestData('Simulasi/Simulasi Pajak Personal').getValue(5, 12))
+				whtAmount = Double.parseDouble(findTestData('Simulasi/Simulasi Pajak Personal').getValue(5, 8))
+				disburseAmount = Double.parseDouble(findTestData('Simulasi/Simulasi Pajak Personal').getValue(5, 13))
+				expenseAmount = Double.parseDouble(findTestData('Simulasi/Simulasi Pajak Personal').getValue(5, 14))
 			   
 			}
 			else if((taxpayerInfo[0]) == 'P'){

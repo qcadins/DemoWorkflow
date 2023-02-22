@@ -757,7 +757,7 @@ public checkSupplier(Sql sqlConnectionTAX,Sql sqlConnectionFOU, Integer sizeSupp
 			}
 		}
 		
-		String officeName = WebUI.getText(findTestObject(modifyObjectOffice))
+		String officeName = WebUI.getText(modifyObjectOffice)
 		Double whtThisYear = CustomKeywords.'commissionReserveFundData.taxCalculation.checkWHTthisYear'(sqlConnectionTAX,sqlConnectionFOU,"Supplier",officeName, supplierName)
 	
 		if(whtThisYear>=whTax){
