@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>labelCustomerName-FL4W</name>
+   <tag></tag>
+   <elementGuidId>c699301a-6858-4328-8364-98ae3b423bb5</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;NewApplication&quot;]/div/div[4]/span/div/div[2]/span/label</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;NewApplication&quot;]/div/div[4]/span/div/div[2]/span/label</value>
+   </webElementProperties>
+</WebElementEntity>

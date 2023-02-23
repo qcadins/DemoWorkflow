@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>modifyCross</name>
+   <tag></tag>
+   <elementGuidId>b29c9acb-5aab-44e5-b993-d5125a5cbacb</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;crossInfomation&quot;]/div[2]/table/tbody/tr[1]/td[1]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;crossInfomation&quot;]/div[2]/table/tbody/tr[1]/td[1]</value>
+   </webElementProperties>
+</WebElementEntity>

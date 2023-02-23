@@ -6,11 +6,11 @@
    <elementGuidId>f1f1358a-1117-4df1-9c66-06a053d1a3ec</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>BASIC</key>
-      </entry>
-      <entry>
          <key>XPATH</key>
          <value>//*[@id=&quot;ownerData&quot;]/div/div[2]/div/div[1]/div/lib-uclookupgeneric/div/div/div[1]/span/button/i</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

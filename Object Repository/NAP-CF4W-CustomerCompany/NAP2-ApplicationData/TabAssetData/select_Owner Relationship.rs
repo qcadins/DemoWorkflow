@@ -6,12 +6,12 @@
    <elementGuidId>9b29f118-e54e-49cf-8a6c-163c1560a78f</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>XPATH</key>
-         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[2]/div[2]/div[3]/app-asset-data/div/div/div/div/form/div/div[2]/div[6]/div[3]/div[1]/select</value>
-      </entry>
-      <entry>
          <key>BASIC</key>
          <value>//*[@id=&quot;userRelationship&quot;][@formcontrolname=&quot;MrOwnerRelationshipCode&quot;]</value>
+      </entry>
+      <entry>
+         <key>XPATH</key>
+         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[2]/div[2]/div[3]/app-asset-data/div/div/div/div/form/div/div[2]/div[6]/div[3]/div[1]/select</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>

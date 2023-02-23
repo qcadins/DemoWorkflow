@@ -206,11 +206,11 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
             inputAppNo()
 
             'call test case application data'
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabApplicationData'), [:], 
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/CF4W/TabApplicationData'), [:], 
                 FailureHandling.CONTINUE_ON_FAILURE)
 
             'call test case tab asset data'
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabAssetData'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/CF4W/TabAssetData'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 
             'call test case tab insurance data'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabInsuranceData'), [:], FailureHandling.CONTINUE_ON_FAILURE)
@@ -240,7 +240,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
             inputAppNo()
 
             'call test case tab asset data'
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabAssetData'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/CF4W/TabAssetData'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 
             'call test case tab insurance data'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabInsuranceData'), [:], FailureHandling.CONTINUE_ON_FAILURE)
@@ -502,11 +502,11 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
             inputAppNo()
 
             'call test case application data'
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabApplicationData'), [:], 
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/CF4W/TabApplicationData'), [:], 
                 FailureHandling.CONTINUE_ON_FAILURE)
 
             'call test case tab asset data'
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabAssetData'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/CF4W/TabAssetData'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 
             'call test case tab insurance data'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabInsuranceData'), [:], FailureHandling.CONTINUE_ON_FAILURE)
@@ -538,7 +538,7 @@ if (GlobalVariable.RoleCompany == 'Data Entry') {
             inputAppNo()
 
             'call test case tab asset data'
-            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabAssetData'), [:], FailureHandling.CONTINUE_ON_FAILURE)
+            WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/CF4W/TabAssetData'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 
             'call test case tab insurance data'
             WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabInsuranceData'), [:], FailureHandling.CONTINUE_ON_FAILURE)

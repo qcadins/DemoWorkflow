@@ -30,7 +30,7 @@ public class getRowAssetAttribute {
 		instanceLOS.eachRow(("select distinct compnt_value from prod_offering po WITH(NOLOCK) join prod_offering_h poh WITH(NOLOCK) on po.PROD_OFFERING_ID = poH.PROD_OFFERING_ID join prod_offering_d pod WITH(NOLOCK) on pod.PROD_OFFERING_H_ID = poh.PROD_OFFERING_H_ID where prod_offering_name = '"+POName+"' and REF_PROD_COMPNT_CODE ='ASSETSCHM'"), { def row ->
 			assetschmCode = row[0]
 		})
-		instance.eachRow(("select count(REF_ATTR_ID) from ASSET_MASTER am WITH(NOLOCK) join ASSET_ATTR aa WITH(NOLOCK) on am.ASSET_TYPE_ID = aa.ASSET_TYPE_ID where am.asset_type_id= (select ash.asset_type_id from asset_schm_h ash WITH(NOLOCK) join asset_schm_d asd WITH(NOLOCK) on ash.asset_schm_h_id = asd.asset_schm_h_id join asset_master am WITH(NOLOCK) on asd.asset_master_id = am.asset_master_id where asset_schm_code = '"+assetschmCode+"' and am.is_active =1 and full_asset_code = '"+assetcode+"') and full_asset_code = '"+assetcode+"' AND am.IS_ACTIVE = '1'"), {  row ->
+		instance.eachRow(("select Count(*) from ASSET_MASTER am WITH(NOLOCK) join ASSET_ATTR aa WITH(NOLOCK) on am.ASSET_TYPE_ID = aa.ASSET_TYPE_ID JOIN REF_ATTR ra WITH(NOLOCK) ON ra.REF_ATTR_ID = aa.REF_ATTR_ID where am.asset_type_id= (select ash.asset_type_id from asset_schm_h ash WITH(NOLOCK) join asset_schm_d asd WITH(NOLOCK) on ash.asset_schm_h_id = asd.asset_schm_h_id join asset_master am WITH(NOLOCK) on asd.asset_master_id = am.asset_master_id where asset_schm_code = '"+assetschmCode+"' and am.is_active =1 and full_asset_code = '"+assetcode+"') and full_asset_code = '"+assetcode+"' AND am.IS_ACTIVE = '1' and ra.ATTR_TYPE_CODE ='TRX'"), {  row ->
 
 			countRowAssetAttributeResult = (row[0])
 		})

@@ -6,11 +6,11 @@
    <elementGuidId>e5976a59-33e3-4ada-9b16-6f6ac5272ed1</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>BASIC</key>
-      </entry>
-      <entry>
          <key>XPATH</key>
          <value>//*[@id=&quot;Kelurahan&quot;]</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

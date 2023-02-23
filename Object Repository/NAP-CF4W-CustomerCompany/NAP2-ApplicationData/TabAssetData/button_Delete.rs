@@ -6,11 +6,11 @@
    <elementGuidId>49a49627-3802-457c-a7bf-045c3ea2ffdb</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>BASIC</key>
-      </entry>
-      <entry>
          <key>XPATH</key>
          <value>//*[@id=&quot;accessoriesData&quot;]/div[2]/table/tbody/tr[1]/td[8]/a/i</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

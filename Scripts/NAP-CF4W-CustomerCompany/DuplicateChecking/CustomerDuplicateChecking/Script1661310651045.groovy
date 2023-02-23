@@ -40,18 +40,13 @@ String DupcheckAppNo = findTestData(excelPathDupcheck).getValue(GlobalVariable.N
 String subjectName
 
 'declare modify object variable'
-def modifyButtonEdit
-
-def modifyCustomerNo
-
-def modifyApplicantNo
-
-def modifySubjectType
+def modifyButtonEdit, modifyCustomerNo, modifyApplicantNo, modifySubjectType
 
 'check dupcheck status'
 int DupCheckStatus = CustomKeywords.'dupCheck.dupCheckVerif.checkDupCheckStatus'(sqlconnectionLOS, DupcheckAppNo)
 
-if (DupCheckStatus == Integer.parseInt(findTestData(excelPathDupcheck).getValue(GlobalVariable.NumofColm, 10))) {
+'check if dupcheck == expected Excel'
+if (DupCheckStatus == Integer.parseInt(findTestData(excelPathDupcheck).getValue(GlobalVariable.NumofColm, 10)) && Integer.parseInt(findTestData(excelPathDupcheck).getValue(GlobalVariable.NumofColm, 10)) == 1) {
 	
 	if(GlobalVariable.LOB == 'CF4W'){
 		
@@ -465,7 +460,7 @@ if (DupCheckStatus == Integer.parseInt(findTestData(excelPathDupcheck).getValue(
         'click button back'
         WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/DuplicateChecking/button_Back'))
     }
-}else{
+}else if(DupCheckStatus != Integer.parseInt(findTestData(excelPathDupcheck).getValue(GlobalVariable.NumofColm, 10))){
 	GlobalVariable.IsDataCancel = 1
 	
 	'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDupcheck'
@@ -474,6 +469,11 @@ if (DupCheckStatus == Integer.parseInt(findTestData(excelPathDupcheck).getValue(
 	
 	'expected dupcheck excel tidak match dengan Dupcheck'
 	KeywordUtil.markFailedAndStop('gagal dupcheck')
+	
+}else if(DupCheckStatus == Integer.parseInt(findTestData(excelPathDupcheck).getValue(GlobalVariable.NumofColm, 10)) && Integer.parseInt(findTestData(excelPathDupcheck).getValue(GlobalVariable.NumofColm, 10)) == 0){
+	'write to excel status success'
+	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.DuplicateChecking',
+		0, GlobalVariable.NumofColm - 1, GlobalVariable.StatusSuccess)
 }
 
 def checkVerifyEqualOrMatch(Boolean isMatch) {

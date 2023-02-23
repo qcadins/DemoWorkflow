@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>labelZipcodeAssetOwnerFL4W</name>
+   <tag></tag>
+   <elementGuidId>9f740dda-0748-4bd3-b54c-b96fc09af9b3</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;ownerData&quot;]/div/div[2]/div/div[1]/div/input</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;ownerData&quot;]/div/div[2]/div/div[1]/div/input</value>
+   </webElementProperties>
+</WebElementEntity>

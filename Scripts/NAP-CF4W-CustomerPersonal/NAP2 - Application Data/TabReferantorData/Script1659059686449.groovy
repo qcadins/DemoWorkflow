@@ -22,7 +22,7 @@ import org.openqa.selenium.By as By
 import org.openqa.selenium.support.ui.Select as Select
 
 'get data file path'
-GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'("\\Excel\\"+ GlobalVariable.LOB +"\\2.1 DataFile_NAP_CF4W.xlsx")
+GlobalVariable.DataFilePath = CustomKeywords.'dbConnection.connectDB.getExcelPath'("\\Excel\\"+ GlobalVariable.LOB +"\\2.1 DataFile_NAP_"+ GlobalVariable.LOB +".xlsx")
 
 'declare excelPathCustomerPersonal'
 excelPathCustomerPersonal = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP1-CustomerData/TabCustomerData'
@@ -60,11 +60,32 @@ WebDriver driver = DriverFactory.getWebDriver()
 
 ArrayList<WebElement> variable
 
+def modifyObjectOffice, modifyObjectCustNo
+
+if(GlobalVariable.LOB == 'CF4W'){
+	'modify office label'
+	modifyObjectOffice = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/label_OriginalOffice'),
+			'xpath', 'equals', ('//*[@id="NewApplication"]/div/div[3]/span/div/div[2]/span/label'), true)
+	
+	'modify Cust No Label'
+	modifyObjectCustNo = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/customerno'),
+			'xpath', 'equals', ('//*[@id="NewApplication"]/div/div[4]/span/div/div[2]'), true)
+	
+}else if(GlobalVariable.LOB == 'FL4W'){
+	'modify office label'
+	modifyObjectOffice = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/label_OriginalOffice'),
+			'xpath', 'equals', ('//*[@id="NewApplication"]/div/div[2]/span/div/div[2]/span/label'), true)
+	
+	'modify Cust No Label'
+	modifyObjectCustNo = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/customerno'),
+			'xpath', 'equals', ('//*[@id="NewApplication"]/div/div[3]/span/div/div[2]'), true)
+}
+
 'Ambil text original office dari confins'
-String officeName = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/label_OriginalOffice'))
+String officeName = WebUI.getText(modifyObjectOffice)
 
 'ambil cuswt no'
-String custno = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/customerno'))
+String custno = WebUI.getText(modifyObjectCustNo)
 
 //pengecekan pada excel data referantor ada lebih dari atau sama dengan 1
 'Looping untuk mencari nilai colm yang menunjukkan colm appno'

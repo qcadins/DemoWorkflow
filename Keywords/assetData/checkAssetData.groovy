@@ -102,10 +102,10 @@ public class checkAssetData {
 
 	//keyword check self owner company
 	@Keyword
-	public checkSelfOwnerCompany(){
+	public checkSelfOwner(Object checkbox, int NumofColm, String excelpath){
 		Boolean ismatch = false
-		if(findTestData('NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(
-		GlobalVariable.NumofColm, 41) == 'Yes' && WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/div_Self Owner CheckBox (1)'),'aria-checked')=="false"){
+		if(findTestData(excelpath).getValue(
+		NumofColm, 41) == 'Yes' && WebUI.getAttribute(checkbox,'aria-checked')=="false"){
 			ismatch = true
 		}
 
@@ -114,10 +114,10 @@ public class checkAssetData {
 
 	//keyword check self usage company
 	@Keyword
-	public checkSelfUsageCompany(){
+	public checkSelfUsage(Object checkbox, int NumofColm, String excelpath){
 		Boolean ismatch = false
-		if(findTestData('NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP2-ApplicationData/TabAssetData').getValue(
-		GlobalVariable.NumofColm, 37) == 'Yes' && WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/div_Self Usage Checkbox (1)'),'aria-checked')=="false"){
+		if(findTestData(excelpath).getValue(
+		NumofColm, 37) == 'Yes' && WebUI.getAttribute(checkbox,'aria-checked')=="false"){
 			ismatch = true
 		}
 

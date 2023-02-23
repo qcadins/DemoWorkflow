@@ -141,7 +141,7 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-App
 }else{
 	if (GlobalVariable.RoleCompany == 'Testing' && GlobalVariable.CheckVerifStoreDBCompany=="Yes") {
 		'call test case verify store to db'
-		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabInsuranceDataStoreDBVerif'),
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/StoreDB/TabInsuranceDataStoreDBVerif'),
 			[:], FailureHandling.CONTINUE_ON_FAILURE)
 	}
 }

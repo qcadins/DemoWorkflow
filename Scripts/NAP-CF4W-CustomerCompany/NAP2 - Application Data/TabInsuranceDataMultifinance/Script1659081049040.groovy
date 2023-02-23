@@ -951,7 +951,7 @@ def checkDDL(Sql sqlConnectionFOU){
 		ArrayList<WebElement> inscoBranchName = new ArrayList<WebElement>()
 		
 		'Ambil text original office dari confins'
-		String officeName = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/label_OriginalOffice'))
+		String officeName = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/label_OriginalOfficeCF4W'))
 		
 		'Ambil array string (text) insco branch name dari db'
 		inscoBranchName = CustomKeywords.'insuranceData.checkInscoBranch.checkDDLInscoBranch'(sqlConnectionFOU, officeName)

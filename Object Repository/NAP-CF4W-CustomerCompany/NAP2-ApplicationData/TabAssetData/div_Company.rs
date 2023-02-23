@@ -6,12 +6,12 @@
    <elementGuidId>e164e2f7-d223-4e2a-9102-c7aa9856ce8d</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>BASIC</key>
-         <value>//mat-radio-group/mat-radio-button[1]/label/span/span[@class=&quot;mat-radio-outer-circle&quot;]</value>
-      </entry>
-      <entry>
          <key>XPATH</key>
          <value>//mat-radio-button[@id='mat-radio-2']/label/div/div</value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//mat-radio-group/mat-radio-button[1]/label/span/span[@class=&quot;mat-radio-outer-circle&quot;]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>

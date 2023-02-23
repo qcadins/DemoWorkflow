@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>buttonAddAsset</name>
+   <tag></tag>
+   <elementGuidId>d9dd35e3-6b9d-451e-9eb3-61bf3c44f015</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;asset-tab&quot;]/app-multi-asset-data/div/app-asset-data-paging/div[1]/span/button</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;asset-tab&quot;]/app-multi-asset-data/div/app-asset-data-paging/div[1]/span/button</value>
+   </webElementProperties>
+</WebElementEntity>

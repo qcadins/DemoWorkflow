@@ -6,13 +6,13 @@
    <elementGuidId>f3ede84c-2cf9-48c1-a276-fcd3d656b840</elementGuidId>
    <selectorCollection>
       <entry>
+         <key>XPATH</key>
+         <value>//*[@id=&quot;accessoriesData&quot;]/div[2]/table/tbody/tr[1]/td[5]/select</value>
+      </entry>
+      <entry>
          <key>BASIC</key>
          <value>//app-asset-data/div/div/div/div/form/div/div[2]/div[4]/div[2]/table/tbody/tr[1]/td[5]/select
 </value>
-      </entry>
-      <entry>
-         <key>XPATH</key>
-         <value>//*[@id=&quot;accessoriesData&quot;]/div[2]/table/tbody/tr[1]/td[5]/select</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>

@@ -134,7 +134,7 @@ if (findTestData(excelPathReferantor).getValue(GlobalVariable.StartIndex, 10).eq
 if (findTestData(excelPathTabApplication).getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || findTestData(excelPathTabApplication).getValue(
 	GlobalVariable.NumofColm, 10).equalsIgnoreCase('Edit')) {
 	'Call test case tab application data'
-	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabApplicationData'), [:], FailureHandling.STOP_ON_FAILURE)
+	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/CF4W/TabApplicationData'), [:], FailureHandling.STOP_ON_FAILURE)
 } else if (findTestData(excelPathTabApplication).getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('Yes')) {
 	'click Save'
 	WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/button_Save'))
@@ -161,36 +161,36 @@ if (findTestData(excelPathTabApplication).getValue(GlobalVariable.NumofColm, 10)
 if (findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('No') || findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm,
 	10).equalsIgnoreCase('Edit')) {
 	'call test case tab asset data'
-	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabAssetData'), [:], FailureHandling.STOP_ON_FAILURE)
+	WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/CF4W/TabAssetData'), [:], FailureHandling.STOP_ON_FAILURE)
 } else if (findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 10).equalsIgnoreCase('Yes')) {
 	'input chasis number'
-	WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_CHASIS NUMBER'),
+	WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_CHASIS NUMBER_CF4W'),
 		findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 29))
 
 	'input engine number'
-	WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_ENGINE NUMBER'),
+	WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_ENGINE NUMBER-CF4W'),
 		findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 30))
 
 	'input license plate number'
-	WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_LICENSE PLATE NUMBER'),
+	WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_LICENSE PLATE NUMBER_CF4W'),
 		findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 31))
 
-	if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_Serial4'),
+	if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_Serial4_CF4W'),
 		GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 		'input serial 4'
-		WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_Serial4'), findTestData(excelPathTabAsset).getValue(
+		WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_Serial4_CF4W'), findTestData(excelPathTabAsset).getValue(
 				GlobalVariable.NumofColm, 32), FailureHandling.OPTIONAL)
 	}
 	
-	if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_Serial5'),
+	if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_Serial5_CF4W'),
 		GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 		'input serial 5'
-		WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_Serial5'), findTestData(excelPathTabAsset).getValue(
+		WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_Serial5_CF4W'), findTestData(excelPathTabAsset).getValue(
 				GlobalVariable.NumofColm, 33), FailureHandling.OPTIONAL)
 	}
 	
 	'click button save'
-	WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Save'))
+	WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Save-CF4W'))
 
 	'Menunggu Alert security deposit dibawah minimum atau manufacturing year dibawah angka tertentu (jika ada) muncul'
 	WebUI.waitForAlert(3)
@@ -210,14 +210,14 @@ if (findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 10).equal
 
 	WebUI.delay(10)
 
-	if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Supplier Name_btn btn-raised btn-primary'),
+	if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Supplier Name_CF4W'),
 		GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
 		'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.StatusFailedCopyApp'
 		CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm,
 			GlobalVariable.StatusFailed, GlobalVariable.StatusFailedCopyApp)
 
 		'click button cancel'
-		WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Cancel'))
+		WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Cancel-CF4W'))
 	}
 }
 
@@ -291,7 +291,7 @@ if (findTestData(excelPathTabFinancial).getValue(GlobalVariable.NumofColm, 10).e
 			GlobalVariable.StatusFailed, GlobalVariable.StatusFailedCopyApp)
 
 		'click button cancel'
-		WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Cancel'))
+		WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Cancel-CF4W'))
 	}
 }
 

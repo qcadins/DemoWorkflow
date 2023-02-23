@@ -754,18 +754,18 @@ WebUI.delay(5)
 if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/ApplicationCurrentStep')),
 	'FINANCIAL DATA', false, FailureHandling.OPTIONAL)) {
 	'click button cancel'
-	WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Cancel'))
+	WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Cancel-CF4W'))
 	
 	GlobalVariable.IsDataCancel = 1
 }else{
 	'check if role = testing & check store db = yes & status = success'
 	if (GlobalVariable.RoleCompany == 'Testing' && GlobalVariable.CheckVerifStoreDBCompany=="Yes") {
 		'call test case subsidy store db verif'
-		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabSubsidyStoreDBVerif'),
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/StoreDB/TabSubsidyStoreDBVerif'),
 				[:], FailureHandling.CONTINUE_ON_FAILURE)
 	
 		'call test case financial datastore db verif'
-		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabFinancialDataStoreDBVerif'),
+		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/StoreDB/TabFinancialDataStoreDBVerif'),
 				[:], FailureHandling.CONTINUE_ON_FAILURE)
 	
 	}

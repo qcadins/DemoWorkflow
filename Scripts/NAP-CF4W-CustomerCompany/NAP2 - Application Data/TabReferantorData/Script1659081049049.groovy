@@ -30,9 +30,6 @@ WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-Appl
 'get applaststep dari confins'
 String appLastStep = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/label_AppLastStep'))
 
-'ambil cuswt no'
-String custno = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/customerno'))
-
 if ((!(appLastStep.equalsIgnoreCase('GUARANTOR')) && !(appLastStep.equalsIgnoreCase('NAP DETAIL')) && !(appLastStep.equalsIgnoreCase('REFERANTOR'))) && (GlobalVariable.FirstTimeEntry == 
 'Yes')) {
     GlobalVariable.FirstTimeEntry = 'No'
@@ -61,8 +58,32 @@ WebDriver driver = DriverFactory.getWebDriver()
 
 ArrayList<WebElement> variable
 
+def modifyObjectOffice, modifyObjectCustNo
+
+if(GlobalVariable.LOB == 'CF4W'){
+	'modify office label'
+	modifyObjectOffice = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/label_OriginalOffice'),
+			'xpath', 'equals', ('//*[@id="NewApplication"]/div/div[3]/span/div/div[2]/span/label'), true)
+	
+	'modify Cust No Label'
+	modifyObjectCustNo = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/customerno'),
+			'xpath', 'equals', ('//*[@id="NewApplication"]/div/div[4]/span/div/div[2]'), true)
+	
+}else if(GlobalVariable.LOB == 'FL4W'){
+	'modify office label'
+	modifyObjectOffice = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/label_OriginalOffice'),
+			'xpath', 'equals', ('//*[@id="NewApplication"]/div/div[2]/span/div/div[2]/span/label'), true)
+	
+	'modify Cust No Label'
+	modifyObjectCustNo = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/customerno'),
+			'xpath', 'equals', ('//*[@id="NewApplication"]/div/div[3]/span/div/div[2]'), true)
+}
+
+'ambil cust no'
+String custno = WebUI.getText(modifyObjectCustNo)
+
 'Ambil text original office dari confins'
-String officeName = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/label_OriginalOffice'))
+String officeName = WebUI.getText(modifyObjectOffice)
 
 //pengecekan pada excel data referantor ada lebih dari atau sama dengan 1
 'Looping untuk mencari nilai colm yang menunjukkan colm appno'
@@ -923,7 +944,7 @@ if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP
 	'check if role = testing & check store db = yes & status = success'
 	if (((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany == 'Yes'))) {
 	    'call test case store db referantor data'
-	    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/TabReferantorDataStoreDBVerif'), [:], 
+	    WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/StoreDB/TabReferantorDataStoreDBVerif'), [:], 
 	        FailureHandling.CONTINUE_ON_FAILURE)
 	}
 }

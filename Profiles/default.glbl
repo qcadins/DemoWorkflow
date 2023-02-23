@@ -549,4 +549,9 @@
       <initValue>findTestData('Login/Login').getValue(2, 12)</initValue>
       <name>LOB</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>2</initValue>
+      <name>NumofAsset</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>
