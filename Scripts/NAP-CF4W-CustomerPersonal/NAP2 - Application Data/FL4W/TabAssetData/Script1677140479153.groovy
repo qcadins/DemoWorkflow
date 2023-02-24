@@ -258,10 +258,10 @@ if(GlobalVariable.Role=="Testing" && GlobalVariable.CheckRuleCompany == "Yes"){
 
 if (findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 26) == 'Percentage') {
     'Untuk handle jika field input percentage terlock'
-    WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/Select_Downpayment CF4W'), 
+    WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/Select_Downpayment FL4W'), 
         'Amount', false)
 
-    WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/Select_Downpayment CF4W'), 
+    WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/Select_Downpayment FL4W'), 
         'Percentage', false)
 
     WebUI.sendKeys(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_Down Payment (Prctg)-FL4W'), 
@@ -820,7 +820,7 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-Ap
     }
 	
     if ((GlobalVariable.Role == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany == 'Yes')) {
-    	if(findTestData(excelPathAccessories).getValue(GlobalVariable.NumofAccessories, 1) == 'SUCCESS'){
+    	if(findTestData(excelPathAccessories).getValue(GlobalVariable.NumofAccessories - 1, 1) == 'SUCCESS'){
     		'call test case store db accessories data'
     		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/FL4W/TabAccessoriesDataStoreDBVerif'), 
     				[:], FailureHandling.CONTINUE_ON_FAILURE)

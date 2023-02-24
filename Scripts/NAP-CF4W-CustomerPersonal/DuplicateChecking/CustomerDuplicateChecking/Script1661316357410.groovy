@@ -41,6 +41,7 @@ int DupCheckStatus = CustomKeywords.'dupCheck.dupCheckVerif.checkDupCheckStatus'
 
 GlobalVariable.FlagFailed = 0
 
+'check if dupcheck == expected Excel'
 if (DupCheckStatus == Integer.parseInt(findTestData(excelPathDupcheck).getValue(GlobalVariable.NumofColm, 10)) && Integer.parseInt(findTestData(excelPathDupcheck).getValue(GlobalVariable.NumofColm, 10)) == 1) {
 	
 	WebUI.delay(3)

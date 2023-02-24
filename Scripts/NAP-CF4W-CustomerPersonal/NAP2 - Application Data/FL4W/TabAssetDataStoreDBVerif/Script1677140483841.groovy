@@ -19,6 +19,9 @@ import internal.GlobalVariable as GlobalVariable
 'connect DB'
 Sql sqlconnection = CustomKeywords.'dbConnection.connectDB.connectLOS'()
 
+'connect DB'
+Sql sqlConnectionFOU = CustomKeywords.'dbConnection.connectDB.connectFOU'()
+
 'declare excelPathCustomerPersonal'
 excelPathCustomerPersonal = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP1-CustomerData/TabCustomerData'
 
@@ -37,78 +40,81 @@ ArrayList<String> resultassetinformation = CustomKeywords.'dbConnection.Customer
 ArrayList<String> resultdocumentinformation = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2AssetDocumentStoreDB'(sqlconnection, 
     findTestData(excelPathCustomerPersonal).getValue(GlobalVariable.NumofColm, 13))
 
+'keyword untuk mencari nama-nama asset document yang muncul pada tab asset'
+ArrayList<String> docName = CustomKeywords.'assetData.checkAssetDoc.checkAssetDocument'(sqlConnectionFOU, findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 17))
+
 'declare arraymatch'
 ArrayList<String> arrayMatch = new ArrayList<String>()
 
 'declare arraysuppinfoindex, arrayassetinfoindex,arraydocinfoindex'
 int arraysuppinfoindex = 0
 
-int arrayassetinfoindex = 0
+int arrayassetinfoindex = 1
 
 int arraydocinfoindex = 0
 
 'verify supplier code'
-arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 12).toUpperCase(), (resultsupplierinformation[
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 12).toUpperCase(), (resultsupplierinformation[
         arraysuppinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify supplier name'
-arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 13).toUpperCase(), (resultsupplierinformation[
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 13).toUpperCase(), (resultsupplierinformation[
         arraysuppinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify sales person'
-arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 14).toUpperCase(), (resultsupplierinformation[
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 14).toUpperCase(), (resultsupplierinformation[
         arraysuppinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify admin head'
-arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 15).toUpperCase(), (resultsupplierinformation[
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 15).toUpperCase(), (resultsupplierinformation[
         arraysuppinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify asset code'
-arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 17).toUpperCase(), (resultassetinformation[
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 17).toUpperCase(), (resultassetinformation[
         arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify asset condition'
-arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 18).toUpperCase(), (resultassetinformation[
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 18).toUpperCase(), (resultassetinformation[
         arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify asset price'
-arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 19).replace(',', ''), resultassetinformation[
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 19).replace(',', ''), resultassetinformation[
         arrayassetinfoindex++], false, FailureHandling.OPTIONAL))
 
 'verify asset usage'
-arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 20).toUpperCase(), (resultassetinformation[
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 20).toUpperCase(), (resultassetinformation[
         arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-if(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 21).length() > 0){
+if(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 21).length() > 0){
 	'verify color'
-	arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 21).toUpperCase(), (resultassetinformation[
+	arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 21).toUpperCase(), (resultassetinformation[
 			arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	}else{
 	'skip color'
 	arrayassetinfoindex++
 	}
 	
-	if(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 22).length() > 0){
+	if(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 22).length() > 0){
 	'verify BPKB ISSUER'
-	arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 22).toUpperCase(), (resultassetinformation[
+	arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 22).toUpperCase(), (resultassetinformation[
 			arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	}else{
 	'skip bpkb'
 	arrayassetinfoindex++
 	}
 	
-	if(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 23).length() > 0){
+	if(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 23).length() > 0){
 	'verify BPKB ISSUE DATE'
-	arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 23).toUpperCase(), (resultassetinformation[
+	arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 23).toUpperCase(), (resultassetinformation[
 			arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	}else{
 	'skip bpkb issue date'
 	arrayassetinfoindex++
 	}
 	
-	if(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 24).length() > 0){
+	if(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 24).length() > 0){
 	'verify note'
-	arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 24).toUpperCase(), (resultassetinformation[
+	arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 24).toUpperCase(), (resultassetinformation[
 			arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	}else{
 	'skip note'
@@ -116,62 +122,62 @@ if(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 21).length
 	}
 
 'verify manufacturing year'
-arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 25).toUpperCase(), (resultassetinformation[
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 25).toUpperCase(), (resultassetinformation[
         arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-if (findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 26).equalsIgnoreCase('Percentage')) {
+if (findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 26).equalsIgnoreCase('Percentage')) {
     'verify DP percent'
-    arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 27).toUpperCase(), (resultassetinformation[
+    arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 27).toUpperCase(), (resultassetinformation[
             arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
     'skip amount'
     arrayassetinfoindex++
-} else if (findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 26).equalsIgnoreCase('Amount')) {
+} else if (findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 26).equalsIgnoreCase('Amount')) {
     'skip percentage'
     arrayassetinfoindex++
 
     'verify DP Amount'
-    arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 28).replace(',', ''), (resultassetinformation[
+    arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 28).replace(',', ''), (resultassetinformation[
             arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 }
 
 'verify chasis number'
-arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 29).toUpperCase(), (resultassetinformation[
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 29).toUpperCase(), (resultassetinformation[
         arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify engine number'
-arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 30).toUpperCase(), (resultassetinformation[
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 30).toUpperCase(), (resultassetinformation[
         arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 'verify license plate'
-arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 31).toUpperCase(), (resultassetinformation[
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 31).toUpperCase(), (resultassetinformation[
         arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 serial4 = resultassetinformation[arrayassetinfoindex++]
 
 if(serial4 != ''){
 'verify serial no 4'
-arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 32).toUpperCase(), (serial4).toUpperCase(), false, FailureHandling.OPTIONAL))
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 32).toUpperCase(), (serial4).toUpperCase(), false, FailureHandling.OPTIONAL))
 }
 
 serial5 = resultassetinformation[arrayassetinfoindex++]
 
 if(serial5 != ''){
 'verify serial no 5'
-arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 33).toUpperCase(), (serial5).toUpperCase(), false, FailureHandling.OPTIONAL))
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 33).toUpperCase(), (serial5).toUpperCase(), false, FailureHandling.OPTIONAL))
 }
 
 'verify asset region'
-arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 35).toUpperCase(), (resultassetinformation[
+arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 35).toUpperCase(), (resultassetinformation[
         arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-if (findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 37).equalsIgnoreCase('No')) {
+if (findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 37).equalsIgnoreCase('No')) {
     'verify user name'
-    arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 38).toUpperCase(), (resultassetinformation[
+    arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 38).toUpperCase(), (resultassetinformation[
             arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
     'verify user relation'
-    arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 39).toUpperCase(), (resultassetinformation[
+    arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 39).toUpperCase(), (resultassetinformation[
             arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 }else{
 	'skip verif user name'
@@ -181,47 +187,47 @@ if (findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 37).equal
 	arrayassetinfoindex++
 }
 
-if (findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 41).equalsIgnoreCase('No')) {
+if (findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 41).equalsIgnoreCase('No')) {
     'verify owner type'
-    arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 42).toUpperCase(), (resultassetinformation[
+    arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 42).toUpperCase(), (resultassetinformation[
             arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
     'verify owner name'
-    arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 43).toUpperCase(), (resultassetinformation[
+    arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 43).toUpperCase(), (resultassetinformation[
             arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
     'verify owner relation'
-    arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 44).toUpperCase(), (resultassetinformation[
+    arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 44).toUpperCase(), (resultassetinformation[
             arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
-    if (findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 42).equalsIgnoreCase('Personal')) {
-		if(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 46).length() > 0){
+    if (findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 42).equalsIgnoreCase('Personal')) {
+		if(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 46).length() > 0){
         'verify owner profession'
-        arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 46).toUpperCase(), (resultassetinformation[
+        arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 46).toUpperCase(), (resultassetinformation[
                 arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 		}else{
 		arrayassetinfoindex++
 		}
     } else {
         'verify owner profession'
-        arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 47).toUpperCase(), (resultassetinformation[
+        arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 47).toUpperCase(), (resultassetinformation[
                 arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
     }
     
     'verify owner id type'
-    arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 48).toUpperCase(), (resultassetinformation[
+    arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 48).toUpperCase(), (resultassetinformation[
             arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
     'verify owner id no'
-    arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 49).toUpperCase(), (resultassetinformation[
+    arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 49).toUpperCase(), (resultassetinformation[
             arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
     'verify owner mobile no'
-    arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 50).toUpperCase(), (resultassetinformation[
+    arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 50).toUpperCase(), (resultassetinformation[
             arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	
 	'verify copy address'
-	if (findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 52).equalsIgnoreCase('Yes')) {
+	if (findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 52).equalsIgnoreCase('Yes')) {
 		address = 0
 		
 		'verify address'
@@ -283,59 +289,59 @@ if (findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 41).equal
 				arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	} else {
 		'verify address'
-		arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 54).toUpperCase(), (resultassetinformation[
+		arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 54).toUpperCase(), (resultassetinformation[
 				arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	
 		'verify rt'
-		arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 55).toUpperCase(), (resultassetinformation[
+		arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 55).toUpperCase(), (resultassetinformation[
 				arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	
 		'verify rw'
-		arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 56).toUpperCase(), (resultassetinformation[
+		arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 56).toUpperCase(), (resultassetinformation[
 				arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	
 		'verify zipcode'
-		arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 57).toUpperCase(), (resultassetinformation[
+		arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 57).toUpperCase(), (resultassetinformation[
 				arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	
 		'verify kelurahan'
-		arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 58).toUpperCase(), (resultassetinformation[
+		arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 58).toUpperCase(), (resultassetinformation[
 				arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	
 		'verify kecamatan'
-		arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 59).toUpperCase(), (resultassetinformation[
+		arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 59).toUpperCase(), (resultassetinformation[
 				arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	
 		'verify kota'
-		arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 60).toUpperCase(), (resultassetinformation[
+		arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 60).toUpperCase(), (resultassetinformation[
 				arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 		
 		'verify address'
-		arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 54).toUpperCase(), (resultassetinformation[
+		arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 54).toUpperCase(), (resultassetinformation[
 				arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	
 		'verify rt'
-		arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 55).toUpperCase(), (resultassetinformation[
+		arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 55).toUpperCase(), (resultassetinformation[
 				arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	
 		'verify rw'
-		arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 56).toUpperCase(), (resultassetinformation[
+		arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 56).toUpperCase(), (resultassetinformation[
 				arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	
 		'verify zipcode'
-		arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 57).toUpperCase(), (resultassetinformation[
+		arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 57).toUpperCase(), (resultassetinformation[
 				arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	
 		'verify kelurahan'
-		arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 58).toUpperCase(), (resultassetinformation[
+		arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 58).toUpperCase(), (resultassetinformation[
 				arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	
 		'verify kecamatan'
-		arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 59).toUpperCase(), (resultassetinformation[
+		arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 59).toUpperCase(), (resultassetinformation[
 				arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	
 		'verify kota'
-		arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 60).toUpperCase(), (resultassetinformation[
+		arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 60).toUpperCase(), (resultassetinformation[
 				arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	}
 }else{
@@ -399,7 +405,7 @@ if (findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 41).equal
 	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (resultassetinformation[
 			arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	
-	if(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 52).equalsIgnoreCase('Yes')){
+	if(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 52).equalsIgnoreCase('Yes')){
 	address = confins
 	
 	'verify address'
@@ -429,33 +435,33 @@ if (findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 41).equal
 	'verify kota'
 	arrayMatch.add(WebUI.verifyMatch(GlobalVariable.Confinsdata[address++].toUpperCase(), (resultassetinformation[
 			arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
-	}else if(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 52).equalsIgnoreCase('No')){
+	}else if(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 52).equalsIgnoreCase('No')){
 	'verify address'
-	arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 54).toUpperCase(), (resultassetinformation[
+	arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 54).toUpperCase(), (resultassetinformation[
 			arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 	'verify rt'
-	arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 55).toUpperCase(), (resultassetinformation[
+	arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 55).toUpperCase(), (resultassetinformation[
 			arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 	'verify rw'
-	arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 56).toUpperCase(), (resultassetinformation[
+	arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 56).toUpperCase(), (resultassetinformation[
 			arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 	'verify zipcode'
-	arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 57).toUpperCase(), (resultassetinformation[
+	arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 57).toUpperCase(), (resultassetinformation[
 			arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 	'verify kelurahan'
-	arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 58).toUpperCase(), (resultassetinformation[
+	arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 58).toUpperCase(), (resultassetinformation[
 			arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 	'verify kecamatan'
-	arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 59).toUpperCase(), (resultassetinformation[
+	arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 59).toUpperCase(), (resultassetinformation[
 			arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
 	'verify kota'
-	arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 60).toUpperCase(), (resultassetinformation[
+	arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 60).toUpperCase(), (resultassetinformation[
 			arrayassetinfoindex++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 	}
 }
@@ -463,32 +469,32 @@ if (findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 41).equal
 
 
 'looping data document'
-for (int i = 0; i < resultdocumentinformation.size(); i) {
-    if (findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 64).length() > 0) {
+for (int i = 0; i < docName.size(); i) {
+    if (findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 64).length() > 0) {
         'verify received'
-        arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 64).toUpperCase(), (resultdocumentinformation[
+        arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 64).toUpperCase(), (resultdocumentinformation[
                 i++]).toUpperCase(), false, FailureHandling.OPTIONAL))
     } else {
         i++
     }
     
     'verify document no'
-    arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 65).toUpperCase(), (resultdocumentinformation[
+    arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 65).toUpperCase(), (resultdocumentinformation[
             i++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 
     'verify expired date'
-    arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 66), resultdocumentinformation[
+    arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 66), resultdocumentinformation[
             i++], false, FailureHandling.OPTIONAL))
 
     'verify document notes'
-    arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 67).toUpperCase(), (resultdocumentinformation[
+    arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 67).toUpperCase(), (resultdocumentinformation[
             i++]).toUpperCase(), false, FailureHandling.OPTIONAL))
 }
 
 'Jika nilai di confins ada yang tidak sesuai dengan db'
 if (arrayMatch.contains(false)) {
     'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedStoredDB'
-    CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofColm, GlobalVariable.StatusFailed, 
-        findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 2) + ';'+GlobalVariable.ReasonFailedStoredDB)
+    CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7.TabAssetData', GlobalVariable.NumofAsset, GlobalVariable.StatusFailed, 
+        findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 2) + ';'+GlobalVariable.ReasonFailedStoredDB)
 }
 

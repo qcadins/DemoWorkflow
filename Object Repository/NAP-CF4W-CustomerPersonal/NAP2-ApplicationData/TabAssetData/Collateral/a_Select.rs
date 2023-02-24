@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>a_Select</name>
+   <tag></tag>
+   <elementGuidId>72cf11a9-8592-4d5d-88bd-ace16f30abe3</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>/html/body/ngb-modal-window/div/div/app-lookup-collateral/div[2]/lib-ucpaging/lib-ucgridview/div/table/tbody/tr/td[3]/span/span/span/a</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>/html/body/ngb-modal-window/div/div/app-lookup-collateral/div[2]/lib-ucpaging/lib-ucgridview/div/table/tbody/tr/td[3]/span/span/span/a</value>
+   </webElementProperties>
+</WebElementEntity>
