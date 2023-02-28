@@ -31,12 +31,12 @@ excelPathTabApplication = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP2-Ap
 
 String custname = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/labelCustomerName-FL4W'))
 
-ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2TabApplicationStoreDBFL4W'(sqlconnection, findTestData(excelPathCustomerCompany).getValue(
+ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2TabApplicationStoreDBFL4W'(sqlconnection, findTestData(excelPathCustomerPersonal).getValue(
 		GlobalVariable.NumofColm, 13), custname)
 		
 ArrayList<Boolean> arrayMatch = new ArrayList<>()
 
-ArrayList<String> resultattr = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2TabApplicationAttrStoreDB'(sqlconnection, findTestData(excelPathCustomerCompany).getValue(
+ArrayList<String> resultattr = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2TabApplicationAttrStoreDB'(sqlconnection, findTestData(excelPathCustomerPersonal).getValue(
 		GlobalVariable.NumofColm, 13))
 		
 ArrayList<String> bankaccount
@@ -44,7 +44,7 @@ def bankarray, confinsdatabankacc
 
 	if(findTestData(excelPathTabApplication).getValue(GlobalVariable.NumofColm, 26).equalsIgnoreCase('Auto Debit')){
 
-	 bankaccount = CustomKeywords.'dbConnection.CustomerDataVerif.BankAccountTabApplicationDataStoreDB'(sqlconnection, findTestData(excelPathCustomerCompany).getValue(
+	 bankaccount = CustomKeywords.'dbConnection.CustomerDataVerif.BankAccountTabApplicationDataStoreDB'(sqlconnection, findTestData(excelPathCustomerPersonal).getValue(
 		GlobalVariable.NumofColm, 13))
 	 
 			 confinsdatabankacc = GlobalVariable.BankAccount.split(' - ')

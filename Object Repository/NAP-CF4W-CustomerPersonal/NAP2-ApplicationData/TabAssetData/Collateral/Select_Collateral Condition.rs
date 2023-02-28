@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>//*[@id=&quot;AddCollInfo&quot;]/div/div[1]/div[2]/div/input</value>
+         <value>//*[@id=&quot;AddCollInfo&quot;]/div/div[1]/div[3]/div/select</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -17,6 +17,6 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//*[@id=&quot;AddCollInfo&quot;]/div/div[1]/div[2]/div/input</value>
+      <value>//*[@id=&quot;AddCollInfo&quot;]/div/div[1]/div[3]/div/select</value>
    </webElementProperties>
 </WebElementEntity>

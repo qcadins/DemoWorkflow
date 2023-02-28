@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>input_Serial No</name>
+   <name>label_OwnerProfession</name>
    <tag></tag>
-   <elementGuidId>d12996bc-5eef-4193-9996-1379421f441a</elementGuidId>
+   <elementGuidId>b9f4e106-4ffa-422e-b3b8-2683599f2666</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>//*[@id=&quot;AddCollInfo&quot;]/div/div[2]/div[2]/div[1]/div/div/input</value>
+         <value>//*[@id=&quot;AddCollOwner&quot;]/div[4]/div[1]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -17,6 +17,6 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//*[@id=&quot;AddCollInfo&quot;]/div/div[2]/div[2]/div[1]/div/div/input</value>
+      <value>//*[@id=&quot;AddCollOwner&quot;]/div[4]/div[1]</value>
    </webElementProperties>
 </WebElementEntity>

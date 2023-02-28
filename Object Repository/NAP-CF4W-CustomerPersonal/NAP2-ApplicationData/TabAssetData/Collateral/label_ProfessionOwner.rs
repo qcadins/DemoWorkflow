@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>label_ProfessionOwner</name>
+   <tag></tag>
+   <elementGuidId>1bf7e162-0c54-41b0-b294-be311a6a8034</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;AddCollOwner&quot;]/div[4]/div[1]/lib-uclookupgeneric/div/div/label</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;AddCollOwner&quot;]/div[4]/div[1]/lib-uclookupgeneric/div/div/label</value>
+   </webElementProperties>
+</WebElementEntity>

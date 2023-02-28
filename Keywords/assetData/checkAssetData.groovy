@@ -102,10 +102,10 @@ public class checkAssetData {
 
 	//keyword check self owner company
 	@Keyword
-	public checkSelfOwner(Object checkbox, int NumofColm, String excelpath){
+	public checkSelfOwner(Object checkbox, int NumofColm, int NumofRow, String excelpath){
 		Boolean ismatch = false
 		if(findTestData(excelpath).getValue(
-		NumofColm, 41) == 'Yes' && WebUI.getAttribute(checkbox,'aria-checked')=="false"){
+		NumofColm, NumofRow) == 'Yes' && WebUI.getAttribute(checkbox,'aria-checked')=="false"){
 			ismatch = true
 		}
 
@@ -114,10 +114,10 @@ public class checkAssetData {
 
 	//keyword check self usage company
 	@Keyword
-	public checkSelfUsage(Object checkbox, int NumofColm, String excelpath){
+	public checkSelfUsage(Object checkbox, int NumofColm, int NumofRow, String excelpath){
 		Boolean ismatch = false
 		if(findTestData(excelpath).getValue(
-		NumofColm, 37) == 'Yes' && WebUI.getAttribute(checkbox,'aria-checked')=="false"){
+		NumofColm, NumofRow) == 'Yes' && WebUI.getAttribute(checkbox,'aria-checked')=="false"){
 			ismatch = true
 		}
 

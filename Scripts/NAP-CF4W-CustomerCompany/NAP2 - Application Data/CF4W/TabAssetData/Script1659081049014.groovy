@@ -432,7 +432,7 @@ for (int i = 0; i < docName.size(); i++) {
 //call test case aksesoris
 WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/CF4W/TabAccessoriesAsset'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 
-if (CustomKeywords.'assetData.checkAssetData.checkSelfUsage'(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/div_Self Usage Checkbox Input CF4W'), GlobalVariable.NumofColm, excelPathTabAsset) == true) {
+if (CustomKeywords.'assetData.checkAssetData.checkSelfUsage'(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/div_Self Usage Checkbox Input CF4W'), GlobalVariable.NumofColm, 37, excelPathTabAsset) == true) {
     'click self usage check box'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/div_Self Usage Checkbox CF4W'))
 } else if (findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 37) == 'No') {
@@ -482,7 +482,7 @@ if (CustomKeywords.'assetData.checkAssetData.checkSelfUsage'(findTestObject('NAP
         findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 39), false)
 }
 
-if (CustomKeywords.'assetData.checkAssetData.checkSelfOwner'(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/div_Self Owner CheckBox Input CF4W'), GlobalVariable.NumofColm, excelPathTabAsset) == true) {
+if (CustomKeywords.'assetData.checkAssetData.checkSelfOwner'(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/div_Self Owner CheckBox Input CF4W'), GlobalVariable.NumofColm, 41, excelPathTabAsset) == true) {
     'click self owner checkbox'
     WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/div_Self Owner CheckBox CF4W'))
 

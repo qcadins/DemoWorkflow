@@ -36,4 +36,15 @@ public class getRowAssetAttribute {
 		})
 		return countRowAssetAttributeResult
 	}
+	
+	//keyword count Row collateral Attr
+	@Keyword
+	def countRowCollateralAttribute(Sql instance, String assetcode){
+		int countRowAssetAttributeResult, assetschmCode	
+		instance.eachRow(("select Count(ATTR_NAME) from ASSET_MASTER am WITH(NOLOCK) join ASSET_ATTR aa WITH(NOLOCK) on am.ASSET_TYPE_ID = aa.ASSET_TYPE_ID JOIN REF_ATTR ra WITH(NOLOCK) ON ra.REF_ATTR_ID = aa.REF_ATTR_ID where  full_asset_code = '"+ assetcode +"' AND am.IS_ACTIVE = '1' and ra.ATTR_TYPE_CODE ='TRX'"), {  row ->
+
+			countRowAssetAttributeResult = (row[0])
+		})
+		return countRowAssetAttributeResult
+	}
 }

@@ -439,7 +439,7 @@ for (int i = 0; i < docName.size(); i++) {
 //call test case aksesoris
 WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/FL4W/TabAccessoriesAsset'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 
-if (CustomKeywords.'assetData.checkAssetData.checkSelfUsage'(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/div_Self Usage Checkbox Input FL4W'), GlobalVariable.NumofAsset, excelPathTabAsset) == true) {
+if (CustomKeywords.'assetData.checkAssetData.checkSelfUsage'(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/div_Self Usage Checkbox Input FL4W'), GlobalVariable.NumofAsset, 37, excelPathTabAsset) == true) {
     'click self usage check box'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/div_Self Usage Checkbox FL4W'))
 } else if (findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 37) == 'No') {
@@ -489,7 +489,7 @@ if (CustomKeywords.'assetData.checkAssetData.checkSelfUsage'(findTestObject('NAP
         findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 39), false)
 }
 
-if (CustomKeywords.'assetData.checkAssetData.checkSelfOwner'(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/div_Self Owner CheckBox Input FL4W'), GlobalVariable.NumofAsset, excelPathTabAsset) == true) {
+if (CustomKeywords.'assetData.checkAssetData.checkSelfOwner'(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/div_Self Owner CheckBox Input FL4W'), GlobalVariable.NumofAsset, 41, excelPathTabAsset) == true) {
     'click self owner checkbox'
     WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/div_Self Owner CheckBox FL4W'))
 
@@ -900,24 +900,22 @@ def getDataOwner() {
 	if(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 41) == 'Yes'){
 
 		'add owner type to array'
-		confinsdata.add('COMPANY')
+		confinsdata.add('PERSONAL')
 		
 		'add owner name to array'
 		confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/input_Owner Name_FL4W'),
 				'value'))
 		
 		Select ownerRelation = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//*[@id="userRelationship"]')))
-		Select ownerProfession = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//*[@id="ownerData1"]/div[4]/div[1]/select')))
 		Select ownerIdType = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//*[@id="idType"]')))
 		String ownerRelationLabel = ownerRelation.getFirstSelectedOption().getText()
-		String ownerProfessionLabel = ownerProfession.getFirstSelectedOption().getText()
 		String ownerIdTypeLabel = ownerIdType.getFirstSelectedOption().getText()
 		
 		'add owner relation to array'
 		confinsdata.add(ownerRelationLabel)
 		
 		'add owner profession to array'
-		confinsdata.add(ownerProfessionLabel)
+		confinsdata.add(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/labelOwnerProfession - FL4W')))
 		
 		'add owner id type to array'
 		confinsdata.add(ownerIdTypeLabel)

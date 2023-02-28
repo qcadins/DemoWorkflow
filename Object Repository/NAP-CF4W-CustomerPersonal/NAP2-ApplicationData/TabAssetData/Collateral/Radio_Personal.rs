@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[3]/app-multi-asset-data/div/app-collateral-add-edit/div/div/div[2]/form/div/div[2]/div[3]/div[1]/div[2]/mat-radio-group/mat-radio-button[2]/label</value>
+         <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[3]/app-multi-asset-data/div/app-collateral-add-edit/div/div/div[2]/form/div/div[2]/div[3]/div[1]/div[2]/mat-radio-group/mat-radio-button[2]/label/span[1]</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -17,6 +17,6 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[3]/app-multi-asset-data/div/app-collateral-add-edit/div/div/div[2]/form/div/div[2]/div[3]/div[1]/div[2]/mat-radio-group/mat-radio-button[2]/label</value>
+      <value>/html/body/app-root/app-full-layout/div/div[2]/div/div/div/div/app-nap-detail-form/div/div/div[2]/div/div[1]/div[2]/div[3]/app-multi-asset-data/div/app-collateral-add-edit/div/div/div[2]/form/div/div[2]/div[3]/div[1]/div[2]/mat-radio-group/mat-radio-button[2]/label/span[1]</value>
    </webElementProperties>
 </WebElementEntity>

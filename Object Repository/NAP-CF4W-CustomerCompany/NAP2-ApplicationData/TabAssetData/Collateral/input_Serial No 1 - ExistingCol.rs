@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>input_Full Asset Code</name>
+   <name>input_Serial No 1 - ExistingCol</name>
    <tag></tag>
-   <elementGuidId>15d9524f-0da0-4e64-a741-21ca647f1600</elementGuidId>
+   <elementGuidId>4279ffef-5153-455c-9078-584e56392ec6</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>//*[@id=&quot;FullAssetCode&quot;]</value>
+         <value>//*[@id=&quot;AddCollInfo&quot;]/div/div[2]/div/div/div/div/input</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -17,6 +17,6 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//*[@id=&quot;FullAssetCode&quot;]</value>
+      <value>//*[@id=&quot;AddCollInfo&quot;]/div/div[2]/div/div/div/div/input</value>
    </webElementProperties>
 </WebElementEntity>

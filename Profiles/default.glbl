@@ -106,7 +106,7 @@
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>''</initValue>
+      <initValue>[]</initValue>
       <name>Confinsdata</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
@@ -553,5 +553,10 @@
       <description></description>
       <initValue>2</initValue>
       <name>NumofAsset</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>2</initValue>
+      <name>NumofCollateral</name>
    </GlobalVariableEntity>
 </GlobalVariableEntities>

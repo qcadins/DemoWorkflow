@@ -9,6 +9,10 @@
          <key>XPATH</key>
          <value>//a[contains(text(),'Select')]</value>
       </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[(text() = 'Select' or . = 'Select')]</value>
+      </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>

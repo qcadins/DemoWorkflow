@@ -25,8 +25,21 @@ excelPathReferantor = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP2-Applic
 'declare excelPathCustomerPersonal'
 excelPathCustomerPersonal = 'NAP-'+ GlobalVariable.LOB +'-CustomerPersonal/NAP1-CustomerData/TabCustomerData'
 
-'get text custname'
-custname = WebUI.getText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabReferantorData/label_CustName'))
+def modifyObjectCustName
+
+if(GlobalVariable.LOB == 'CF4W'){
+	'modify CustName'
+	modifyObjectCustName = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabReferantorData/label_CustName'),
+			'xpath', 'equals', ('//*[@id="NewApplication"]/div/div[5]/span/div/div[2]/span/label'), true)
+
+}else if(GlobalVariable.LOB == 'FL4W'){
+	'modify CustName'
+	modifyObjectCustName = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabReferantorData/label_CustName'),
+			'xpath', 'equals', ('//*[@id="NewApplication"]/div/div[4]/span/div/div[2]/span/label'), true)
+}
+
+'get custname from confins'
+custname = WebUI.getText(modifyObjectCustName)
 
 'get referantor data from db'
 ArrayList<String> result = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2TabReferantorStoreDB'(sqlconnection, findTestData(excelPathCustomerPersonal).getValue(

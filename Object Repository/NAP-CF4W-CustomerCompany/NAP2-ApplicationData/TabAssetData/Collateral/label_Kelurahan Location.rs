@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>labelOwnerProfession</name>
+   <name>label_Kelurahan Location</name>
    <tag></tag>
-   <elementGuidId>1939782a-e4e0-43b3-b82c-e05ef3b3c0c3</elementGuidId>
+   <elementGuidId>20ca450f-5f43-4cd1-a561-c4d1f3bba67c</elementGuidId>
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>//*[@id=&quot;ownerData&quot;]/div[4]/div[1]/lib-uclookupgeneric/div/div/label</value>
+         <value>//*[@id=&quot;collLocationAddr&quot;]/div/div[2]/div/div[2]/div/input</value>
       </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
@@ -17,6 +17,6 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//*[@id=&quot;ownerData&quot;]/div[4]/div[1]/lib-uclookupgeneric/div/div/label</value>
+      <value>//*[@id=&quot;collLocationAddr&quot;]/div/div[2]/div/div[2]/div/input</value>
    </webElementProperties>
 </WebElementEntity>

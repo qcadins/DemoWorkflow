@@ -34,4 +34,17 @@ public class checkAssetDoc {
 
 		return documentName
 	}
+
+	//Keyword untuk mencari nama-nama Collateral document yang muncul pada tab asset data
+	@Keyword
+	public checkCollateralDocument(Sql instance, String collateraltype){
+		ArrayList<String> documentName = new ArrayList<String>()
+
+		instance.eachRow(("SELECT ASSET_DOC_NAME FROM ASSET_DOC_LIST adl JOIN REF_ASSET_DOC rad ON adl.REF_ASSET_DOC_ID = rad.REF_ASSET_DOC_ID JOIN ASSET_TYPE at ON at.ASSET_TYPE_ID = adl.ASSET_TYPE_ID WHERE at.ASSET_TYPE_CODE = '"+ collateraltype +"' and adl.IS_ACTIVE = 1 and rad.IS_ACTIVE = 1 ORDER BY ASSET_DOC_NAME"), { def row ->
+			documentName.add(row[0].toUpperCase())
+
+		})
+
+		return documentName
+	}
 }

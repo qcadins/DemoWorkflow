@@ -6,17 +6,28 @@
    <elementGuidId>72cf11a9-8592-4d5d-88bd-ace16f30abe3</elementGuidId>
    <selectorCollection>
       <entry>
+         <key>XPATH</key>
+         <value>//a[contains(text(),'Select')]</value>
+      </entry>
+      <entry>
          <key>BASIC</key>
-         <value>/html/body/ngb-modal-window/div/div/app-lookup-collateral/div[2]/lib-ucpaging/lib-ucgridview/div/table/tbody/tr/td[3]/span/span/span/a</value>
+         <value>//*[(text() = 'Select' or . = 'Select')]</value>
       </entry>
    </selectorCollection>
-   <selectorMethod>BASIC</selectorMethod>
+   <selectorMethod>XPATH</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>/html/body/ngb-modal-window/div/div/app-lookup-collateral/div[2]/lib-ucpaging/lib-ucgridview/div/table/tbody/tr/td[3]/span/span/span/a</value>
+      <value>/html/body/ngb-modal-window/div/div/div[2]/lib-ucpaging/lib-ucgridview/div/table/tbody/tr/td[3]/span/span/span/a</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>text</name>
+      <type>Main</type>
+      <value>Select</value>
    </webElementProperties>
 </WebElementEntity>

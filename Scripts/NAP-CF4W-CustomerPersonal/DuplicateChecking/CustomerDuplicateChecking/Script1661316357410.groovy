@@ -41,7 +41,7 @@ int DupCheckStatus = CustomKeywords.'dupCheck.dupCheckVerif.checkDupCheckStatus'
 
 GlobalVariable.FlagFailed = 0
 
-'check if dupcheck == expected Excel'
+'check if query dupcheck == expected Excel dan query kena dupcheck maka akan melakukan dupcheck'
 if (DupCheckStatus == Integer.parseInt(findTestData(excelPathDupcheck).getValue(GlobalVariable.NumofColm, 10)) && Integer.parseInt(findTestData(excelPathDupcheck).getValue(GlobalVariable.NumofColm, 10)) == 1) {
 	
 	WebUI.delay(3)
@@ -470,6 +470,8 @@ if (DupCheckStatus == Integer.parseInt(findTestData(excelPathDupcheck).getValue(
         'click button back'
         WebUI.click(findTestObject('NAP-CF4W-CustomerPersonal/DuplicateChecking/button_Back')) //Verify sort & paging
     }
+
+'check if Query dupcheck != expected excel maka tidak akan melakukan dupcheck dan staus FAILED'
 }else if(DupCheckStatus != Integer.parseInt(findTestData(excelPathDupcheck).getValue(GlobalVariable.NumofColm, 10))){
 	GlobalVariable.IsDataCancel = 1
 	
@@ -480,6 +482,7 @@ if (DupCheckStatus == Integer.parseInt(findTestData(excelPathDupcheck).getValue(
 	'expected dupcheck excel tidak match dengan Dupcheck'
 	KeywordUtil.markFailedAndStop('gagal dupcheck')
 	
+'check if query dupcheck == expected excel dan query tidak kena dupcheck maka akan write status SUCCESS'
 }else if(DupCheckStatus == Integer.parseInt(findTestData(excelPathDupcheck).getValue(GlobalVariable.NumofColm, 10)) && Integer.parseInt(findTestData(excelPathDupcheck).getValue(GlobalVariable.NumofColm, 10)) == 0){
 	'write to excel status success'
 	CustomKeywords.'customizeKeyword.writeExcel.writeToExcel'(GlobalVariable.DataFilePath, '4.DuplicateChecking',

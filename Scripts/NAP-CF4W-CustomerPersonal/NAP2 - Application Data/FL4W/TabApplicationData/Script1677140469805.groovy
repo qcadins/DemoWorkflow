@@ -869,7 +869,7 @@ if (WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NA
 }else{
 	if(GlobalVariable.Role == 'Testing' && GlobalVariable.CheckVerifStoreDBCompany=="Yes"){
 			'call test case store db application data'
-			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/FL4W/TabApplicationDataStoreDBVerif'),
+			WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerPersonal/NAP2 - Application Data/FL4W/TabApplicationDataStoreDBVerif'),
 					[:], FailureHandling.CONTINUE_ON_FAILURE)
 	}
 }
