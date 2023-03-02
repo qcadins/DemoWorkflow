@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>paidAmountbyCust</name>
+   <tag></tag>
+   <elementGuidId>846921c6-94bb-4499-846c-258e2163892a</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;summaryInsurance&quot;]/div[1]/div/label[4]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;summaryInsurance&quot;]/div[1]/div/label[4]</value>
+   </webElementProperties>
+</WebElementEntity>

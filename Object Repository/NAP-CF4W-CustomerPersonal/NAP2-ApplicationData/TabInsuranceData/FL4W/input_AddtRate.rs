@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>input_AddtRate</name>
+   <tag></tag>
+   <elementGuidId>504d3e95-ad46-4be6-a4e0-6158f460feff</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//div[@id='insuranceCoverage']/div[5]/table/tbody/tr[3]/td[8]/div/span/div/input</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//div[@id='insuranceCoverage']/div[5]/table/tbody/tr[3]/td[8]/div/span/div/input</value>
+   </webElementProperties>
+</WebElementEntity>

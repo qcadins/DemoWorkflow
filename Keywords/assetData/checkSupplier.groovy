@@ -46,7 +46,7 @@ public class checkSupplier {
 	@Keyword
 	public checkSupplierScheme(Sql instance, String poname){
 		String suppschm
-		instance.eachRow(("select distinct compnt_value_desc from prod_offering po WITH(NOLOCK) join prod_offering_h poHead on po.PROD_OFFERING_ID = poHead.PROD_OFFERING_ID join prod_offering_d poDetail on poDetail.PROD_OFFERING_H_ID = poHead.PROD_OFFERING_H_ID where prod_offering_name = '"+poname+"' and REF_PROD_COMPNT_CODE ='SUPPLSCHM'"), { def row ->
+		instance.eachRow(("select compnt_value_desc from prod_offering po WITH(NOLOCK) join prod_offering_h poHead on po.PROD_OFFERING_ID = poHead.PROD_OFFERING_ID join prod_offering_d poDetail on poDetail.PROD_OFFERING_H_ID = poHead.PROD_OFFERING_H_ID where prod_offering_name = '"+poname+"' and REF_PROD_COMPNT_CODE ='SUPPLSCHM' AND poHead.PROD_STAT = 'ACT'"), { def row ->
 			suppschm = (row[0])
 		})
 		return suppschm

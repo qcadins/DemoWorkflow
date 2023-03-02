@@ -27,21 +27,21 @@ excelPathTabAsset = 'NAP-'+ GlobalVariable.LOB +'-CustomerCompany/NAP2-Applicati
 
 'get supplier data from db'
 ArrayList<String> resultsupplierinformation = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2TabAssetSupplierInfoStoreDB'(
-    sqlconnection, findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofAsset, 13))
+    sqlconnection, findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm, 13))
 
 'get asset data from db'
 ArrayList<String> resultassetinformation = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2TabAssetStoreDB'(sqlconnection, 
-    findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofAsset, 13))
+    findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm, 13))
 
 'get asset document from db'
 ArrayList<String> resultdocumentinformation = CustomKeywords.'dbConnection.CustomerDataVerif.NAP2AssetDocumentStoreDB'(sqlconnection, 
-    findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofAsset, 13))
+    findTestData(excelPathCustomerCompany).getValue(GlobalVariable.NumofColm, 13))
 
 ArrayList<String> arrayMatch = new ArrayList<String>()
 
 int arraysuppinfoindex = 0
 
-int arrayassetinfoindex = 0
+int arrayassetinfoindex = 1
 
 'verify supplier code'
 arrayMatch.add(WebUI.verifyMatch(findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 12).toUpperCase(), (resultsupplierinformation[

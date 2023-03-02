@@ -58,9 +58,9 @@ public class checkAssetData {
 
 	//keyword check asset usage DDL
 	@Keyword
-	public checkAssetUsageDDL(Sql instance){
+	public checkAssetUsageDDL(Sql instance, String poname){
 		ArrayList<String> assetUsage = new ArrayList<String>()
-		instance.eachRow(("select UPPER(DESCR) from REF_MASTER WITH(NOLOCK) where ref_master_type_code = 'asset_usage' and IS_ACTIVE = 1"), { def row ->
+		instance.eachRow(("select DESCR from prod_offering po WITH(NOLOCK) JOIN prod_offering_h poHead on po.PROD_OFFERING_ID = poHead.PROD_OFFERING_ID JOIN PROD_OFFERING_D pod on poHead.PROD_OFFERING_H_ID = pod.PROD_OFFERING_H_ID JOIN REF_PURPOSE_OF_FIN rpf WITH(NOLOCK) ON rpf.PURPOSE_OF_FIN_CODE = pod.COMPNT_VALUE JOIN REF_FIN_ASSET_USAGE_MAP rfa WITH(NOLOCK) ON rfa.REF_PURPOSE_OF_FIN_ID = rpf.REF_PURPOSE_OF_FIN_ID JOIN FOUNDATION.dbo.REF_MASTER rf WITH(NOLOCK) ON rf.MASTER_CODE = MR_ASSET_USAGE_CODE where PROD_OFFERING_NAME = '"+ poname +"' and REF_PROD_COMPNT_CODE = 'PURPOSE_OF_FINANCING' AND poHead.PROD_STAT = 'ACT'"), { def row ->
 			assetUsage.add(row[0].toUpperCase())
 		})
 		return assetUsage

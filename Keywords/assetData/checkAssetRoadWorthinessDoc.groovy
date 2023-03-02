@@ -31,4 +31,14 @@ public class checkAssetRoadWorthinessDoc {
 		})
 		return attrVal
 	}
+	
+	//keyword check road wothiness document
+	@Keyword
+	public checkRWDFL4W(Sql instanceLOS, String appno, String assetcode){
+		String attrVal
+		instanceLOS.eachRow(("SELECT ATTR_VALUE FROM APP_ASSET_ATTR aaa WITH(NOLOCK) JOIN APP_ASSET aa WITH(NOLOCK) ON aaa.APP_ASSET_ID = aa.APP_ASSET_ID JOIN APP a WITH(NOLOCK) ON a.APP_ID = aa.APP_ID WHERE APP_NO = '"+ appno +"' AND ASSET_ATTR_CODE = 'ROAD_WORTHINESS_DOC' AND FULL_ASSET_CODE = '"+ assetcode +"'"), { def row ->
+			attrVal = row[0]
+		})
+		return attrVal
+	}
 }

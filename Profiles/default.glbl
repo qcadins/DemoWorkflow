@@ -559,4 +559,9 @@
       <initValue>2</initValue>
       <name>NumofCollateral</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>2</initValue>
+      <name>NumofInsurance</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>

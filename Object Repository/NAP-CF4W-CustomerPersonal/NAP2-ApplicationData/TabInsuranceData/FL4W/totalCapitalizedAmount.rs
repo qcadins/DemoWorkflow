@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>totalCapitalizedAmount</name>
+   <tag></tag>
+   <elementGuidId>c18ff931-83cc-44d5-90d8-7aaf8382b1dc</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;summaryInsurance&quot;]/div[2]/div/label[2]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;summaryInsurance&quot;]/div[2]/div/label[2]</value>
+   </webElementProperties>
+</WebElementEntity>

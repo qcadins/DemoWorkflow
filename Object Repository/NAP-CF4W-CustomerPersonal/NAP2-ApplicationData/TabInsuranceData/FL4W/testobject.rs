@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>testobject</name>
+   <tag></tag>
+   <elementGuidId>15e17fdf-65c3-49ed-9c08-fcda1a977bdb</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;insuranceCoverage&quot;]/div[5]/table/tbody[2]/tr[2]/td[5]</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;insuranceCoverage&quot;]/div[5]/table/tbody[2]/tr[2]/td[5]</value>
+   </webElementProperties>
+</WebElementEntity>

@@ -23,12 +23,12 @@ excelPathTabAsset = (('NAP-' + GlobalVariable.LOB) + '-CustomerCompany/NAP2-Appl
 'declare excelPathCustomerCompany'
 excelPathCustomerCompany = (('NAP-' + GlobalVariable.LOB) + '-CustomerCompany/NAP1-CustomerData-Company/TabCustomerData')
 
-countAccessories = findTestData(excelPathTabAsset).getColumnNumbers()
+countAsset = findTestData(excelPathTabAsset).getColumnNumbers()
 
 WebDriver driver = DriverFactory.getWebDriver()
 
 'Looping untuk mencari nilai colm yang menunjukkan colm appno'
-for (GlobalVariable.NumofAsset = 2; GlobalVariable.NumofAsset <= (findTestData(excelPathTabAsset).getColumnNumbers() - 1); (GlobalVariable.NumofAsset)++) {
+for (GlobalVariable.NumofAsset = 2; GlobalVariable.NumofAsset <= (countAsset - 1); (GlobalVariable.NumofAsset)++) {
     if (findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 8) == findTestData(excelPathCustomerCompany).getValue(
         GlobalVariable.NumofColm, 13)) {
         GlobalVariable.StartIndex = GlobalVariable.NumofAsset
@@ -39,7 +39,7 @@ for (GlobalVariable.NumofAsset = 2; GlobalVariable.NumofAsset <= (findTestData(e
     }
 }
 
-for (GlobalVariable.NumofAsset = GlobalVariable.StartIndex; GlobalVariable.NumofAsset <= (countAccessories - 1); (GlobalVariable.NumofAsset)++) {
+for (GlobalVariable.NumofAsset = GlobalVariable.StartIndex; GlobalVariable.NumofAsset <= (countAsset - 1); (GlobalVariable.NumofAsset)++) {
     if (findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 8).equalsIgnoreCase(findTestData(excelPathCustomerCompany).getValue(
             GlobalVariable.NumofColm, 13))) {
         'click button add'

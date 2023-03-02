@@ -145,7 +145,7 @@ CustomKeywords.'customizeKeyword.function.verifyInputLookup'(findTestData(excelP
     '7.TabAssetData', GlobalVariable.NumofAsset)
 
 'call function check asset info dll'
-checkDDLAssetInfo(sqlConnectionFOU)
+checkDDLAssetInfo(sqlConnectionFOU, sqlConnectionLOS)
 
 'select asset condition'
 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/select_Asset ConditionNew Used'), 
@@ -254,10 +254,10 @@ if(GlobalVariable.RoleCompany=="Testing" && GlobalVariable.CheckRuleCompany == "
 
 if (findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofAsset, 26) == 'Percentage') {
     'Untuk handle jika field input percentage terlock'
-    WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/Select_Downpayment CF4W'), 
+    WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/Select_Downpayment FL4W'), 
         'Amount', false)
 
-    WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/Select_Downpayment CF4W'), 
+    WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/Select_Downpayment FL4W'), 
         'Percentage', false)
 
     WebUI.sendKeys(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_Down Payment (Prctg)-FL4W'), 
@@ -792,7 +792,7 @@ if ((iscompleteMandatory == 0) && (GlobalVariable.FlagFailed == 0)) {
 
 if (GlobalVariable.FlagFailed == 0) {
     'check save process write to excel'
-    CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory, findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabInsuranceData/select_InsuredBy'), 
+    CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory, findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/AssetMultiple/buttonAddAsset'), 
         GlobalVariable.NumofAsset, '7.TabAssetData')
 
     if (iscompleteMandatory == 0) {
@@ -816,7 +816,7 @@ if (WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-App
     }
 	
     if ((GlobalVariable.RoleCompany == 'Testing') && (GlobalVariable.CheckVerifStoreDBCompany == 'Yes')) {
-    	if(findTestData('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/Accessories').getValue(GlobalVariable.NumofAccessories, 1) == 'SUCCESS'){
+    	if(findTestData(excelPathAccessories).getValue(GlobalVariable.NumofAccessories, 1) == 'SUCCESS'){
     		'call test case store db accessories data'
     		WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/FL4W/TabAccessoriesDataStoreDBVerif'), 
     				[:], FailureHandling.CONTINUE_ON_FAILURE)
@@ -901,7 +901,7 @@ def getDataOwner() {
 		'add owner name to array'
 		confinsdata.add(WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/input_Owner Name_FL4W'),
 				'value'))
-		
+
 		Select ownerRelation = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//*[@id="userRelationship"]')))
 		Select ownerProfession = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//*[@id="ownerData1"]/div[4]/div[1]/select')))
 		Select ownerIdType = new Select(DriverFactory.getWebDriver().findElement(By.xpath('//*[@id="idType"]')))
@@ -911,6 +911,8 @@ def getDataOwner() {
 		
 		'add owner relation to array'
 		confinsdata.add(ownerRelationLabel)
+		
+		println(ownerRelationLabel)
 		
 		'add owner profession to array'
 		confinsdata.add(ownerProfessionLabel)
@@ -1006,6 +1008,8 @@ def checkSupplierScheme(Sql sqlConnectionLOS, Sql sqlConnectionFOU, String PONam
 		'Ambil text supplier scheme dari db'
 		String suppschm = CustomKeywords.'assetData.checkSupplier.checkSupplierScheme'(sqlConnectionLOS, POName)
 	
+		println(suppschm)
+		
 		'click search button'
 		WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Search Supplier'))
 	
@@ -1057,10 +1061,13 @@ def checkLookupAsset(Sql sqlConnectionLOS, Sql sqlConnectionFOU, String POName){
 	}
 }
 
-def checkDDLAssetInfo(Sql sqlConnectionFOU){
+def checkDDLAssetInfo(Sql sqlConnectionFOU, Sql sqlConnectionLOS){
 	if(GlobalVariable.RoleCompany == 'Testing'){
+		
+		String POName = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/label_ProductOfferingFL4W'))
+		
 		'Ambil array string (text) asset usage dari db'
-		ArrayList<String> assetUsage = CustomKeywords.'assetData.checkAssetData.checkAssetUsageDDL'(sqlConnectionFOU)
+		ArrayList<String> assetUsage = CustomKeywords.'assetData.checkAssetData.checkAssetUsageDDL'(sqlConnectionLOS, POName)
 		
 		'Ambil array string (text) asset condition dari db'
 		ArrayList<String> assetCondition = CustomKeywords.'assetData.checkAssetData.checkAssetConditionDDL'(sqlConnectionFOU)

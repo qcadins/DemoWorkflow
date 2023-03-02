@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>select_SumInsuredAmountTerrorist</name>
+   <tag></tag>
+   <elementGuidId>9a2d7410-ce3a-403f-a9b3-88afbb1f8743</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//div[@id='insuranceCoverage']/div[5]/table/tbody/tr[9]/td[7]/div/div/select</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//div[@id='insuranceCoverage']/div[5]/table/tbody/tr[9]/td[7]/div/div/select</value>
+   </webElementProperties>
+</WebElementEntity>

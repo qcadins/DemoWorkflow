@@ -52,24 +52,24 @@ public class verifyInsuranceData {
 			'Inisialisasi Format untuk mendapatkan nilai desimal dari nilai persen'
 			NumberFormat decimalFormat = NumberFormat.getPercentInstance()
 
-			Object capitalizeObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/input_Capitalized'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[1]/td[1]/div/input",true)
+			Object capitalizeObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/CF4W/input_Capitalized'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[1]/td[1]/div/input",true)
 
 			if(WebUI.verifyElementChecked(capitalizeObject,5,FailureHandling.OPTIONAL)){
 				counterCap=1
 			}
 
-			Object paidByObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/select_PaidBy'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[1]/td[2]/div/select",true)
+			Object paidByObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/CF4W/select_PaidBy'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[1]/td[2]/div/select",true)
 
-			Object sumInsuredPercentObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/input_SumInsuredPercentage'), 'xpath', 'equals',
+			Object sumInsuredPercentObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/CF4W/input_SumInsuredPercentage'), 'xpath', 'equals',
 					"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[1]/td[5]/div/input", true)
 
-			Object mainCoverageObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/select_MainCoverageTP'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[1]/td[6]/span[1]/select",true)
+			Object mainCoverageObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/CF4W/select_MainCoverageTP'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[1]/td[6]/span[1]/select",true)
 
 			if(WebUI.verifyOptionSelectedByLabel(paidByObject,'(?i)MULTIFINANCE',true,20,FailureHandling.OPTIONAL) && counterPaidByMF==0){
 				counterPaidByMF = 1
 			}
 
-			Object rateObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/input_Rate'), 'xpath', 'equals',
+			Object rateObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/CF4W/input_Rate'), 'xpath', 'equals',
 					"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[1]/td[8]/div/input", true)
 
 			'Ambil nilai dari rate'
@@ -85,11 +85,11 @@ public class verifyInsuranceData {
 			Float sumInsuredPercent = decimalFormat.parse(textSumInsuredPercent).floatValue();
 
 			'Ambil nilai coverage amount'
-			String textAmount = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/input_Coverage Amount MF'),'value').replace(",","")
+			String textAmount = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/CF4W/input_Coverage Amount MF'),'value').replace(",","")
 
 			BigDecimal Amount = Long.parseLong(textAmount)
 
-			Object numberOfMonthObject =  WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/td_numberOfMonth'), 'xpath', 'equals',
+			Object numberOfMonthObject =  WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/CF4W/td_numberOfMonth'), 'xpath', 'equals',
 					"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[1]/td[4]", true)
 
 			'Ambil nilai number of month'
@@ -97,7 +97,7 @@ public class verifyInsuranceData {
 
 			BigDecimal numberOfMonth = Double.parseDouble(textNumberOfMonth)
 
-			Object mainPremiObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/td_MainPremiumAmt'), 'xpath', 'equals',
+			Object mainPremiObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/CF4W/td_MainPremiumAmt'), 'xpath', 'equals',
 					"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[1]/td[9]", true)
 
 			'Ambil nilai Main Premium Amount'
@@ -125,11 +125,11 @@ public class verifyInsuranceData {
 
 				int countSumInsuredAmount = 0
 
-				Object addCovYearCheckbox = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/input_Flood_checkboxLabel TP'),
+				Object addCovYearCheckbox = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/CF4W/input_Flood_checkboxLabel TP'),
 						'xpath', 'equals', ((('//*[@id=\'insuranceCoverage\']/div[5]/table/tbody[' + i) + ']/tr[') + (j + 2)) + ']/td[6]/div/div/label/input',
 						true)
 
-				Object modifySumInsuredAmount = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/select_SumInsuredAmountFlood'),
+				Object modifySumInsuredAmount = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/CF4W/select_SumInsuredAmountFlood'),
 						'xpath', 'equals', ((('//div[@id=\'insuranceCoverage\']/div[5]/table/tbody[' + i) + ']/tr[') + (j + 2)) + ']/td[7]/div/div/select',
 						true)
 
@@ -139,7 +139,7 @@ public class verifyInsuranceData {
 				}
 
 
-				Object modifyAddtRateObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/input_AddtRate'),'xpath','equals',"//div[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr["+(j+2)+"]/td[8]/div/span/div/input",true)
+				Object modifyAddtRateObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/CF4W/input_AddtRate'),'xpath','equals',"//div[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr["+(j+2)+"]/td[8]/div/span/div/input",true)
 
 				'Ambil nilai dari rate additional coverage '
 				String textAddCovRate = WebUI.getAttribute(modifyAddtRateObject,'value').replaceAll("\\s","").replace(",","")
@@ -166,7 +166,7 @@ public class verifyInsuranceData {
 					}
 
 				}
-				Object AddtAmtObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/td_FloodAmt'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr["+(j+2)+"]/td[9]",true)
+				Object AddtAmtObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/CF4W/td_FloodAmt'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr["+(j+2)+"]/td[9]",true)
 
 				'ambil nilai additional premi dari confins'
 				String textAddtPremiAmt = WebUI.getText(AddtAmtObject).replace(",","")
@@ -185,7 +185,7 @@ public class verifyInsuranceData {
 			'tambahkan main premi dan additional premi untuk menghitung total premi per tahunnya'
 			resultTotalPremiPerYear = Result+totalResultAddtPremi
 
-			Object totalPremiPerYearObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/td_TotalPremiPerYear'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr["+(countAddCov+3)+"]/td[9]",true)
+			Object totalPremiPerYearObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/CF4W/td_TotalPremiPerYear'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr["+(countAddCov+3)+"]/td[9]",true)
 
 			'ambil nilai total premi per tahun dari confins'
 			String textTotalPremiPerYear = WebUI.getText(totalPremiPerYearObject).replace(",","")
@@ -230,7 +230,7 @@ public class verifyInsuranceData {
 		int counterPaidByMF=0, counterCap = 0
 
 		'Jika full capitalize amount pada confins tercentang'
-		if(WebUI.verifyElementChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/input_FullCapitalizedAmount'),2,FailureHandling.OPTIONAL)){
+		if(WebUI.verifyElementChecked(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/CF4W/input_FullCapitalizedAmount'),2,FailureHandling.OPTIONAL)){
 			counterCap = 1
 		}
 
@@ -241,18 +241,18 @@ public class verifyInsuranceData {
 			'Inisialisasi Format untuk mendapatkan nilai desimal dari nilai persen'
 			NumberFormat decimalFormat = NumberFormat.getPercentInstance()
 
-			Object paidByObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/select_PaidBy'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[1]/td[1]/div/select",true)
+			Object paidByObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/CF4W/select_PaidBy'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[1]/td[1]/div/select",true)
 
-			Object sumInsuredPercentObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/input_SumInsuredPercentage'), 'xpath', 'equals',
+			Object sumInsuredPercentObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/CF4W/input_SumInsuredPercentage'), 'xpath', 'equals',
 					"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[1]/td[4]/div/input", true)
 
-			Object mainCoverageObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/select_MainCoverageTP'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[1]/td[5]/span[1]/select",true)
+			Object mainCoverageObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/CF4W/select_MainCoverageTP'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[1]/td[5]/span[1]/select",true)
 
 			if(WebUI.verifyOptionSelectedByLabel(paidByObject,'(?i)MULTIFINANCE',true,20,FailureHandling.OPTIONAL) && counterPaidByMF==0){
 				counterPaidByMF = 1
 			}
 
-			Object rateObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/input_Rate'), 'xpath', 'equals',
+			Object rateObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/CF4W/input_Rate'), 'xpath', 'equals',
 					"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[1]/td[7]/div/input", true)
 
 			'Ambil nilai dari rate'
@@ -268,11 +268,11 @@ public class verifyInsuranceData {
 			Float sumInsuredPercent = decimalFormat.parse(textSumInsuredPercent).floatValue();
 
 			'Ambil nilai coverage amount'
-			String textAmount = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/input_Coverage Amount MF'),'value').replace(",","")
+			String textAmount = WebUI.getAttribute(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/CF4W/input_Coverage Amount MF'),'value').replace(",","")
 
 			BigDecimal Amount = Long.parseLong(textAmount)
 
-			Object numberOfMonthObject =  WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/td_numberOfMonth'), 'xpath', 'equals',
+			Object numberOfMonthObject =  WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/CF4W/td_numberOfMonth'), 'xpath', 'equals',
 					"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[1]/td[3]", true)
 
 			'Ambil nilai number of month'
@@ -280,7 +280,7 @@ public class verifyInsuranceData {
 
 			BigDecimal numberOfMonth = Double.parseDouble(textNumberOfMonth)
 
-			Object mainPremiObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/td_MainPremiumAmt'), 'xpath', 'equals',
+			Object mainPremiObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/CF4W/td_MainPremiumAmt'), 'xpath', 'equals',
 					"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr[1]/td[8]", true)
 
 			'Ambil nilai Main Premium Amount'
@@ -308,11 +308,11 @@ public class verifyInsuranceData {
 
 				int countSumInsuredAmount = 0
 
-				Object addCovYearCheckbox = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/input_Flood_checkboxLabel TP'),
+				Object addCovYearCheckbox = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/CF4W/input_Flood_checkboxLabel TP'),
 						'xpath', 'equals', ((('//*[@id=\'insuranceCoverage\']/div[5]/table/tbody[' + i) + ']/tr[') + (j + 2)) + ']/td[5]/div/div/label/input',
 						true)
 
-				Object modifySumInsuredAmount = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/select_SumInsuredAmountFlood'),
+				Object modifySumInsuredAmount = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/CF4W/select_SumInsuredAmountFlood'),
 						'xpath', 'equals', ((('//div[@id=\'insuranceCoverage\']/div[5]/table/tbody[' + i) + ']/tr[') + (j + 2)) + ']/td[6]/div/div/select',
 						true)
 
@@ -321,7 +321,7 @@ public class verifyInsuranceData {
 					countSumInsuredAmount = 1
 				}
 
-				Object modifyAddtRateObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/input_AddtRate'),'xpath','equals',"//div[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr["+(j+2)+"]/td[7]/div/span/div/input",true)
+				Object modifyAddtRateObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/CF4W/input_AddtRate'),'xpath','equals',"//div[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr["+(j+2)+"]/td[7]/div/span/div/input",true)
 
 				'Ambil nilai dari rate additional coverage '
 				String textAddCovRate = WebUI.getAttribute(modifyAddtRateObject,'value').replaceAll("\\s","").replace(",","")
@@ -348,7 +348,7 @@ public class verifyInsuranceData {
 					}
 
 				}
-				Object AddtAmtObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/td_FloodAmt'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr["+(j+2)+"]/td[8]",true)
+				Object AddtAmtObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/CF4W/td_FloodAmt'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr["+(j+2)+"]/td[8]",true)
 
 				'ambil nilai additional premi dari confins'
 				String textAddtPremiAmt = WebUI.getText(AddtAmtObject).replace(",","")
@@ -367,7 +367,7 @@ public class verifyInsuranceData {
 			'tambahkan main premi dan additional premi untuk menghitung total premi per tahunnya'
 			resultTotalPremiPerYear = Result+totalResultAddtPremi
 
-			Object totalPremiPerYearObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/td_TotalPremiPerYear'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr["+(countAddCov+3)+"]/td[8]",true)
+			Object totalPremiPerYearObject = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabInsuranceData/CF4W/td_TotalPremiPerYear'),'xpath','equals',"//*[@id='insuranceCoverage']/div[5]/table/tbody["+i+"]/tr["+(countAddCov+3)+"]/td[8]",true)
 
 			'ambil nilai total premi per tahun dari confins'
 			String textTotalPremiPerYear = WebUI.getText(totalPremiPerYearObject).replace(",","")

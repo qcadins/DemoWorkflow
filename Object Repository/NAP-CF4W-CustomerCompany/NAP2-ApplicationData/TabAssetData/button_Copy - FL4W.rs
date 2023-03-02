@@ -7,7 +7,7 @@
    <selectorCollection>
       <entry>
          <key>BASIC</key>
-         <value>//*[@id=&quot;assetData&quot;]/div[7]/div/div/div/span/button/span</value>
+         <value>//*[@id=&quot;ownerData1&quot;]/div[5]/div/div/div/span/button</value>
       </entry>
       <entry>
          <key>XPATH</key>
@@ -49,7 +49,7 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>//*[@id=&quot;assetData&quot;]/div[7]/div/div/div/span/button/span</value>
+      <value>//*[@id=&quot;ownerData1&quot;]/div[5]/div/div/div/span/button</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

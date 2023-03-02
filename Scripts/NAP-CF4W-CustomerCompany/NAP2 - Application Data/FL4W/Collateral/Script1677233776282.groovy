@@ -48,14 +48,64 @@ WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-Applicat
 'check if existing collateral'
 if(findTestData(excelPathCollateral).getValue(GlobalVariable.NumofCollateral, 12).equalsIgnoreCase('Existing Collateral')){
 	
+	'click button lookup existing collateral'
+	WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/Collateral/button_Lookup Existing Collateral'))
+	
+	'set text asset name'
+	WebUI.setText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/Collateral/input_FullAssetName Existing Collateral'), findTestData(excelPathCollateral).getValue(GlobalVariable.NumofCollateral, 62))
+	
+	'set text amount more than'
+	WebUI.setText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/Collateral/input_Amount More Than'), findTestData(excelPathCollateral).getValue(GlobalVariable.NumofCollateral, 63))
+	
+	'set text amount less than'
+	WebUI.setText(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/Collateral/input_Amount Less Than'), findTestData(excelPathCollateral).getValue(GlobalVariable.NumofCollateral, 64))
+	
+	'click button search'
+	WebUI.click(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/Collateral/button_Search'))
+	
+	'call function verify lookup'
+	verifyInputLookup()
+	
+	'select collateral status'
+	WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/Collateral/Select_Collateral Status'),
+		'New Collateral', false)
+	
+	'select collateral type dengan index untuk refresh karena kadang lookup collateral tidak muncul button nya'
+	WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/Collateral/Select_Collateral Type'),
+		'BMW', false)
+	
+	'call function check ddl collateral info'
+	checkDDL(sqlConnectionFOU, sqlConnectionLOS)
+	
+	'select collateral type'
+	WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/Collateral/Select_Collateral Type'),
+		'(?i)' + findTestData(excelPathCollateral).getValue(GlobalVariable.NumofCollateral, 14), true)
+
+
+	'click button lookup collateral'
+	WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/Collateral/button_Lookup Collateral Name'))
+
+	'input collateral code'
+	WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/Collateral/input_Collateral Code'),
+		findTestData(excelPathCollateral).getValue(GlobalVariable.NumofCollateral, 15))
+
+	'input collateral name'
+	WebUI.setText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/Collateral/input_Collateral Name'),
+		findTestData(excelPathCollateral).getValue(GlobalVariable.NumofCollateral, 16))
+
+	'click button search'
+	WebUI.click(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/Collateral/button_Search'))
+
+	'call function verifyInputLookup'
+	verifyInputLookup()
+	
+	'select collateral status'
+	WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/Collateral/Select_Collateral Status'),
+		findTestData(excelPathCollateral).getValue(GlobalVariable.NumofCollateral, 12), false)
+	
 	'call test case collateral existing'
     WebUI.callTestCase(findTestCase('NAP-CF4W-CustomerCompany/NAP2 - Application Data/FL4W/CollateralExisting'), [:], FailureHandling.CONTINUE_ON_FAILURE)
 	
-//	'call function input coll attr'
-//	inputCollAttr(sqlConnectionFOU)
-//	
-//	'call function input coll doc'
-//	inputCollAttr(sqlConnectionFOU)
 }else if (findTestData(excelPathCollateral).getValue(GlobalVariable.NumofCollateral, 12).equalsIgnoreCase('New Collateral')) {
 
 'select collateral type dengan index untuk refresh karena kadang lookup collateral tidak muncul button nya'
@@ -63,7 +113,7 @@ WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-Applicat
 	'BMW', false)
 
 'call function check ddl collateral info'
-checkDDL(sqlConnectionFOU)
+checkDDL(sqlConnectionFOU, sqlConnectionLOS)
 
 'select collateral type'
 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/Collateral/Select_Collateral Type'), 
@@ -147,11 +197,105 @@ if(WebUI.verifyElementPresent(findTestObject('NAP-CF4W-CustomerCompany/NAP2-Appl
 		findTestData(excelPathCollateral).getValue(GlobalVariable.NumofCollateral, 30))
 }
 
-'call function input coll attr'
-inputCollAttr(sqlConnectionFOU)
 
-'call function input coll doc'
-inputCollAttr(sqlConnectionFOU)
+	'count collateral attribute'
+	int countCollateralAtrtibute = CustomKeywords.'customizeKeyword.getRowAssetAttribute.countRowCollateralAttribute'(sqlConnectionFOU,
+		findTestData(excelPathCollateral).getValue(GlobalVariable.NumofCollateral, 15))
+	
+	for (int i = 1; i <= countCollateralAtrtibute; i++) {
+		'modify Asset Attribute Input Text'
+		modifyObjectCollateralAttributeInputText = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/Collateral/object_Collateral Attr'),
+			'xpath', 'equals', ('//*[@id="RefAttrContentAppCollateralAttrObjs"]/div[2]/div/div[' + i) + ']/div/div/input[@type="text"]',
+			true)
+		
+		'modify Asset Attribute Select Dropdownlist'
+		modifyObjectCollateralAttributeList = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/Collateral/object_Collateral Attr'),
+			'xpath', 'equals', ('//*[@id="RefAttrContentAppCollateralAttrObjs"]/div[2]/div/div[' + i) + ']/div/div/select',
+			true)
+	
+		'modify Asset Attribute Input Date'
+		modifyObjectCollateralAttributeInputDate = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/Collateral/object_Collateral Attr'),
+			'xpath', 'equals', ('//*[@id="RefAttrContentAppCollateralAttrObjs"]/div[2]/div/div[' + i) + ']/div/div/input[@type="date"]',
+			true)
+	
+		'modify Asset Attribute Input Number '
+		modifyObjectCollateralAttributeInputNumber = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/Collateral/object_Collateral Attr'),
+			'xpath', 'equals', ('//*[@id="RefAttrContentAppCollateralAttrObjs"]/div[2]/div/div[' + i) + ']/div/div/input[@formcontrolname="AttrValue"]',
+			true)
+	
+		if (WebUI.verifyElementPresent(modifyObjectCollateralAttributeInputText, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
+			'input "Attribute"'
+			WebUI.setText(modifyObjectCollateralAttributeInputText, 'Attr', FailureHandling.OPTIONAL)
+		} else if (WebUI.verifyElementPresent(modifyObjectCollateralAttributeList, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
+			'select option index 1'
+			WebUI.selectOptionByIndex(modifyObjectCollateralAttributeList, 1, FailureHandling.OPTIONAL)
+		} else if (WebUI.verifyElementPresent(modifyObjectCollateralAttributeInputDate, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
+			'input date 01/01/2000'
+			WebUI.setText(modifyObjectCollateralAttributeInputDate, '01/01/2000', FailureHandling.OPTIONAL)
+		} else if (WebUI.verifyElementPresent(modifyObjectCollateralAttributeInputNumber, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
+			'input number 0'
+			WebUI.setText(modifyObjectCollateralAttributeInputNumber, '0', FailureHandling.OPTIONAL)
+		}
+	}
+
+	
+	'keyword untuk mencari nama-nama asset document yang muncul pada tab asset'
+	ArrayList<String> docName = CustomKeywords.'assetData.checkAssetDoc.checkCollateralDocument'(sqlConnectionFOU, findTestData(
+			excelPathCollateral).getValue(GlobalVariable.NumofCollateral, 14))
+	
+	'looping asset document'
+	for (int i = 0; i < docName.size(); i++) {
+		'modify document name'
+		modifyDocumentName = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/Collateral/object_Collateral Doc'),
+			'xpath', 'equals', ('//*[@id=\'AddCollDocument\']/div/table/tbody/tr[' + (i + 1)) + ']/td[1]', true)
+	
+		'get text document name'
+		textDocumentName = WebUI.getText(modifyDocumentName)
+	
+		'Verif document name yang muncul pada confins sesuai dengan db'
+		if (WebUI.verifyMatch(textDocumentName, docName[i], false) == false) {
+			checkVerifyEqualOrMatch(false)
+	
+			break
+		}
+		
+		'modify object received'
+		modifyReceived = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/Collateral/object_Collateral Doc'),
+			'xpath', 'equals', ('//*[@id=\'AddCollDocument\']/div/table/tbody/tr[' + (i + 1)) + ']/td[2]/input', true)
+	
+		'modify object document no'
+		modifyDocumentNo = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/Collateral/object_Collateral Doc'),
+			'xpath', 'equals', ('//*[@id=\'AddCollDocument\']/div/table/tbody/tr[' + (i + 1)) + ']/td[3]/input', true)
+	
+		'modify object expired date'
+		modifyExpiredDate = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/Collateral/object_Collateral Doc'),
+			'xpath', 'equals', ('//*[@id=\'AddCollDocument\']/div/table/tbody/tr[' + (i + 1)) + ']/td[4]/input', true)
+	
+		'modify document notes'
+		modifyDocumentNotes = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/Collateral/object_Collateral Doc'),
+			'xpath', 'equals', ('//*[@id=\'AddCollDocument\']/div/table/tbody/tr[' + (i + 1)) + ']/td[5]/input', true)
+	
+		'Pengecekan nilai received pada excel "yes" atau "no" dan pengecekan kondisi checkbox tercentang atau tidak'
+		if (findTestData(excelPathCollateral).getValue(GlobalVariable.NumofCollateral, 57).equalsIgnoreCase('Yes') && WebUI.verifyElementNotChecked(
+			modifyReceived, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
+			'centang received'
+			WebUI.check(modifyReceived)
+		} else if (findTestData(excelPathCollateral).getValue(GlobalVariable.NumofCollateral, 57).equalsIgnoreCase('No') &&
+		WebUI.verifyElementChecked(modifyReceived, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
+			'uncentang received'
+			WebUI.uncheck(modifyReceived)
+		}
+		
+		'input documentNo'
+		WebUI.setText(modifyDocumentNo, findTestData(excelPathCollateral).getValue(GlobalVariable.NumofCollateral, 58))
+	
+		'input expired date'
+		WebUI.setText(modifyExpiredDate, findTestData(excelPathCollateral).getValue(GlobalVariable.NumofCollateral, 59))
+	
+		'input document notes'
+		WebUI.setText(modifyDocumentNotes, findTestData(excelPathCollateral).getValue(GlobalVariable.NumofCollateral, 60))
+	}
+
 
 if (CustomKeywords.'assetData.checkAssetData.checkSelfOwner'(findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/Collateral/checkBox_Self Owner Status'), GlobalVariable.NumofCollateral, 34, excelPathCollateral) == true) {
 	'click self owner checkbox'
@@ -621,10 +765,14 @@ def verifyInputLookup() {
     }
 }
 
-def checkDDL(Sql sqlConnectionFOU){
+def checkDDL(Sql sqlConnectionFOU, Sql sqlConnectionLOS){
 	if(GlobalVariable.RoleCompany == 'Testing'){
+		
+		'get POName'
+		String POName = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/label_ProductOfferingFL4W'))
+		
 		'Ambil array string (text) asset usage dari db'
-		ArrayList<String> assetUsage = CustomKeywords.'assetData.checkAssetData.checkAssetUsageDDL'(sqlConnectionFOU)
+		ArrayList<String> assetUsage = CustomKeywords.'assetData.checkAssetData.checkAssetUsageDDL'(sqlConnectionLOS, POName)
 		
 		'Ambil array string (text) asset condition dari db'
 		ArrayList<String> assetCondition = CustomKeywords.'assetData.checkAssetData.checkAssetConditionDDL'(sqlConnectionFOU)
@@ -636,7 +784,7 @@ def checkDDL(Sql sqlConnectionFOU){
 		Integer totalAssetCondition = WebUI.getNumberOfTotalOption(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/Collateral/Select_Collateral Condition'))
 		
 		'Verif jumlah asset usage yang muncul pada confins sesuai dengan jumlah asset usage pada db'
-		if (WebUI.verifyEqual(totalAssetUsage, assetUsage.size()) == false) {
+		if (WebUI.verifyEqual(totalAssetUsage - 1, assetUsage.size()) == false) {
 			'Write To Excel GlobalVariable.StatusFailed and GlobalVariable.ReasonFailedDDL'
 			CustomKeywords.'customizeKeyword.writeExcel.writeToExcelStatusReason'('7b.CollateralData', GlobalVariable.NumofCollateral,
 				GlobalVariable.StatusFailed, findTestData(excelPathCollateral).getValue(GlobalVariable.NumofCollateral, 2) + ';' + GlobalVariable.ReasonFailedDDL + 'Jumlah Asset Usage')
@@ -672,107 +820,5 @@ def checkDDL(Sql sqlConnectionFOU){
 			
 			GlobalVariable.FlagFailed = 1
 		}
-	}
-}
-
-def inputCollAttr(Sql sqlConnectionFOU){
-	'count collateral attribute'
-	int countCollateralAtrtibute = CustomKeywords.'customizeKeyword.getRowAssetAttribute.countRowCollateralAttribute'(sqlConnectionFOU,
-		findTestData(excelPathCollateral).getValue(GlobalVariable.NumofCollateral, 15))
-	
-	for (int i = 1; i <= countCollateralAtrtibute; i++) {
-		'modify Asset Attribute Input Text'
-		modifyObjectCollateralAttributeInputText = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/Collateral/object_Collateral Attr'),
-			'xpath', 'equals', ('//*[@id="RefAttrContentAppCollateralAttrObjs"]/div[2]/div/div[' + i) + ']/div/div/input[@type="text"]',
-			true)
-	
-		//
-		'modify Asset Attribute Select Dropdownlist'
-		modifyObjectCollateralAttributeList = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/Collateral/object_Collateral Attr'),
-			'xpath', 'equals', ('//*[@id="RefAttrContentAppCollateralAttrObjs"]/div[2]/div/div[' + i) + ']/div/div/select',
-			true)
-	
-		'modify Asset Attribute Input Date'
-		modifyObjectCollateralAttributeInputDate = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/Collateral/object_Collateral Attr'),
-			'xpath', 'equals', ('//*[@id="RefAttrContentAppCollateralAttrObjs"]/div[2]/div/div[' + i) + ']/div/div/input[@type="date"]',
-			true)
-	
-		'modify Asset Attribute Input Number '
-		modifyObjectCollateralAttributeInputNumber = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/Collateral/object_Collateral Attr'),
-			'xpath', 'equals', ('//*[@id="RefAttrContentAppCollateralAttrObjs"]/div[2]/div/div[' + i) + ']/div/div/input[@formcontrolname="AttrValue"]',
-			true)
-	
-		if (WebUI.verifyElementPresent(modifyObjectCollateralAttributeInputText, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
-			'input "Attribute"'
-			WebUI.setText(modifyObjectCollateralAttributeInputText, 'Attr', FailureHandling.OPTIONAL)
-		} else if (WebUI.verifyElementPresent(modifyObjectCollateralAttributeList, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
-			'select option index 1'
-			WebUI.selectOptionByIndex(modifyObjectCollateralAttributeList, 1, FailureHandling.OPTIONAL)
-		} else if (WebUI.verifyElementPresent(modifyObjectCollateralAttributeInputDate, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
-			'input date 01/01/2000'
-			WebUI.setText(modifyObjectCollateralAttributeInputDate, '01/01/2000', FailureHandling.OPTIONAL)
-		} else if (WebUI.verifyElementPresent(modifyObjectCollateralAttributeInputNumber, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
-			'input number 0'
-			WebUI.setText(modifyObjectCollateralAttributeInputNumber, '0', FailureHandling.OPTIONAL)
-		}
-	}
-}
-
-def inputColDoc(Sql sqlConnectionFOU){
-	'keyword untuk mencari nama-nama asset document yang muncul pada tab asset'
-	ArrayList<String> docName = CustomKeywords.'assetData.checkAssetDoc.checkCollateralDocument'(sqlConnectionFOU, findTestData(
-			excelPathCollateral).getValue(GlobalVariable.NumofCollateral, 14))
-	
-	'looping asset document'
-	for (int i = 0; i < docName.size(); i++) {
-		'modify document name'
-		modifyDocumentName = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/Collateral/object_Collateral Doc'),
-			'xpath', 'equals', ('//*[@id=\'AddCollDocument\']/div/table/tbody/tr[' + (i + 1)) + ']/td[1]', true)
-	
-		'get text document name'
-		textDocumentName = WebUI.getText(modifyDocumentName)
-	
-		'Verif document name yang muncul pada confins sesuai dengan db'
-		if (WebUI.verifyMatch(textDocumentName, docName[i], false) == false) {
-			checkVerifyEqualOrMatch(false)
-	
-			break
-		}
-		
-		'modify object received'
-		modifyReceived = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/Collateral/object_Collateral Doc'),
-			'xpath', 'equals', ('//*[@id=\'AddCollDocument\']/div/table/tbody/tr[' + (i + 1)) + ']/td[2]/input', true)
-	
-		'modify object document no'
-		modifyDocumentNo = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/Collateral/object_Collateral Doc'),
-			'xpath', 'equals', ('//*[@id=\'AddCollDocument\']/div/table/tbody/tr[' + (i + 1)) + ']/td[3]/input', true)
-	
-		'modify object expired date'
-		modifyExpiredDate = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/Collateral/object_Collateral Doc'),
-			'xpath', 'equals', ('//*[@id=\'AddCollDocument\']/div/table/tbody/tr[' + (i + 1)) + ']/td[4]/input', true)
-	
-		'modify document notes'
-		modifyDocumentNotes = WebUI.modifyObjectProperty(findTestObject('Object Repository/NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/Collateral/object_Collateral Doc'),
-			'xpath', 'equals', ('//*[@id=\'AddCollDocument\']/div/table/tbody/tr[' + (i + 1)) + ']/td[5]/input', true)
-	
-		'Pengecekan nilai received pada excel "yes" atau "no" dan pengecekan kondisi checkbox tercentang atau tidak'
-		if (findTestData(excelPathCollateral).getValue(GlobalVariable.NumofCollateral, 57).equalsIgnoreCase('Yes') && WebUI.verifyElementNotChecked(
-			modifyReceived, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
-			'centang received'
-			WebUI.check(modifyReceived)
-		} else if (findTestData(excelPathCollateral).getValue(GlobalVariable.NumofCollateral, 57).equalsIgnoreCase('No') &&
-		WebUI.verifyElementChecked(modifyReceived, GlobalVariable.TimeOut, FailureHandling.OPTIONAL)) {
-			'uncentang received'
-			WebUI.uncheck(modifyReceived)
-		}
-		
-		'input documentNo'
-		WebUI.setText(modifyDocumentNo, findTestData(excelPathCollateral).getValue(GlobalVariable.NumofCollateral, 58))
-	
-		'input expired date'
-		WebUI.setText(modifyExpiredDate, findTestData(excelPathCollateral).getValue(GlobalVariable.NumofCollateral, 59))
-	
-		'input document notes'
-		WebUI.setText(modifyDocumentNotes, findTestData(excelPathCollateral).getValue(GlobalVariable.NumofCollateral, 60))
 	}
 }

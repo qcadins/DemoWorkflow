@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>modifyObjectMultiple</name>
+   <tag></tag>
+   <elementGuidId>4782807d-1ac1-42f5-94f4-1073e04aaa6f</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@id=&quot;collateral&quot;]/lib-ucgridview/div/table/tbody/tr[1]/td[10]/span/span/span/a/i</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>BASIC</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>//*[@id=&quot;collateral&quot;]/lib-ucgridview/div/table/tbody/tr[1]/td[10]/span/span/span/a/i</value>
+   </webElementProperties>
+</WebElementEntity>

@@ -839,7 +839,7 @@ WebUI.delay(5)
 
 if (GlobalVariable.FlagFailed == 0) {
 	'check save process write to excel'
-	CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory, findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/button_Asset Name_CF4W'),
+	CustomKeywords.'checkSaveProcess.checkSaveProcess.checkStatus'(iscompleteMandatory, findTestObject('Object Repository/NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabAssetData/AssetMultiple/buttonAddAsset'),
 		GlobalVariable.NumofColm, '6.TabApplicationData')
 
 	if (iscompleteMandatory == 0) {
