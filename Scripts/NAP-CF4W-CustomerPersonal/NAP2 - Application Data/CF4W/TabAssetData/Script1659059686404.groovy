@@ -134,7 +134,7 @@ WebUI.setText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/Tab
     findTestData(excelPathTabAsset).getValue(GlobalVariable.NumofColm, 19))
 
 'call function check DDL'
-checkDDLAssetInfo(sqlConnectionFOU)
+checkDDLAssetInfo(sqlConnectionFOU, sqlConnectionLOS)
 
 'select asset usage'
 WebUI.selectOptionByLabel(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabAssetData/select_-Select One- Commercial  Non Commercial'), 
@@ -1010,10 +1010,14 @@ def checkAssetLookup(Sql sqlConnectionLOS, Sql sqlConnectionFOU, String POName){
 	}
 }
 
-def checkDDLAssetInfo(Sql sqlConnectionFOU){
+def checkDDLAssetInfo(Sql sqlConnectionFOU, Sql sqlConnectionLOS){
 	if (GlobalVariable.Role == 'Testing') {
+		
+		'Ambil text product offering dari confins'
+		String POName = WebUI.getText(findTestObject('NAP-CF4W-CustomerPersonal/NAP2-ApplicationData/TabApplicationData/label_ProductOfferingCF4W'))
+		
 		'Ambil array string (text) asset usage dari db'
-		ArrayList<String> assetUsage = CustomKeywords.'assetData.checkAssetData.checkAssetUsageDDL'(sqlConnectionFOU)
+		ArrayList<String> assetUsage = CustomKeywords.'assetData.checkAssetData.checkAssetUsageDDL'(sqlConnectionLOS, POName)
 		
 		'Ambil array string (text) asset condition dari db'
 		ArrayList<String> assetCondition = CustomKeywords.'assetData.checkAssetData.checkAssetConditionDDL'(sqlConnectionFOU)

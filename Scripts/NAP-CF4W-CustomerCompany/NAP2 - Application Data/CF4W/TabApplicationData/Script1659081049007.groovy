@@ -74,20 +74,9 @@ if (GlobalVariable.RoleCompany == 'Testing') {
     'verify application step'
     checkVerifyEqualOrMatch(WebUI.verifyMatch(WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/ApplicationCurrentStep')), 
         'APPLICATION DATA', false, FailureHandling.OPTIONAL))
-
-	if(GlobalVariable.LOB == 'CF4W'){
-		'modify POName'
-		modifyObjectPOName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/label_ProductOfferingCF4W'),
-				'xpath', 'equals', ('//*[@id="NewApplication"]/div/div[6]/span/div/div[2]/label'), true)
-	
-	}else if(GlobalVariable.LOB == 'FL4W'){
-		'modify POName'
-		modifyObjectPOName = WebUI.modifyObjectProperty(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/label_ProductOfferingCF4W'),
-				'xpath', 'equals', ('//*[@id="NewApplication"]/div/div[5]/span/div/div[2]/label'), true)
-	}
 	
     'Ambil text product offering dari confins'
-    String POName = WebUI.getText(modifyObjectPOName)
+    String POName = WebUI.getText(findTestObject('NAP-CF4W-CustomerCompany/NAP2-ApplicationData/TabApplicationData/label_ProductOfferingCF4W'))
 
     'Pengecekan interest type dari db product offering '
     String InterestType = CustomKeywords.'applicationData.checkInterestType.checkInterest'(sqlConnectionLOS, POName)
