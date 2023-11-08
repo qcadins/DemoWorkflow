@@ -1,15 +1,12 @@
-name: Groovy CodeNarc Analysis
+name: Code Scanning
 
 on:
   push:
     branches:
-      - "master"
-  pull_request:
-    branches:
-      - "master"
+      - main
 
 jobs:
-  code-analysis:
+  code-scan:
     runs-on: ubuntu-latest
 
     steps:
@@ -27,24 +24,15 @@ jobs:
           sudo apt-get update
           sudo apt-get install groovy
           echo "Groovy installed successfully"
-
-      - name: Install Dependencies
+      
+      - name: Install CodeNarc
         run: |
-          echo "Configuring Grape..."
-          mkdir -p ~/.groovy
-          echo "groovy.grape.report.downloads=true" > ~/.groovy/grapeConfig.xml
-          echo "Configured Grape"
-          groovy -e "groovy.grape.Grape.grab(group:'commons-cli', module:'commons-cli', version:'1.4')"
-          echo "Dependencies installed"
+          groovy -e "grape grab 'org.codenarc:CodeNarc:2.0.0'"
+          echo "CodeNarc installed successfully"
 
-      - name: Run CodeNarc Analysis
+      - name: Run CodeNarc Analysis on Groovy Scripts
         run: |
-          groovy .Scripts
-          # Replace /path/to/CodeNarc.groovy with the actual path to your CodeNarc script
+          for file in $(find ./Scripts/Login -name "*.groovy"); do
+            groovy -cp /path/to/CodeNarc-2.0.0-all.jar -e "import org.codenarc.Main; Main.main(['-basedir', '$file'])"
+          done
         working-directory: ${{ github.workspace }}
-
-      - name: Upload CodeNarc Report
-        uses: actions/upload-artifact@v2
-        with:
-          name: codenarc-report
-          path: codenarc-report.xml
