@@ -39,7 +39,7 @@ jobs:
 
       - name: Run CodeNarc Analysis
         run: |
-          groovy /path/to/CodeNarc.groovy
+          groovy ./CodeNarc.groovy
           # Replace /path/to/CodeNarc.groovy with the actual path to your CodeNarc script
         working-directory: ${{ github.workspace }}
 
