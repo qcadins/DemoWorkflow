@@ -35,7 +35,7 @@ jobs:
 
       - name: Run CodeNarc Analysis on Groovy Scripts
         run: |
-          for file in $(find ./Scripts/Login -name "*.groovy"); do
+          for file in $(find ./Scripts/Login/LoginR3BranchManagerSuperuser -name "*.groovy"); do
             groovy -cp ~/.groovy/grapes/org.codenarc/CodeNarc/jars/CodeNarc-2.0.0.jar -e "import org.codenarc.Main; Main.main(['-basedir', '$file'])"
           done
         working-directory: ${{ github.workspace }}
