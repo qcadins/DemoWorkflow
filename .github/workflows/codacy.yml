@@ -27,10 +27,6 @@ jobs:
           sudo apt-get update
           sudo apt-get install groovy
           echo "Groovy installed successfully"
-
-      - name: Run Grape Dependency Resolution
-        run: |
-          groovy ./setup.groovy
         working-directory: ${{ github.workspace }}
 
       - name: Run CodeNarc Analysis on Groovy Scripts
