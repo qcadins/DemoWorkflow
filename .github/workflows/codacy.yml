@@ -1,4 +1,4 @@
-name: Code Scanning
+name: Katalon Code Scan with Codacy
 
 on:
   push:
@@ -26,12 +26,23 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install groovy
-          echo "Groovy installed successfully"
         working-directory: ${{ github.workspace }}
 
-      - name: Run CodeNarc Analysis on Groovy Scripts
+      - name: Run Katalon Tests
         run: |
-          for file in $(find ./Scripts/Login/LoginR3BranchManagerSuperuser -name "*.groovy"); do
-            groovy -cp ./libs/CodeNarc-3.3.0.jar -e "import org.codenarc.Main; Main.main(['-basedir', '$file'])"
-          done
+          ./path/to/your/katalon.sh -noSplash -runMode=console -consoleLog -projectPath="${{ github.workspace }}/YourKatalonProject.prj" -testSuitePath="Test Suites/YourTestSuite" -apiKey=${{ secrets.KATALON_API_KEY }}
         working-directory: ${{ github.workspace }}
+
+      - name: Run Codacy Analysis CLI
+        uses: codacy/codacy-analysis-cli-action@<latest_version>
+        with:
+          project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
+          verbose: true
+          output: results.sarif
+          format: sarif
+          max-allowed-issues: 2147483647
+
+      - name: Upload SARIF results file
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: results.sarif
