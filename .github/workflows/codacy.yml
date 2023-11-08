@@ -39,7 +39,7 @@ jobs:
 
       - name: Run CodeNarc Analysis
         run: |
-          groovy ./CodeNarc.groovy
+          groovy .Scripts/APIFullService/MAIN_API Status Registrasi/Script1693456800853.groovy
           # Replace /path/to/CodeNarc.groovy with the actual path to your CodeNarc script
         working-directory: ${{ github.workspace }}
 
