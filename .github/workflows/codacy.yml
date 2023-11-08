@@ -24,11 +24,18 @@ jobs:
 
       - name: Install Groovy
         run: |
-          curl -s get.sdkman.io | bash
-          source "$HOME/.sdkman/bin/sdkman-init.sh"
-          sdk install groovy
-          groovy --version
-        shell: bash
+          sudo apt-get update
+          sudo apt-get install groovy
+          echo "Groovy installed successfully"
+
+      - name: Install Dependencies
+        run: |
+          echo "Configuring Grape..."
+          mkdir -p ~/.groovy
+          echo "groovy.grape.report.downloads=true" > ~/.groovy/grapeConfig.xml
+          echo "Configured Grape"
+          groovy -e "groovy.grape.Grape.grab(group:'commons-cli', module:'commons-cli', version:'1.4')"
+          echo "Dependencies installed"
 
       - name: Run CodeNarc Analysis
         run: |
