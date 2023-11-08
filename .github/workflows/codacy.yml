@@ -28,10 +28,10 @@ jobs:
           sudo apt-get install groovy
           echo "Groovy installed successfully"
       
-      - name: Install CodeNarc
+      - name: Run Grape Dependency Resolution
         run: |
-          groovy -e "grape grab 'org.codenarc:CodeNarc:2.0.0'"
-          echo "CodeNarc installed successfully"
+          groovy ./setup.groovy
+        working-directory: ${{ github.workspace }}
 
       - name: Run CodeNarc Analysis on Groovy Scripts
         run: |
